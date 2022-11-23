@@ -6,6 +6,7 @@
 
 # Specific files
 CMakeSettings.json
+Doxyfile
 
 # Specific directories
 out/

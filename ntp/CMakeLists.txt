@@ -1,9 +1,10 @@
 #
 # Directories
 #
-set(LIB_INCLUDE_ROOT        ${NTP_ROOT}/include)
+set(LIB_INCLUDE_ROOT        ${NTP_LIBRARY_ROOT}/include)
 set(LIB_DETAILS_INCLUDE     ${LIB_INCLUDE_ROOT}/details)
-set(LIB_SOURCE_ROOT         ${NTP_ROOT}/src)
+
+set(LIB_SOURCE_ROOT         ${NTP_LIBRARY_ROOT}/src)
 set(LIB_DETAILS_SOURCE      ${LIB_SOURCE_ROOT}/details)
 
 set(LIB_INCLUDE_DIRECTORIES ${LIB_INCLUDE_ROOT}
