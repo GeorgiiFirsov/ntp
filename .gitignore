@@ -1,0 +1,11 @@
+# Hidden items
+.*
+!/.gitignore
+!/.clang-format
+!/.clang-tidy
+
+# Specific files
+CMakeSettings.json
+
+# Specific directories
+out/
