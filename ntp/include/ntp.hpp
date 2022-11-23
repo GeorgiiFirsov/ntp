@@ -1,6 +1,15 @@
+/**
+ * @file ntp.hpp
+ * @brief Main ntp library header
+ * 
+ * @license GPL-v3
+ * 
+ * @author GeorgyFirsov (gfirsov007@gmail.com)
+ */
+
 #pragma once
 
-//
+// 
 //            __
 //    ____   / /_ ____
 //   / __ \ / __// __ \                                                                                    
@@ -13,10 +22,6 @@
 //  / /|  // /_/ // /_ / / | |/ //  __/    / /  / / / // /   /  __// /_/ // /_/ // ____// /_/ // /_/ // /
 // /_/ |_/ \__,_/ \__//_/  |___/ \___/    /_/  /_/ /_//_/    \___/ \__,_/ \__,_//_/     \____/ \____//_/
 //
-// Author: GeorgyFirsov
-// Licence: GPL-v3
-//
-
 
 //
 // Configuration

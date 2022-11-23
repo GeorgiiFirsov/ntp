@@ -3,7 +3,7 @@
 
 namespace ntp::exception {
 
-std::string Win32Exception::FormatMessage(DWORD code, ...)
+std::string Win32Exception::FormatMessage(DWORD code, ...) noexcept
 {
     va_list args;
     va_start(args, code);
