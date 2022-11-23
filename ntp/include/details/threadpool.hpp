@@ -10,6 +10,7 @@
 
 #include <Windows.h>
 
+#include "config.hpp"
 #include "allocator.hpp"
 
 
@@ -90,7 +91,7 @@ class BasicThreadPool final
 public:
 
 private:
-    // Treadpool taits
+    // Treadpool traits
     traits_t traits_;
 };
 

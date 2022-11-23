@@ -24,12 +24,6 @@
 //
 
 //
-// Configuration
-//
-#include "config.hpp"
-
-
-//
 // Just a list of necessary library headers
 //
 #include "details/threadpool.hpp"
