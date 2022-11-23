@@ -35,7 +35,7 @@ public:
     /**
      * @brief Allocates specific number of elements
      * 
-	 * @arg count Number of elements to allocate (default = 1)
+	 * @param count Number of elements to allocate (default = 1)
 	 * @returns Pointer to allocated memory
 	 * @throws exception::Win32Exception if count is zero or in case
 	 *                                   of allocation failure
@@ -48,7 +48,7 @@ public:
     /**
      * @brief Allocates specific number of bytes
      * 
-     * @arg bytes Number of bytes to allocate (default = sizeof(Ty))
+     * @param bytes Number of bytes to allocate (default = sizeof(Ty))
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception if bytes is less than sizeof(Ty) or
      *                                   in case of allocation failure
@@ -67,7 +67,7 @@ public:
     /**
      * @brief Frees a memory, allocated with HeapAllocator
      * 
-     * @arg ptr Pointer to memory (may be NULL-pointer)
+     * @param ptr Pointer to memory (may be NULL-pointer)
      */
     static void Free(Ty* ptr) noexcept
     {
@@ -85,7 +85,7 @@ struct HeapAllocator<void> final
     /**
      * @brief Allocates specific number of bytes
      *
-     * @arg bytes Number of bytes to allocate
+     * @param bytes Number of bytes to allocate
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception in case of allocation failure
      *
@@ -106,7 +106,7 @@ struct HeapAllocator<void> final
     /**
      * @brief Frees a memory, allocated with HeapAllocator
      *
-     * @arg ptr Pointer to memory (may be NULL-pointer)
+     * @param ptr Pointer to memory (may be NULL-pointer)
      */
     static void Free(void* ptr) noexcept
     {
@@ -134,7 +134,7 @@ public:
      * @brief Allocates specific number of elements
      * 
 	 * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
-     * @arg count Number of elements to allocate (default = 1)
+     * @param count Number of elements to allocate (default = 1)
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception if count is zero or in case
      *                                   of allocation failure
@@ -149,7 +149,7 @@ public:
 	 * @brief Allocates specific number of bytes
 	 *
 	 * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
-     * @arg bytes Number of bytes to allocate (default = sizeof(Ty))
+     * @param bytes Number of bytes to allocate (default = sizeof(Ty))
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception if bytes is less than sizeof(Ty) or
      *                                   in case of allocation failure
@@ -169,7 +169,7 @@ public:
     /**
      * @brief Frees a memory, allocated with AlignedAllocator
      *
-     * @arg ptr Pointer to memory (may be NULL-pointer)
+     * @param ptr Pointer to memory (may be NULL-pointer)
      */
     static void Free(Ty* ptr) noexcept
     {
@@ -188,7 +188,7 @@ struct AlignedAllocator<void> final
      * @brief Allocates specific number of bytes
      *
      * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
-     * @arg bytes Number of bytes to allocate
+     * @param bytes Number of bytes to allocate
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception in case of allocation failure
      *
@@ -208,7 +208,7 @@ struct AlignedAllocator<void> final
     /**
      * @brief Frees a memory, allocated with AlignedAllocator<void>
      *
-     * @arg ptr Pointer to memory (may be NULL-pointer)
+     * @param ptr Pointer to memory (may be NULL-pointer)
      */
     static void Free(void* ptr) noexcept
     {

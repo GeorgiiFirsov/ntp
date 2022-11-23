@@ -28,8 +28,8 @@ public:
      * 
      * @tparam Tys Variadic pack of argument types (always deduced automatically)
      * 
-     * @arg code Win32 error code
-     * @arg args... Optional variable number of arguments, that can be used for message formatting
+     * @param code Win32 error code
+     * @param args Optional variable number of arguments, that can be used for message formatting
      */
     template<typename... Tys>
     explicit Win32Exception(DWORD code, Tys... args) noexcept
