@@ -27,7 +27,6 @@ public:
      * @brief Constructor, that formats message for a specific error code
      * 
      * @tparam Tys Variadic pack of argument types (always deduced automatically)
-     * 
      * @param code Win32 error code
      * @param args Optional variable number of arguments, that can be used for message formatting
      */
