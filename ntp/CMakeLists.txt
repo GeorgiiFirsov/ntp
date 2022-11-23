@@ -14,14 +14,18 @@ set(LIB_INCLUDE_DIRECTORIES ${LIB_INCLUDE_ROOT}
 # Sources and headers
 #
 set(LIB_SOURCE_FILES ${LIB_DETAILS_SOURCE}/threadpool.cpp
-                     ${LIB_DETAILS_SOURCE}/exception.cpp)
+                     ${LIB_DETAILS_SOURCE}/exception.cpp
+                     ${LIB_DETAILS_SOURCE}/utils.cpp
+                     ${LIB_DETAILS_SOURCE}/work.cpp)
 
 set(LIB_HEADER_FILES ${LIB_INCLUDE_ROOT}/ntp.hpp
                      ${LIB_DETAILS_INCLUDE}/config.hpp
                      ${LIB_DETAILS_INCLUDE}/threadpool.hpp
                      ${LIB_DETAILS_INCLUDE}/allocator.hpp
                      ${LIB_DETAILS_INCLUDE}/exception.hpp
-                     ${LIB_DETAILS_INCLUDE}/utils.hpp)
+                     ${LIB_DETAILS_INCLUDE}/utils.hpp
+                     ${LIB_DETAILS_INCLUDE}/basic_callback.hpp
+                     ${LIB_DETAILS_INCLUDE}/work.hpp)
 
 set(LIB_SOURCES      ${LIB_SOURCE_FILES} 
                      ${LIB_HEADER_FILES})

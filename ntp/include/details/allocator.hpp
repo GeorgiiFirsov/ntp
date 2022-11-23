@@ -142,7 +142,7 @@ public:
     template<size_t alignment = NTP_ALLOCATION_ALIGNMENT>
     static Ty* Allocate(size_t count = 1)
     {
-        return AllocateBytes<alignment>(count * sizeof(Ty))
+        return AllocateBytes<alignment>(count * sizeof(Ty));
     }
 
     /**

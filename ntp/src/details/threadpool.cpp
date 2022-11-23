@@ -79,6 +79,21 @@ CustomThreadPoolTraits::~CustomThreadPoolTraits()
 }
 
 
+CleanupGroup::CleanupGroup(PTP_CALLBACK_ENVIRON environment)
+    : cleanup_group_(CreateThreadpoolCleanupGroup())
+{
+    if (!cleanup_group_)
+    {
+        throw exception::Win32Exception();
+    }
+
+    if (environment)
+    {
+        SetThreadpoolCallbackCleanupGroup(environment, cleanup_group_, nullptr);
+    }
+}
+
+
 CleanupGroup::~CleanupGroup()
 {
     if (cleanup_group_)

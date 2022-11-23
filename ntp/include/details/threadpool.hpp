@@ -14,6 +14,7 @@
 
 #include "config.hpp"
 #include "allocator.hpp"
+#include "work.hpp"
 
 
 namespace ntp {
@@ -99,22 +100,9 @@ public:
      * @brief Constructor, that initializes cleanup group and 
      *        associates it with a threadpool if necessary
      * 
-     * @param traits Threadpool traits used for internal implementation
+     * @param environment Threadpool environment to use
      */
-    template<typename ThreadPoolTraits>
-    explicit CleanupGroup(const ThreadPoolTraits& traits)
-        : cleanup_group_(CreateThreadpoolCleanupGroup())
-    {
-        if (!cleanup_group_)
-        {
-            throw exception::Win32Exception();
-        }
-
-        if (const auto environment = traits.Environment(); environment)
-        {
-            SetThreadpoolCallbackCleanupGroup(environment, cleanup_group_, nullptr);
-        }
-    }
+    explicit CleanupGroup(PTP_CALLBACK_ENVIRON environment);
 
     ~CleanupGroup();
 
@@ -156,7 +144,8 @@ public:
      */
     explicit BasicThreadPool()
         : traits_()
-        , cleanup_group_(traits_)
+        , cleanup_group_(traits_.Environment())
+        , work_manager_(traits_.Environment())
     { }
 
     /**
@@ -172,8 +161,24 @@ public:
     template<typename = std::enable_if_t<std::is_same_v<traits_t, details::CustomThreadPoolTraits>>>
     explicit BasicThreadPool(DWORD min_threads, DWORD max_threads)
         : traits_(min_threads, max_threads)
-        , cleanup_group_(traits_)
+        , cleanup_group_(traits_.Environment())
+        , work_manager_(traits_.Environment())
     { }
+
+    /**
+	 * @brief Submits a work callback into threadpool.
+	 *
+	 * @tparam Functor Type of callable to invoke in threadpool
+	 * @tparam Args... Types of arguments
+	 * @param functor Callable to invoke
+	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     */
+    template<typename Functor, typename... Args>
+    void SubmitWork(Functor&& functor, Args&&... args)
+    {
+        return work_manager_.Submit(std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
 
 private:
     // Treadpool traits
@@ -181,6 +186,9 @@ private:
 
     // Cleanup group for callbacks
     details::CleanupGroup cleanup_group_;
+
+    // Managers for callbacks
+    work::details::Manager work_manager_;
 };
 
 
