@@ -9,3 +9,4 @@ CMakeSettings.json
 
 # Specific directories
 out/
+doxygen/
