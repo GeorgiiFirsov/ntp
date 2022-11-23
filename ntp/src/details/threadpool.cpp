@@ -1,3 +1,8 @@
+/**
+ * @file threadpool.cpp
+ * @brief Threadpool implementation (traits and some helper functions)
+ */
+
 #include <Windows.h>
 
 #include <thread>
@@ -9,6 +14,9 @@
 
 namespace ntp::details {
 
+/**
+ * @brief Get number of threads to use as default maximum for custom threadpool
+ */
 DWORD HardwareThreads()
 {
     static int threads = static_cast<int>(std::thread::hardware_concurrency());
@@ -21,7 +29,7 @@ DWORD HardwareThreads()
 }
 
 
-CustomThreadPoolTraits::CustomThreadPoolTraits()
+CustomThreadPoolTraits::CustomThreadPoolTraits(DWORD min_threads /* = 0 */, DWORD max_threads /* = 0 */)
     : pool_(nullptr)
     , environment_(environment_allocator_t::AllocateBytes(sizeof(TP_CALLBACK_ENVIRON_V3) + 512))
 {
@@ -35,8 +43,19 @@ CustomThreadPoolTraits::CustomThreadPoolTraits()
     // Set threads count for new threadpool
     //
 
-    SetThreadpoolThreadMinimum(pool_, 1);
-    SetThreadpoolThreadMaximum(pool_, HardwareThreads());
+    min_threads = (min_threads) ? min_threads : 1;
+    max_threads = (max_threads && max_threads >= min_threads)
+                    ? max_threads
+                    : HardwareThreads();
+
+    //
+    // If max_threads is still less than min_treads, then make them equal
+    //
+
+    max_threads = (max_threads >= min_threads) ? max_threads : min_threads;
+
+    SetThreadpoolThreadMinimum(pool_, min_threads);
+    SetThreadpoolThreadMaximum(pool_, max_threads);
 
     //
     // now initialize environment and link with the pool
@@ -56,6 +75,15 @@ CustomThreadPoolTraits::~CustomThreadPoolTraits()
     if (pool_)
     {
         CloseThreadpool(pool_);
+    }
+}
+
+
+CleanupGroup::~CleanupGroup()
+{
+    if (cleanup_group_)
+    {
+        CloseThreadpoolCleanupGroup(cleanup_group_);
     }
 }
 

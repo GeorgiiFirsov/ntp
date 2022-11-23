@@ -10,6 +10,8 @@
 
 #include <Windows.h>
 
+#include <type_traits>
+
 #include "config.hpp"
 #include "allocator.hpp"
 
@@ -44,6 +46,7 @@ struct SystemThreadPoolTraits final
  */
 class CustomThreadPoolTraits final
 {
+    // Allocator for TP_CALLBACK_ENVIRON
     using environment_allocator_t = allocator::HeapAllocator<TP_CALLBACK_ENVIRON>;
 
 private:
@@ -51,7 +54,19 @@ private:
     CustomThreadPoolTraits& operator=(const CustomThreadPoolTraits&) = delete;
 
 public:
-    CustomThreadPoolTraits();
+    /**
+     * @brief Constructor with the ability to set threadpool threads number
+     * 
+     * If min_threads is 0, then minimum number of threads will be set to 1.
+     * If max_threads is 0 or less than min_threads, then maximum number of threads will 
+     * be set to ntp::details::HardwareThreads.
+     * If max_threads is still less than min_threads after changes described above, then
+     * maximum number of threads is set to be equal to minimum.
+     * 
+     * @param min_threads Minimum number of threads
+     * @param max_threads Maximum number of threads
+     */
+    CustomThreadPoolTraits(DWORD min_threads = 0, DWORD max_threads = 0);
     ~CustomThreadPoolTraits();
 
     /** 
@@ -67,6 +82,50 @@ private:
 
     // Environment associated with custom threadpool
     PTP_CALLBACK_ENVIRON environment_;
+};
+
+
+/**
+ * @brief Wrapper for PTP_CLEANUP_GROUP, that is used to 
+          manage all callbacks at once
+ */
+class CleanupGroup final
+{
+    CleanupGroup(const CleanupGroup&)            = delete;
+    CleanupGroup& operator=(const CleanupGroup&) = delete;
+
+public:
+    /**
+     * @brief Constructor, that initializes cleanup group and 
+     *        associates it with a threadpool if necessary
+     * 
+     * @param traits Threadpool traits used for internal implementation
+     */
+    template<typename ThreadPoolTraits>
+    explicit CleanupGroup(const ThreadPoolTraits& traits)
+        : cleanup_group_(CreateThreadpoolCleanupGroup())
+    {
+        if (!cleanup_group_)
+        {
+            throw exception::Win32Exception();
+        }
+
+        if (const auto environment = traits.Environment(); environment)
+        {
+            SetThreadpoolCallbackCleanupGroup(environment, cleanup_group_, nullptr);
+        }
+    }
+
+    ~CleanupGroup();
+
+    /**
+     * @brief Obtain a pointer to the internal cleanup group
+     */
+    operator PTP_CLEANUP_GROUP() const noexcept { return cleanup_group_; }
+
+private:
+    // Internal cleanup group
+    PTP_CLEANUP_GROUP cleanup_group_;
 };
 
 }  // namespace details
@@ -86,13 +145,42 @@ private:
 template<typename ThreadPoolTraits>
 class BasicThreadPool final
 {
+    // Alias for traits type
     using traits_t = ThreadPoolTraits;
 
 public:
+    /**
+     * @brief Default constructor
+     * 
+     * Initializes stateful threadpool traits and cleanup group
+     */
+    explicit BasicThreadPool()
+        : traits_()
+        , cleanup_group_(traits_)
+    { }
+
+    /**
+     * @brief Constructor with the ability to set threadpool threads number
+     * 
+     * This constructor is available only for BasicThreadPool<details::CustomThreadPoolTraits>
+     * specialization. For the description of parameters refer to details::CustomThreadPoolTraits
+     * description.
+	 *
+	 * @param min_threads Minimum number of threads
+	 * @param max_threads Maximum number of threads
+     */
+    template<typename = std::enable_if_t<std::is_same_v<traits_t, details::CustomThreadPoolTraits>>>
+    explicit BasicThreadPool(DWORD min_threads, DWORD max_threads)
+        : traits_(min_threads, max_threads)
+        , cleanup_group_(traits_)
+    { }
 
 private:
     // Treadpool traits
     traits_t traits_;
+
+    // Cleanup group for callbacks
+    details::CleanupGroup cleanup_group_;
 };
 
 
