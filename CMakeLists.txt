@@ -16,9 +16,9 @@ option(NTP_ENABLE_DOCS "Enable building docs for ntp library." ON)
 #
 # Basic common directories
 #
-set(NTP_ROOT ${CMAKE_SOURCE_DIR})
+set(NTP_ROOT         ${CMAKE_SOURCE_DIR})
 set(NTP_LIBRARY_ROOT ${NTP_ROOT}/ntp)
-set(NTP_INCLUDE_DIR ${NTP_LIBRARY_ROOT}/include)
+set(NTP_INCLUDE_DIR  ${NTP_LIBRARY_ROOT}/include)
 
 #
 # Library itself
