@@ -5,10 +5,26 @@
 
 #pragma once
 
+#include <functional>
+
 #include "config.hpp"
 
 
 namespace ntp::details {
+
+/**
+ * @brief Cancellation test timeout, while waiting for callbacks.
+ *        Set to 500 msec.
+ */
+NTP_INLINE constexpr auto kTestCancelTimeout = 500ul;
+
+/**
+ * @brief Cancellation checker for threadpool
+ * 
+ * @returns true if cancellation requested, false -- otherwise
+ */
+using test_cancel_t = std::function<bool()>;
+
 
 /**
  * @brief Interface for callback wrapper

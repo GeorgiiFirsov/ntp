@@ -20,6 +20,17 @@
 namespace ntp {
 namespace details {
 
+/**
+ * @brief Default cancellation test implementation
+ * 
+ * @returns always false
+ */
+inline bool DefaultTestCancel() noexcept
+{
+    return false;
+}
+
+
 /** 
  * @brief Traits for system-default threadpool
  *  
@@ -140,12 +151,15 @@ public:
     /**
      * @brief Default constructor
      * 
-     * Initializes stateful threadpool traits and cleanup group
+	 * Initializes stateful threadpool traits and cleanup group
+     * 
+	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
      */
-    explicit BasicThreadPool()
+    explicit BasicThreadPool(details::test_cancel_t test_cancel = details::DefaultTestCancel)
         : traits_()
         , cleanup_group_(traits_.Environment())
-        , work_manager_(traits_.Environment())
+        , test_cancel_(std::move(test_cancel))
+        , work_manager_(traits_.Environment(), test_cancel_)
     { }
 
     /**
@@ -157,12 +171,14 @@ public:
 	 *
 	 * @param min_threads Minimum number of threads
 	 * @param max_threads Maximum number of threads
+	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
      */
     template<typename = std::enable_if_t<std::is_same_v<traits_t, details::CustomThreadPoolTraits>>>
-    explicit BasicThreadPool(DWORD min_threads, DWORD max_threads)
+    explicit BasicThreadPool(DWORD min_threads, DWORD max_threads, details::test_cancel_t test_cancel = details::DefaultTestCancel)
         : traits_(min_threads, max_threads)
         , cleanup_group_(traits_.Environment())
-        , work_manager_(traits_.Environment())
+        , test_cancel_(std::move(test_cancel))
+        , work_manager_(traits_.Environment(), test_cancel_)
     { }
 
     /**
@@ -186,6 +202,9 @@ private:
 
     // Cleanup group for callbacks
     details::CleanupGroup cleanup_group_;
+
+    // Cancellation test function
+    details::test_cancel_t test_cancel_;
 
     // Managers for callbacks
     work::details::Manager work_manager_;

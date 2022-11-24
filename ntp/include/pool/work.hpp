@@ -77,9 +77,10 @@ public:
     /**
      * @brief Constructor that initializes all necessary objects.
      * 
-     * @param environment Owning threadpool traits
+	 * @param environment Owning threadpool traits
+	 * @param test_cancel Reference to cancellation test function (defaulted to ntp::details::DefaultTestCancel)
      */
-    explicit Manager(PTP_CALLBACK_ENVIRON environment);
+    explicit Manager(PTP_CALLBACK_ENVIRON environment, const ntp::details::test_cancel_t& test_cancel);
 
     ~Manager();
 
@@ -104,8 +105,29 @@ public:
         SubmitThreadpoolWork(work_);
     }
 
+    /**
+     * @brief Wait for all callbacks to complete
+     * 
+     * Wait is performed in separate thread if possible with periodical cancellation checks.
+     * If waiting in separate thread is not possible, wait is performed in caller thread,
+     * cancellation checks are impossible in this case (error message is reported to logger).
+     * 
+     * @returns true if all callbacks are completed, false if cancellation occurred while waiting for callbacks
+     */
+    bool WaitAll() noexcept;
+
+    /**
+     * @brief Cancel all pending callbacks
+     */
+    void CancelAll() noexcept;
+
+private:
+    size_t ClearList() noexcept;
+
 private:
     static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work);
+
+    static void CALLBACK WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self);
 
 private:
     // Internal queue with callbacks
@@ -116,6 +138,9 @@ private:
 
     // Event: all tasks completed
     ATL::CEvent done_event_;
+
+    //
+    const ntp::details::test_cancel_t& test_cancel_;
 };
 
 }  // namespace ntp::work::details
