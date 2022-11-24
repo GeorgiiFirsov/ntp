@@ -147,6 +147,10 @@ class BasicThreadPool final
     // Alias for traits type
     using traits_t = ThreadPoolTraits;
 
+private:
+    BasicThreadPool(const BasicThreadPool&)            = delete;
+    BasicThreadPool& operator=(const BasicThreadPool&) = delete;
+
 public:
     /**
      * @brief Default constructor

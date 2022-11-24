@@ -77,6 +77,10 @@ class NativeSlist final
     // Allocator for header
     using allocator_t = allocator::AlignedAllocator<SLIST_HEADER>;
 
+private:
+    NativeSlist(const NativeSlist&)            = delete;
+    NativeSlist& operator=(const NativeSlist&) = delete;
+
 public:
     explicit NativeSlist();
     ~NativeSlist();
@@ -109,6 +113,10 @@ class alignas(NTP_ALLOCATION_ALIGNMENT) NativeSlistEntry
 {
     // Use raw aligned allocator
     using allocator_t = allocator::AlignedAllocator<void>;
+
+private:
+    NativeSlistEntry(const NativeSlistEntry&)            = delete;
+    NativeSlistEntry& operator=(const NativeSlistEntry&) = delete;
 
 public:
     /**

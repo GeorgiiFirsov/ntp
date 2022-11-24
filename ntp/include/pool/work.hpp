@@ -73,6 +73,9 @@ private:
 class Manager final
     : public ntp::details::BasicManager
 {
+    Manager(const Manager&)            = delete;
+    Manager& operator=(const Manager&) = delete;
+
 public:
     /**
      * @brief Constructor that initializes all necessary objects.
