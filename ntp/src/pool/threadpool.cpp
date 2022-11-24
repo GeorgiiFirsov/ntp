@@ -32,13 +32,14 @@ DWORD HardwareThreads()
 BasicThreadPoolTraits::BasicThreadPoolTraits()
     : environment_(environment_allocator_t::AllocateBytes(sizeof(TP_CALLBACK_ENVIRON_V3) + 512))
 {
-    InitializeThreadpoolEnvironment(Environment());
+    InitializeThreadpoolEnvironment(environment_);
 }
 
 BasicThreadPoolTraits::~BasicThreadPoolTraits()
 {
     if (environment_)
     {
+        DestroyThreadpoolEnvironment(environment_);
         environment_allocator_t::Free(environment_);
     }
 }
