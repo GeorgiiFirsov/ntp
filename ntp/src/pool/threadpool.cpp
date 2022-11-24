@@ -93,7 +93,6 @@ CleanupGroup::CleanupGroup(PTP_CALLBACK_ENVIRON environment)
     }
 }
 
-
 CleanupGroup::~CleanupGroup()
 {
     if (cleanup_group_)

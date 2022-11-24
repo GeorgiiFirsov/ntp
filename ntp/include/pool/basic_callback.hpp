@@ -18,6 +18,7 @@ namespace ntp::details {
  */
 NTP_INLINE constexpr auto kTestCancelTimeout = 500ul;
 
+
 /**
  * @brief Cancellation checker for threadpool
  * 
