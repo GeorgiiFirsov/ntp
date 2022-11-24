@@ -26,4 +26,5 @@
 //
 // Just a list of necessary library headers
 //
-#include "details/threadpool.hpp"
+#include "config.hpp"
+#include "threadpool.hpp"
