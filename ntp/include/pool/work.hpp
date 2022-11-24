@@ -38,8 +38,9 @@ public:
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
-    explicit Callback(Functor&& functor, Args&&... args)
-        : BasicCallback(std::forward<Functor>(functor), std::forward<Args>(args)...)
+    template<typename CFunctor, typename... CArgs>
+    explicit Callback(CFunctor&& functor, CArgs&&... args)
+        : BasicCallback(std::forward<CFunctor>(functor), std::forward<CArgs>(args)...)
     { }
 
     /**

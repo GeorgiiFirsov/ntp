@@ -62,7 +62,7 @@ template<typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) BasicCallback final
     : public ICallback
 {
-    BasicCallback(const BasicCallback&) = delete;
+    BasicCallback(const BasicCallback&)            = delete;
     BasicCallback& operator=(const BasicCallback&) = delete;
 
 private:
@@ -76,8 +76,9 @@ public:
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
-    explicit BasicCallback(Functor functor, Args&&... args)
-        : args_(std::forward<Args>(args)...)
+    template<typename... CArgs>
+    explicit BasicCallback(Functor functor, CArgs&&... args)
+        : args_(std::forward<CArgs>(args)...)
         , functor_(std::move(functor))
     { }
 
