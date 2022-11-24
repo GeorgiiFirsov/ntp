@@ -44,7 +44,7 @@ bool Manager::WaitAll() noexcept
     done_event_.Reset();
 
     //
-    // Now
+    // Now try to submit waiting callback
     //
 
     const auto submitted = TrySubmitThreadpoolCallback(
@@ -58,6 +58,10 @@ bool Manager::WaitAll() noexcept
         ntp::details::SafeThreadpoolCall<WaitForThreadpoolWorkCallbacks>(work_, FALSE);
         done_event_.Set();
     }
+
+    //
+    // And... Wait for everithing to complete :)
+    //
 
     bool cancelled = false;
 
