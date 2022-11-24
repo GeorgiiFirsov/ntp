@@ -142,7 +142,7 @@ private:
     // Event: all tasks completed
     ATL::CEvent done_event_;
 
-    //
+    // Reference to cancellation test function
     const ntp::details::test_cancel_t& test_cancel_;
 };
 
