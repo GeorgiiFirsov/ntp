@@ -32,20 +32,35 @@ inline bool DefaultTestCancel() noexcept
 
 
 /** 
- * @brief Traits for system-default threadpool
+ * @brief Basic threadpool traits. Used as system-default threadpool traits
  *  
  * Each Win32 process has its own default threadpool.
  * These traits allow user to use it via SystemThreadPool 
  * class.
  */
-struct SystemThreadPoolTraits final
+class BasicThreadPoolTraits
 {
+    // Allocator for TP_CALLBACK_ENVIRON
+    using environment_allocator_t = allocator::HeapAllocator<TP_CALLBACK_ENVIRON>;
+
+private:
+    BasicThreadPoolTraits(const BasicThreadPoolTraits&)            = delete;
+    BasicThreadPoolTraits& operator=(const BasicThreadPoolTraits&) = delete;
+
+public:
+    BasicThreadPoolTraits();
+    ~BasicThreadPoolTraits();
+
     /**
-     * @brief Get an environment associated with the system-default threadpool
+     * @brief Get a threadpool environment associated by default with the system threadpool
      * 
-     * @returns Pointer to the environment (actually NULL-pointer)
+     * @returns Pointer to the environment
      */
-    PTP_CALLBACK_ENVIRON Environment() const noexcept { return nullptr; }
+    PTP_CALLBACK_ENVIRON Environment() const noexcept { return environment_; }
+
+private:
+    // Environment associated with system threadpool (by default)
+    PTP_CALLBACK_ENVIRON environment_;
 };
 
 
@@ -57,11 +72,8 @@ struct SystemThreadPoolTraits final
  * via ThreadPool class.
  */
 class CustomThreadPoolTraits final
+    : public BasicThreadPoolTraits
 {
-    // Allocator for TP_CALLBACK_ENVIRON
-    using environment_allocator_t = allocator::HeapAllocator<TP_CALLBACK_ENVIRON>;
-
-private:
     CustomThreadPoolTraits(const CustomThreadPoolTraits&)            = delete;
     CustomThreadPoolTraits& operator=(const CustomThreadPoolTraits&) = delete;
 
@@ -81,19 +93,9 @@ public:
     CustomThreadPoolTraits(DWORD min_threads = 0, DWORD max_threads = 0);
     ~CustomThreadPoolTraits();
 
-    /** 
-     * @brief Get an environment associated with the custom threadpool
-     * 
-     * @returns Pointer to the environment
-     */
-    PTP_CALLBACK_ENVIRON Environment() const noexcept { return environment_; }
-
 private:
     // Custom threadpool descriptor
     PTP_POOL pool_;
-
-    // Environment associated with custom threadpool
-    PTP_CALLBACK_ENVIRON environment_;
 };
 
 
@@ -144,6 +146,10 @@ private:
 template<typename ThreadPoolTraits>
 class BasicThreadPool final
 {
+    // Traits must inherit details::BasicThreadPoolTraits
+    static_assert(std::is_base_of_v<details::BasicThreadPoolTraits, ThreadPoolTraits> || std::is_same_v<details::BasicThreadPoolTraits, ThreadPoolTraits>,
+        "[BasicThreadPool]: ThreadPoolTraits MUST inherit details::BasicThreadPoolTraits");
+
     // Alias for traits type
     using traits_t = ThreadPoolTraits;
 
@@ -218,7 +224,7 @@ private:
 /**
  * @brief System-default threadpool wrapper
  */
-using SystemThreadPool = BasicThreadPool<details::SystemThreadPoolTraits>;
+using SystemThreadPool = BasicThreadPool<details::BasicThreadPoolTraits>;
 
 /**
  * @brief Custom threadpool wrapper

@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <Windows.h>
+
 #include <functional>
 
 #include "config.hpp"

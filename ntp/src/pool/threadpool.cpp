@@ -29,9 +29,24 @@ DWORD HardwareThreads()
 }
 
 
+BasicThreadPoolTraits::BasicThreadPoolTraits()
+    : environment_(environment_allocator_t::AllocateBytes(sizeof(TP_CALLBACK_ENVIRON_V3) + 512))
+{
+    InitializeThreadpoolEnvironment(Environment());
+}
+
+BasicThreadPoolTraits::~BasicThreadPoolTraits()
+{
+    if (environment_)
+    {
+        environment_allocator_t::Free(environment_);
+    }
+}
+
+
 CustomThreadPoolTraits::CustomThreadPoolTraits(DWORD min_threads /* = 0 */, DWORD max_threads /* = 0 */)
-    : pool_(nullptr)
-    , environment_(environment_allocator_t::AllocateBytes(sizeof(TP_CALLBACK_ENVIRON_V3) + 512))
+    : BasicThreadPoolTraits()
+    , pool_(nullptr)
 {
     pool_ = CreateThreadpool(nullptr);
     if (!pool_)
@@ -61,36 +76,34 @@ CustomThreadPoolTraits::CustomThreadPoolTraits(DWORD min_threads /* = 0 */, DWOR
     // now initialize environment and link with the pool
     //
 
-    InitializeThreadpoolEnvironment(environment_);
-    SetThreadpoolCallbackPool(environment_, pool_);
+    SetThreadpoolCallbackPool(Environment(), pool_);
 }
 
 CustomThreadPoolTraits::~CustomThreadPoolTraits()
 {
-    if (environment_)
-    {
-        environment_allocator_t::Free(environment_);
-    }
-
     if (pool_)
     {
+        SetThreadpoolCallbackPool(Environment(), nullptr);
         CloseThreadpool(pool_);
     }
 }
 
 
 CleanupGroup::CleanupGroup(PTP_CALLBACK_ENVIRON environment)
-    : cleanup_group_(CreateThreadpoolCleanupGroup())
+    : cleanup_group_()
 {
+    if (!environment)
+    {
+        throw exception::Win32Exception(ERROR_INVALID_PARAMETER);
+    }
+
+    cleanup_group_ = CreateThreadpoolCleanupGroup();
     if (!cleanup_group_)
     {
         throw exception::Win32Exception();
     }
 
-    if (environment)
-    {
-        SetThreadpoolCallbackCleanupGroup(environment, cleanup_group_, nullptr);
-    }
+    SetThreadpoolCallbackCleanupGroup(environment, cleanup_group_, nullptr);
 }
 
 CleanupGroup::~CleanupGroup()
