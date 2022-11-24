@@ -30,6 +30,7 @@ add_subdirectory(ntp)
 #
 if (NTP_ENABLE_DOCS)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Docs building is enabled. Adding test projects.")
+
     add_subdirectory(docs)
 else(NTP_ENABLE_DOCS)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Docs building is disabled.")
@@ -40,6 +41,8 @@ endif(NTP_ENABLE_DOCS)
 #
 if (NTP_ENABLE_TESTING)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Testing is enabled. Adding test projects.")
+
+    enable_testing()
     add_subdirectory(tests)
 else(NTP_ENABLE_TESTING)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Testing is disabled.")
