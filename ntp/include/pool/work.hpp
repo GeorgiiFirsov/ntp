@@ -29,15 +29,8 @@ namespace ntp::work::details {
  */
 template<typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) Callback final
-    : public ntp::details::ICallback
+    : public ntp::details::BasicCallback<Functor, Args...>
 {
-    Callback(const Callback&)            = delete;
-    Callback& operator=(const Callback&) = delete;
-
-private:
-    // Type of packed arguments
-    using tuple_t = std::tuple<std::decay_t<Args>...>;
-
 public:
     /**
      * @brief Constructor from callable and its arguments
@@ -45,9 +38,8 @@ public:
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
-    explicit Callback(Functor functor, Args&&... args)
-        : args_(std::forward<Args>(args)...)
-        , functor_(std::move(functor))
+    explicit Callback(Functor&& functor, Args&&... args)
+        : BasicCallback(std::forward<Functor>(functor), std::forward<Args>(args)...)
     { }
 
     /**
@@ -55,15 +47,8 @@ public:
      */
     void Call(void* /*parameter*/) override
     {
-        std::apply(functor_, args_);
+        std::apply(Callable(), Arguments());
     }
-
-private:
-    // Packed arguments
-    tuple_t args_;
-
-    // Callable
-    Functor functor_;
 };
 
 
