@@ -15,7 +15,8 @@
 
 #include <Windows.h>
 
-#include "exception.hpp"
+#include "config.hpp"
+#include "details/exception.hpp"
 
 
 namespace ntp::allocator {
@@ -28,7 +29,7 @@ namespace ntp::allocator {
 template<typename Ty>
 class HeapAllocator final
 {
-	// Actually I use allocator for void-pointers
+    // Actually I use allocator for void-pointers
     using basic_allocator_t = HeapAllocator<void>;
 
 public:

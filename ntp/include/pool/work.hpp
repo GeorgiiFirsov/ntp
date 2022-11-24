@@ -14,9 +14,9 @@
 #include <type_traits>
 
 #include "config.hpp"
-#include "utils.hpp"
-#include "allocator.hpp"
-#include "basic_callback.hpp"
+#include "details/utils.hpp"
+#include "details/allocator.hpp"
+#include "pool/basic_callback.hpp"
 
 
 namespace ntp::work::details {

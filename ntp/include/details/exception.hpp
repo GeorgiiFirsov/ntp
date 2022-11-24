@@ -26,12 +26,12 @@ public:
     /**
      * @brief Constructor, that formats message for a specific error code
      * 
-     * @tparam Tys Variadic pack of argument types (always deduced automatically)
+     * @tparam Args... Variadic pack of argument types (always deduced automatically)
      * @param code Win32 error code
      * @param args Optional variable number of arguments, that can be used for message formatting
      */
-    template<typename... Tys>
-    explicit Win32Exception(DWORD code, Tys... args) noexcept
+    template<typename... Args>
+    explicit Win32Exception(DWORD code, Args... args) noexcept
         : message_(FormatMessage(code, args...))
     { }
 
@@ -50,7 +50,12 @@ public:
     const char* what() const noexcept override { return message_.c_str(); }
 
 private:
-    std::string FormatMessage(DWORD code, ... /* C-style varargs are necessary :( */) noexcept;
+    template<typename... Args>
+    static std::string FormatMessage(DWORD code, Args... args) noexcept
+    {
+        const DWORD flags = FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
+        return ntp::details::FormatMessage(flags, static_cast<LPCSTR>(nullptr), code, args...);
+    }
 
 private:
     // Error description

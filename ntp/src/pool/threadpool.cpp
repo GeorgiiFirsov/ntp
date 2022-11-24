@@ -7,9 +7,9 @@
 
 #include <thread>
 
-#include "threadpool.hpp"
-#include "allocator.hpp"
-#include "exception.hpp"
+#include "pool/threadpool.hpp"
+#include "details/allocator.hpp"
+#include "details/exception.hpp"
 
 
 namespace ntp::details {

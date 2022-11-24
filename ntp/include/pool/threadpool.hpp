@@ -13,8 +13,8 @@
 #include <type_traits>
 
 #include "config.hpp"
-#include "allocator.hpp"
-#include "work.hpp"
+#include "details/allocator.hpp"
+#include "pool/work.hpp"
 
 
 namespace ntp {

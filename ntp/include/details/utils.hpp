@@ -6,7 +6,7 @@
 #pragma once
 
 #include "config.hpp"
-#include "allocator.hpp"
+#include "details/allocator.hpp"
 
 
 namespace ntp::details {
@@ -32,6 +32,39 @@ DWORD SafeThreadpoolCall(Args&&... args) noexcept
         return GetExceptionCode();
     }
 }
+
+
+/**
+ * @brief Wrapper for Win32 API FormatMessage
+ *
+ * @param flags formatting flags (refer to Win32 API for possible values)
+ * @param source optional format string (if FORMAT_MESSAGE_FROM_SYSTEM is specified this parameter MUST be NULL)
+ * @param message_id optional message identifier (ignored if FORMAT_MESSAGE_FROM_STRING is specified)
+ * @returns formatted message of empty string in case of error
+ */
+std::string FormatMessage(DWORD flags, LPCSTR source, DWORD message_id, ...) noexcept;
+
+
+/**
+ * @brief Wrapper for Win32 API FormatMessage
+ *
+ * @param flags formatting flags (refer to Win32 API for possible values)
+ * @param source optional format string (if FORMAT_MESSAGE_FROM_SYSTEM is specified this parameter MUST be NULL)
+ * @param message_id optional message identifier (ignored if FORMAT_MESSAGE_FROM_STRING is specified)
+ * @returns formatted message of empty string in case of error
+ */
+std::wstring FormatMessage(DWORD flags, LPCWSTR source, DWORD message_id, ...) noexcept;
+
+
+/**
+ * @brief converts std::string to std::wstring using MultiByteToWideChar
+ * 
+ * Uses Windows-1251 codepage
+ * 
+ * @param source Source string
+ * @returns Converted string
+ */
+std::wstring Convert(const std::string& source) noexcept;
 
 
 /**

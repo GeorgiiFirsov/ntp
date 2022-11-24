@@ -1,5 +1,6 @@
-#include "work.hpp"
-#include "exception.hpp"
+#include "pool/work.hpp"
+#include "details/exception.hpp"
+#include "logger/logger_internal.hpp"
 
 
 namespace ntp::work::details {
@@ -51,11 +52,12 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER
     }
     catch (const std::exception& error)
     {
-        // TODO
+        logger::details::Logger::Instance().TraceMessage(logger::Severity::kError, error.what());
     }
     catch (...)
-	{
-		// TODO
+    {
+        logger::details::Logger::Instance().TraceMessage(logger::Severity::kCritical,
+            L"[Manager::InvokeCallback]: unknown error");
     }
 }
 
