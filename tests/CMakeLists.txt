@@ -16,7 +16,9 @@ set(TEST_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR}
 #
 # Sources and headers
 #
-set(TEST_SOURCE_FILES ${TEST_SOURCE_ROOT}/pool_creation_test.cpp)
+set(TEST_SOURCE_FILES ${TEST_SOURCE_ROOT}/pool_creation_test.cpp
+                      ${TEST_SOURCE_ROOT}/work_test.cpp)
+
 set(TEST_HEADER_FILES )
 
 set(TEST_SOURCES      ${TEST_SOURCE_FILES} 

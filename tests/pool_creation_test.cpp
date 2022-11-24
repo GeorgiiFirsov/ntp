@@ -3,14 +3,15 @@
 #include "ntp.hpp"
 
 
-TEST(ThreadPool, Creation_System)
+namespace creation {
+TEST(ThreadPool, System)
 {
     EXPECT_NO_THROW({
         ntp::SystemThreadPool pool;
     });
 }
 
-TEST(ThreadPool, Creation_SystemTestCancel)
+TEST(ThreadPool, SystemTestCancel)
 {
     const auto TestCancel = []() { return false; };
 
@@ -19,21 +20,21 @@ TEST(ThreadPool, Creation_SystemTestCancel)
     });
 }
 
-TEST(ThreadPool, Creation_Custom)
+TEST(ThreadPool, Custom)
 {
     EXPECT_NO_THROW({
         ntp::ThreadPool pool;
     });
 }
 
-TEST(ThreadPool, Creation_CustomMinMax)
+TEST(ThreadPool, CustomMinMax)
 {
     EXPECT_NO_THROW({
         ntp::ThreadPool pool(1, 10);
     });
 }
 
-TEST(ThreadPool, Creation_CustomTestCancel)
+TEST(ThreadPool, CustomTestCancel)
 {
     const auto TestCancel = []() { return false; };
 
@@ -42,7 +43,7 @@ TEST(ThreadPool, Creation_CustomTestCancel)
     });
 }
 
-TEST(ThreadPool, Creation_CustomMinMaxTestCancel)
+TEST(ThreadPool, CustomMinMaxTestCancel)
 {
     const auto TestCancel = []() { return false; };
 
@@ -50,3 +51,5 @@ TEST(ThreadPool, Creation_CustomMinMaxTestCancel)
         ntp::ThreadPool pool(1, 10, TestCancel);
     });
 }
+
+}  // namespace creation

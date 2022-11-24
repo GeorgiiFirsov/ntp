@@ -114,10 +114,6 @@ class alignas(NTP_ALLOCATION_ALIGNMENT) NativeSlistEntry
     // Use raw aligned allocator
     using allocator_t = allocator::AlignedAllocator<void>;
 
-private:
-    NativeSlistEntry(const NativeSlistEntry&)            = delete;
-    NativeSlistEntry& operator=(const NativeSlistEntry&) = delete;
-
 public:
     /**
 	 * @brief Custom new operator, that allocates aligned memory

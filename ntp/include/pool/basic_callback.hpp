@@ -59,7 +59,7 @@ struct alignas(NTP_ALLOCATION_ALIGNMENT) ICallback
  * to store callable and its arguments.
  */
 template<typename Functor, typename... Args>
-class alignas(NTP_ALLOCATION_ALIGNMENT) BasicCallback final
+class alignas(NTP_ALLOCATION_ALIGNMENT) BasicCallback
     : public ICallback
 {
     BasicCallback(const BasicCallback&)            = delete;
