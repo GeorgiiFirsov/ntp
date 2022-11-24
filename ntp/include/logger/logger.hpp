@@ -13,8 +13,8 @@ namespace ntp::logger {
  */
 enum class Severity : unsigned char
 {
-    kNormal   = 0, /**< Normal message */
-    kExtended = 1, /**< Not very important message */
+    kExtended = 0, /**< Not very important message */
+    kNormal   = 1, /**< Normal message */
     kError    = 2, /**< Error message */
     kCritical = 3  /**< Critical error message */
 };
