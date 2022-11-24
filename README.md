@@ -4,7 +4,7 @@
 
 ## TODO
 
-- [ ] Work callbacks waiting
+- [X] Work callbacks waiting
 - [ ] Wait callbacks
 - [ ] Timer callbacks
 - [ ] IO callbacks

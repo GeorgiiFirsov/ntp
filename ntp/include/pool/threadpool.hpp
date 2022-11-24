@@ -192,6 +192,15 @@ public:
     { }
 
     /**
+     * @brief Destructor releases all forgotten resources via cleanup group
+     */
+    ~BasicThreadPool()
+    {
+        ntp::details::SafeThreadpoolCall<CloseThreadpoolCleanupGroupMembers>(
+            cleanup_group_, TRUE, nullptr);
+    }
+
+    /**
 	 * @brief Submits a work callback into threadpool.
 	 *
 	 * @tparam Functor Type of callable to invoke in threadpool
@@ -204,6 +213,39 @@ public:
     {
         return work_manager_.Submit(std::forward<Functor>(functor),
             std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Waits until all work callbacks are completed or cancellation is requested
+     * 
+     * @returns true if all callbacks are completed, false if cancellation 
+     *          occurred while waiting for callbacks
+     */
+    bool WaitWorks() noexcept { return work_manager_.WaitAll(); }
+
+    /**
+     * @brief Cancel all pending work callbacks
+     */
+    void CancelWorks() noexcept { return work_manager_.CancelAll(); }
+
+    /**
+	 * @brief Waits until all callbacks (of any kind) are completed
+     *        or cancellation is requested
+	 *
+	 * @returns true if all callbacks are completed, false if cancellation 
+     *          occurred while waiting for callbacks
+     */
+    bool WaitAllCallbacks() noexcept
+    {
+        bool works_completed = work_manager_.WaitAll();
+    }
+
+    /**
+     * @brief Cancel all pending callbacks (of any kind)
+     */
+    void CancelAllCallbacks() noexcept
+    {
+        work_manager_.CancelAll();
     }
 
 private:
