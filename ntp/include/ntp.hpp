@@ -23,6 +23,8 @@
 // /_/ |_/ \__,_/ \__//_/  |___/ \___/    /_/  /_/ /_//_/    \___/ \__,_/ \__,_//_/     \____/ \____//_/
 //
 
+#define NTP_LIBRARY_MAIN 1
+
 //
 // Just a list of necessary library headers
 //
