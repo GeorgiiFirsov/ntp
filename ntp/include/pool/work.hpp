@@ -9,13 +9,10 @@
 #include <atlsync.h>
 
 #include <tuple>
-#include <memory>
 #include <utility>
-#include <type_traits>
 
 #include "config.hpp"
 #include "details/utils.hpp"
-#include "details/allocator.hpp"
 #include "pool/basic_callback.hpp"
 
 
@@ -37,14 +34,14 @@ public:
      * 
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
-     */
+	 */
     template<typename CFunctor, typename... CArgs>
     explicit Callback(CFunctor&& functor, CArgs&&... args)
         : BasicCallback(std::forward<CFunctor>(functor), std::forward<CArgs>(args)...)
     { }
 
     /**
-     * @brief Invokation of internal callback (interface's parameter ignored)
+     * @brief Invocation of internal callback (interface's parameter ignored)
      */
     void Call(void* /*parameter*/) override
     {
@@ -67,9 +64,8 @@ public:
      * @brief Constructor that initializes all necessary objects.
      * 
 	 * @param environment Owning threadpool traits
-	 * @param test_cancel Reference to cancellation test function (defaulted to ntp::details::DefaultTestCancel)
      */
-    explicit Manager(PTP_CALLBACK_ENVIRON environment, const ntp::details::test_cancel_t& test_cancel);
+    explicit Manager(PTP_CALLBACK_ENVIRON environment);
 
     ~Manager();
 
@@ -99,11 +95,13 @@ public:
      * 
      * Wait is performed in separate thread if possible with periodical cancellation checks.
      * If waiting in separate thread is not possible, wait is performed in caller thread,
-     * cancellation checks are impossible in this case (error message is reported to logger).
+	 * cancellation checks are impossible in this case (error message is reported to logger).
+     * 
+	 * @param test_cancel Reference to cancellation test function
      * 
      * @returns true if all callbacks are completed, false if cancellation occurred while waiting for callbacks
      */
-    bool WaitAll() noexcept;
+    bool WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept;
 
     /**
      * @brief Cancel all pending callbacks
@@ -127,9 +125,6 @@ private:
 
     // Event: all tasks completed
     ATL::CEvent done_event_;
-
-    // Reference to cancellation test function
-    const ntp::details::test_cancel_t& test_cancel_;
 };
 
 }  // namespace ntp::work::details

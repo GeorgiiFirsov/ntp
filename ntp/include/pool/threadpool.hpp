@@ -169,7 +169,7 @@ public:
         : traits_()
         , cleanup_group_(traits_.Environment())
         , test_cancel_(std::move(test_cancel))
-        , work_manager_(traits_.Environment(), test_cancel_)
+        , work_manager_(traits_.Environment())
     { }
 
     /**
@@ -188,7 +188,7 @@ public:
         : traits_(min_threads, max_threads)
         , cleanup_group_(traits_.Environment())
         , test_cancel_(std::move(test_cancel))
-        , work_manager_(traits_.Environment(), test_cancel_)
+        , work_manager_(traits_.Environment())
     { }
 
     /**
@@ -221,7 +221,7 @@ public:
      * @returns true if all callbacks are completed, false if cancellation 
      *          occurred while waiting for callbacks
      */
-    bool WaitWorks() noexcept { return work_manager_.WaitAll(); }
+    bool WaitWorks() noexcept { return work_manager_.WaitAll(test_cancel_); }
 
     /**
      * @brief Cancel all pending work callbacks
@@ -237,7 +237,7 @@ public:
      */
     bool WaitAllCallbacks() noexcept
     {
-        bool works_completed = work_manager_.WaitAll();
+        bool works_completed = work_manager_.WaitAll(test_cancel_);
     }
 
     /**

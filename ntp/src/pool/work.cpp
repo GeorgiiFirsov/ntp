@@ -5,12 +5,11 @@
 
 namespace ntp::work::details {
 
-Manager::Manager(PTP_CALLBACK_ENVIRON environment, const ntp::details::test_cancel_t& test_cancel)
+Manager::Manager(PTP_CALLBACK_ENVIRON environment)
     : BasicManager(environment)
     , queue_()
     , work_()
     , done_event_(TRUE, FALSE)
-    , test_cancel_(test_cancel)
 {
     work_ = CreateThreadpoolWork(reinterpret_cast<PTP_WORK_CALLBACK>(InvokeCallback),
         static_cast<PSLIST_HEADER>(queue_), Environment());
@@ -35,7 +34,7 @@ Manager::~Manager()
     }
 }
 
-bool Manager::WaitAll() noexcept
+bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
 {
     //
     // Suppose we have something working...
@@ -67,7 +66,7 @@ bool Manager::WaitAll() noexcept
 
     while (WAIT_TIMEOUT == WaitForSingleObject(done_event_, ntp::details::kTestCancelTimeout))
     {
-        if (test_cancel_())
+        if (test_cancel())
         {
             CancelAll();
             cancelled = true;
