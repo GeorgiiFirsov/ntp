@@ -119,10 +119,9 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER
             throw exception::Win32Exception(ERROR_NO_MORE_ITEMS);
         }
 
-        std::unique_ptr<ntp::details::ICallback> callback(
-            static_cast<ntp::details::ICallback*>(entry));
-
-        callback->Call(nullptr);
+        ntp::details::callback_t(
+            static_cast<ntp::details::ICallback*>(entry))
+            ->Call(nullptr);
     }
     catch (const std::exception& error)
     {

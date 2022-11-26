@@ -7,6 +7,7 @@
 
 #include <Windows.h>
 
+#include <memory>
 #include <functional>
 
 #include "config.hpp"
@@ -47,6 +48,12 @@ struct alignas(NTP_ALLOCATION_ALIGNMENT) ICallback
 	 */
     virtual void Call(void* parameter) = 0;
 };
+
+
+/**
+ * @brief Smart pointer to ICallback implementation object
+ */
+using callback_t = std::unique_ptr<ICallback>;
 
 
 /**
