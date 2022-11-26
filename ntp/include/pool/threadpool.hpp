@@ -192,7 +192,7 @@ public:
     { }
 
     /**
-     * @brief Destructor releases all forgotten resources via cleanup group
+     * @brief Destructor releases all forgotten (or not) resources via cleanup group
      */
     ~BasicThreadPool()
     {

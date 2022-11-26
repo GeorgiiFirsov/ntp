@@ -22,16 +22,12 @@ Manager::Manager(PTP_CALLBACK_ENVIRON environment)
 
 Manager::~Manager()
 {
-    if (work_)
-    {
-        ntp::details::SafeThreadpoolCall<WaitForThreadpoolWorkCallbacks>(work_, TRUE);
-        ntp::details::SafeThreadpoolCall<CloseThreadpoolWork>(std::exchange(work_, nullptr));
-    }
+    CancelAll();
 
-    if (queue_)
-    {
-        ClearList();
-    }
+	//
+	// Actually we dont need to free PTP_WORK here, 
+	// because it will be free via cleanup group.
+	//
 }
 
 bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
