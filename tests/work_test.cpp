@@ -1,10 +1,4 @@
-#include <atlsync.h>
-
-#include <atomic>
-
-#include "gtest/gtest.h"
-
-#include "ntp.hpp"
+#include "config.hpp"
 
 
 namespace work {
@@ -47,23 +41,23 @@ TEST(Work, SubmitMultiple)
 
 TEST(Work, Cancel)
 {
-	static constexpr auto kWorkers = 50;
+    static constexpr auto kWorkers = 50;
 
-	const auto Worker = [](std::atomic_int& counter) {
-		counter++;
-	};
+    const auto Worker = [](std::atomic_int& counter) {
+        counter++;
+    };
 
-	std::atomic_int counter = 0;
-	ntp::SystemThreadPool pool;
+    std::atomic_int counter = 0;
+    ntp::SystemThreadPool pool;
 
-	for (auto i = 0; i < kWorkers; ++i)
-	{
-		pool.SubmitWork(Worker, std::ref(counter));
-	}
+    for (auto i = 0; i < kWorkers; ++i)
+    {
+        pool.SubmitWork(Worker, std::ref(counter));
+    }
 
-	pool.CancelWorks();
+    pool.CancelWorks();
 
-	EXPECT_LE(counter, kWorkers);
+    EXPECT_LE(counter, kWorkers);
 }
 
 }  // namespace work

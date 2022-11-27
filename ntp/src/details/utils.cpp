@@ -5,9 +5,10 @@
 
 #include <vector>
 
-#include "utils.hpp"
 #include "config.hpp"
-#include "exception.hpp"
+#include "native/ntrtl.h"
+#include "details/utils.hpp"
+#include "details/exception.hpp"
 
 
 namespace ntp::details {
@@ -149,6 +150,48 @@ NativeSlist::~NativeSlist()
 void NativeSlist::Push(PSLIST_ENTRY entry) noexcept
 {
     InterlockedPushEntrySList(header_, entry);
+}
+
+
+RtlResource::RtlResource()
+    : resource_()
+{
+    RtlInitializeResource(&resource_);
+}
+
+RtlResource::~RtlResource()
+{
+    RtlDeleteResource(&resource_);
+}
+
+void RtlResource::lock()
+{
+    RtlAcquireResourceExclusive(&resource_, TRUE);
+}
+
+bool RtlResource::try_lock()
+{
+    return RtlAcquireResourceExclusive(&resource_, FALSE);
+}
+
+void RtlResource::unlock() noexcept
+{
+    RtlReleaseResource(&resource_);
+}
+
+void RtlResource::lock_shared()
+{
+    RtlAcquireResourceShared(&resource_, TRUE);
+}
+
+bool RtlResource::try_lock_shared()
+{
+    return RtlAcquireResourceShared(&resource_, FALSE);
+}
+
+void RtlResource::unlock_shared() noexcept
+{
+    RtlReleaseResource(&resource_);
 }
 
 }  // namespace ntp::details

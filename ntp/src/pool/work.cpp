@@ -24,10 +24,10 @@ Manager::~Manager()
 {
     CancelAll();
 
-	//
-	// Actually we dont need to free PTP_WORK here, 
-	// because it will be free via cleanup group.
-	//
+    //
+    // Actually we dont need to free PTP_WORK here,
+    // because it will be freed via cleanup group.
+    //
 }
 
 bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
@@ -100,7 +100,7 @@ size_t Manager::ClearList() noexcept
 }
 
 /* static */
-void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work)
+void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work) noexcept
 {
     try
     {
@@ -131,15 +131,15 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER
 }
 
 /* static */
-void CALLBACK Manager::WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self)
+void CALLBACK Manager::WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self) noexcept
 {
     logger::details::Logger::Instance().TraceMessage(logger::Severity::kExtended,
         L"[Manager::WaitAllCallback]: wait started");
 
     if (self)
     {
-        SetEventWhenCallbackReturns(instance, self->done_event_);
-        CallbackMayRunLong(instance);
+        ntp::details::SafeThreadpoolCall<SetEventWhenCallbackReturns>(instance, self->done_event_);
+        ntp::details::SafeThreadpoolCall<CallbackMayRunLong>(instance);
 
         //
         // And now I wait for callbacks

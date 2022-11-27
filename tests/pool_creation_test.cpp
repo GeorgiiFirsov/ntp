@@ -1,6 +1,4 @@
-#include "gtest/gtest.h"
-
-#include "ntp.hpp"
+#include "config.hpp"
 
 
 namespace creation {

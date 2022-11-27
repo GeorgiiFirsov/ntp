@@ -6,6 +6,7 @@
 #pragma once
 
 #include "config.hpp"
+#include "native/ntrtl.h"
 #include "details/allocator.hpp"
 
 
@@ -134,6 +135,54 @@ public:
     {
         return allocator_t::Free(ptr);
     }
+};
+
+
+/**
+ * @brief STL-compatible (in terms of SharedLockable and Lockable 
+ * named requirements) wrapper for RTL_RESOURCE.
+ */
+class RtlResource final
+{
+    RtlResource(const RtlResource&)            = delete;
+    RtlResource& operator=(const RtlResource&) = delete;
+
+public:
+    explicit RtlResource();
+    ~RtlResource();
+
+    /**
+     * @brief Blocks until a lock can be acquired for the current execution agent (thread, process, task).
+     */
+    void lock();
+
+    /**
+     * @brief Attempts to acquire the lock for the current execution agent (thread, process, task) without blocking.
+     */
+    bool try_lock();
+
+    /**
+     * @brief Releases the non-shared lock held by the execution agent.
+     */
+    void unlock() noexcept;
+
+    /**
+     * @brief Blocks until a lock can be obtained for the current execution agent (thread, process, task).
+     */
+    void lock_shared();
+
+    /**
+     * @brief Attempts to obtain a lock for the current execution agent (thread, process, task) without blocking.
+     */
+    bool try_lock_shared();
+
+    /**
+     * @brief Releases the shared lock held by the execution agent.
+     */
+    void unlock_shared() noexcept;
+
+private:
+    RTL_RESOURCE resource_;
 };
 
 }  // namespace ntp::details

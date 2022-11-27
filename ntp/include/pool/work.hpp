@@ -63,7 +63,7 @@ public:
     /**
      * @brief Constructor that initializes all necessary objects.
      * 
-	 * @param environment Owning threadpool traits
+	 * @param environment Owning threadpool environment
      */
     explicit Manager(PTP_CALLBACK_ENVIRON environment);
 
@@ -87,7 +87,7 @@ public:
             std::forward<Functor>(functor), std::forward<Args>(args)...);
 
         queue_.Push(callback);
-        SubmitThreadpoolWork(work_);
+        ntp::details::SafeThreadpoolCall<SubmitThreadpoolWork>(work_);
     }
 
     /**
@@ -112,9 +112,9 @@ private:
     size_t ClearList() noexcept;
 
 private:
-    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work);
+    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work) noexcept;
 
-    static void CALLBACK WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self);
+    static void CALLBACK WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self) noexcept;
 
 private:
     // Internal queue with callbacks

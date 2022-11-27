@@ -10,11 +10,13 @@
 
 #include <Windows.h>
 
+#include <chrono>
 #include <type_traits>
 
 #include "config.hpp"
 #include "details/allocator.hpp"
 #include "pool/work.hpp"
+#include "pool/wait.hpp"
 
 
 namespace ntp {
@@ -170,6 +172,7 @@ public:
         , cleanup_group_(traits_.Environment())
         , test_cancel_(std::move(test_cancel))
         , work_manager_(traits_.Environment())
+        , wait_manager_(traits_.Environment())
     { }
 
     /**
@@ -189,6 +192,7 @@ public:
         , cleanup_group_(traits_.Environment())
         , test_cancel_(std::move(test_cancel))
         , work_manager_(traits_.Environment())
+        , wait_manager_(traits_.Environment())
     { }
 
     /**
@@ -217,8 +221,8 @@ public:
 
     /**
      * @brief Waits until all work callbacks are completed or cancellation is requested
-     * 
-     * @returns true if all callbacks are completed, false if cancellation 
+     *
+     * @returns true if all callbacks are completed, false if cancellation
      *          occurred while waiting for callbacks
      */
     bool WaitWorks() noexcept { return work_manager_.WaitAll(test_cancel_); }
@@ -228,17 +232,71 @@ public:
      */
     void CancelWorks() noexcept { return work_manager_.CancelAll(); }
 
+
     /**
-	 * @brief Waits until all callbacks (of any kind) are completed
-     *        or cancellation is requested
+	 * @brief Submits or replaces a wait callback of default type into threadpool.
 	 *
-	 * @returns true if all callbacks are completed, false if cancellation 
-     *          occurred while waiting for callbacks
+	 * @tparam Rep Type of ticks representation for timeout
+	 * @tparam Period Type of period for timeout ticks
+	 * @tparam Functor Type of callable to invoke in threadpool
+	 * @tparam Args... Types of arguments
+	 * @param wait_handle Handle to wait for
+	 * @param timeout Timeout while wait object waits for the specified handle
+	 *                (pass ntp::time::max_native_duration for infinite wait timeout)
+	 * @param functor Callable to invoke
+	 * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
-    bool WaitAllCallbacks() noexcept
+    template<typename Rep, typename Period, typename Functor, typename... Args>
+    void SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
-        bool works_completed = work_manager_.WaitAll(test_cancel_);
+        return wait_manager_.Submit(wait_handle, timeout, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
     }
+
+    /**
+	 * @brief Submits or replaces a wait callback into threadpool (timeout never expires).
+	 *
+	 * @tparam Functor Type of callable to invoke in threadpool
+	 * @tparam Args... Types of arguments
+	 * @param wait_handle Handle to wait for
+	 * @param functor Callable to invoke
+	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     */
+    template<typename Functor, typename... Args>
+    auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>>
+    {
+        return wait_manager_.Submit(wait_handle, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+	 * @brief Replaces an existing wait callback in threadpool.
+	 *
+	 * @tparam Functor Type of callable to invoke in threadpool
+	 * @tparam Args... Types of arguments
+	 * @param wait_handle Handle to wait for
+	 * @param functor Callable to invoke
+	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @throws exception::Win32Exception if specified handle is not present in waits
+     */
+	template<typename Functor, typename... Args>
+    void Replace(HANDLE wait_handle, Functor&& functor, Args&&... args)
+    {
+        return wait_manager_.Replace(wait_handle, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Cancel threadpool wait for the specified handle
+     */
+    void CancelWait(HANDLE wait_handle) noexcept { return wait_manager_.Cancel(wait_handle); }
+
+    /**
+     * @brief Cancel all pending wait callbacks
+     */
+    void CancelWaits() noexcept { return wait_manager_.CancelAll(); }
+
 
     /**
      * @brief Cancel all pending callbacks (of any kind)
@@ -246,6 +304,7 @@ public:
     void CancelAllCallbacks() noexcept
     {
         work_manager_.CancelAll();
+        wait_manager_.CancelAll();
     }
 
 private:
@@ -260,6 +319,7 @@ private:
 
     // Managers for callbacks
     work::details::Manager work_manager_;
+    wait::details::Manager wait_manager_;
 };
 
 
