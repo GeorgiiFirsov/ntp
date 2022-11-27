@@ -193,12 +193,15 @@ public:
         const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
         if (native_timeout != ntp::time::max_native_duration)
         {
+            context.wait_timeout = ntp::time::AsFiletime(native_timeout);
+
             //
-            // If timeout does not equal to ntp::time::max_native_duration, then
-            // it will be converted to FILETIME, otherwise wait never expires
+            // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
+            // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait
             //
 
-            context.wait_timeout = ntp::time::AsFiletime(native_timeout);
+            context.wait_timeout->dwLowDateTime = static_cast<DWORD>(
+                -static_cast<LONG>(context.wait_timeout->dwLowDateTime));
         }
 
         context.native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),

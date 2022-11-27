@@ -30,6 +30,27 @@ TEST(Wait, Completion)
     EXPECT_TRUE(is_completed);
 }
 
+TEST(Wait, TimedCompletion)
+{
+    using namespace std::chrono_literals;
+
+    ATL::CEvent event(TRUE, FALSE);
+    ATL::CEvent callback_completed(TRUE, FALSE);
+    ntp::SystemThreadPool pool;
+
+    bool is_completed = false;
+    pool.SubmitWait(event, 2s, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+        is_completed = (wait_result == WAIT_OBJECT_0);
+        SetEventWhenCallbackReturns(instance, callback_completed);
+    });
+
+    event.Set();
+
+    WaitForSingleObject(callback_completed, INFINITE);
+
+    EXPECT_TRUE(is_completed);
+}
+
 TEST(Wait, Timeout)
 {
     using namespace std::chrono_literals;
