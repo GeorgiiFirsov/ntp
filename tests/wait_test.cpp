@@ -46,8 +46,6 @@ TEST(Wait, Timeout)
 
     std::this_thread::sleep_for(50ms);
 
-    WaitForSingleObject(callback_completed, INFINITE);
-
     EXPECT_TRUE(is_timed_out);
 }
 
@@ -60,9 +58,9 @@ TEST(Wait, Replace)
     bool is_completed = false;
     pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
 
-    pool.SubmitWait(event, [&is_completed, &callback_completed](TP_WAIT_RESULT wait_result) {
+    pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
-        callback_completed.Set();
+        SetEventWhenCallbackReturns(instance, callback_completed);
     });
 
     event.Set();

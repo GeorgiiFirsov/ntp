@@ -80,7 +80,7 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* cont
             throw exception::Win32Exception(ERROR_INVALID_PARAMETER);
         }
 
-        context->callback->Call(reinterpret_cast<void*>(wait_result));
+        context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
 
         //
         // BUGBUG: need to think about exceptions in user-defined callback

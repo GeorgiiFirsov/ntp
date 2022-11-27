@@ -43,9 +43,24 @@ public:
     /**
      * @brief Invocation of internal callback (interface's parameter ignored)
      */
-    void Call(void* /*parameter*/) override
+    void Call(PTP_CALLBACK_INSTANCE instance, void* /*parameter*/) override
     {
-        std::apply(Callable(), Arguments());
+        return CallImpl(instance);
+    }
+
+private:
+    template<typename = void> /* if constexpr works only for templates */
+    void CallImpl(PTP_CALLBACK_INSTANCE instance)
+    {
+        if constexpr (std::is_invocable_v<std::decay_t<Functor>, PTP_CALLBACK_INSTANCE, std::decay_t<Args>...>)
+        {
+            const auto args = std::tuple_cat(std::make_tuple(instance), Arguments());
+            std::apply(Callable(), args);
+        }
+        else
+        {
+            std::apply(Callable(), Arguments());
+        }
     }
 };
 

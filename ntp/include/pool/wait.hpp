@@ -46,12 +46,25 @@ public:
     /**
      * @brief Invocation of internal callback (interface's parameter is assumed to be TP_WAIT_RESULT)
      */
-    void Call(void* parameter) override
+    void Call(PTP_CALLBACK_INSTANCE instance, void* parameter) override
     {
-        const auto wait_result = reinterpret_cast<TP_WAIT_RESULT>(parameter);
-        const auto arguments   = std::tuple_cat(std::make_tuple(wait_result), Arguments());
+        return CallImpl(instance, reinterpret_cast<TP_WAIT_RESULT>(parameter));
+    }
 
-        std::apply(Callable(), arguments);
+private:
+    template<typename = void> /* if constexpr works only for templates */
+    void CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result)
+    {
+        if constexpr (std::is_invocable_v<std::decay_t<Functor>, PTP_CALLBACK_INSTANCE, TP_WAIT_RESULT, std::decay_t<Args>...>)
+        {
+            const auto args = std::tuple_cat(std::make_tuple(instance, wait_result), Arguments());
+            std::apply(Callable(), args);
+        }
+        else
+        {
+            const auto args = std::tuple_cat(std::make_tuple(wait_result), Arguments());
+            std::apply(Callable(), args);
+        }
     }
 };
 
@@ -297,7 +310,7 @@ private:
     mutable lock_t lock_;
 
     // If true, callback will not release its resource after completion.
-    // This flag is used in CancelAll function to prevent container 
+    // This flag is used in CancelAll function to prevent container
     // modification while iterating over it.
     mutable RemovalPermission removal_permission_;
 };

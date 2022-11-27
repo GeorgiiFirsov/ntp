@@ -117,7 +117,7 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER
 
         ntp::details::callback_t(
             static_cast<ntp::details::ICallback*>(entry))
-            ->Call(nullptr);
+            ->Call(instance, nullptr);
     }
     catch (const std::exception& error)
     {

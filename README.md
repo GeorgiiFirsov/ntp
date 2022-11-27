@@ -10,5 +10,5 @@
 - [ ] IO callbacks (`PTP_IO`)
 - [ ] Tests
 - [ ] Cute documentation
-- [ ] Support for `PTP_INSTANCE` as optional first argument in callbacks
+- [X] Support for `PTP_INSTANCE` as optional first argument in callbacks
 - [ ] (Optional) Alpc callbacks (`PTP_ALPC`)

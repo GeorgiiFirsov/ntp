@@ -44,9 +44,10 @@ struct alignas(NTP_ALLOCATION_ALIGNMENT) ICallback
     /**
 	 * @brief Method to invoke callback with an optional argument
 	 * 
+     * @param instance Structure that defines the callback instance
 	 * @param parameter Optional user defined pointer-sized parameter
 	 */
-    virtual void Call(void* parameter) = 0;
+    virtual void Call(PTP_CALLBACK_INSTANCE instance, void* parameter) = 0;
 };
 
 
