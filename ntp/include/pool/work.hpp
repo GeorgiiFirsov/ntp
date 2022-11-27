@@ -26,7 +26,7 @@ namespace ntp::work::details {
  */
 template<typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) Callback final
-    : public ntp::details::BasicCallback<Functor, Args...>
+    : public ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>
 {
 public:
     /**
@@ -41,16 +41,16 @@ public:
     { }
 
     /**
-     * @brief Invocation of internal callback (interface's parameter ignored)
+     * @brief Parameter conversion function. Does nothing.
      */
-    void Call(PTP_CALLBACK_INSTANCE instance, void* /*parameter*/) override
-    {
-        return CallImpl(instance);
-    }
+    void* ConvertParameter(void*) { return nullptr; }
 
-private:
+    /**
+     * @brief Callback invocation function implementation. Supports invocation of 
+     *        callbacks with or without PTP_CALLBACK_INSTANCE parameter.
+     */
     template<typename = void> /* if constexpr works only for templates */
-    void CallImpl(PTP_CALLBACK_INSTANCE instance)
+    void CallImpl(PTP_CALLBACK_INSTANCE instance, void* /* parameter */)
     {
         if constexpr (std::is_invocable_v<std::decay_t<Functor>, PTP_CALLBACK_INSTANCE, std::decay_t<Args>...>)
         {

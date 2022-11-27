@@ -8,6 +8,7 @@
 #include <Windows.h>
 
 #include <memory>
+#include <type_traits>
 #include <functional>
 
 #include "config.hpp"
@@ -58,14 +59,16 @@ using callback_t = std::unique_ptr<ICallback>;
 
 
 /**
- * @brief Base class for all callbacks. Does not implement 
- *        Call method of ntp::details::ICallback, hence
- *        it remains abstract
+ * @brief Base class for all callbacks.
  * 
  * All callbacks are inherited from this class, that is used
  * to store callable and its arguments.
+ * 
+ * @tparam Derived Derived from this class implementation for specific callback type (CRTP)
+ * @tparam Functor Arbitrary callable to wrap
+ * @tparam Args... Variadic pack of arguments of callable
  */
-template<typename Functor, typename... Args>
+template<typename Derived, typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) BasicCallback
     : public ICallback
 {
@@ -76,7 +79,7 @@ private:
     // Type of packed arguments
     using tuple_t = std::tuple<std::decay_t<Args>...>;
 
-public:
+protected:
     /**
      * @brief Constructor from callable and its arguments
      *
@@ -89,7 +92,6 @@ public:
         , functor_(std::move(functor))
     { }
 
-protected:
     /**
 	 * @brief Get stored callable
 	 *
@@ -103,6 +105,15 @@ protected:
      * @returns Reference to packed arguments tuple
      */
     tuple_t& Arguments() noexcept { return args_; }
+
+private:
+    void Call(PTP_CALLBACK_INSTANCE instance, void* parameter) final
+    {
+        const auto converted_parameter = AsDerived()->ConvertParameter(parameter);
+        return AsDerived()->CallImpl(instance, converted_parameter);
+    }
+
+    Derived* AsDerived() noexcept { return static_cast<Derived*>(this); }
 
 private:
     // Packed arguments

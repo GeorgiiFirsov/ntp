@@ -29,7 +29,7 @@ namespace ntp::wait::details {
  */
 template<typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) Callback final
-    : public ntp::details::BasicCallback<Functor, Args...>
+    : public ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>
 {
 public:
     /**
@@ -44,14 +44,14 @@ public:
     { }
 
     /**
-     * @brief Invocation of internal callback (interface's parameter is assumed to be TP_WAIT_RESULT)
+     * @brief Converts void* parameter into TP_WAIT_RESULT.
      */
-    void Call(PTP_CALLBACK_INSTANCE instance, void* parameter) override
-    {
-        return CallImpl(instance, reinterpret_cast<TP_WAIT_RESULT>(parameter));
-    }
+    TP_WAIT_RESULT ConvertParameter(void* parameter) { return reinterpret_cast<TP_WAIT_RESULT>(parameter); }
 
-private:
+    /**
+     * @brief Callback invocation function implementation. Supports invocation of
+     *        callbacks with or without PTP_CALLBACK_INSTANCE parameter.
+     */
     template<typename = void> /* if constexpr works only for templates */
     void CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result)
     {
