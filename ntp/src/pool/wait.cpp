@@ -129,10 +129,4 @@ void Manager::CloseWait(PTP_WAIT wait) noexcept
     ntp::details::SafeThreadpoolCall<CloseThreadpoolWait>(wait);
 }
 
-/* static */
-void Manager::Wait(PTP_WAIT wait) noexcept
-{
-    ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(wait, FALSE);
-}
-
 }  // namespace ntp::wait::details

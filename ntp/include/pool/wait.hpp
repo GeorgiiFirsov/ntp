@@ -280,8 +280,6 @@ private:
 
     static void CloseWait(PTP_WAIT wait) noexcept;
 
-    static void Wait(PTP_WAIT wait) noexcept;
-
 private:
     // Container with callbacks
     callbacks_t callbacks_;
