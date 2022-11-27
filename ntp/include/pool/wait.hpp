@@ -107,7 +107,7 @@ private:
     };
 
     /**
-     * @brief 
+     * @brief Pseudo-lock primitive to prohibit removal from container
      */
     class RemovalPermission
     {
@@ -118,6 +118,7 @@ private:
         RemovalPermission()
             : can_remove_(true)
         { }
+
         ~RemovalPermission() = default;
 
         void lock() noexcept { can_remove_.store(false, std::memory_order_release); }
