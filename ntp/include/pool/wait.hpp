@@ -214,7 +214,7 @@ public:
         meta.iterator = iter;
         meta.manager  = this;
 
-        SubmitInternal(*iter->second);
+        SubmitInternal(context);
     }
 
     /**
