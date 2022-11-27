@@ -76,10 +76,10 @@ TEST(Wait, Replace)
     ATL::CEvent callback_completed(TRUE, FALSE);
     ntp::SystemThreadPool pool;
 
-    bool is_completed = false;
-    pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
+    bool is_completed  = false;
+    HANDLE wait_object = pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
 
-    pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+    pool.Replace(wait_object, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
         SetEventWhenCallbackReturns(instance, callback_completed);
     });
@@ -97,18 +97,15 @@ TEST(Wait, Cancel)
     ATL::CEvent callback_completed(TRUE, FALSE);
     ntp::SystemThreadPool pool;
 
-    bool is_completed = false;
-    pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
-
-    pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+    bool is_completed  = false;
+    HANDLE wait_object = pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
         SetEventWhenCallbackReturns(instance, callback_completed);
     });
 
-    pool.CancelWait(event);
-    event.Set();
-
-    EXPECT_FALSE(is_completed);
+    EXPECT_NO_THROW({
+        pool.CancelWait(wait_object);
+    });
 }
 
 TEST(Wait, CancelAll)

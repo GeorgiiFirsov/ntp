@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <map>
+#include <set>
 #include <mutex>
 #include <tuple>
 #include <atomic>
@@ -70,6 +70,91 @@ public:
 
 
 /**
+ * @brief Context structure for threadpool wait objects
+ * 
+ * @tparam MetaContextType Type of meta context information structure/class
+ */
+template<typename MetaContextType>
+struct Context final
+{
+    /**
+     * @brief Signature used to check validity of the context handle
+     */
+    static constexpr auto kSignature = 0xCAFEBABE;
+
+    /**
+     * @brief Smart pointer to context
+     */
+    using context_ptr_t = std::unique_ptr<Context, std::function<void(Context*)>>;
+
+private:
+    Context(HANDLE wait_handle, ntp::details::ICallback* callback) noexcept
+        : meta_context()
+        , wait_timeout()
+        , callback(callback)
+        , native_handle(nullptr)
+        , wait_handle(wait_handle)
+    { }
+
+    Context(const Context&)            = delete;
+    Context& operator=(const Context&) = delete;
+
+public:
+    /**
+     * @brief Creation of the context
+     */
+    static context_ptr_t Create(HANDLE wait_handle, ntp::details::ICallback* callback) noexcept
+    {
+        return context_ptr_t { new Context(wait_handle, callback), Context::Destroy };
+    }
+
+    /**
+     * @brief Deletion of the context
+     */
+    static void Destroy(Context* context) noexcept
+    {
+        if (context)
+        {
+            delete context;
+        }
+    }
+
+    /**
+     * @brief Converting a handle to context
+     */
+    static Context* FromHandle(HANDLE handle) noexcept
+    {
+        const auto context = static_cast<Context*>(handle);
+        return (context->signature == kSignature)
+                 ? context
+                 : nullptr;
+    }
+
+    /**
+     * @brief Converting context into a handle
+     */
+    operator HANDLE() const noexcept
+    {
+        auto handle = reinterpret_cast<const void*>(this);
+        return const_cast<HANDLE>(handle);
+    }
+
+public:
+    ULONG signature = kSignature; /**< See kSignature for details */
+
+    MetaContextType meta_context; /**< Meta information about context */
+
+    std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
+
+    ntp::details::callback_t callback; /**< Pointer to callback wrapper */
+
+    PTP_WAIT native_handle; /**< Native threadpool wait object */
+
+    HANDLE wait_handle; /**< Handle to wait for */
+};
+
+
+/**
  * @brief Manager for wait callbacks. Binds callbacks and threadpool implementation.
  */
 class Manager final
@@ -79,8 +164,6 @@ class Manager final
     static constexpr auto kRemovalScanThreschold = 100;
 
 private:
-    struct Context;
-
     // Mapping from wait handles to callback contexts. Map is used instead of
     // unordered map, because it never invalidates iterators and references.
     //
@@ -88,7 +171,7 @@ private:
     // Wait handle -----------------+                |
     //                              |                |
     //                              V                V
-    using callbacks_t = std::map<HANDLE, std::unique_ptr<Context>>;
+    using callbacks_t = std::set<HANDLE>;
 
     // Lock primitive
     using lock_t = ntp::details::RtlResource;
@@ -104,21 +187,7 @@ private:
         callbacks_t::iterator iterator; /**< Iterator to current context */
     };
 
-    /**
-     * @brief Context of threadpool wait callback.
-     *
-     * Stores all necessary information about current callback instance.
-     */
-    struct Context
-    {
-        std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
-
-        PTP_WAIT native_handle; /**< Native threadpool wait object */
-
-        ntp::details::callback_t callback; /**< Pointer to callback wrapper */
-
-        MetaContext meta; /**< Meta information about context */
-    };
+    using context_t = Context<MetaContext>;
 
     /**
      * @brief 
@@ -164,57 +233,41 @@ public:
      *                (pass ntp::time::max_native_duration for infinite wait timeout)
 	 * @param functor Callable to invoke
 	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+	 * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
-    void Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
+    HANDLE Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
         std::unique_lock lock { lock_ };
-
-        //
-        // If we already have callback for this handle, then replace it with the new one
-        //
-
-        if (auto callback = callbacks_.find(wait_handle); callback != callbacks_.end())
-        {
-            return ReplaceUnsafe(callback, std::forward<Functor>(functor), std::forward<Args>(args)...);
-        }
 
         //
         // Create new context and submit a new wait object
         //
 
-        const auto [iter, _] = callbacks_.emplace(wait_handle, std::make_unique<Context>());
-        auto& context        = *iter->second;
-        auto& meta           = iter->second->meta;
-
-        context.callback.reset(new Callback<Functor, Args...>(
-            std::forward<Functor>(functor), std::forward<Args>(args)...));
+        auto callback = new Callback<Functor, Args...>(std::forward<Functor>(functor), std::forward<Args>(args)...);
+        auto context  = context_t::Create(wait_handle, callback);
 
         const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
         if (native_timeout != ntp::time::max_native_duration)
         {
-            context.wait_timeout = ntp::time::AsFiletime(native_timeout);
-
             //
             // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
             // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait
             //
 
-            context.wait_timeout->dwLowDateTime = static_cast<DWORD>(
-                -static_cast<LONG>(context.wait_timeout->dwLowDateTime));
+            context->wait_timeout                = ntp::time::AsFiletime(native_timeout);
+            context->wait_timeout->dwLowDateTime = static_cast<DWORD>(
+                -static_cast<LONG>(context->wait_timeout->dwLowDateTime));
         }
 
-        context.native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
-            iter->second.get(), Environment());
+        context->native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
+            *context, Environment());
 
-        //
-        // Set context meta information and then set wait
-        //
+        const auto [iter, _]           = callbacks_.emplace(*context);
+        context->meta_context.manager  = this;
+        context->meta_context.iterator = iter;
 
-        meta.iterator = iter;
-        meta.manager  = this;
-
-        SubmitInternal(context);
+        return SubmitInternal(context.release());
     }
 
     /**
@@ -228,10 +281,11 @@ public:
 	 * @param wait_handle Handle to wait for
 	 * @param functor Callable to invoke
 	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+	 * @returns handle for created wait object
      */
     template<typename Functor, typename... Args>
     auto Submit(HANDLE wait_handle, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
     {
         return Submit(wait_handle, ntp::time::max_native_duration, std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
@@ -243,17 +297,18 @@ public:
      * wait handle, creates a new callback wrapper and then sets wait again
 	 * with unchanged parameters.
 	 *
-	 * @param wait_handle Handle to wait for
+	 * @param wait_object Handle for an existing wait object (obtained from Submit)
 	 * @param functor New callable to invoke
 	 * @param args New arguments to pass into callable (they will be copied into wrapper)
-     * @throws ntp::exception::Win32Exception if wait handle is not present
+	 * @throws ntp::exception::Win32Exception if wait handle is not present or corrupt
+	 * @returns handle for the same wait object
      */
     template<typename Functor, typename... Args>
-    void Replace(HANDLE wait_handle, Functor&& functor, Args&&... args)
+    HANDLE Replace(HANDLE wait_object, Functor&& functor, Args&&... args)
     {
         std::unique_lock lock { lock_ };
 
-        if (auto callback = callbacks_.find(wait_handle); callback != callbacks_.end())
+        if (auto callback = callbacks_.find(wait_object); callback != callbacks_.end())
         {
             return ReplaceUnsafe(callback, std::forward<Functor>(functor), std::forward<Args>(args)...);
         }
@@ -266,9 +321,9 @@ public:
      * 
      * If no wait for the handle is present, does nothing.
      * 
-     * @param wait_handle Handle, that is (possibly) awaited in an owning threadpool
+     * @param wait_object Handle for an existing wait object (obtained from Submit)
      */
-    void Cancel(HANDLE wait_handle) noexcept;
+    void Cancel(HANDLE wait_object) noexcept;
 
     /**
      * @brief Cancel all pending callbacks.
@@ -277,29 +332,34 @@ public:
 
 private:
     template<typename Functor, typename... Args>
-    void ReplaceUnsafe(callbacks_t::iterator callback, Functor&& functor, Args&&... args)
+    HANDLE ReplaceUnsafe(callbacks_t::iterator callback, Functor&& functor, Args&&... args)
     {
-        auto& [wait_handle, context] = *callback;
+        if (auto context = context_t::FromHandle(*callback); context)
+        {
+            //
+            // Firstly we need to cancel current pending callback and only
+            // after that we are allowed to replace it with the new one
+            //
 
-        //
-        // Firstly we need to cancel current pending callback and only
-        // after that we are allowed to replace it with the new one
-        //
+            SetThreadpoolWait(context->native_handle, nullptr, nullptr);
 
-        SetThreadpoolWait(context->native_handle, nullptr, nullptr);
+            context->callback.reset(new Callback<Functor, Args...>(
+                std::forward<Functor>(functor), std::forward<Args>(args)...));
 
-        context->callback.reset(new Callback<Functor, Args...>(
-            std::forward<Functor>(functor), std::forward<Args>(args)...));
+            SubmitInternal(context);
 
-        SubmitInternal(*context);
+            return context;
+        }
+
+        throw exception::Win32Exception(ERROR_INVALID_HANDLE);
     }
 
     void Remove(callbacks_t::iterator callback) noexcept;
 
-    void SubmitInternal(Context& context) noexcept;
+    HANDLE SubmitInternal(HANDLE context_handle);
 
 private:
-    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* context, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept;
+    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, HANDLE context_handle, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept;
 
     static void CloseWait(PTP_WAIT wait) noexcept;
 

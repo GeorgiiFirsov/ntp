@@ -235,7 +235,7 @@ public:
 
 
     /**
-	 * @brief Submits or replaces a wait callback of default type into threadpool.
+	 * @brief Submits a wait callback into threadpool.
 	 *
 	 * @tparam Rep Type of ticks representation for timeout
 	 * @tparam Period Type of period for timeout ticks
@@ -246,26 +246,28 @@ public:
 	 *                (pass ntp::time::max_native_duration for infinite wait timeout)
 	 * @param functor Callable to invoke
 	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
-    void SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
+    HANDLE SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
         return wait_manager_.Submit(wait_handle, timeout, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 
     /**
-	 * @brief Submits or replaces a wait callback into threadpool (timeout never expires).
+	 * @brief Submits a wait callback into threadpool (timeout never expires).
 	 *
 	 * @tparam Functor Type of callable to invoke in threadpool
 	 * @tparam Args... Types of arguments
 	 * @param wait_handle Handle to wait for
 	 * @param functor Callable to invoke
 	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+	 * @returns handle for created wait object
      */
     template<typename Functor, typename... Args>
     auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
     {
         return wait_manager_.Submit(wait_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -276,22 +278,25 @@ public:
 	 *
 	 * @tparam Functor Type of callable to invoke in threadpool
 	 * @tparam Args... Types of arguments
-	 * @param wait_handle Handle to wait for
+	 * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
 	 * @param functor Callable to invoke
 	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @throws exception::Win32Exception if specified handle is not present in waits
+	 * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
+	 * @returns handle for the same wait object
      */
-	template<typename Functor, typename... Args>
-    void Replace(HANDLE wait_handle, Functor&& functor, Args&&... args)
+    template<typename Functor, typename... Args>
+    HANDLE Replace(HANDLE wait_object, Functor&& functor, Args&&... args)
     {
-        return wait_manager_.Replace(wait_handle, std::forward<Functor>(functor),
+        return wait_manager_.Replace(wait_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 
     /**
-     * @brief Cancel threadpool wait for the specified handle
+     * @brief Cancel threadpool wait
+     * 
+     * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
      */
-    void CancelWait(HANDLE wait_handle) noexcept { return wait_manager_.Cancel(wait_handle); }
+    void CancelWait(HANDLE wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
 
     /**
      * @brief Cancel all pending wait callbacks

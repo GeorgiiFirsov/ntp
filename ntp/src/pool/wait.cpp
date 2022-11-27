@@ -18,14 +18,19 @@ Manager::~Manager()
     CancelAll();
 }
 
-void Manager::Cancel(HANDLE wait_handle) noexcept
+void Manager::Cancel(HANDLE wait_object) noexcept
 {
     std::unique_lock lock { lock_ };
 
-    const auto callback = callbacks_.find(wait_handle);
+    const auto callback = callbacks_.find(wait_object);
     if (callback != callbacks_.cend())
     {
-        CloseWait(callback->second->native_handle);
+        if (auto context = context_t::FromHandle(*callback); context)
+        {
+            CloseWait(context->native_handle);
+            context_t::Destroy(context);
+        }
+
         callbacks_.erase(callback);
     }
 }
@@ -35,9 +40,13 @@ void Manager::CancelAll() noexcept
     std::unique_lock lock { lock_ };
     std::unique_lock removal_ban { removal_permission_ };
 
-    for (auto& [_, callback] : callbacks_)
+    for (HANDLE context_handle : callbacks_)
     {
-        CloseWait(callback->native_handle);
+        if (auto context = context_t::FromHandle(context_handle); context)
+        {
+            CloseWait(context->native_handle);
+            context_t::Destroy(context);
+        }
     }
 
     callbacks_.clear();
@@ -59,36 +68,47 @@ void Manager::Remove(callbacks_t::iterator callback) noexcept
     }
 }
 
-void Manager::SubmitInternal(Context& context) noexcept
+HANDLE Manager::SubmitInternal(HANDLE context_handle)
 {
-    HANDLE wait_handle = context.meta.iterator->first;
-    PFILETIME timeout  = context.wait_timeout.has_value()
-                           ? &context.wait_timeout.value()
-                           : nullptr;
+    if (auto context = context_t::FromHandle(context_handle); context)
+    {
+        PFILETIME wait_timeout = (context->wait_timeout.has_value())
+                                   ? &context->wait_timeout.value()
+                                   : nullptr;
 
-    ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(
-        context.native_handle, wait_handle, timeout);
+        ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(
+            context->native_handle, context->wait_handle, wait_timeout);
+
+        return context_handle;
+    }
+
+    throw exception::Win32Exception(ERROR_INVALID_HANDLE);
 }
 
 /* static */
-void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* context, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept
+void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, HANDLE context_handle, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept
 {
     try
     {
-        if (!context)
+        if (!context_handle)
         {
             throw exception::Win32Exception(ERROR_INVALID_PARAMETER);
         }
 
-        context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
+        if (auto context = context_t::FromHandle(context_handle); context)
+        {
+            context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
 
-        //
-        // BUGBUG: need to think about exceptions in user-defined callback
-        // Probably need to implement something like std::async here
-        //
+            //
+            // BUGBUG: need to think about exceptions in user-defined callback
+            // Probably need to implement something like std::async here
+            //
 
-        auto manager = context->meta.manager;
-        manager->Remove(context->meta.iterator);
+            auto manager = context->meta_context.manager;
+            return manager->Remove(context->meta_context.iterator);
+        }
+
+        throw exception::Win32Exception(ERROR_INVALID_HANDLE);
     }
     catch (const std::exception& error)
     {
