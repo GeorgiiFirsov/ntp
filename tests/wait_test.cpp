@@ -18,9 +18,9 @@ TEST(Wait, Completion)
     ntp::SystemThreadPool pool;
 
     bool is_completed = false;
-    pool.SubmitWait(event, [&is_completed, &callback_completed](TP_WAIT_RESULT wait_result) {
+    pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
-        callback_completed.Set();
+        SetEventWhenCallbackReturns(instance, callback_completed);
     });
 
     event.Set();
@@ -39,9 +39,9 @@ TEST(Wait, Timeout)
     ntp::SystemThreadPool pool;
 
     bool is_timed_out = false;
-    pool.SubmitWait(event, 10ms, [&is_timed_out, &callback_completed](TP_WAIT_RESULT wait_result) {
+    pool.SubmitWait(event, 10ms, [&is_timed_out, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_timed_out = (wait_result == WAIT_TIMEOUT);
-        callback_completed.Set();
+        SetEventWhenCallbackReturns(instance, callback_completed);
     });
 
     std::this_thread::sleep_for(50ms);
@@ -79,9 +79,9 @@ TEST(Wait, Cancel)
     bool is_completed = false;
     pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
 
-    pool.SubmitWait(event, [&is_completed, &callback_completed](TP_WAIT_RESULT wait_result) {
+    pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
-        callback_completed.Set();
+        SetEventWhenCallbackReturns(instance, callback_completed);
     });
 
     pool.CancelWait(event);
