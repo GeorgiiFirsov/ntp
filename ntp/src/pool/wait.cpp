@@ -72,12 +72,12 @@ HANDLE Manager::SubmitInternal(HANDLE context_handle)
 {
     if (auto context = context_t::FromHandle(context_handle); context)
     {
-        PFILETIME wait_timeout = (context->wait_timeout.has_value())
-                                   ? &context->wait_timeout.value()
+        PFILETIME wait_timeout = (context->object_context.wait_timeout.has_value())
+                                   ? &context->object_context.wait_timeout.value()
                                    : nullptr;
 
         ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(
-            context->native_handle, context->wait_handle, wait_timeout);
+            context->native_handle, context->object_context.wait_handle, wait_timeout);
 
         return context_handle;
     }

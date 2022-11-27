@@ -70,91 +70,6 @@ public:
 
 
 /**
- * @brief Context structure for threadpool wait objects
- * 
- * @tparam MetaContextType Type of meta context information structure/class
- */
-template<typename MetaContextType>
-struct Context final
-{
-    /**
-     * @brief Signature used to check validity of the context handle
-     */
-    static constexpr auto kSignature = 0xCAFEBABE;
-
-    /**
-     * @brief Smart pointer to context
-     */
-    using context_ptr_t = std::unique_ptr<Context, std::function<void(Context*)>>;
-
-private:
-    Context(HANDLE wait_handle, ntp::details::ICallback* callback) noexcept
-        : meta_context()
-        , wait_timeout()
-        , callback(callback)
-        , native_handle(nullptr)
-        , wait_handle(wait_handle)
-    { }
-
-    Context(const Context&)            = delete;
-    Context& operator=(const Context&) = delete;
-
-public:
-    /**
-     * @brief Creation of the context
-     */
-    static context_ptr_t Create(HANDLE wait_handle, ntp::details::ICallback* callback) noexcept
-    {
-        return context_ptr_t { new Context(wait_handle, callback), Context::Destroy };
-    }
-
-    /**
-     * @brief Deletion of the context
-     */
-    static void Destroy(Context* context) noexcept
-    {
-        if (context)
-        {
-            delete context;
-        }
-    }
-
-    /**
-     * @brief Converting a handle to context
-     */
-    static Context* FromHandle(HANDLE handle) noexcept
-    {
-        const auto context = static_cast<Context*>(handle);
-        return (context->signature == kSignature)
-                 ? context
-                 : nullptr;
-    }
-
-    /**
-     * @brief Converting context into a handle
-     */
-    operator HANDLE() const noexcept
-    {
-        auto handle = reinterpret_cast<const void*>(this);
-        return const_cast<HANDLE>(handle);
-    }
-
-public:
-    ULONG signature = kSignature; /**< See kSignature for details */
-
-    MetaContextType meta_context; /**< Meta information about context */
-
-    std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
-
-    ntp::details::callback_t callback; /**< Pointer to callback wrapper */
-
-    PTP_WAIT native_handle; /**< Native threadpool wait object */
-
-    HANDLE wait_handle; /**< Handle to wait for */
-};
-
-
-/**
  * @brief Manager for wait callbacks. Binds callbacks and threadpool implementation.
  */
 class Manager final
@@ -164,13 +79,7 @@ class Manager final
     static constexpr auto kRemovalScanThreschold = 100;
 
 private:
-    // Mapping from wait handles to callback contexts. Map is used instead of
-    // unordered map, because it never invalidates iterators and references.
-    //
-    // Callback context -----------------------------+
-    // Wait handle -----------------+                |
-    //                              |                |
-    //                              V                V
+    // Container with callbacks represented by their handles
     using callbacks_t = std::set<HANDLE>;
 
     // Lock primitive
@@ -187,7 +96,15 @@ private:
         callbacks_t::iterator iterator; /**< Iterator to current context */
     };
 
-    using context_t = Context<MetaContext>;
+    /**
+     * @brief Information specific for wait objects
+     */
+    struct WaitContext
+    {
+        std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
+
+        HANDLE wait_handle; /**< Handle to wait for */
+    };
 
     /**
      * @brief 
@@ -211,6 +128,9 @@ private:
     private:
         std::atomic_bool can_remove_;
     };
+
+    // Context instantiation
+    using context_t = ntp::details::Context<PTP_WAIT, WaitContext, MetaContext>;
 
 public:
     /**
@@ -238,14 +158,8 @@ public:
     template<typename Rep, typename Period, typename Functor, typename... Args>
     HANDLE Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
-        std::unique_lock lock { lock_ };
-
-        //
-        // Create new context and submit a new wait object
-        //
-
-        auto callback = new Callback<Functor, Args...>(std::forward<Functor>(functor), std::forward<Args>(args)...);
-        auto context  = context_t::Create(wait_handle, callback);
+        auto callback = std::make_unique<Callback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
+        auto context  = context_t::Create({ std::nullopt, wait_handle }, std::move(callback));
 
         const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
         if (native_timeout != ntp::time::max_native_duration)
@@ -255,13 +169,15 @@ public:
             // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait
             //
 
-            context->wait_timeout                = ntp::time::AsFiletime(native_timeout);
-            context->wait_timeout->dwLowDateTime = static_cast<DWORD>(
-                -static_cast<LONG>(context->wait_timeout->dwLowDateTime));
+            context->object_context.wait_timeout                = ntp::time::AsFiletime(native_timeout);
+            context->object_context.wait_timeout->dwLowDateTime = static_cast<DWORD>(
+                -static_cast<LONG>(context->object_context.wait_timeout->dwLowDateTime));
         }
 
         context->native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
             *context, Environment());
+
+        std::unique_lock lock { lock_ };
 
         const auto [iter, _]           = callbacks_.emplace(*context);
         context->meta_context.manager  = this;

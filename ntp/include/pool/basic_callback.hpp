@@ -125,6 +125,90 @@ private:
 
 
 /**
+ * @brief Context structure for threadpool objects
+ *
+ * @tparam NativeHandleType Type of native handle for specific threadpool object (e.g. PTP_WAIT)
+ * @tparam ObjectContext Type of context specific for concrete threadpool object type
+ * @tparam MetaContextType Type of meta context information structure/class
+ */
+template<typename NativeHandleType, typename ObjectContext, typename MetaContextType>
+struct Context final
+{
+    /**
+     * @brief Signature used to check validity of the context handle
+     */
+    static constexpr auto kSignature = 0xCAFEBABE;
+
+    /**
+     * @brief Smart pointer to context
+     */
+    using context_ptr_t = std::unique_ptr<Context, std::function<void(Context*)>>;
+
+private:
+    Context(const ObjectContext& object_context, ntp::details::callback_t&& callback) noexcept
+        : meta_context()
+        , object_context(object_context)
+        , callback(std::move(callback))
+        , native_handle(nullptr)
+    { }
+
+    Context(const Context&)            = delete;
+    Context& operator=(const Context&) = delete;
+
+public:
+    /**
+     * @brief Creation of the context
+     */
+    static context_ptr_t Create(const ObjectContext& object_context, ntp::details::callback_t&& callback) noexcept
+    {
+        return context_ptr_t { new Context(object_context, std::move(callback)), Context::Destroy };
+    }
+
+    /**
+     * @brief Deletion of the context
+     */
+    static void Destroy(Context* context) noexcept
+    {
+        if (context)
+        {
+            delete context;
+        }
+    }
+
+    /**
+     * @brief Converting a handle to context
+     */
+    static Context* FromHandle(HANDLE handle) noexcept
+    {
+        const auto context = static_cast<Context*>(handle);
+        return (context->signature == kSignature)
+                 ? context
+                 : nullptr;
+    }
+
+    /**
+     * @brief Converting context into a handle
+     */
+    operator HANDLE() const noexcept
+    {
+        auto handle = reinterpret_cast<const void*>(this);
+        return const_cast<HANDLE>(handle);
+    }
+
+public:
+    ULONG signature = kSignature; /**< See kSignature for details */
+
+    MetaContextType meta_context; /**< Meta information about context */
+
+    ObjectContext object_context; /**< Information associated with specific object */
+
+    ntp::details::callback_t callback; /**< Pointer to callback wrapper */
+
+    NativeHandleType native_handle; /**< Native threadpool object */
+};
+
+
+/**
  * @brief Base class for all callbacks' managers
  */
 class BasicManager
