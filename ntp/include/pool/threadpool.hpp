@@ -285,7 +285,7 @@ public:
 	 * @returns handle for the same wait object
      */
     template<typename Functor, typename... Args>
-    HANDLE Replace(HANDLE wait_object, Functor&& functor, Args&&... args)
+    HANDLE ReplaceWait(HANDLE wait_object, Functor&& functor, Args&&... args)
     {
         return wait_manager_.Replace(wait_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);

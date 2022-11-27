@@ -79,7 +79,7 @@ TEST(Wait, Replace)
     bool is_completed  = false;
     HANDLE wait_object = pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
 
-    pool.Replace(wait_object, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+    pool.ReplaceWait(wait_object, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
         SetEventWhenCallbackReturns(instance, callback_completed);
     });
