@@ -3,7 +3,15 @@
  *
  * @section intro_sec Introduction
  *
- * TODO :)
+ * Windows API has a very beautiful <a href="https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pool-api">Thread Pool API</a>
+ * that allows to execute work tasks, wait for waitable handles or completion ports and schedule timer callbacks very efficiently.
+ * 
+ * This API is designed for C programming language, but C++ provides more useful features, that make working
+ * with such APIs easier. This library is a wrapper for Thread Pool API, that provides a C++ abstraction and
+ * makes easier to manage all threadpool resources.
+ *
+ * For further information about internal API refer to 
+ * <a href="https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pools">Microsof documentation</a>.
  *
  * @section install_sec Installation
  *
@@ -11,9 +19,95 @@
  *
  * @section usage_sec Usage
  *
- * TODO :)
+ * Usage of ntp is as simple as possible.
+ * Just add the following lines in your CMakeLists.txt:
+ * @code{.unparsed}
+ target_link_libraries(your-project PRIVATE ntp)
+ target_include_directories(your-project PRIVATE "/path/to/ntp/include")
+ * @endcode
+ * After that you can just include header and use library features:
+ * @code{.cpp}
+ #include "ntp.hpp"
+ * @endcode
  *
  * @section examples_sec Examples
  *
- * TODO :)
+ * @subsection basic_workers_sec Basic workers
+ *
+ * @code{.cpp}
+ #include "ntp.hpp"
+
+ void DoWork()
+ {
+     ntp::SystemThreadPool pool;
+	 
+	 pool.SubmitWork([]() {
+	     // Do some long operation.
+	 });
+	 
+	 // Do some other work.
+	 
+	 pool.WaitWorks();
+ }
+ * @endcode
+ *
+ * @subsection extern_cancel_sec External cancellation
+ *
+ * @code{.cpp}
+ #include "ntp.hpp"
+
+ void DoWork(const std::vector<Callable>& tasks)
+ {
+     //
+	 // For RpcTestCancel refer to: https://learn.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpctestcancel
+	 //
+
+     ntp::SystemThreadPool pool(RpcTestCancel);
+
+	 for (const auto& task : tasks)
+	 {
+	     pool.SumbitWork(task);
+	 }
+
+	 // Do some other work.
+
+	 const bool completed = pool.WaitWorks();
+	 if (!completed)
+	 {
+	     //
+	     // If WaitWorks returns false, then external cancellation test was 
+	     // triggered while tasks were awaited.
+	     //
+
+	     HandleIncompleteWork();
+	 }
+ }
+ * @endcode
+ *
+ * @subsection callback_completions_sec Cleanup on callback exit
+ *
+ * Callbacks may optionally accept PTP_CALLBACK_INSTANCE as their first argument.
+ * It allows user to call the following functions:
+ * - <a href="https://learn.microsoft.com/ru-ru/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-freelibrarywhencallbackreturns">FreeLibraryWhenCallbackReturns</a>
+ * - <a href="https://learn.microsoft.com/ru-ru/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-leavecriticalsectionwhencallbackreturns">LeaveCriticalSectionWhenCallbackReturns</a>
+ * - <a href="https://learn.microsoft.com/ru-ru/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-releasemutexwhencallbackreturns">ReleaseMutexWhenCallbackReturns</a>
+ * - <a href="https://learn.microsoft.com/ru-ru/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-releasesemaphorewhencallbackreturns">ReleaseSemaphoreWhenCallbackReturns</a>
+ * - <a href="https://learn.microsoft.com/ru-ru/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-seteventwhencallbackreturns">SetEventWhenCallbackReturns</a>
+ * 
+ * @code{.cpp}
+ #include "ntp.hpp"
+
+ void DoWork(HANDLE event)
+ {
+     ntp::SystemThreadPool pool;
+
+	 pool.SubmitWork([event](PTP_CALLBACK_INSTANCE instance) {
+	     SetEventWhenCallbackReturns(instance, event);
+	     
+	     // Do some work. After callback ends event will be set.
+	 });
+
+	 // Do further work...
+ }
+ * @endcode
  */
