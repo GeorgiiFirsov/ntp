@@ -28,6 +28,8 @@ template<typename Functor, typename... Args>
 class alignas(NTP_ALLOCATION_ALIGNMENT) Callback final
     : public ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>
 {
+    friend class ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>;
+
 public:
     /**
      * @brief Constructor from callable and its arguments
@@ -40,6 +42,7 @@ public:
         : BasicCallback(std::forward<CFunctor>(functor), std::forward<CArgs>(args)...)
     { }
 
+private:
     /**
      * @brief Parameter conversion function. Does nothing.
      */
