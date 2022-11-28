@@ -11,7 +11,7 @@
  * makes easier to manage all threadpool resources.
  *
  * For further information about internal API refer to 
- * <a href="https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pools">Microsof documentation</a>.
+ * <a href="https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pools">Microsoft documentation</a>.
  *
  * @section install_sec Installation
  *
@@ -110,4 +110,63 @@
 	 // Do further work...
  }
  * @endcode
+ *
+ * @subsection wait_sec Basic wait callbacks
+ *
+ * @code{.cpp}
+ #include "ntp..hpp"
+
+ class ProcessManager final
+ {
+ public:
+     void LaunchProcess(const wchar_t* command_line)
+	 {
+	     STARTUPINFO si{ sizeof(STARTUPINFO) };
+	     PROCESS_INFORMATION pi{};
+
+	     //
+	     // Don't handle errors for simplicity
+	     //
+
+	     CreateProcess(nullptr, command_line, nullptr, nullptr, 
+	         FALSE, 0, nullptr, nullptr, &si, &pi);
+			 
+	     //
+	     // Set wait callback
+	     //
+
+	     pool_.SubmitWait(pi.hProcess, OnProcessCompleted, 
+	         pi.hProcess /* Pass handle to callback too */); // (1)
+	 }
+
+ private:
+     static void OnProcessCompleted(TP_WAIT_RESULT wait_result, HANDLE process)
+	 {
+	     if (wait_result == WAIT_OBJECT_0)
+	     {
+	         // Process has been ended
+	     }
+
+	     //
+	     // Close process handle, passed as parameter at (1)
+	     //
+
+	     CloseHandle(process);
+	 }
+
+ private:
+     ntp::SystemThreadPool pool_;
+ }
+ * @endcode
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
