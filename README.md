@@ -134,7 +134,7 @@ public:
         //
 
         pool_.SubmitWait(pi.hProcess, OnProcessCompleted, 
-        pi.hProcess /* Pass handle to callback too/); // (1)
+            pi.hProcess /* Pass handle to callback too */); // (1)
     }
 
 private:
