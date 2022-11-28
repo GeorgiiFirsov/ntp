@@ -19,7 +19,8 @@ set(TEST_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR}
 set(TEST_SOURCE_FILES ${TEST_SOURCE_ROOT}/pool_creation_test.cpp
                       ${TEST_SOURCE_ROOT}/work_test.cpp
                       ${TEST_SOURCE_ROOT}/wait_test.cpp
-                      ${TEST_SOURCE_ROOT}/timer_test.cpp)
+                      ${TEST_SOURCE_ROOT}/timer_test.cpp
+                      ${TEST_SOURCE_ROOT}/logger_test.cpp)
 
 set(TEST_HEADER_FILES ${TEST_SOURCE_ROOT}/config.hpp)
 

@@ -27,4 +27,5 @@
 // Just a list of necessary library headers
 //
 #include "config.hpp"
+#include "logger/logger.hpp"
 #include "pool/threadpool.hpp"
