@@ -39,7 +39,7 @@ BasicThreadPoolTraits::~BasicThreadPoolTraits()
 {
     if (environment_)
     {
-        DestroyThreadpoolEnvironment(environment_);
+        ntp::details::SafeThreadpoolCall<DestroyThreadpoolEnvironment>(environment_);
         environment_allocator_t::Free(environment_);
     }
 }
@@ -111,7 +111,7 @@ CleanupGroup::~CleanupGroup()
 {
     if (cleanup_group_)
     {
-        CloseThreadpoolCleanupGroup(cleanup_group_);
+        ntp::details::SafeThreadpoolCall<CloseThreadpoolCleanupGroup>(cleanup_group_);
     }
 }
 

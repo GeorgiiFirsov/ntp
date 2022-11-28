@@ -48,7 +48,7 @@ NTP_INLINE constexpr bool is_duration_v = is_duration<Ty>::value;
 /**
  * @brief Native 100-ns duration interval.
  */
-using native_duration_t = std::chrono::duration<unsigned long long, std::ratio<1, 10'000'000>>;
+using native_duration_t = std::chrono::duration<long long, std::ratio<1, 10'000'000>>;
 
 
 /**
@@ -64,7 +64,7 @@ NTP_INLINE constexpr auto max_native_duration = (native_duration_t::max)();
  * @returns Converted into FILETIME duration
  */
 template<typename Rep, typename Period>
-FILETIME AsFiletime(const std::chrono::duration<Rep, Period>& duration) noexcept
+FILETIME AsFileTime(const std::chrono::duration<Rep, Period>& duration) noexcept
 {
     const auto native       = std::chrono::duration_cast<native_duration_t>(duration);
     const auto native_count = native.count();
@@ -77,6 +77,16 @@ FILETIME AsFiletime(const std::chrono::duration<Rep, Period>& duration) noexcept
     const auto high_part = static_cast<DWORD>(native_count >> 32);
 
     return FILETIME { low_part, high_part };
+}
+
+
+/**
+ * @brief Negates a duration value stored in FILETIME structure.
+ */
+inline FILETIME Negate(FILETIME time)
+{
+    time.dwLowDateTime = static_cast<DWORD>(-static_cast<LONG>(time.dwLowDateTime));
+    return time;
 }
 
 }  // namespace ntp::time

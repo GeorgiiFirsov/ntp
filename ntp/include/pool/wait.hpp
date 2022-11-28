@@ -12,7 +12,6 @@
 #include "config.hpp"
 #include "details/time.hpp"
 #include "details/utils.hpp"
-#include "details/exception.hpp"
 #include "pool/basic_callback.hpp"
 
 
@@ -97,10 +96,8 @@ public:
      */
     explicit WaitManager(PTP_CALLBACK_ENVIRON environment);
 
-    ~WaitManager();
-
     /**
-     * @brief Submits or replaces a threadpool wait object with a user-defined callback.
+     * @brief Submits a threadpool wait object with a user-defined callback.
      * 
      * Creates a new callback wrapper, new wait object (if not already present), put 
      * it into a callbacks container and then sets threadpool wait.
@@ -127,9 +124,8 @@ public:
             // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait
             //
 
-            context->object_context.wait_timeout                = ntp::time::AsFiletime(native_timeout);
-            context->object_context.wait_timeout->dwLowDateTime = static_cast<DWORD>(
-                -static_cast<LONG>(context->object_context.wait_timeout->dwLowDateTime));
+            context->object_context.wait_timeout = ntp::time::AsFileTime(native_timeout);
+            context->object_context.wait_timeout = ntp::time::Negate(context->object_context.wait_timeout.value());
         }
 
         const auto native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
@@ -141,10 +137,10 @@ public:
     }
 
     /**
-	 * @brief Submits or replaces a threadpool wait object of default type with a 
+	 * @brief Submits a threadpool wait object with a 
      * user-defined callback. It never expires.
 	 *
-	 * Just calls generic version of ntp::wait::details::Manager::Submit with
+	 * Just calls generic version of ntp::wait::details::WaitManager::Submit with
 	 * ntp::time::max_native_duration as timeout parameter.
 	 *
 	 * @param wait_handle Handle to wait for
@@ -162,11 +158,10 @@ public:
     /**
      * @brief Replaces an existing threadpool wait callback with a new one.
      * 
-     * Cancels current pending callback, that corresponds to the specified 
-     * wait handle, creates a new callback wrapper and then sets wait again
-	 * with unchanged parameters.
+     * Cancels current pending callback, creates a new callback wrapper and then 
+     * sets wait again with unchanged parameters.
 	 *
-	 * @param wait_object Handle for an existing wait object (obtained from Submit)
+	 * @param wait_object Handle for an existing wait object (obtained from ntp::wait::details::WaitManager::Submit)
 	 * @param functor New callable to invoke
 	 * @param args New arguments to pass into callable (they will be copied into wrapper)
 	 * @throws ntp::exception::Win32Exception if wait handle is not present or corrupt
@@ -194,7 +189,8 @@ private:
         // after that we are allowed to replace it with the new one
         //
 
-        SetThreadpoolWait(native_handle, nullptr, nullptr);
+        ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(native_handle, nullptr, nullptr);
+        ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(native_handle, TRUE);
 
         context->callback = std::make_unique<WaitCallback<Functor, Args...>>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);

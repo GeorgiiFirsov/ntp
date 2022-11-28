@@ -17,6 +17,7 @@
 #include "details/allocator.hpp"
 #include "pool/work.hpp"
 #include "pool/wait.hpp"
+#include "pool/timer.hpp"
 
 
 namespace ntp {
@@ -173,6 +174,7 @@ public:
         , test_cancel_(std::move(test_cancel))
         , work_manager_(traits_.Environment())
         , wait_manager_(traits_.Environment())
+        , timer_manager_(traits_.Environment())
     { }
 
     /**
@@ -193,6 +195,7 @@ public:
         , test_cancel_(std::move(test_cancel))
         , work_manager_(traits_.Environment())
         , wait_manager_(traits_.Environment())
+        , timer_manager_(traits_.Environment())
     { }
 
     /**
@@ -200,6 +203,10 @@ public:
      */
     ~BasicThreadPool()
     {
+        //
+        // Managers dont cancel all their pending callbacks. They are cancelled and closed here.
+        //
+
         ntp::details::SafeThreadpoolCall<CloseThreadpoolCleanupGroupMembers>(
             cleanup_group_, TRUE, nullptr);
     }
@@ -294,7 +301,7 @@ public:
     /**
      * @brief Cancel threadpool wait
      * 
-     * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
+     * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait)
      */
     void CancelWait(HANDLE wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
 
@@ -305,12 +312,76 @@ public:
 
 
     /**
+     * @brief Submits a threadpool timer object with a user-defined callback.
+     *
+     * @param timeout Timeout after which timer object calls the callback
+     * @param period If non-zero, timer object willbe triggered each period after first call
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
+     */
+    template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
+    HANDLE SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
+    {
+        return timer_manager_.Submit(timeout, period, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
+	 *
+	 * @param timeout Timeout after which timer object calls the callback
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
+     */
+    template<typename Rep, typename Period, typename Functor, typename... Args>
+    auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
+    {
+        return timer_manager_.Submit(timeout, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Replaces an existing timer callback in threadpool.
+     *
+     * @tparam Functor Type of callable to invoke in threadpool
+     * @tparam Args... Types of arguments
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
+     * @returns handle for the same timer object
+     */
+    template<typename Functor, typename... Args>
+    HANDLE ReplaceTimer(HANDLE timer_object, Functor&& functor, Args&&... args)
+    {
+        return timer_manager_.Replace(timer_object, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Cancel threadpool wait
+     *
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
+     */
+    void CancelTimer(HANDLE timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
+
+    /**
+     * @brief Cancel all pending wait callbacks
+     */
+    void CancelTimers() noexcept { return timer_manager_.CancelAll(); }
+
+
+    /**
      * @brief Cancel all pending callbacks (of any kind)
      */
     void CancelAllCallbacks() noexcept
     {
         work_manager_.CancelAll();
         wait_manager_.CancelAll();
+        timer_manager_.CancelAll();
     }
 
 private:
@@ -326,6 +397,7 @@ private:
     // Managers for callbacks
     work::details::WorkManager work_manager_;
     wait::details::WaitManager wait_manager_;
+    timer::details::TimerManager timer_manager_;
 };
 
 

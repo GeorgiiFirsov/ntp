@@ -85,8 +85,6 @@ public:
      */
     explicit WorkManager(PTP_CALLBACK_ENVIRON environment);
 
-    ~WorkManager();
-
     /**
      * @brief Submits a callback into threadpool.
      * 

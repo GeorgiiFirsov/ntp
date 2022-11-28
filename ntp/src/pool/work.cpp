@@ -20,16 +20,6 @@ WorkManager::WorkManager(PTP_CALLBACK_ENVIRON environment)
     }
 }
 
-WorkManager::~WorkManager()
-{
-    CancelAll();
-
-    //
-    // Actually we dont need to free PTP_WORK here,
-    // because it will be freed via cleanup group.
-    //
-}
-
 bool WorkManager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
 {
     //

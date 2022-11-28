@@ -1,6 +1,5 @@
 #include "pool/wait.hpp"
 #include "details/utils.hpp"
-#include "details/exception.hpp"
 #include "logger/logger_internal.hpp"
 
 
@@ -9,11 +8,6 @@ namespace ntp::wait::details {
 WaitManager::WaitManager(PTP_CALLBACK_ENVIRON environment)
     : BasicManagerEx(environment)
 { }
-
-WaitManager::~WaitManager()
-{
-    CancelAll();
-}
 
 void WaitManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context)
 {
