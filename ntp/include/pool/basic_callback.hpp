@@ -159,6 +159,10 @@ private:
  * 
  * This extended version is used for waits, because each such object must have separate native handle.
  * 
+ * Derived class must implement the following methods:
+ * - static Close(native_handle_t native_handle)
+ * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context)
+ * 
  * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
  * @tparam ObjectContext Type of context specific for threadpool object kind
  * @tparam Derived Derived from this class implementation for specific callback type (CRTP)
