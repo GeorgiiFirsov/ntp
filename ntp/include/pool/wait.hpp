@@ -8,7 +8,6 @@
 #include <map>
 #include <mutex>
 #include <tuple>
-#include <atomic>
 #include <utility>
 #include <optional>
 
@@ -110,30 +109,6 @@ private:
         HANDLE wait_handle; /**< Handle to wait for */
 
         ntp::details::callback_t callback; /**< Pointer to callback wrapper */
-    };
-
-    /**
-     * @brief Pseudo-lock primitive to prohibit removal from container
-     */
-    class RemovalPermission
-    {
-        RemovalPermission(const RemovalPermission&)            = delete;
-        RemovalPermission& operator=(const RemovalPermission&) = delete;
-
-    public:
-        RemovalPermission()
-            : can_remove_(true)
-        { }
-
-        ~RemovalPermission() = default;
-
-        void lock() noexcept { can_remove_.store(false, std::memory_order_release); }
-        void unlock() noexcept { can_remove_.store(true, std::memory_order_release); }
-
-        operator bool() const noexcept { return can_remove_.load(std::memory_order_acquire); }
-
-    private:
-        std::atomic_bool can_remove_;
     };
 
 public:
@@ -292,7 +267,7 @@ private:
     // If true, callback will not release its resource after completion.
     // This flag is used in CancelAll function to prevent container
     // modification while iterating over it.
-    mutable RemovalPermission removal_permission_;
+    mutable ntp::details::RemovalPermission removal_permission_;
 };
 
 }  // namespace ntp::wait::details

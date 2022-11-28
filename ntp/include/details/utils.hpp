@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <atomic>
+
 #include "config.hpp"
 #include "native/ntrtl.h"
 #include "details/allocator.hpp"
@@ -183,6 +185,38 @@ public:
 
 private:
     RTL_RESOURCE resource_;
+};
+
+
+/**
+ * @brief Pseudo-lock primitive to prohibit removal from container
+ */
+class RemovalPermission
+{
+    RemovalPermission(const RemovalPermission&)            = delete;
+    RemovalPermission& operator=(const RemovalPermission&) = delete;
+
+public:
+    RemovalPermission()
+        : can_remove_(true)
+    { }
+
+    ~RemovalPermission() = default;
+
+    /**
+     * @brief Prohibits removal
+     */
+    void lock() noexcept { can_remove_.store(false, std::memory_order_release); }
+
+    /**
+     * @brief Allows removal
+     */
+    void unlock() noexcept { can_remove_.store(true, std::memory_order_release); }
+
+    operator bool() const noexcept { return can_remove_.load(std::memory_order_acquire); }
+
+private:
+    std::atomic_bool can_remove_;
 };
 
 }  // namespace ntp::details
