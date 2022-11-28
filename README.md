@@ -112,7 +112,7 @@ void DoWork(HANDLE event)
 ### Basic wait callbacks
 
 ```cpp
-#include "ntp..hpp"
+#include "ntp.hpp"
 
 class ProcessManager final
 {
