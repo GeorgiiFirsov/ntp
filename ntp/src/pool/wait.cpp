@@ -6,75 +6,27 @@
 
 namespace ntp::wait::details {
 
-Manager::Manager(PTP_CALLBACK_ENVIRON environment)
-    : BasicManager(environment)
-    , callbacks_()
-    , lock_()
-    , removal_permission_()
+WaitManager::WaitManager(PTP_CALLBACK_ENVIRON environment)
+    : BasicManagerEx(environment)
 { }
 
-Manager::~Manager()
+WaitManager::~WaitManager()
 {
     CancelAll();
 }
 
-void Manager::Cancel(HANDLE wait_object) noexcept
+void WaitManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context)
 {
-    std::unique_lock lock { lock_ };
-
-    const auto native_handle = static_cast<native_handle_t>(wait_object);
-    if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.cend())
-    {
-        CloseWait(native_handle);
-        callbacks_.erase(callback);
-    }
-}
-
-void Manager::CancelAll() noexcept
-{
-    std::unique_lock lock { lock_ };
-    std::unique_lock removal_ban { removal_permission_ };
-
-    for (auto& [native_handle, _] : callbacks_)
-    {
-        CloseWait(native_handle);
-    }
-
-    callbacks_.clear();
-}
-
-void Manager::Remove(callbacks_t::iterator callback) noexcept
-{
-    std::unique_lock lock { lock_ };
-
-    if (removal_permission_)
-    {
-        //
-        // We may iterate over callbacks_ when this function is called,
-        // hence in this case we must keep container as is and not
-        // remove callback
-        //
-
-        callbacks_.erase(callback);
-    }
-}
-
-HANDLE Manager::SubmitInternal(callbacks_t::iterator callback)
-{
-    auto& [native_handle, context] = *callback;
-
-    PFILETIME wait_timeout = (context->wait_timeout.has_value())
-                               ? &context->wait_timeout.value()
+    PFILETIME wait_timeout = (object_context.wait_timeout.has_value())
+                               ? &object_context.wait_timeout.value()
                                : nullptr;
 
     ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(
-        native_handle, context->wait_handle, wait_timeout);
-
-    return native_handle;
+        native_handle, object_context.wait_handle, wait_timeout);
 }
 
 /* static */
-void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* context, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept
+void NTAPI WaitManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_pointer_t context, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept
 {
     try
     {
@@ -83,15 +35,24 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* cont
             throw exception::Win32Exception(ERROR_INVALID_PARAMETER);
         }
 
-        context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
-
         //
         // BUGBUG: need to think about exceptions in user-defined callback
         // Probably need to implement something like std::async here
         //
 
+        context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
+
+        //
+        // Clean object here
+        //
+
+        DisassociateCurrentThreadFromCallback(instance);
+
+        auto iterator = context->meta_context.iterator;
+        Close(iterator->first);
+
         auto manager = context->meta_context.manager;
-        return manager->Remove(context->meta_context.iterator);
+        return manager->Remove(iterator);
     }
     catch (const std::exception& error)
     {
@@ -100,16 +61,16 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* cont
     catch (...)
     {
         logger::details::Logger::Instance().TraceMessage(logger::Severity::kCritical,
-            L"[Manager::InvokeCallback]: unknown error");
+            L"[WaitManager::InvokeCallback]: unknown error");
     }
 }
 
 /* static */
-void Manager::CloseWait(PTP_WAIT wait) noexcept
+void WaitManager::Close(native_handle_t native_handle) noexcept
 {
-    ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(wait, nullptr, nullptr);
-    ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(wait, TRUE);
-    ntp::details::SafeThreadpoolCall<CloseThreadpoolWait>(wait);
+    ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(native_handle, nullptr, nullptr);
+    ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(native_handle, TRUE);
+    ntp::details::SafeThreadpoolCall<CloseThreadpoolWait>(native_handle);
 }
 
 }  // namespace ntp::wait::details

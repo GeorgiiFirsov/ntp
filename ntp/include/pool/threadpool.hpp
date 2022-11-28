@@ -324,8 +324,8 @@ private:
     details::test_cancel_t test_cancel_;
 
     // Managers for callbacks
-    work::details::Manager work_manager_;
-    wait::details::Manager wait_manager_;
+    work::details::WorkManager work_manager_;
+    wait::details::WaitManager wait_manager_;
 };
 
 

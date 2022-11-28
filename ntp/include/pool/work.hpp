@@ -25,10 +25,10 @@ namespace ntp::work::details {
  * @tparam Args... Types of arguments
  */
 template<typename Functor, typename... Args>
-class alignas(NTP_ALLOCATION_ALIGNMENT) Callback final
-    : public ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>
+class alignas(NTP_ALLOCATION_ALIGNMENT) WorkCallback final
+    : public ntp::details::BasicCallback<WorkCallback<Functor, Args...>, Functor, Args...>
 {
-    friend class ntp::details::BasicCallback<Callback<Functor, Args...>, Functor, Args...>;
+    friend class ntp::details::BasicCallback<WorkCallback<Functor, Args...>, Functor, Args...>;
 
 public:
     /**
@@ -38,7 +38,7 @@ public:
      * @param args Arguments to pass into callable (they will be copied into wrapper)
 	 */
     template<typename CFunctor, typename... CArgs>
-    explicit Callback(CFunctor&& functor, CArgs&&... args)
+    explicit WorkCallback(CFunctor&& functor, CArgs&&... args)
         : BasicCallback(std::forward<CFunctor>(functor), std::forward<CArgs>(args)...)
     { }
 
@@ -49,7 +49,7 @@ private:
     void* ConvertParameter(void*) { return nullptr; }
 
     /**
-     * @brief Callback invocation function implementation. Supports invocation of 
+     * @brief WorkCallback invocation function implementation. Supports invocation of 
      *        callbacks with or without PTP_CALLBACK_INSTANCE parameter.
      */
     template<typename = void> /* if constexpr works only for templates */
@@ -69,13 +69,13 @@ private:
 
 
 /**
- * @brief Manager for work callbacks. Binds callbacks and threadpool implementation.
+ * @brief WorkManager for work callbacks. Binds callbacks and threadpool implementation.
  */
-class Manager final
+class WorkManager final
     : public ntp::details::BasicManager
 {
-    Manager(const Manager&)            = delete;
-    Manager& operator=(const Manager&) = delete;
+    WorkManager(const WorkManager&)            = delete;
+    WorkManager& operator=(const WorkManager&) = delete;
 
 public:
     /**
@@ -83,9 +83,9 @@ public:
      * 
 	 * @param environment Owning threadpool environment
      */
-    explicit Manager(PTP_CALLBACK_ENVIRON environment);
+    explicit WorkManager(PTP_CALLBACK_ENVIRON environment);
 
-    ~Manager();
+    ~WorkManager();
 
     /**
      * @brief Submits a callback into threadpool.
@@ -101,7 +101,7 @@ public:
     template<typename Functor, typename... Args>
     void Submit(Functor&& functor, Args&&... args)
     {
-        const auto callback = new Callback<Functor, Args...>(
+        const auto callback = new WorkCallback<Functor, Args...>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);
 
         queue_.Push(callback);
@@ -132,7 +132,7 @@ private:
 private:
     static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work) noexcept;
 
-    static void CALLBACK WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self) noexcept;
+    static void CALLBACK WaitAllCallback(PTP_CALLBACK_INSTANCE instance, WorkManager* self) noexcept;
 
 private:
     // Internal queue with callbacks

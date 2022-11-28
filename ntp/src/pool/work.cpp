@@ -5,7 +5,7 @@
 
 namespace ntp::work::details {
 
-Manager::Manager(PTP_CALLBACK_ENVIRON environment)
+WorkManager::WorkManager(PTP_CALLBACK_ENVIRON environment)
     : BasicManager(environment)
     , queue_()
     , work_()
@@ -20,7 +20,7 @@ Manager::Manager(PTP_CALLBACK_ENVIRON environment)
     }
 }
 
-Manager::~Manager()
+WorkManager::~WorkManager()
 {
     CancelAll();
 
@@ -30,7 +30,7 @@ Manager::~Manager()
     //
 }
 
-bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
+bool WorkManager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
 {
     //
     // Suppose we have something working...
@@ -48,7 +48,7 @@ bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
     if /* [[unlikely]] */ (!submitted)
     {
         logger::details::Logger::Instance().TraceMessage(logger::Severity::kError,
-            L"[Manager::WaitAll]: cannot wait in separate thread, waiting in current one, cancellation is unavailable");
+            L"[WorkManager::WaitAll]: cannot wait in separate thread, waiting in current one, cancellation is unavailable");
 
         ntp::details::SafeThreadpoolCall<WaitForThreadpoolWorkCallbacks>(work_, FALSE);
         done_event_.Set();
@@ -70,22 +70,22 @@ bool Manager::WaitAll(const ntp::details::test_cancel_t& test_cancel) noexcept
     }
 
     logger::details::Logger::Instance().TraceMessage(logger::Severity::kExtended,
-        L"[Manager::WaitAll]: wait completed");
+        L"[WorkManager::WaitAll]: wait completed");
 
     return !cancelled;
 }
 
-void Manager::CancelAll() noexcept
+void WorkManager::CancelAll() noexcept
 {
     ntp::details::SafeThreadpoolCall<WaitForThreadpoolWorkCallbacks>(work_, TRUE);
     done_event_.Set();
 
     size_t left_unprocessed = ClearList();
     logger::details::Logger::Instance().TraceMessage(logger::Severity::kNormal,
-        L"[Manager::CancelAll]: tasks cancelled and %1!zu! left unprocessed", left_unprocessed);
+        L"[WorkManager::CancelAll]: tasks cancelled and %1!zu! left unprocessed", left_unprocessed);
 }
 
-size_t Manager::ClearList() noexcept
+size_t WorkManager::ClearList() noexcept
 {
     PSLIST_ENTRY entry = nullptr;
     size_t entries     = 0;
@@ -100,7 +100,7 @@ size_t Manager::ClearList() noexcept
 }
 
 /* static */
-void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work) noexcept
+void NTAPI WorkManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER queue, PTP_WORK work) noexcept
 {
     try
     {
@@ -126,15 +126,15 @@ void NTAPI Manager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, PSLIST_HEADER
     catch (...)
     {
         logger::details::Logger::Instance().TraceMessage(logger::Severity::kCritical,
-            L"[Manager::InvokeCallback]: unknown error");
+            L"[WorkManager::InvokeCallback]: unknown error");
     }
 }
 
 /* static */
-void CALLBACK Manager::WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* self) noexcept
+void CALLBACK WorkManager::WaitAllCallback(PTP_CALLBACK_INSTANCE instance, WorkManager* self) noexcept
 {
     logger::details::Logger::Instance().TraceMessage(logger::Severity::kExtended,
-        L"[Manager::WaitAllCallback]: wait started");
+        L"[WorkManager::WaitAllCallback]: wait started");
 
     if (self)
     {
@@ -150,11 +150,11 @@ void CALLBACK Manager::WaitAllCallback(PTP_CALLBACK_INSTANCE instance, Manager* 
     else
     {
         logger::details::Logger::Instance().TraceMessage(logger::Severity::kError,
-            L"[Manager::WaitAllCallback]: pointer to manager is NULL");
+            L"[WorkManager::WaitAllCallback]: pointer to manager is NULL");
     }
 
     logger::details::Logger::Instance().TraceMessage(logger::Severity::kExtended,
-        L"[Manager::WaitAllCallback]: wait finished");
+        L"[WorkManager::WaitAllCallback]: wait finished");
 }
 
 }  // namespace ntp::work::details

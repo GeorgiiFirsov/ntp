@@ -15,7 +15,7 @@
 namespace ntp::details {
 
 /**
- * @brief Provides SEH-safe way to call functions from Win32 ThreadPool API
+ * @brief Provides SEH-safe way to call functions from Win32 ThreadPool API.
  * 
  * @tparam function Pointer to function to call
  * @tparam Args... Types of arguments
@@ -38,7 +38,7 @@ DWORD SafeThreadpoolCall(Args&&... args) noexcept
 
 
 /**
- * @brief Wrapper for Win32 API FormatMessage
+ * @brief Wrapper for Win32 API FormatMessage.
  *
  * @param flags formatting flags (refer to Win32 API for possible values)
  * @param source optional format string (if FORMAT_MESSAGE_FROM_SYSTEM is specified this parameter MUST be NULL)
@@ -49,7 +49,7 @@ std::string FormatMessage(DWORD flags, LPCSTR source, DWORD message_id, ...) noe
 
 
 /**
- * @brief Wrapper for Win32 API FormatMessage
+ * @brief Wrapper for Win32 API FormatMessage.
  *
  * @param flags formatting flags (refer to Win32 API for possible values)
  * @param source optional format string (if FORMAT_MESSAGE_FROM_SYSTEM is specified this parameter MUST be NULL)
@@ -60,9 +60,9 @@ std::wstring FormatMessage(DWORD flags, LPCWSTR source, DWORD message_id, ...) n
 
 
 /**
- * @brief converts std::string to std::wstring using MultiByteToWideChar
+ * @brief converts std::string to std::wstring using MultiByteToWideChar.
  * 
- * Uses Windows-1251 codepage
+ * Uses Windows-1251 codepage.
  * 
  * @param source Source string
  * @returns Converted string
@@ -71,7 +71,7 @@ std::wstring Convert(const std::string& source) noexcept;
 
 
 /**
- * @brief Wrapper for SLIST_HEADER
+ * @brief Wrapper for SLIST_HEADER.
  * 
  * Native lock-free (atomic) single-linked list.
  */
@@ -89,14 +89,14 @@ public:
     ~NativeSlist();
 
     /**
-	 * @brief Inserts a new item to the list
+	 * @brief Inserts a new item to the list.
      * 
      * @param entry New item to insert into the list
 	 */
     void Push(PSLIST_ENTRY entry) noexcept;
 
     /**
-	 * @brief Implicit cast operator to internal list header
+	 * @brief Implicit cast operator to internal list header.
      * 
      * @returns Pointer to the internal list headers
 	 */
@@ -109,7 +109,7 @@ private:
 
 
 /**
- * @brief Wrapper for SLIST_ENTRY (actually inherits from it)
+ * @brief Wrapper for SLIST_ENTRY (actually inherits from it).
  */
 class alignas(NTP_ALLOCATION_ALIGNMENT) NativeSlistEntry
     : public SLIST_ENTRY
@@ -119,7 +119,7 @@ class alignas(NTP_ALLOCATION_ALIGNMENT) NativeSlistEntry
 
 public:
     /**
-	 * @brief Custom new operator, that allocates aligned memory
+	 * @brief Custom new operator, that allocates aligned memory.
 	 *
 	 * @param bytes Number of bytes to allocate
      */
@@ -129,7 +129,7 @@ public:
     }
 
     /**
-     * @brief Matching custom delete operator
+     * @brief Matching custom delete operator.
      * 
      * @param ptr Pointer to free
      */
@@ -189,7 +189,7 @@ private:
 
 
 /**
- * @brief Pseudo-lock primitive to prohibit removal from container
+ * @brief Pseudo-lock primitive to prohibit removal from container.
  */
 class RemovalPermission
 {
@@ -204,15 +204,18 @@ public:
     ~RemovalPermission() = default;
 
     /**
-     * @brief Prohibits removal
+     * @brief Prohibits removal.
      */
     void lock() noexcept { can_remove_.store(false, std::memory_order_release); }
 
     /**
-     * @brief Allows removal
+     * @brief Allows removal.
      */
     void unlock() noexcept { can_remove_.store(true, std::memory_order_release); }
 
+    /**
+     * @brief Implicit cast to boolean value. 
+     */
     operator bool() const noexcept { return can_remove_.load(std::memory_order_acquire); }
 
 private:

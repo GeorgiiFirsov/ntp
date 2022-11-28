@@ -7,11 +7,14 @@
 
 #include <Windows.h>
 
+#include <map>
+#include <mutex>
 #include <memory>
 #include <type_traits>
 #include <functional>
 
 #include "config.hpp"
+#include "details/utils.hpp"
 
 
 namespace ntp::details {
@@ -148,6 +151,216 @@ protected:
 private:
     // Non-owning pointer to environment associated with a threadpool
     PTP_CALLBACK_ENVIRON environment_;
+};
+
+
+/**
+ * @brief Extended version of ntp::details::BasicManager with container of callbacks.
+ * 
+ * This extended version is used for waits, because each such object must have separate native handle.
+ * 
+ * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
+ * @tparam ObjectContext Type of context specific for threadpool object kind
+ * @tparam Derived Derived from this class implementation for specific callback type (CRTP)
+ */
+template<typename NativeHandle, typename ObjectContext, typename Derived>
+class BasicManagerEx
+    : public BasicManager
+{
+    // Forward declaration of context structure
+    struct Context;
+
+protected:
+    /**
+     * @brief Smart pointer to specific context
+     */
+    using context_t = std::unique_ptr<Context>;
+
+    /**
+     * @brief Raw pointer to specific context
+     */
+    using context_pointer_t = typename context_t::pointer;
+
+    /**
+     * @brief Type of native threadpool object handle
+     */
+    using native_handle_t = NativeHandle;
+
+    /**
+     * @brief Implementation's context
+     */
+    using object_context_t = ObjectContext;
+
+    /**
+     * @brief Container with callbacks represented by their handles
+     */
+    using callbacks_t = std::map<native_handle_t, context_t>;
+
+    /**
+     * @brief Iterator type for container with callbacks
+     */
+    using iterator_t = typename callbacks_t::iterator;
+
+    /**
+     * @brief Lock primitive
+     */
+    using lock_t = ntp::details::RtlResource;
+
+private:
+    /**
+     * @brief Meta information about context.
+     */
+    struct MetaContext
+    {
+        BasicManagerEx* manager; /**< Pointer to parent wait manager */
+
+        iterator_t iterator; /**< Iterator to current context */
+    };
+
+    /**
+     * @brief Callback context structure
+     */
+    struct Context final
+    {
+        object_context_t object_context; /**< Context specific to callback kind */
+
+        MetaContext meta_context; /**< Meta information about context */
+
+        ntp::details::callback_t callback; /**< Pointer to callback wrapper */
+    };
+
+protected:
+    /**
+	 * @brief Constructor that initializes all necessary objects.
+	 *
+	 * @param environment Owning threadpool environment
+     */
+    BasicManagerEx(PTP_CALLBACK_ENVIRON environment)
+        : BasicManager(environment)
+        , callbacks_()
+        , lock_()
+        , removal_permission_()
+    { }
+
+public:
+    /**
+     * @brief Cancels and removes an object.
+     *
+     * If no such object is present, does nothing.
+     *
+     * @param object Handle for an object
+     */
+    void Cancel(HANDLE object) noexcept
+    {
+        std::unique_lock lock { lock_ };
+
+        const auto native_handle = static_cast<native_handle_t>(object);
+        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.cend())
+        {
+            Derived::Close(native_handle);
+            callbacks_.erase(callback);
+        }
+    }
+
+    /**
+     * @brief Cancel all pending callbacks.
+     */
+    void CancelAll() noexcept
+    {
+        std::unique_lock lock { lock_ };
+        std::unique_lock removal_ban { removal_permission_ };
+
+        for (auto& [native_handle, _] : callbacks_)
+        {
+            Derived::Close(native_handle);
+        }
+
+        callbacks_.clear();
+    }
+
+    /**
+     * @brief Remove callback from container if allowed. 
+     * 
+     * This function should be protected, but is located in public section, because
+     * it is called in callbacks wrappers via pointer to BasicManagerEx and can
+     * be accessed only if it is public.
+     * 
+     * @param callback Iterator to callback to remove
+     */
+    void Remove(iterator_t callback) noexcept
+    {
+        std::unique_lock lock { lock_ };
+
+        if (removal_permission_)
+        {
+            //
+            // We may iterate over callbacks_ when this function is called,
+            // hence in this case we must keep container as is and not
+            // remove callback
+            //
+
+            callbacks_.erase(callback);
+        }
+    }
+
+protected:
+    /**
+     * @brief Put context into container and then submit associated callback.
+     * 
+     * @param native_handle Native handle of threadpool object to submit
+     * @param context Filled context of callback
+     */
+    void SubmitContext(native_handle_t native_handle, context_t&& context)
+    {
+        std::unique_lock lock { lock_ };
+
+        const auto [iter, _]                = callbacks_.emplace(native_handle, std::move(context));
+        iter->second->meta_context.manager  = this;
+        iter->second->meta_context.iterator = iter;
+
+        AsDerived()->SubmitInternal(native_handle, iter->second->object_context);
+    }
+
+    /**
+     * @brief Look for specific threadpool object by handle.
+     * 
+     * @param handle Handle to threadpool object to look for
+     */
+    std::pair<iterator_t, bool> Lookup(HANDLE handle) noexcept
+    {
+        std::unique_lock lock { lock_ };
+
+        const auto native_handle = static_cast<native_handle_t>(handle);
+        const auto callback      = callbacks_.find(native_handle);
+
+        return std::make_pair(callback, callback != callbacks_.end());
+    }
+
+protected:
+    /**
+     * @brief Create new empty context.
+     * 
+     * @returns Smart pointer to empty context
+     */
+    static context_t CreateContext()
+    {
+        return std::make_unique<Context>();
+    }
+
+private:
+    Derived* AsDerived() noexcept { return static_cast<Derived*>(this); }
+
+private:
+    // Container with callbacks
+    callbacks_t callbacks_;
+
+    // Syncronization primitive for callbacks container
+    mutable lock_t lock_;
+
+    // If true, callback will not release its resource after completion.
+    // This flag is used in CancelAll function to prevent container
+    // modification while iterating over it.
+    mutable ntp::details::RemovalPermission removal_permission_;
 };
 
 }  // namespace ntp::details
