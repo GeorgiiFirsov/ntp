@@ -166,8 +166,8 @@ public:
         context->callback    = std::make_unique<Callback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
         context->wait_handle = wait_handle;
 
-        const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
-        if (native_timeout != ntp::time::max_native_duration)
+        if (const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
+            native_timeout != ntp::time::max_native_duration)
         {
             //
             // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
