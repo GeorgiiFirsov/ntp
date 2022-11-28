@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <set>
+#include <map>
 #include <mutex>
 #include <tuple>
 #include <atomic>
@@ -75,12 +75,14 @@ public:
 class Manager final
     : public ntp::details::BasicManager
 {
-    // If we have such number of waits, then we need to scan for marked for removal callbacks
-    static constexpr auto kRemovalScanThreschold = 100;
+    // Forward declaration of context structure
+    struct Context;
 
-private:
+    // Type of native threadpool object handle
+    using native_handle_t = PTP_WAIT;
+
     // Container with callbacks represented by their handles
-    using callbacks_t = std::set<HANDLE>;
+    using callbacks_t = std::map<native_handle_t, std::unique_ptr<Context>>;
 
     // Lock primitive
     using lock_t = ntp::details::RtlResource;
@@ -97,13 +99,17 @@ private:
     };
 
     /**
-     * @brief Information specific for wait objects
+     * 
      */
-    struct WaitContext
+    struct Context final
     {
+        MetaContext meta_context; /**< Meta information about context */
+
         std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
 
         HANDLE wait_handle; /**< Handle to wait for */
+
+        ntp::details::callback_t callback; /**< Pointer to callback wrapper */
     };
 
     /**
@@ -129,9 +135,6 @@ private:
     private:
         std::atomic_bool can_remove_;
     };
-
-    // Context instantiation
-    using context_t = ntp::details::Context<PTP_WAIT, WaitContext, MetaContext>;
 
 public:
     /**
@@ -159,8 +162,9 @@ public:
     template<typename Rep, typename Period, typename Functor, typename... Args>
     HANDLE Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
-        auto callback = std::make_unique<Callback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
-        auto context  = context_t::Create({ std::nullopt, wait_handle }, std::move(callback));
+        auto context         = std::make_unique<Context>();
+        context->callback    = std::make_unique<Callback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
+        context->wait_handle = wait_handle;
 
         const auto native_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
         if (native_timeout != ntp::time::max_native_duration)
@@ -170,21 +174,21 @@ public:
             // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait
             //
 
-            context->object_context.wait_timeout                = ntp::time::AsFiletime(native_timeout);
-            context->object_context.wait_timeout->dwLowDateTime = static_cast<DWORD>(
-                -static_cast<LONG>(context->object_context.wait_timeout->dwLowDateTime));
+            context->wait_timeout                = ntp::time::AsFiletime(native_timeout);
+            context->wait_timeout->dwLowDateTime = static_cast<DWORD>(
+                -static_cast<LONG>(context->wait_timeout->dwLowDateTime));
         }
 
-        context->native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
-            *context, Environment());
+        const auto native_handle = CreateThreadpoolWait(reinterpret_cast<PTP_WAIT_CALLBACK>(InvokeCallback),
+            context.get(), Environment());
 
         std::unique_lock lock { lock_ };
 
-        const auto [iter, _]           = callbacks_.emplace(*context);
-        context->meta_context.manager  = this;
-        context->meta_context.iterator = iter;
+        const auto [iter, _]                = callbacks_.emplace(native_handle, std::move(context));
+        iter->second->meta_context.manager  = this;
+        iter->second->meta_context.iterator = iter;
 
-        return SubmitInternal(context.release());
+        return SubmitInternal(iter);
     }
 
     /**
@@ -225,7 +229,8 @@ public:
     {
         std::unique_lock lock { lock_ };
 
-        if (auto callback = callbacks_.find(wait_object); callback != callbacks_.end())
+        const auto native_handle = static_cast<native_handle_t>(wait_object);
+        if (auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
         {
             return ReplaceUnsafe(callback, std::forward<Functor>(functor), std::forward<Args>(args)...);
         }
@@ -251,32 +256,29 @@ private:
     template<typename Functor, typename... Args>
     HANDLE ReplaceUnsafe(callbacks_t::iterator callback, Functor&& functor, Args&&... args)
     {
-        if (auto context = context_t::FromHandle(*callback); context)
-        {
-            //
-            // Firstly we need to cancel current pending callback and only
-            // after that we are allowed to replace it with the new one
-            //
+        auto& [native_handle, context] = *callback;
 
-            SetThreadpoolWait(context->native_handle, nullptr, nullptr);
+        //
+        // Firstly we need to cancel current pending callback and only
+        // after that we are allowed to replace it with the new one
+        //
 
-            context->callback.reset(new Callback<Functor, Args...>(
-                std::forward<Functor>(functor), std::forward<Args>(args)...));
+        SetThreadpoolWait(native_handle, nullptr, nullptr);
 
-            SubmitInternal(context);
+        context->callback.reset(new Callback<Functor, Args...>(
+            std::forward<Functor>(functor), std::forward<Args>(args)...));
 
-            return context;
-        }
+        SubmitInternal(callback);
 
-        throw exception::Win32Exception(ERROR_INVALID_HANDLE);
+        return native_handle;
     }
 
     void Remove(callbacks_t::iterator callback) noexcept;
 
-    HANDLE SubmitInternal(HANDLE context_handle);
+    HANDLE SubmitInternal(callbacks_t::iterator callback);
 
 private:
-    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, HANDLE context_handle, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept;
+    static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, Context* context, PTP_WAIT wait, TP_WAIT_RESULT wait_result) noexcept;
 
     static void CloseWait(PTP_WAIT wait) noexcept;
 
