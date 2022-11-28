@@ -6,7 +6,7 @@
 
 - [X] Work callbacks (`PTP_WORK`)
 - [X] Wait callbacks (`PTP_WAIT`)
-- [ ] Timer callbacks (`PTP_TIMER`)
+- [X] Timer callbacks (`PTP_TIMER`)
 - [ ] IO callbacks (`PTP_IO`)
 - [ ] Tests
 - [ ] Cute documentation
