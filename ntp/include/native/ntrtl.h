@@ -60,6 +60,7 @@ VOID NTAPI RtlDeleteResource(PRTL_RESOURCE pResource);
  * 
  * @param pResource A pointer to the resource object to acquire for shared access
  * @param bWait Boolean value specifying whether the function can wait for access to be granted
+ * @returns Nonzero if shared access was granted, zero if not
  */
 BOOLEAN NTAPI RtlAcquireResourceShared(PRTL_RESOURCE pResource, BOOLEAN bWait);
 
@@ -69,6 +70,7 @@ BOOLEAN NTAPI RtlAcquireResourceShared(PRTL_RESOURCE pResource, BOOLEAN bWait);
  * 
  * @param pResource A pointer to the resource object to exclusively acquire
  * @param bWait Boolean value specifying whether the function can wait for access to be granted
+ * @returns Nonzero if exclusive access was granted, zero if not
  */
 BOOLEAN NTAPI RtlAcquireResourceExclusive(PRTL_RESOURCE pResource, BOOLEAN bWait);
 
