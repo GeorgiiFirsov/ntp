@@ -157,6 +157,35 @@ private:
 }
 ```
 
+### External logger support
+
+`ntp` library supports custom logger callback, that accepts severity and a message string.
+Severity has values from `ntp::logger::Severity` enumeration.
+
+```cpp
+#include "ntp.hpp"
+
+void TraceCallback(ntp::logger::Severity severity, const wchar_t* message)
+{
+    if (severity >= ntp::logger::Severity::kNormal)
+    {
+        //
+        // Skip ntp::logger::Severity::kExtended
+        //
+
+        std::wcerr << message << L'\n';
+    }
+}
+
+int main()
+{
+    ntp::logger::SetLogger(TraceCallback);
+
+    // Do work with thread pools
+}
+```
+
+
 ## TODO
 
 - [X] Work callbacks (`PTP_WORK`)
