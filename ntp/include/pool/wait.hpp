@@ -99,7 +99,7 @@ private:
     };
 
     /**
-     * 
+     * @brief Callback context structure
      */
     struct Context final
     {
