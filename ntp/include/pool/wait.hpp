@@ -145,8 +145,7 @@ public:
      * user-defined callback. It never expires.
 	 *
 	 * Just calls generic version of ntp::wait::details::Manager::Submit with
-	 * ntp::time::max_native_duration as timeout parameter and 
-     * ntp::wait::details::Type::kDefault as type parameter.
+	 * ntp::time::max_native_duration as timeout parameter.
 	 *
 	 * @param wait_handle Handle to wait for
 	 * @param functor Callable to invoke
