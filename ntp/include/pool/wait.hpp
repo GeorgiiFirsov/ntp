@@ -170,11 +170,11 @@ public:
     template<typename Functor, typename... Args>
     HANDLE Replace(HANDLE wait_object, Functor&& functor, Args&&... args)
     {
-        if (auto [callback, found] = Lookup(wait_object); found)
+        const auto native_handle = static_cast<native_handle_t>(wait_object);
+        if (const auto context = Lookup(native_handle); context)
         {
-            auto& [native_handle, context] = *callback;
-            return ReplaceUnsafe(native_handle, context.get(),
-                std::forward<Functor>(functor), std::forward<Args>(args)...);
+            return ReplaceUnsafe(native_handle, context, std::forward<Functor>(functor),
+                std::forward<Args>(args)...);
         }
 
         throw exception::Win32Exception(ERROR_NOT_FOUND);

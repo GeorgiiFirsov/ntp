@@ -10,8 +10,9 @@
 #include <map>
 #include <mutex>
 #include <memory>
-#include <type_traits>
 #include <functional>
+#include <type_traits>
+#include <shared_mutex>
 
 #include "config.hpp"
 #include "details/utils.hpp"
@@ -176,37 +177,34 @@ class BasicManagerEx
 
 protected:
     /**
-     * @brief Smart pointer to specific context
+     * @brief Smart pointer to specific context.
      */
     using context_t = std::unique_ptr<Context>;
 
     /**
-     * @brief Raw pointer to specific context
+     * @brief Raw pointer to specific context. Is never invalidated, while pointee lives.
+     *        E.g. after any modification of the container, this pointer still remains
+     *        valid, if corresponding object is not erased from container.
      */
     using context_pointer_t = typename context_t::pointer;
 
     /**
-     * @brief Type of native threadpool object handle
+     * @brief Type of native threadpool object handle.
      */
     using native_handle_t = NativeHandle;
 
     /**
-     * @brief Implementation's context
+     * @brief Implementation's context.
      */
     using object_context_t = ObjectContext;
 
     /**
-     * @brief Container with callbacks represented by their handles
+     * @brief Container with callbacks represented by their handles.
      */
     using callbacks_t = std::map<native_handle_t, context_t>;
 
     /**
-     * @brief Iterator type for container with callbacks
-     */
-    using iterator_t = typename callbacks_t::iterator;
-
-    /**
-     * @brief Lock primitive
+     * @brief Lock primitive.
      */
     using lock_t = ntp::details::RtlResource;
 
@@ -295,16 +293,19 @@ protected:
     /**
      * @brief Look for specific threadpool object by handle.
      * 
-     * @param handle Handle to threadpool object to look for
+     * @param native_handle Handle to threadpool object to look for
+     * @returns Corresponding context or nullptr, if such object does not exist
      */
-    std::pair<iterator_t, bool> Lookup(HANDLE handle) noexcept
+    context_pointer_t Lookup(native_handle_t native_handle) noexcept
     {
-        std::unique_lock lock { lock_ };
+        std::shared_lock lock { lock_ };
 
-        const auto native_handle = static_cast<native_handle_t>(handle);
-        const auto callback      = callbacks_.find(native_handle);
+        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
+        {
+            return callback->second.get();
+        }
 
-        return std::make_pair(callback, callback != callbacks_.end());
+        return nullptr;
     }
 
 protected:
