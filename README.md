@@ -185,6 +185,28 @@ int main()
 }
 ```
 
+### Variety of thread pools
+
+```cpp
+#include "ntp.hpp"
+
+void DoWork()
+{
+    //
+    // You can create your own pool with, for
+    // instance, 4 to 16 threads
+    //
+    
+    ntp::ThreadPool pool(4, 16);
+    
+    pool.SubmitWork([]() {
+        // Do more work
+    });
+    
+    // ...
+}
+```
+
 
 ## TODO
 
@@ -194,7 +216,7 @@ int main()
 - [ ] IO callbacks (`PTP_IO`)
 - [ ] Tests
 - [ ] Cute documentation
-- [X] Support for `PTP_INSTANCE` as optional first argument in callbacks
+- [X] Support for `PTP_CALLBACK_INSTANCE` as optional first argument in callbacks
 - [ ] (Optional) Alpc callbacks (`PTP_ALPC`)
 
 [1]: https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pool-api
