@@ -38,13 +38,7 @@ void NTAPI TimerManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_
 
         if (0 == context->object_context.timer_period)
         {
-            DisassociateCurrentThreadFromCallback(instance);
-
-            auto iterator = context->meta_context.iterator;
-            Close(iterator->first);
-
-            auto manager = context->meta_context.manager;
-            return manager->Remove(iterator);
+            CleanupContext(instance, context);
         }
     }
     catch (const std::exception& error)

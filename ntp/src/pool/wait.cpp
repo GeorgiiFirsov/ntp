@@ -40,13 +40,7 @@ void NTAPI WaitManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_p
         // Clean object here
         //
 
-        DisassociateCurrentThreadFromCallback(instance);
-
-        auto iterator = context->meta_context.iterator;
-        Close(iterator->first);
-
-        auto manager = context->meta_context.manager;
-        return manager->Remove(iterator);
+        CleanupContext(instance, context);
     }
     catch (const std::exception& error)
     {

@@ -218,7 +218,7 @@ private:
     {
         BasicManagerEx* manager; /**< Pointer to parent wait manager */
 
-        iterator_t iterator; /**< Iterator to current context */
+        native_handle_t native_handle; /**< Native handle of corresponding threadpool object */
     };
 
     /**
@@ -243,7 +243,6 @@ protected:
         : BasicManager(environment)
         , callbacks_()
         , lock_()
-        , removal_permission_()
     { }
 
 public:
@@ -256,14 +255,8 @@ public:
      */
     void Cancel(HANDLE object) noexcept
     {
-        std::unique_lock lock { lock_ };
-
         const auto native_handle = static_cast<native_handle_t>(object);
-        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.cend())
-        {
-            Derived::Close(native_handle);
-            callbacks_.erase(callback);
-        }
+        CloseAndRemove(native_handle);
     }
 
     /**
@@ -272,7 +265,6 @@ public:
     void CancelAll() noexcept
     {
         std::unique_lock lock { lock_ };
-        std::unique_lock removal_ban { removal_permission_ };
 
         for (auto& [native_handle, _] : callbacks_)
         {
@@ -280,31 +272,6 @@ public:
         }
 
         callbacks_.clear();
-    }
-
-    /**
-     * @brief Remove callback from container if allowed. 
-     * 
-     * This function should be protected, but is located in public section, because
-     * it is called in callbacks wrappers via pointer to BasicManagerEx and can
-     * be accessed only if it is public.
-     * 
-     * @param callback Iterator to callback to remove
-     */
-    void Remove(iterator_t callback) noexcept
-    {
-        std::unique_lock lock { lock_ };
-
-        if (removal_permission_)
-        {
-            //
-            // We may iterate over callbacks_ when this function is called,
-            // hence in this case we must keep container as is and not
-            // remove callback
-            //
-
-            callbacks_.erase(callback);
-        }
     }
 
 protected:
@@ -318,9 +285,9 @@ protected:
     {
         std::unique_lock lock { lock_ };
 
-        const auto [iter, _]                = callbacks_.emplace(native_handle, std::move(context));
-        iter->second->meta_context.manager  = this;
-        iter->second->meta_context.iterator = iter;
+        const auto [iter, _]                     = callbacks_.emplace(native_handle, std::move(context));
+        iter->second->meta_context.manager       = this;
+        iter->second->meta_context.native_handle = native_handle;
 
         AsDerived()->SubmitInternal(native_handle, iter->second->object_context);
     }
@@ -351,8 +318,49 @@ protected:
         return std::make_unique<Context>();
     }
 
+    /**
+     * @brief A right way to delete object from its callback.
+     * 
+     * Removes callback and object association and then removes context
+     * by its value. Removing by value is required, because we can
+     * collide with Cancel/CancelAll functions. After container's lock
+     * is released, no already closed objects will remain in container.
+     * 
+     * It may be confusing, why object is removed by value. This is the
+     * key to atomicity of removal. If Cancel/CancelAll closes and 
+     * removes object first, then there will be no object anymore,
+     * and this function will do nothing.
+     * 
+     * @param instance Running callback instance (it is extremely important
+     *                 to remove association between object and callback)
+     * @param context Context to remove from container
+     */
+    static void CleanupContext(PTP_CALLBACK_INSTANCE instance, context_pointer_t context)
+    {
+        DisassociateCurrentThreadFromCallback(instance);
+
+        auto native_handle = context->meta_context.native_handle;
+        auto manager       = context->meta_context.manager;
+
+        return manager->CloseAndRemove(native_handle);
+    }
+
 private:
-    Derived* AsDerived() noexcept { return static_cast<Derived*>(this); }
+    Derived* AsDerived() noexcept
+    {
+        return static_cast<Derived*>(this);
+    }
+
+    void CloseAndRemove(native_handle_t native_handle)
+    {
+        std::unique_lock lock { lock_ };
+
+        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
+        {
+            Derived::Close(native_handle);
+            callbacks_.erase(callback);
+        }
+    }
 
 private:
     // Container with callbacks
@@ -360,11 +368,6 @@ private:
 
     // Syncronization primitive for callbacks container
     mutable lock_t lock_;
-
-    // If true, callback will not release its resource after completion.
-    // This flag is used in CancelAll function to prevent container
-    // modification while iterating over it.
-    mutable ntp::details::RemovalPermission removal_permission_;
 };
 
 }  // namespace ntp::details
