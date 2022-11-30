@@ -120,7 +120,7 @@ public:
      * @returns handle for created wait object
      */
     template<typename Functor, typename... Args>
-    HANDLE Submit(HANDLE io_handle, Functor&& functor, Args&&... args)
+    native_handle_t Submit(HANDLE io_handle, Functor&& functor, Args&&... args)
     {
         auto context      = CreateContext();
         context->callback = std::make_unique<IoCallback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
@@ -147,12 +147,11 @@ public:
      * @returns handle for the same io object
      */
     template<typename Functor, typename... Args>
-    HANDLE Replace(HANDLE io_object, Functor&& functor, Args&&... args)
+    native_handle_t Replace(native_handle_t io_object, Functor&& functor, Args&&... args)
     {
-        const auto native_handle = static_cast<native_handle_t>(timer_object);
-        if (const auto context = Lookup(native_handle); context)
+        if (const auto context = Lookup(io_object); context)
         {
-            return ReplaceUnsafe(native_handle, context, std::forward<Functor>(functor),
+            return ReplaceUnsafe(io_object, context, std::forward<Functor>(functor),
                 std::forward<Args>(args)...);
         }
 
@@ -161,7 +160,7 @@ public:
 
 private:
     template<typename Functor, typename... Args>
-    HANDLE ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+    native_handle_t ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
         // Firstly we need to cancel current pending callback and only

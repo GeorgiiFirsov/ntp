@@ -110,7 +110,7 @@ public:
 	 * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
-    HANDLE Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
+    native_handle_t Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
         auto context                        = CreateContext();
         context->callback                   = std::make_unique<WaitCallback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
@@ -150,7 +150,7 @@ public:
      */
     template<typename Functor, typename... Args>
     auto Submit(HANDLE wait_handle, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, native_handle_t>
     {
         return Submit(wait_handle, ntp::time::max_native_duration, std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
@@ -168,12 +168,11 @@ public:
 	 * @returns handle for the same wait object
      */
     template<typename Functor, typename... Args>
-    HANDLE Replace(HANDLE wait_object, Functor&& functor, Args&&... args)
+    native_handle_t Replace(native_handle_t wait_object, Functor&& functor, Args&&... args)
     {
-        const auto native_handle = static_cast<native_handle_t>(wait_object);
-        if (const auto context = Lookup(native_handle); context)
+        if (const auto context = Lookup(wait_object); context)
         {
-            return ReplaceUnsafe(native_handle, context, std::forward<Functor>(functor),
+            return ReplaceUnsafe(wait_object, context, std::forward<Functor>(functor),
                 std::forward<Args>(args)...);
         }
 
@@ -182,7 +181,7 @@ public:
 
 private:
     template<typename Functor, typename... Args>
-    HANDLE ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+    native_handle_t ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
         // Firstly we need to cancel current pending callback and only

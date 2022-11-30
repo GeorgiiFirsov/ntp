@@ -175,6 +175,12 @@ class BasicManagerEx
     // Forward declaration of context structure
     struct Context;
 
+public:
+    /**
+     * @brief Type of native threadpool object handle.
+     */
+    using native_handle_t = NativeHandle;
+
 protected:
     /**
      * @brief Smart pointer to specific context.
@@ -187,11 +193,6 @@ protected:
      *        valid, if corresponding object is not erased from container.
      */
     using context_pointer_t = typename context_t::pointer;
-
-    /**
-     * @brief Type of native threadpool object handle.
-     */
-    using native_handle_t = NativeHandle;
 
     /**
      * @brief Implementation's context.
@@ -251,10 +252,9 @@ public:
      *
      * @param object Handle for an object
      */
-    void Cancel(HANDLE object) noexcept
+    void Cancel(native_handle_t object) noexcept
     {
-        const auto native_handle = static_cast<native_handle_t>(object);
-        CloseAndRemove(native_handle);
+        CloseAndRemove(object);
     }
 
     /**

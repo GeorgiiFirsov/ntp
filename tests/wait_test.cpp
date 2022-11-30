@@ -77,7 +77,7 @@ TEST(Wait, Replace)
     ntp::SystemThreadPool pool;
 
     bool is_completed  = false;
-    HANDLE wait_object = pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
+    const auto wait_object = pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
 
     pool.ReplaceWait(wait_object, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
@@ -98,7 +98,7 @@ TEST(Wait, Cancel)
     ntp::SystemThreadPool pool;
 
     bool is_completed  = false;
-    HANDLE wait_object = pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+    const auto wait_object = pool.SubmitWait(event, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
         is_completed = (wait_result == WAIT_OBJECT_0);
         SetEventWhenCallbackReturns(instance, callback_completed);
     });

@@ -104,7 +104,8 @@ public:
 	 * @returns handle for created wait object
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
-    HANDLE Submit(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
+    native_handle_t Submit(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period,
+        Functor&& functor, Args&&... args)
     {
         auto context      = CreateContext();
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
@@ -139,7 +140,7 @@ public:
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto Submit(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, native_handle_t>
     {
         return Submit(timeout, std::chrono::milliseconds(0), std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
@@ -158,12 +159,11 @@ public:
 	 * @returns handle for the same timer object
      */
     template<typename Functor, typename... Args>
-    HANDLE Replace(HANDLE timer_object, Functor&& functor, Args&&... args)
+    native_handle_t Replace(native_handle_t timer_object, Functor&& functor, Args&&... args)
     {
-        const auto native_handle = static_cast<native_handle_t>(timer_object);
-        if (const auto context = Lookup(native_handle); context)
+        if (const auto context = Lookup(timer_object); context)
         {
-            return ReplaceUnsafe(native_handle, context, std::forward<Functor>(functor),
+            return ReplaceUnsafe(timer_object, context, std::forward<Functor>(functor),
                 std::forward<Args>(args)...);
         }
 
@@ -172,7 +172,7 @@ public:
 
 private:
     template<typename Functor, typename... Args>
-    HANDLE ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+    native_handle_t ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
         // Firstly we need to cancel current pending callback and only

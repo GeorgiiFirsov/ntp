@@ -25,7 +25,7 @@ namespace ntp {
 namespace details {
 
 /**
- * @brief Default cancellation test implementation
+ * @brief Default cancellation test implementation.
  * 
  * @returns always false
  */
@@ -36,7 +36,7 @@ inline bool DefaultTestCancel() noexcept
 
 
 /** 
- * @brief Basic threadpool traits. Used as system-default threadpool traits
+ * @brief Basic threadpool traits. Used as system-default threadpool traits.
  *  
  * Each Win32 process has its own default threadpool.
  * These traits allow user to use it via SystemThreadPool 
@@ -56,7 +56,7 @@ public:
     ~BasicThreadPoolTraits();
 
     /**
-     * @brief Get a threadpool environment associated by default with the system threadpool
+     * @brief Get a threadpool environment associated by default with the system threadpool.
      * 
      * @returns Pointer to the environment
      */
@@ -69,7 +69,7 @@ private:
 
 
 /** 
- * @brief Traits for a custom threadpool
+ * @brief Traits for a custom threadpool.
  * 
  * These traits create a new threadpool in constructor
  * and then allow user to interact with this pool
@@ -83,7 +83,7 @@ class CustomThreadPoolTraits final
 
 public:
     /**
-     * @brief Constructor with the ability to set threadpool threads number
+     * @brief Constructor with the ability to set threadpool threads number.
      * 
      * If min_threads is 0, then minimum number of threads will be set to 1.
      * If max_threads is 0 or less than min_threads, then maximum number of threads will 
@@ -105,7 +105,7 @@ private:
 
 /**
  * @brief Wrapper for PTP_CLEANUP_GROUP, that is used to 
-          manage all callbacks at once
+          manage all callbacks at once.
  */
 class CleanupGroup final
 {
@@ -115,7 +115,7 @@ class CleanupGroup final
 public:
     /**
      * @brief Constructor, that initializes cleanup group and 
-     *        associates it with a threadpool if necessary
+     *        associates it with a threadpool if necessary.
      * 
      * @param environment Threadpool environment to use
      */
@@ -124,7 +124,7 @@ public:
     ~CleanupGroup();
 
     /**
-     * @brief Obtain a pointer to the internal cleanup group
+     * @brief Obtain a pointer to the internal cleanup group.
      */
     operator PTP_CLEANUP_GROUP() const noexcept { return cleanup_group_; }
 
@@ -137,8 +137,32 @@ private:
 
 
 /**
+ * @brief Opaque threadpool wait object descriptor.
+ * 
+ * Intentionally defined as native handle for WaitManager.
+ */
+using wait_t = wait::details::WaitManager::native_handle_t;
+
+
+/**
+ * @brief Opaque threadpool timer object descriptor.
+ *
+ * Intentionally defined as native handle for TimerManager.
+ */
+using timer_t = timer::details::TimerManager::native_handle_t;
+
+
+/**
+ * @brief Opaque threadpool IO object descriptor.
+ *
+ * Intentionally defined as native handle for IoManager.
+ */
+using io_t = io::details::IoManager::native_handle_t;
+
+
+/**
  * @brief Basic threadpool class, that provides an interface 
- *        for interacting with a pool
+ *        for interacting with a pool.
  *
  * Class needs to be instantiated with threadpool traits, that
  * define which threadpool to use: system-default or cutom.
@@ -259,7 +283,7 @@ public:
      * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
-    HANDLE SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
+    wait_t SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
     {
         return wait_manager_.Submit(wait_handle, timeout, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -277,7 +301,7 @@ public:
      */
     template<typename Functor, typename... Args>
     auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, wait_t>
     {
         return wait_manager_.Submit(wait_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -295,7 +319,7 @@ public:
 	 * @returns handle for the same wait object
      */
     template<typename Functor, typename... Args>
-    HANDLE ReplaceWait(HANDLE wait_object, Functor&& functor, Args&&... args)
+    wait_t ReplaceWait(wait_t wait_object, Functor&& functor, Args&&... args)
     {
         return wait_manager_.Replace(wait_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -306,7 +330,7 @@ public:
      * 
      * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait)
      */
-    void CancelWait(HANDLE wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
+    void CancelWait(wait_t wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
 
     /**
      * @brief Cancel all pending wait callbacks
@@ -324,7 +348,7 @@ public:
      * @returns handle for created wait object
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
-    HANDLE SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
+    timer_t SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
     {
         return timer_manager_.Submit(timeout, period, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -340,7 +364,7 @@ public:
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, HANDLE>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, timer_t>
     {
         return timer_manager_.Submit(timeout, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -358,7 +382,7 @@ public:
      * @returns handle for the same timer object
      */
     template<typename Functor, typename... Args>
-    HANDLE ReplaceTimer(HANDLE timer_object, Functor&& functor, Args&&... args)
+    timer_t ReplaceTimer(timer_t timer_object, Functor&& functor, Args&&... args)
     {
         return timer_manager_.Replace(timer_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -369,7 +393,7 @@ public:
      *
      * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
      */
-    void CancelTimer(HANDLE timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
+    void CancelTimer(timer_t timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
 
     /**
      * @brief Cancel all pending wait callbacks
@@ -386,7 +410,7 @@ public:
      * @returns handle for created wait object
      */
     template<typename Functor, typename... Args>
-    HANDLE SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
+    io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
     {
         return io_manager_.Submit(io_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -402,7 +426,7 @@ public:
      * @returns handle for the same io object
      */
     template<typename Functor, typename... Args>
-    HANDLE ReplaceIo(HANDLE io_object, Functor&& functor, Args&&... args)
+    io_t ReplaceIo(io_t io_object, Functor&& functor, Args&&... args)
     {
         return io_manager_.Replace(io_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -413,7 +437,7 @@ public:
      *
      * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
      */
-    void CancelIo(HANDLE io_object) noexcept { return io_manager_.Cancel(io_object); }
+    void CancelIo(io_t io_object) noexcept { return io_manager_.Cancel(io_object); }
 
     /**
      * @brief Cancel all pending IO callbacks
@@ -429,6 +453,7 @@ public:
         work_manager_.CancelAll();
         wait_manager_.CancelAll();
         timer_manager_.CancelAll();
+        io_manager_.CancelAll();
     }
 
 private:
