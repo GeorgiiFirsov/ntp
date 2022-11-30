@@ -13,6 +13,7 @@
 
 #include <Windows.h>
 #include <atlsync.h>
+#include <atlfile.h>
 
 
 //
@@ -22,6 +23,8 @@
 #include <atomic>
 #include <thread>
 #include <chrono>
+#include <vector>
+#include <array>
 
 
 //

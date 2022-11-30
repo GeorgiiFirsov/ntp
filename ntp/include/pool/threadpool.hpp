@@ -18,6 +18,7 @@
 #include "pool/work.hpp"
 #include "pool/wait.hpp"
 #include "pool/timer.hpp"
+#include "pool/io.hpp"
 
 
 namespace ntp {
@@ -175,6 +176,7 @@ public:
         , work_manager_(traits_.Environment())
         , wait_manager_(traits_.Environment())
         , timer_manager_(traits_.Environment())
+        , io_manager_(traits_.Environment())
     { }
 
     /**
@@ -196,6 +198,7 @@ public:
         , work_manager_(traits_.Environment())
         , wait_manager_(traits_.Environment())
         , timer_manager_(traits_.Environment())
+        , io_manager_(traits_.Environment())
     { }
 
     /**
@@ -375,6 +378,50 @@ public:
 
 
     /**
+     * @brief Submits a threadpool IO object with a user-defined callback.
+     *
+     * @param io_handle Handle of and object, wchich asynchronous IO is performed on
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
+     */
+    template<typename Functor, typename... Args>
+    HANDLE SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
+    {
+        return io_manager_.Submit(io_handle, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Replaces an existing threadpool IO callback with a new one.
+     *
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     * @param functor New callable to invoke
+     * @param args New arguments to pass into callable (they will be copied into wrapper)
+     * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
+     * @returns handle for the same io object
+     */
+    template<typename Functor, typename... Args>
+    HANDLE ReplaceIo(HANDLE io_object, Functor&& functor, Args&&... args)
+    {
+        return io_manager_.Replace(io_object, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Cancel threadpool IO
+     *
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     */
+    void CancelIo(HANDLE io_object) noexcept { return io_manager_.Cancel(io_object); }
+
+    /**
+     * @brief Cancel all pending IO callbacks
+     */
+    void CancelIos() noexcept { return io_manager_.CancelAll(); }
+
+
+    /**
      * @brief Cancel all pending callbacks (of any kind)
      */
     void CancelAllCallbacks() noexcept
@@ -398,6 +445,7 @@ private:
     work::details::WorkManager work_manager_;
     wait::details::WaitManager wait_manager_;
     timer::details::TimerManager timer_manager_;
+    io::details::IoManager io_manager_;
 };
 
 

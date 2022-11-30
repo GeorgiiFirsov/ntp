@@ -24,6 +24,7 @@ set(LIB_SOURCE_FILES ${LIB_POOL_SOURCE}/threadpool.cpp
                      ${LIB_POOL_SOURCE}/work.cpp
                      ${LIB_POOL_SOURCE}/wait.cpp
                      ${LIB_POOL_SOURCE}/timer.cpp
+                     ${LIB_POOL_SOURCE}/io.cpp
                      ${LIB_LOGGER_SOURCE}/logger.cpp
                      ${LIB_DETAILS_SOURCE}/utils.cpp)
 
@@ -34,6 +35,7 @@ set(LIB_HEADER_FILES ${LIB_INCLUDE_ROOT}/ntp.hpp
                      ${LIB_POOL_INCLUDE}/work.hpp
                      ${LIB_POOL_INCLUDE}/wait.hpp
                      ${LIB_POOL_INCLUDE}/timer.hpp
+                     ${LIB_POOL_INCLUDE}/io.hpp
                      ${LIB_LOGGER_INCLUDE}/logger.hpp
                      ${LIB_LOGGER_INCLUDE}/logger_internal.hpp
                      ${LIB_NATIVE_INCLUDE}/ntrtl.h
