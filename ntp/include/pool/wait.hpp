@@ -160,33 +160,9 @@ public:
         return Submit(wait_handle, ntp::time::max_native_duration, std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
 
-    /**
-     * @brief Replaces an existing threadpool wait callback with a new one.
-     * 
-     * Cancels current pending callback, creates a new callback wrapper and then 
-     * sets wait again with unchanged parameters.
-	 *
-	 * @param wait_object Handle for an existing wait object (obtained from ntp::wait::details::WaitManager::Submit)
-	 * @param functor New callable to invoke
-	 * @param args New arguments to pass into callable (they will be copied into wrapper)
-	 * @throws ntp::exception::Win32Exception if wait handle is not present or corrupt
-	 * @returns handle for the same wait object
-     */
-    template<typename Functor, typename... Args>
-    native_handle_t Replace(native_handle_t wait_object, Functor&& functor, Args&&... args)
-    {
-        if (const auto context = Lookup(wait_object); context)
-        {
-            return ReplaceUnsafe(wait_object, context, std::forward<Functor>(functor),
-                std::forward<Args>(args)...);
-        }
-
-        throw exception::Win32Exception(ERROR_NOT_FOUND);
-    }
-
 private:
     template<typename Functor, typename... Args>
-    native_handle_t ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+    native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
         // Firstly we need to cancel current pending callback and only
@@ -195,6 +171,11 @@ private:
 
         ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(native_handle, nullptr, nullptr);
         ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(native_handle, TRUE);
+
+        //
+        // Now I can change callback and here I don't care about callback itself,
+        // because it is cancelled.
+        //
 
         context->callback = std::make_unique<WaitCallback<Functor, Args...>>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);

@@ -308,15 +308,16 @@ public:
     }
 
     /**
-	 * @brief Replaces an existing wait callback in threadpool.
-	 *
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
-	 * @returns handle for the same wait object
+     * @brief Replaces an existing wait callback in threadpool.
+     *        This method cannot be called concurrently for the same wait object.
+     *
+     * @tparam Functor Type of callable to invoke in threadpool
+     * @tparam Args... Types of arguments
+     * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
+     * @returns handle for the same wait object
      */
     template<typename Functor, typename... Args>
     wait_t ReplaceWait(wait_t wait_object, Functor&& functor, Args&&... args)
@@ -372,6 +373,7 @@ public:
 
     /**
      * @brief Replaces an existing timer callback in threadpool.
+     *        This method cannot be called concurrently for the same timer object.
      *
      * @tparam Functor Type of callable to invoke in threadpool
      * @tparam Args... Types of arguments
@@ -418,6 +420,7 @@ public:
 
     /**
      * @brief Replaces an existing threadpool IO callback with a new one.
+     *        This method cannot be called concurrently for the same IO object.
      *
      * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
      * @param functor New callable to invoke

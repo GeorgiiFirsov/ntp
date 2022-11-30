@@ -150,34 +150,9 @@ public:
         return Submit(timeout, std::chrono::milliseconds(0), std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
 
-    /**
-     * @brief Replaces an existing threadpool timer callback with a new one.
-     * 
-     * Cancels current pending callback, that corresponds to the specified 
-     * timer handle, creates a new callback wrapper and then sets timer again
-	 * with unchanged parameters.
-	 *
-	 * @param timer_object Handle for an existing timer object (obtained from ntp::timer::details::TimerManager::Submit)
-	 * @param functor New callable to invoke
-	 * @param args New arguments to pass into callable (they will be copied into wrapper)
-	 * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
-	 * @returns handle for the same timer object
-     */
-    template<typename Functor, typename... Args>
-    native_handle_t Replace(native_handle_t timer_object, Functor&& functor, Args&&... args)
-    {
-        if (const auto context = Lookup(timer_object); context)
-        {
-            return ReplaceUnsafe(timer_object, context, std::forward<Functor>(functor),
-                std::forward<Args>(args)...);
-        }
-
-        throw exception::Win32Exception(ERROR_NOT_FOUND);
-    }
-
 private:
     template<typename Functor, typename... Args>
-    native_handle_t ReplaceUnsafe(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+    native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
         // Firstly we need to cancel current pending callback and only
@@ -186,6 +161,11 @@ private:
 
         ntp::details::SafeThreadpoolCall<SetThreadpoolTimerEx>(native_handle, nullptr, 0, 0);
         ntp::details::SafeThreadpoolCall<WaitForThreadpoolTimerCallbacks>(native_handle, TRUE);
+
+        //
+        // Now I can change callback and here I don't care about callback itself,
+        // because it is cancelled.
+        //
 
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);

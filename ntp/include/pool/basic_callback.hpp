@@ -163,6 +163,7 @@ private:
  * Derived class must implement the following methods:
  * - static Close(native_handle_t native_handle)
  * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context)
+ * - native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
  * 
  * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
  * @tparam ObjectContext Type of context specific for threadpool object kind
@@ -246,6 +247,27 @@ protected:
 
 public:
     /**
+     * @brief Replaces an existing threadpool callback with a new one.
+     *
+     * @param io_object Handle for an existing threadpool object
+     * @param functor New callable to invoke
+     * @param args New arguments to pass into callable (they will be copied into wrapper)
+     * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
+     * @returns handle for the threadpool object with updated callback
+     */
+    template<typename Functor, typename... Args>
+    native_handle_t Replace(native_handle_t object, Functor&& functor, Args&&... args)
+    {
+        if (const auto context = Lookup(object); context)
+        {
+            return AsDerived()->ReplaceInternal(object, context,
+                std::forward<Functor>(functor), std::forward<Args>(args)...);
+        }
+
+        throw exception::Win32Exception(ERROR_NOT_FOUND);
+    }
+
+    /**
      * @brief Cancels and removes an object.
      *
      * If no such object is present, does nothing.
@@ -288,24 +310,6 @@ protected:
         iter->second->meta_context.native_handle = native_handle;
 
         AsDerived()->SubmitInternal(native_handle, iter->second->object_context);
-    }
-
-    /**
-     * @brief Look for specific threadpool object by handle.
-     * 
-     * @param native_handle Handle to threadpool object to look for
-     * @returns Corresponding context or nullptr, if such object does not exist
-     */
-    context_pointer_t Lookup(native_handle_t native_handle) noexcept
-    {
-        std::shared_lock lock { lock_ };
-
-        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
-        {
-            return callback->second.get();
-        }
-
-        return nullptr;
     }
 
 protected:
@@ -361,6 +365,18 @@ private:
             Derived::Close(native_handle);
             callbacks_.erase(callback);
         }
+    }
+
+    context_pointer_t Lookup(native_handle_t native_handle) noexcept
+    {
+        std::shared_lock lock { lock_ };
+
+        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
+        {
+            return callback->second.get();
+        }
+
+        return nullptr;
     }
 
 private:
