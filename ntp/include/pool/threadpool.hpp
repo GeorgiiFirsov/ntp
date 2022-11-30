@@ -346,7 +346,7 @@ public:
      * @param period If non-zero, timer object willbe triggered each period after first call
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created wait object
+     * @returns handle for created timer object
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
     timer_t SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
@@ -361,7 +361,7 @@ public:
 	 * @param timeout Timeout after which timer object calls the callback
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created wait object
+     * @returns handle for created timer object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -409,7 +409,7 @@ public:
      * @param io_handle Handle of and object, wchich asynchronous IO is performed on
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created wait object
+     * @returns handle for created IO object
      */
     template<typename Functor, typename... Args>
     io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
@@ -426,7 +426,7 @@ public:
      * @param functor New callable to invoke
      * @param args New arguments to pass into callable (they will be copied into wrapper)
      * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
-     * @returns handle for the same io object
+     * @returns handle for the same IO object
      */
     template<typename Functor, typename... Args>
     io_t ReplaceIo(io_t io_object, Functor&& functor, Args&&... args)
