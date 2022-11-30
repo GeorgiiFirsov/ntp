@@ -99,7 +99,7 @@ public:
     /**
      * @brief Submits a threadpool wait object with a user-defined callback.
      * 
-     * Creates a new callback wrapper, new wait object (if not already present), put 
+     * Creates a new callback wrapper, new wait object, put 
      * it into a callbacks container and then sets threadpool wait.
      * 
      * @param wait_handle Handle to wait for

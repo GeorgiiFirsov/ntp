@@ -94,8 +94,8 @@ public:
     /**
      * @brief Submits a threadpool timer object with a user-defined callback.
      * 
-     * Creates a new callback wrapper, new wait object (if not already present), put 
-     * it into a callbacks container and then sets threadpool wait.
+     * Creates a new callback wrapper, new timer object, put 
+     * it into a callbacks container and then sets threadpool timer.
 	 *
 	 * @param timeout Timeout after which timer object calls the callback
 	 * @param period If non-zero, timer object willbe triggered each period after first call
