@@ -17,6 +17,18 @@
 namespace ntp::timer::details {
 
 /**
+ * @brief Specific context for threadpool timer objects.
+ *        Contatins timeout and period.
+ */
+struct TimerContext
+{
+    FILETIME timer_timeout; /**< Timeout of first trigger */
+
+    DWORD timer_period; /**< Timer period (if 0, then timer is non-periodic) */
+};
+
+
+/**
  * @brief Timer callback wrapper (PTP_TIMER).
  *
  * @tparam Functor Type of callable to invoke in threadpool
@@ -60,18 +72,6 @@ public:
             std::apply(Callable(), Arguments());
         }
     }
-};
-
-
-/**
- * Specific context for threadpool timer objects.
- *        Contatins timeout and period.
- */
-struct TimerContext
-{
-    FILETIME timer_timeout; /**< Timeout of first trigger */
-
-    DWORD timer_period; /**< Timer period (if 0, then timer is non-periodic) */
 };
 
 

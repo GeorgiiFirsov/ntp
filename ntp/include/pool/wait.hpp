@@ -18,6 +18,18 @@
 namespace ntp::wait::details {
 
 /**
+ * @brief Specific context for threadpool wait objects. 
+ *        Contatins wait handle and wait timeout.
+ */
+struct WaitContext
+{
+    std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
+
+    HANDLE wait_handle; /**< Handle to wait for */
+};
+
+
+/**
  * @brief Wait callback wrapper (PTP_WAIT).
  *
  * @tparam Functor Type of callable to invoke in threadpool
@@ -65,18 +77,6 @@ private:
             std::apply(Callable(), args);
         }
     }
-};
-
-
-/**
- * @brief Specific context for threadpool wait objects. 
- *        Contatins wait handle and wait timeout.
- */
-struct WaitContext
-{
-    std::optional<FILETIME> wait_timeout; /**< Wait timeout (pftTimeout parameter of SetThreadpoolWait function) */
-
-    HANDLE wait_handle; /**< Handle to wait for */
 };
 
 
