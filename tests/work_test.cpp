@@ -1,8 +1,5 @@
 #include "config.hpp"
 
-
-namespace work {
-
 TEST(Work, Submit)
 {
     const auto Worker = [](int& counter) {
@@ -59,5 +56,3 @@ TEST(Work, Cancel)
 
     EXPECT_LE(counter, kWorkers);
 }
-
-}  // namespace work
