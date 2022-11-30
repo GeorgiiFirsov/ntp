@@ -16,17 +16,17 @@ endif()
 #
 set(NTP_DOCS_ROOT        ${NTP_ROOT}/docs)
 set(NTP_DOCS_STYLES_ROOT ${NTP_DOCS_ROOT}/doxygen-awesome-css)
-set(DOXYGEN_IN           ${NTP_DOCS_ROOT}/Doxyfile.in)
-set(DOXYGEN_OUT          ${NTP_DOCS_ROOT}/Doxyfile)
+set(NTP_DOXYGEN_IN       ${NTP_DOCS_ROOT}/Doxyfile.in)
+set(NTP_DOXYGEN_OUT      ${NTP_DOCS_ROOT}/Doxyfile)
 
 #
 # And here we go...
 #
 message("[${CMAKE_PROJECT_NAME}] Configuring doxygen...")
 
-configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+configure_file(${NTP_DOXYGEN_IN} ${NTP_DOXYGEN_OUT} @ONLY)
 add_custom_target(ntp_docs ALL
-    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+    COMMAND ${DOXYGEN_EXECUTABLE} ${NTP_DOXYGEN_OUT}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Generating documentation with Doxygen"
     VERBATIM)
