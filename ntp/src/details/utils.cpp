@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "native/ntrtl.h"
 #include "details/utils.hpp"
 #include "details/exception.hpp"

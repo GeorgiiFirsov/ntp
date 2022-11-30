@@ -1,4 +1,4 @@
-#include "config.hpp"
+#include "test_config.hpp"
 
 
 void TraceCallback(ntp::logger::Severity severity, const wchar_t* message)

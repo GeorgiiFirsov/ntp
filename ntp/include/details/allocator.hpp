@@ -15,7 +15,7 @@
 
 #include <Windows.h>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "details/exception.hpp"
 
 

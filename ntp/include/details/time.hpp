@@ -10,7 +10,7 @@
 #include <ratio>
 #include <chrono>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 
 
 namespace ntp::time {

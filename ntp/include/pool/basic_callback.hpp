@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <shared_mutex>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "details/utils.hpp"
 
 

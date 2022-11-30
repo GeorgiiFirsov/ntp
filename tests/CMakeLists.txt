@@ -8,22 +8,23 @@ find_package(GTest CONFIG REQUIRED)
 #
 set(TEST_ROOT                ${NTP_ROOT}/tests)
 set(TEST_SOURCE_ROOT         ${TEST_ROOT})
+set(TEST_CASES_ROOT          ${TEST_SOURCE_ROOT}/cases)
 
-set(TEST_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR} 
+set(TEST_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR} ${TEST_ROOT}
                              ${gtest_SOURCE_DIR}/include 
                              ${gtest_SOURCE_DIR})
 
 #
 # Sources and headers
 #
-set(TEST_SOURCE_FILES ${TEST_SOURCE_ROOT}/pool_creation_test.cpp
-                      ${TEST_SOURCE_ROOT}/work_test.cpp
-                      ${TEST_SOURCE_ROOT}/wait_test.cpp
-                      ${TEST_SOURCE_ROOT}/timer_test.cpp
-                      ${TEST_SOURCE_ROOT}/io_test.cpp
-                      ${TEST_SOURCE_ROOT}/logger_test.cpp)
+set(TEST_SOURCE_FILES ${TEST_CASES_ROOT}/pool_creation_test.cpp
+                      ${TEST_CASES_ROOT}/work_test.cpp
+                      ${TEST_CASES_ROOT}/wait_test.cpp
+                      ${TEST_CASES_ROOT}/timer_test.cpp
+                      ${TEST_CASES_ROOT}/io_test.cpp
+                      ${TEST_CASES_ROOT}/logger_test.cpp)
 
-set(TEST_HEADER_FILES ${TEST_SOURCE_ROOT}/config.hpp
+set(TEST_HEADER_FILES ${TEST_SOURCE_ROOT}/test_config.hpp
                       ${TEST_SOURCE_ROOT}/utils.hpp)
 
 set(TEST_SOURCES      ${TEST_SOURCE_FILES} 

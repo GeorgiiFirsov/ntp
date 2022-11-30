@@ -7,7 +7,7 @@
 
 #include <atomic>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "native/ntrtl.h"
 #include "details/allocator.hpp"
 

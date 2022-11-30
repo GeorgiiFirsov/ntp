@@ -1,7 +1,6 @@
-#include "config.hpp"
+#include "test_config.hpp"
 
 
-namespace creation {
 TEST(ThreadPool, System)
 {
     EXPECT_NO_THROW({
@@ -49,5 +48,3 @@ TEST(ThreadPool, CustomMinMaxTestCancel)
         ntp::ThreadPool pool(1, 10, TestCancel);
     });
 }
-
-}  // namespace creation

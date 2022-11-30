@@ -11,7 +11,7 @@
 #include <tuple>
 #include <utility>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "details/utils.hpp"
 #include "pool/basic_callback.hpp"
 

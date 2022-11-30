@@ -1,4 +1,5 @@
-#include "config.hpp"
+#include "test_config.hpp"
+
 
 TEST(Timer, Submit)
 {

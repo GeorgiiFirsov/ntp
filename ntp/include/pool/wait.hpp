@@ -9,7 +9,7 @@
 #include <utility>
 #include <optional>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "details/time.hpp"
 #include "details/utils.hpp"
 #include "pool/basic_callback.hpp"

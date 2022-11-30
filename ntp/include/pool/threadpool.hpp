@@ -13,7 +13,7 @@
 #include <chrono>
 #include <type_traits>
 
-#include "config.hpp"
+#include "ntp_config.hpp"
 #include "details/allocator.hpp"
 #include "pool/work.hpp"
 #include "pool/wait.hpp"
