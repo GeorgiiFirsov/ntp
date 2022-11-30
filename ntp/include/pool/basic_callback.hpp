@@ -249,7 +249,7 @@ public:
     /**
      * @brief Replaces an existing threadpool callback with a new one.
      *
-     * @param io_object Handle for an existing threadpool object
+     * @param object Handle for an existing threadpool object
      * @param functor New callable to invoke
      * @param args New arguments to pass into callable (they will be copied into wrapper)
      * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
