@@ -14,9 +14,10 @@ endif()
 #
 # Setup variables
 #
-set(NTP_DOCS_ROOT ${NTP_ROOT}/docs)
-set(DOXYGEN_IN    ${NTP_DOCS_ROOT}/Doxyfile.in)
-set(DOXYGEN_OUT   ${NTP_DOCS_ROOT}/Doxyfile)
+set(NTP_DOCS_ROOT        ${NTP_ROOT}/docs)
+set(NTP_DOCS_STYLES_ROOT ${NTP_DOCS_ROOT}/doxygen-awesome-css)
+set(DOXYGEN_IN           ${NTP_DOCS_ROOT}/Doxyfile.in)
+set(DOXYGEN_OUT          ${NTP_DOCS_ROOT}/Doxyfile)
 
 #
 # And here we go...

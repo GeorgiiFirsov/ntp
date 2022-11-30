@@ -215,9 +215,9 @@ void DoWork()
 - [X] Timer callbacks (`PTP_TIMER`)
 - [ ] IO callbacks (`PTP_IO`)
 - [X] Tests
-- [ ] Cute documentation
+- [X] Cute documentation
 - [X] Support for `PTP_CALLBACK_INSTANCE` as optional first argument in callbacks
-- [ ] Refactor tests
+- [X] Refactor tests
 - [ ] Extend code coverage
 - [ ] (Optional) Alpc callbacks (`PTP_ALPC`)
 
