@@ -214,9 +214,11 @@ void DoWork()
 - [X] Wait callbacks (`PTP_WAIT`)
 - [X] Timer callbacks (`PTP_TIMER`)
 - [ ] IO callbacks (`PTP_IO`)
-- [ ] Tests
+- [X] Tests
 - [ ] Cute documentation
 - [X] Support for `PTP_CALLBACK_INSTANCE` as optional first argument in callbacks
+- [ ] Refactor tests
+- [ ] Extend code coverage
 - [ ] (Optional) Alpc callbacks (`PTP_ALPC`)
 
 [1]: https://learn.microsoft.com/en-us/windows/win32/procthread/thread-pool-api
