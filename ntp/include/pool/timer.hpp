@@ -148,7 +148,7 @@ public:
      * @brief Replaces an existing threadpool timer callback with a new one.
      * 
      * Cancels current pending callback, that corresponds to the specified 
-     * wait handle, creates a new callback wrapper and then sets wait again
+     * timer handle, creates a new callback wrapper and then sets timer again
 	 * with unchanged parameters.
 	 *
 	 * @param timer_object Handle for an existing timer object (obtained from ntp::timer::details::TimerManager::Submit)
