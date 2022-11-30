@@ -122,6 +122,11 @@ public:
         const auto native_handle = CreateThreadpoolTimer(reinterpret_cast<PTP_TIMER_CALLBACK>(InvokeCallback),
             context.get(), Environment());
 
+        if (!native_handle)
+        {
+            throw exception::Win32Exception();
+        }
+
         SubmitContext(native_handle, std::move(context));
 
         return native_handle;

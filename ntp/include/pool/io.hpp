@@ -128,6 +128,11 @@ public:
         const auto native_handle = CreateThreadpoolIo(io_handle, reinterpret_cast<PTP_WIN32_IO_CALLBACK>(InvokeCallback),
             context.get(), Environment());
 
+        if (!native_handle)
+        {
+            throw exception::Win32Exception();
+        }
+
         SubmitContext(native_handle, std::move(context));
 
         return native_handle;
