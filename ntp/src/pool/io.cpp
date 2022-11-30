@@ -46,7 +46,7 @@ void NTAPI IoManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_poi
     catch (...)
     {
         logger::details::Logger::Instance().TraceMessage(logger::Severity::kCritical,
-            L"[TimerManager::InvokeCallback]: unknown error");
+            L"[IoManager::InvokeCallback]: unknown error");
     }
 }
 
