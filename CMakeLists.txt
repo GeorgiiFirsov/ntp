@@ -21,6 +21,11 @@ set(NTP_LIBRARY_ROOT ${NTP_ROOT}/ntp)
 set(NTP_INCLUDE_DIR  ${NTP_LIBRARY_ROOT}/include)
 
 #
+# Preprocessor definitions
+#
+add_compile_definitions(UNICODE)  # Build with unicode characters (wchar_t)
+
+#
 # Library itself
 #
 add_subdirectory(ntp)
