@@ -34,7 +34,7 @@ void NTAPI WaitManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_p
         // Probably need to implement something like std::async here
         //
 
-        context->callback->Call(instance, reinterpret_cast<void*>(wait_result));
+        context->callback->Call(instance, &wait_result);
 
         //
         // Clean object here
