@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 468.50 263.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 259)">
 <title>ntp/include/logger/logger_internal.hpp</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-259 464.5,-259 464.5,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -23,7 +22,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="0,-0.5 0,-19.5 70,-19.5 70,-0.5 0,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="0,-0.5 0,-19.5 70,-19.5 70,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="35" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Windows.h</text>
 </a>
 </g>
@@ -38,7 +37,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="28,-112.5 28,-131.5 78,-131.5 78,-112.5 28,-112.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="28,-112.5 28,-131.5 78,-131.5 78,-112.5 28,-112.5"/>
 <text text-anchor="middle" x="53" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">atomic</text>
 </a>
 </g>
@@ -53,7 +52,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="utils_8hpp.html" target="_top" xlink:title="Some useful implementation stuff.">
-<polygon fill="white" stroke="black" points="99.5,-168.5 99.5,-187.5 194.5,-187.5 194.5,-168.5 99.5,-168.5"/>
+<polygon fill="none" stroke="black" points="99.5,-168.5 99.5,-187.5 194.5,-187.5 194.5,-168.5 99.5,-168.5"/>
 <text text-anchor="middle" x="147" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/utils.hpp</text>
 </a>
 </g>
@@ -68,7 +67,7 @@
 <g id="node13" class="node">
 <title>Node13</title>
 <g id="a_node13"><a xlink:href="logger_8hpp.html" target="_top" xlink:title="Interface for custom logger function.">
-<polygon fill="white" stroke="black" points="212.5,-168.5 212.5,-187.5 313.5,-187.5 313.5,-168.5 212.5,-168.5"/>
+<polygon fill="none" stroke="black" points="212.5,-168.5 212.5,-187.5 313.5,-187.5 313.5,-168.5 212.5,-168.5"/>
 <text text-anchor="middle" x="263" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">logger/logger.hpp</text>
 </a>
 </g>
@@ -89,7 +88,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="ntp__config_8hpp_source.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="203,-56.5 203,-75.5 291,-75.5 291,-56.5 203,-56.5"/>
+<polygon fill="none" stroke="black" points="203,-56.5 203,-75.5 291,-75.5 291,-56.5 203,-56.5"/>
 <text text-anchor="middle" x="247" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp_config.hpp</text>
 </a>
 </g>
@@ -104,7 +103,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="ntrtl_8h.html" target="_top" xlink:title="Contains necessary declarations/definitions of internal windows objects and functions.">
-<polygon fill="white" stroke="black" points="303,-112.5 303,-131.5 383,-131.5 383,-112.5 303,-112.5"/>
+<polygon fill="none" stroke="black" points="303,-112.5 303,-131.5 383,-131.5 383,-112.5 303,-112.5"/>
 <text text-anchor="middle" x="343" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">native/ntrtl.h</text>
 </a>
 </g>
@@ -119,7 +118,7 @@
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="allocator_8hpp.html" target="_top" xlink:title="Allocator implementations.">
-<polygon fill="white" stroke="black" points="96,-112.5 96,-131.5 212,-131.5 212,-112.5 96,-112.5"/>
+<polygon fill="none" stroke="black" points="96,-112.5 96,-131.5 212,-131.5 212,-112.5 96,-112.5"/>
 <text text-anchor="middle" x="154" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/allocator.hpp</text>
 </a>
 </g>
@@ -134,7 +133,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="309,-56.5 309,-75.5 377,-75.5 377,-56.5 309,-56.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="309,-56.5 309,-75.5 377,-75.5 377,-56.5 309,-56.5"/>
 <text text-anchor="middle" x="343" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">windows.h</text>
 </a>
 </g>
@@ -149,7 +148,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="395.5,-56.5 395.5,-75.5 460.5,-75.5 460.5,-56.5 395.5,-56.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="395.5,-56.5 395.5,-75.5 460.5,-75.5 460.5,-56.5 395.5,-56.5"/>
 <text text-anchor="middle" x="428" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">winternl.h</text>
 </a>
 </g>
@@ -176,7 +175,7 @@
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="exception_8hpp.html" target="_top" xlink:title="Win32 error wrapper implementations.">
-<polygon fill="white" stroke="black" points="63,-56.5 63,-75.5 185,-75.5 185,-56.5 63,-56.5"/>
+<polygon fill="none" stroke="black" points="63,-56.5 63,-75.5 185,-75.5 185,-56.5 63,-56.5"/>
 <text text-anchor="middle" x="124" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/exception.hpp</text>
 </a>
 </g>
@@ -197,7 +196,7 @@
 <g id="node11" class="node">
 <title>Node11</title>
 <g id="a_node11"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="89.5,-0.5 89.5,-19.5 154.5,-19.5 154.5,-0.5 89.5,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="89.5,-0.5 89.5,-19.5 154.5,-19.5 154.5,-0.5 89.5,-0.5"/>
 <text text-anchor="middle" x="122" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">stdexcept</text>
 </a>
 </g>
@@ -212,7 +211,7 @@
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="173,-0.5 173,-19.5 217,-19.5 217,-0.5 173,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="173,-0.5 173,-19.5 217,-19.5 217,-0.5 173,-0.5"/>
 <text text-anchor="middle" x="195" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">string</text>
 </a>
 </g>

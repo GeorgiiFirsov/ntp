@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 139.00 151.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 147)">
 <title>ntp::details::ICallback</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-147 135,-147 135,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -22,7 +21,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="classntp_1_1details_1_1NativeSlistEntry.html" target="_top" xlink:title="Wrapper for SLIST_ENTRY (actually inherits from it).">
-<polygon fill="white" stroke="black" points="0,-56.5 0,-86.5 131,-86.5 131,-56.5 0,-56.5"/>
+<polygon fill="none" stroke="black" points="0,-56.5 0,-86.5 131,-86.5 131,-56.5 0,-56.5"/>
 <text text-anchor="start" x="8" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::NativeSlist</text>
 <text text-anchor="middle" x="65.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">Entry</text>
 </a>
@@ -38,7 +37,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="25.5,-123.5 25.5,-142.5 105.5,-142.5 105.5,-123.5 25.5,-123.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="25.5,-123.5 25.5,-142.5 105.5,-142.5 105.5,-123.5 25.5,-123.5"/>
 <text text-anchor="middle" x="65.5" y="-130.5" font-family="Helvetica,sans-Serif" font-size="10.00">SLIST_ENTRY</text>
 </a>
 </g>

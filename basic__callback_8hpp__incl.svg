@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 895.48 263.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 259)">
 <title>ntp/include/pool/basic_callback.hpp</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-259 891.48,-259 891.48,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -23,7 +22,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="157.48,-0.5 157.48,-19.5 227.48,-19.5 227.48,-0.5 157.48,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="157.48,-0.5 157.48,-19.5 227.48,-19.5 227.48,-0.5 157.48,-0.5"/>
 <text text-anchor="middle" x="192.48" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Windows.h</text>
 </a>
 </g>
@@ -38,7 +37,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="432.48,-168.5 432.48,-187.5 470.48,-187.5 470.48,-168.5 432.48,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="432.48,-168.5 432.48,-187.5 470.48,-187.5 470.48,-168.5 432.48,-168.5"/>
 <text text-anchor="middle" x="451.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">map</text>
 </a>
 </g>
@@ -53,7 +52,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="488.48,-168.5 488.48,-187.5 536.48,-187.5 536.48,-168.5 488.48,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="488.48,-168.5 488.48,-187.5 536.48,-187.5 536.48,-168.5 488.48,-168.5"/>
 <text text-anchor="middle" x="512.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">mutex</text>
 </a>
 </g>
@@ -68,7 +67,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="554.48,-168.5 554.48,-187.5 612.48,-187.5 612.48,-168.5 554.48,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="554.48,-168.5 554.48,-187.5 612.48,-187.5 612.48,-168.5 554.48,-168.5"/>
 <text text-anchor="middle" x="583.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">memory</text>
 </a>
 </g>
@@ -83,7 +82,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="630.98,-168.5 630.98,-187.5 695.98,-187.5 695.98,-168.5 630.98,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="630.98,-168.5 630.98,-187.5 695.98,-187.5 695.98,-168.5 630.98,-168.5"/>
 <text text-anchor="middle" x="663.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">functional</text>
 </a>
 </g>
@@ -98,7 +97,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="713.98,-168.5 713.98,-187.5 782.98,-187.5 782.98,-168.5 713.98,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="713.98,-168.5 713.98,-187.5 782.98,-187.5 782.98,-168.5 713.98,-168.5"/>
 <text text-anchor="middle" x="748.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">type_traits</text>
 </a>
 </g>
@@ -113,7 +112,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="801.48,-168.5 801.48,-187.5 887.48,-187.5 887.48,-168.5 801.48,-168.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="801.48,-168.5 801.48,-187.5 887.48,-187.5 887.48,-168.5 801.48,-168.5"/>
 <text text-anchor="middle" x="844.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">shared_mutex</text>
 </a>
 </g>
@@ -128,7 +127,7 @@
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="ntp__config_8hpp_source.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="360.48,-56.5 360.48,-75.5 448.48,-75.5 448.48,-56.5 360.48,-56.5"/>
+<polygon fill="none" stroke="black" points="360.48,-56.5 360.48,-75.5 448.48,-75.5 448.48,-56.5 360.48,-56.5"/>
 <text text-anchor="middle" x="404.48" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp_config.hpp</text>
 </a>
 </g>
@@ -143,7 +142,7 @@
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="utils_8hpp.html" target="_top" xlink:title="Some useful implementation stuff.">
-<polygon fill="white" stroke="black" points="232.98,-168.5 232.98,-187.5 327.98,-187.5 327.98,-168.5 232.98,-168.5"/>
+<polygon fill="none" stroke="black" points="232.98,-168.5 232.98,-187.5 327.98,-187.5 327.98,-168.5 232.98,-168.5"/>
 <text text-anchor="middle" x="280.48" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/utils.hpp</text>
 </a>
 </g>
@@ -164,7 +163,7 @@
 <g id="node11" class="node">
 <title>Node11</title>
 <g id="a_node11"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="154.48,-112.5 154.48,-131.5 204.48,-131.5 204.48,-112.5 154.48,-112.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="154.48,-112.5 154.48,-131.5 204.48,-131.5 204.48,-112.5 154.48,-112.5"/>
 <text text-anchor="middle" x="179.48" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">atomic</text>
 </a>
 </g>
@@ -179,7 +178,7 @@
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:href="ntrtl_8h.html" target="_top" xlink:title="Contains necessary declarations/definitions of internal windows objects and functions.">
-<polygon fill="white" stroke="black" points="56.48,-112.5 56.48,-131.5 136.48,-131.5 136.48,-112.5 56.48,-112.5"/>
+<polygon fill="none" stroke="black" points="56.48,-112.5 56.48,-131.5 136.48,-131.5 136.48,-112.5 56.48,-112.5"/>
 <text text-anchor="middle" x="96.48" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">native/ntrtl.h</text>
 </a>
 </g>
@@ -194,7 +193,7 @@
 <g id="node15" class="node">
 <title>Node15</title>
 <g id="a_node15"><a xlink:href="allocator_8hpp.html" target="_top" xlink:title="Allocator implementations.">
-<polygon fill="white" stroke="black" points="222.48,-112.5 222.48,-131.5 338.48,-131.5 338.48,-112.5 222.48,-112.5"/>
+<polygon fill="none" stroke="black" points="222.48,-112.5 222.48,-131.5 338.48,-131.5 338.48,-112.5 222.48,-112.5"/>
 <text text-anchor="middle" x="280.48" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/allocator.hpp</text>
 </a>
 </g>
@@ -209,7 +208,7 @@
 <g id="node13" class="node">
 <title>Node13</title>
 <g id="a_node13"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="96.48,-56.5 96.48,-75.5 164.48,-75.5 164.48,-56.5 96.48,-56.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="96.48,-56.5 96.48,-75.5 164.48,-75.5 164.48,-56.5 96.48,-56.5"/>
 <text text-anchor="middle" x="130.48" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">windows.h</text>
 </a>
 </g>
@@ -224,7 +223,7 @@
 <g id="node14" class="node">
 <title>Node14</title>
 <g id="a_node14"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="12.98,-56.5 12.98,-75.5 77.98,-75.5 77.98,-56.5 12.98,-56.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="12.98,-56.5 12.98,-75.5 77.98,-75.5 77.98,-56.5 12.98,-56.5"/>
 <text text-anchor="middle" x="45.48" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">winternl.h</text>
 </a>
 </g>
@@ -251,7 +250,7 @@
 <g id="node16" class="node">
 <title>Node16</title>
 <g id="a_node16"><a xlink:href="exception_8hpp.html" target="_top" xlink:title="Win32 error wrapper implementations.">
-<polygon fill="white" stroke="black" points="220.48,-56.5 220.48,-75.5 342.48,-75.5 342.48,-56.5 220.48,-56.5"/>
+<polygon fill="none" stroke="black" points="220.48,-56.5 220.48,-75.5 342.48,-75.5 342.48,-56.5 220.48,-56.5"/>
 <text text-anchor="middle" x="281.48" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">details/exception.hpp</text>
 </a>
 </g>
@@ -272,7 +271,7 @@
 <g id="node17" class="node">
 <title>Node17</title>
 <g id="a_node17"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="314.98,-0.5 314.98,-19.5 379.98,-19.5 379.98,-0.5 314.98,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="314.98,-0.5 314.98,-19.5 379.98,-19.5 379.98,-0.5 314.98,-0.5"/>
 <text text-anchor="middle" x="347.48" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">stdexcept</text>
 </a>
 </g>
@@ -287,7 +286,7 @@
 <g id="node18" class="node">
 <title>Node18</title>
 <g id="a_node18"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="252.48,-0.5 252.48,-19.5 296.48,-19.5 296.48,-0.5 252.48,-0.5"/>
+<polygon fill="none" stroke="#bfbfbf" points="252.48,-0.5 252.48,-19.5 296.48,-19.5 296.48,-0.5 252.48,-0.5"/>
 <text text-anchor="middle" x="274.48" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">string</text>
 </a>
 </g>

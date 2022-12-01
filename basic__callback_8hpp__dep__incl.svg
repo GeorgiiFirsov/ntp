@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 617.50 207.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 203)">
 <title>ntp/include/pool/basic_callback.hpp</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-203 613.5,-203 613.5,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -23,7 +22,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="io_8hpp.html" target="_top" xlink:title="Implementation of threadpool IO callback.">
-<polygon fill="white" stroke="black" points="0,-112.5 0,-131.5 128,-131.5 128,-112.5 0,-112.5"/>
+<polygon fill="none" stroke="black" points="0,-112.5 0,-131.5 128,-131.5 128,-112.5 0,-112.5"/>
 <text text-anchor="middle" x="64" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/io.hpp</text>
 </a>
 </g>
@@ -38,7 +37,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="timer_8hpp.html" target="_top" xlink:title="Implementation of threadpool timer callback.">
-<polygon fill="white" stroke="black" points="146,-112.5 146,-131.5 290,-131.5 290,-112.5 146,-112.5"/>
+<polygon fill="none" stroke="black" points="146,-112.5 146,-131.5 290,-131.5 290,-112.5 146,-112.5"/>
 <text text-anchor="middle" x="218" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/timer.hpp</text>
 </a>
 </g>
@@ -53,7 +52,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="wait_8hpp.html" target="_top" xlink:title="Implementation of threadpool wait callback.">
-<polygon fill="white" stroke="black" points="308,-112.5 308,-131.5 448,-131.5 448,-112.5 308,-112.5"/>
+<polygon fill="none" stroke="black" points="308,-112.5 308,-131.5 448,-131.5 448,-112.5 308,-112.5"/>
 <text text-anchor="middle" x="378" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/wait.hpp</text>
 </a>
 </g>
@@ -68,7 +67,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="work_8hpp.html" target="_top" xlink:title="Work callback wrapper and manager implementation.">
-<polygon fill="white" stroke="black" points="466.5,-112.5 466.5,-131.5 609.5,-131.5 609.5,-112.5 466.5,-112.5"/>
+<polygon fill="none" stroke="black" points="466.5,-112.5 466.5,-131.5 609.5,-131.5 609.5,-112.5 466.5,-112.5"/>
 <text text-anchor="middle" x="538" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/work.hpp</text>
 </a>
 </g>
@@ -83,7 +82,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="threadpool_8hpp.html" target="_top" xlink:title="Threadpool implementations.">
-<polygon fill="white" stroke="black" points="212.5,-56.5 212.5,-75.5 383.5,-75.5 383.5,-56.5 212.5,-56.5"/>
+<polygon fill="none" stroke="black" points="212.5,-56.5 212.5,-75.5 383.5,-75.5 383.5,-56.5 212.5,-56.5"/>
 <text text-anchor="middle" x="298" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/threadpool.hpp</text>
 </a>
 </g>
@@ -98,7 +97,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="ntp_8hpp.html" target="_top" xlink:title="Main ntp library header.">
-<polygon fill="white" stroke="black" points="169,-0.5 169,-19.5 279,-19.5 279,-0.5 169,-0.5"/>
+<polygon fill="none" stroke="black" points="169,-0.5 169,-19.5 279,-19.5 279,-0.5 169,-0.5"/>
 <text text-anchor="middle" x="224" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/ntp.hpp</text>
 </a>
 </g>
@@ -113,7 +112,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="threadpool_8cpp.html" target="_top" xlink:title="Threadpool implementation (traits and some helper functions)">
-<polygon fill="white" stroke="black" points="297.5,-0.5 297.5,-19.5 446.5,-19.5 446.5,-0.5 297.5,-0.5"/>
+<polygon fill="none" stroke="black" points="297.5,-0.5 297.5,-19.5 446.5,-19.5 446.5,-0.5 297.5,-0.5"/>
 <text text-anchor="middle" x="372" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/src/pool/threadpool.cpp</text>
 </a>
 </g>

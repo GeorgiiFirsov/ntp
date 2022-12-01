@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 680.00 341.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 337)">
 <title>ntp/include/native/ntrtl.h</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-337 676,-337 676,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -23,7 +22,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="utils_8hpp.html" target="_top" xlink:title="Some useful implementation stuff.">
-<polygon fill="white" stroke="black" points="379.5,-235.5 379.5,-265.5 486.5,-265.5 486.5,-235.5 379.5,-235.5"/>
+<polygon fill="none" stroke="black" points="379.5,-235.5 379.5,-265.5 486.5,-265.5 486.5,-235.5 379.5,-235.5"/>
 <text text-anchor="start" x="387.5" y="-253.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/details</text>
 <text text-anchor="middle" x="433" y="-242.5" font-family="Helvetica,sans-Serif" font-size="10.00">/utils.hpp</text>
 </a>
@@ -39,7 +38,7 @@
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:href="utils_8cpp.html" target="_top" xlink:title="Implementation of helper functions and classes.">
-<polygon fill="white" stroke="black" points="542,-174 542,-193 672,-193 672,-174 542,-174"/>
+<polygon fill="none" stroke="black" points="542,-174 542,-193 672,-193 672,-174 542,-174"/>
 <text text-anchor="middle" x="607" y="-181" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/src/details/utils.cpp</text>
 </a>
 </g>
@@ -54,7 +53,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="logger__internal_8hpp.html" target="_top" xlink:title="Internal logger subsystem implementation.">
-<polygon fill="white" stroke="black" points="334,-168.5 334,-198.5 448,-198.5 448,-168.5 334,-168.5"/>
+<polygon fill="none" stroke="black" points="334,-168.5 334,-198.5 448,-198.5 448,-168.5 334,-168.5"/>
 <text text-anchor="start" x="342" y="-186.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/logger</text>
 <text text-anchor="middle" x="391" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">/logger_internal.hpp</text>
 </a>
@@ -70,7 +69,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="basic__callback_8hpp.html" target="_top" xlink:title="Interfaces and base classes for callback wrappers.">
-<polygon fill="white" stroke="black" points="192.5,-168.5 192.5,-198.5 315.5,-198.5 315.5,-168.5 192.5,-168.5"/>
+<polygon fill="none" stroke="black" points="192.5,-168.5 192.5,-198.5 315.5,-198.5 315.5,-168.5 192.5,-168.5"/>
 <text text-anchor="start" x="200.5" y="-186.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/basic</text>
 <text text-anchor="middle" x="254" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">_callback.hpp</text>
 </a>
@@ -86,7 +85,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="io_8hpp.html" target="_top" xlink:title="Implementation of threadpool IO callback.">
-<polygon fill="white" stroke="black" points="320,-112.5 320,-131.5 448,-131.5 448,-112.5 320,-112.5"/>
+<polygon fill="none" stroke="black" points="320,-112.5 320,-131.5 448,-131.5 448,-112.5 320,-112.5"/>
 <text text-anchor="middle" x="384" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/io.hpp</text>
 </a>
 </g>
@@ -101,7 +100,7 @@
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="timer_8hpp.html" target="_top" xlink:title="Implementation of threadpool timer callback.">
-<polygon fill="white" stroke="black" points="466,-112.5 466,-131.5 610,-131.5 610,-112.5 466,-112.5"/>
+<polygon fill="none" stroke="black" points="466,-112.5 466,-131.5 610,-131.5 610,-112.5 466,-112.5"/>
 <text text-anchor="middle" x="538" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/timer.hpp</text>
 </a>
 </g>
@@ -116,7 +115,7 @@
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="wait_8hpp.html" target="_top" xlink:title="Implementation of threadpool wait callback.">
-<polygon fill="white" stroke="black" points="0,-112.5 0,-131.5 140,-131.5 140,-112.5 0,-112.5"/>
+<polygon fill="none" stroke="black" points="0,-112.5 0,-131.5 140,-131.5 140,-112.5 0,-112.5"/>
 <text text-anchor="middle" x="70" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/wait.hpp</text>
 </a>
 </g>
@@ -131,7 +130,7 @@
 <g id="node11" class="node">
 <title>Node11</title>
 <g id="a_node11"><a xlink:href="work_8hpp.html" target="_top" xlink:title="Work callback wrapper and manager implementation.">
-<polygon fill="white" stroke="black" points="158.5,-112.5 158.5,-131.5 301.5,-131.5 301.5,-112.5 158.5,-112.5"/>
+<polygon fill="none" stroke="black" points="158.5,-112.5 158.5,-131.5 301.5,-131.5 301.5,-112.5 158.5,-112.5"/>
 <text text-anchor="middle" x="230" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/work.hpp</text>
 </a>
 </g>
@@ -176,7 +175,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="threadpool_8hpp.html" target="_top" xlink:title="Threadpool implementations.">
-<polygon fill="white" stroke="black" points="221.5,-56.5 221.5,-75.5 392.5,-75.5 392.5,-56.5 221.5,-56.5"/>
+<polygon fill="none" stroke="black" points="221.5,-56.5 221.5,-75.5 392.5,-75.5 392.5,-56.5 221.5,-56.5"/>
 <text text-anchor="middle" x="307" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/pool/threadpool.hpp</text>
 </a>
 </g>
@@ -191,7 +190,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="ntp_8hpp.html" target="_top" xlink:title="Main ntp library header.">
-<polygon fill="white" stroke="black" points="178,-0.5 178,-19.5 288,-19.5 288,-0.5 178,-0.5"/>
+<polygon fill="none" stroke="black" points="178,-0.5 178,-19.5 288,-19.5 288,-0.5 178,-0.5"/>
 <text text-anchor="middle" x="233" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/include/ntp.hpp</text>
 </a>
 </g>
@@ -206,7 +205,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="threadpool_8cpp.html" target="_top" xlink:title="Threadpool implementation (traits and some helper functions)">
-<polygon fill="white" stroke="black" points="306.5,-0.5 306.5,-19.5 455.5,-19.5 455.5,-0.5 306.5,-0.5"/>
+<polygon fill="none" stroke="black" points="306.5,-0.5 306.5,-19.5 455.5,-19.5 455.5,-0.5 306.5,-0.5"/>
 <text text-anchor="middle" x="381" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp/src/pool/threadpool.cpp</text>
 </a>
 </g>

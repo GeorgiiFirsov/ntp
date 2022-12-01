@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 94.00 151.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 147)">
 <title>ntp/src/pool</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-147 90,-147 90,4 -4,4"/>
 <g id="clust1" class="cluster">
 <title>clusterdir_bd0dde57184c1d426492455d9e7ff45b</title>
 <g id="a_clust1"><a xlink:href="dir_bd0dde57184c1d426492455d9e7ff45b.html" target="_top" xlink:title="src">
@@ -30,7 +29,7 @@
 <g id="node2" class="node">
 <title>dir_732709f0eb07a19ab7415b8df6a497c7</title>
 <g id="a_node2"><a xlink:href="dir_732709f0eb07a19ab7415b8df6a497c7.html" target="_top" xlink:title="include">
-<polygon fill="white" stroke="red" points="70,-36 16,-36 16,0 70,0 70,-36"/>
+<polygon fill="none" stroke="red" points="70,-36 16,-36 16,0 70,0 70,-36"/>
 <text text-anchor="middle" x="43" y="-15.5" font-family="Helvetica,sans-Serif" font-size="10.00">include</text>
 </a>
 </g>

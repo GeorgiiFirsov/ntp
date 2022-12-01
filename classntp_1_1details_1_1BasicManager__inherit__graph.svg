@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 555.00 279.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 275.5)">
 <title>ntp::details::BasicManager</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-275.5 551,-275.5 551,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -22,7 +21,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="classntp_1_1details_1_1BasicManagerEx.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="201.5,-230 201.5,-271 347.5,-271 347.5,-230 201.5,-230"/>
+<polygon fill="none" stroke="black" points="201.5,-230 201.5,-271 347.5,-271 347.5,-230 201.5,-230"/>
 <text text-anchor="start" x="209.5" y="-259" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicManager</text>
 <text text-anchor="start" x="209.5" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00">Ex&lt; PTP_IO, IoContext,</text>
 <text text-anchor="middle" x="274.5" y="-237" font-family="Helvetica,sans-Serif" font-size="10.00"> IoManager &gt;</text>
@@ -39,7 +38,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="classntp_1_1details_1_1BasicManagerEx.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="196,-170 196,-211 353,-211 353,-170 196,-170"/>
+<polygon fill="none" stroke="black" points="196,-170 196,-211 353,-211 353,-170 196,-170"/>
 <text text-anchor="start" x="204" y="-199" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicManager</text>
 <text text-anchor="start" x="204" y="-188" font-family="Helvetica,sans-Serif" font-size="10.00">Ex&lt; PTP_WAIT, WaitContext,</text>
 <text text-anchor="middle" x="274.5" y="-177" font-family="Helvetica,sans-Serif" font-size="10.00"> WaitManager &gt;</text>
@@ -56,7 +55,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="classntp_1_1details_1_1BasicManagerEx.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="189.5,-110 189.5,-151 359.5,-151 359.5,-110 189.5,-110"/>
+<polygon fill="none" stroke="black" points="189.5,-110 189.5,-151 359.5,-151 359.5,-110 189.5,-110"/>
 <text text-anchor="start" x="197.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicManager</text>
 <text text-anchor="start" x="197.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">Ex&lt; PTP_TIMER, TimerContext,</text>
 <text text-anchor="middle" x="274.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00"> TimerManager &gt;</text>
@@ -73,7 +72,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="classntp_1_1details_1_1BasicManagerEx.html" target="_top" xlink:title="Extended version of ntp::details::BasicManager with container of callbacks.">
-<polygon fill="white" stroke="black" points="182,-50 182,-91 367,-91 367,-50 182,-50"/>
+<polygon fill="none" stroke="black" points="182,-50 182,-91 367,-91 367,-50 182,-50"/>
 <text text-anchor="start" x="190" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicManager</text>
 <text text-anchor="start" x="190" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">Ex&lt; NativeHandle, ObjectContext,</text>
 <text text-anchor="middle" x="274.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00"> Derived &gt;</text>
@@ -90,7 +89,7 @@
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="classntp_1_1work_1_1details_1_1WorkManager.html" target="_top" xlink:title="WorkManager for work callbacks. Binds callbacks and threadpool implementation.">
-<polygon fill="white" stroke="black" points="224,-0.5 224,-30.5 325,-30.5 325,-0.5 224,-0.5"/>
+<polygon fill="none" stroke="black" points="224,-0.5 224,-30.5 325,-30.5 325,-0.5 224,-0.5"/>
 <text text-anchor="start" x="232" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::work::details</text>
 <text text-anchor="middle" x="274.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::WorkManager</text>
 </a>
@@ -106,7 +105,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="classntp_1_1io_1_1details_1_1IoManager.html" target="_top" xlink:title="Manager for wait callbacks. Binds callbacks and threadpool implementation.">
-<polygon fill="white" stroke="black" points="403,-241 403,-260 547,-260 547,-241 403,-241"/>
+<polygon fill="none" stroke="black" points="403,-241 403,-260 547,-260 547,-241 403,-241"/>
 <text text-anchor="middle" x="475" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::io::details::IoManager</text>
 </a>
 </g>
@@ -121,7 +120,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="classntp_1_1wait_1_1details_1_1WaitManager.html" target="_top" xlink:title="Manager for wait callbacks. Binds callbacks and threadpool implementation.">
-<polygon fill="white" stroke="black" points="426,-175.5 426,-205.5 524,-205.5 524,-175.5 426,-175.5"/>
+<polygon fill="none" stroke="black" points="426,-175.5 426,-205.5 524,-205.5 524,-175.5 426,-175.5"/>
 <text text-anchor="start" x="434" y="-193.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::wait::details</text>
 <text text-anchor="middle" x="475" y="-182.5" font-family="Helvetica,sans-Serif" font-size="10.00">::WaitManager</text>
 </a>
@@ -137,7 +136,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="classntp_1_1timer_1_1details_1_1TimerManager.html" target="_top" xlink:title="Manager for wait callbacks. Binds callbacks and threadpool implementation.">
-<polygon fill="white" stroke="black" points="423,-115.5 423,-145.5 527,-145.5 527,-115.5 423,-115.5"/>
+<polygon fill="none" stroke="black" points="423,-115.5 423,-145.5 527,-145.5 527,-115.5 423,-115.5"/>
 <text text-anchor="start" x="431" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::timer::details</text>
 <text text-anchor="middle" x="475" y="-122.5" font-family="Helvetica,sans-Serif" font-size="10.00">::TimerManager</text>
 </a>

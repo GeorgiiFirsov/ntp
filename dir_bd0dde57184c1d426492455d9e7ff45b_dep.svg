@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 326.00 175.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 171)">
 <title>ntp/src</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-171 322,-171 322,4 -4,4"/>
 <g id="clust1" class="cluster">
 <title>clusterdir_12a93777c2835b14eab543fe425a2b1e</title>
 <g id="a_clust1"><a xlink:href="dir_12a93777c2835b14eab543fe425a2b1e.html" target="_top" xlink:title="ntp">
@@ -28,7 +27,7 @@
 <g id="node1" class="node">
 <title>dir_732709f0eb07a19ab7415b8df6a497c7</title>
 <g id="a_node1"><a xlink:href="dir_732709f0eb07a19ab7415b8df6a497c7.html" target="_top" xlink:title="include">
-<polygon fill="white" stroke="red" points="150,-52 96,-52 96,-16 150,-16 150,-52"/>
+<polygon fill="none" stroke="red" points="150,-52 96,-52 96,-16 150,-16 150,-52"/>
 <text text-anchor="middle" x="123" y="-31.5" font-family="Helvetica,sans-Serif" font-size="10.00">include</text>
 </a>
 </g>

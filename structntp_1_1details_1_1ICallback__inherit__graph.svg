@@ -8,7 +8,6 @@
  viewBox="0.00 0.00 791.00 279.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 275.5)">
 <title>ntp::details::ICallback</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-275.5 787,-275.5 787,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
@@ -22,7 +21,7 @@
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="classntp_1_1details_1_1BasicCallback.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="446.5,-230 446.5,-271 598.5,-271 598.5,-230 446.5,-230"/>
+<polygon fill="none" stroke="black" points="446.5,-230 446.5,-271 598.5,-271 598.5,-230 446.5,-230"/>
 <text text-anchor="start" x="454.5" y="-259" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicCallback</text>
 <text text-anchor="start" x="454.5" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; TimerCallback&lt; Functor,</text>
 <text text-anchor="middle" x="522.5" y="-237" font-family="Helvetica,sans-Serif" font-size="10.00"> Args... &gt;, Functor, Args... &gt;</text>
@@ -39,7 +38,7 @@
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="classntp_1_1details_1_1BasicCallback.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="441,-170 441,-211 604,-211 604,-170 441,-170"/>
+<polygon fill="none" stroke="black" points="441,-170 441,-211 604,-211 604,-170 441,-170"/>
 <text text-anchor="start" x="449" y="-199" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicCallback</text>
 <text text-anchor="start" x="449" y="-188" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; IoCallback&lt; Functor, Args...</text>
 <text text-anchor="middle" x="522.5" y="-177" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt;, Functor, Args... &gt;</text>
@@ -56,7 +55,7 @@
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="classntp_1_1details_1_1BasicCallback.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="446.5,-110 446.5,-151 598.5,-151 598.5,-110 446.5,-110"/>
+<polygon fill="none" stroke="black" points="446.5,-110 446.5,-151 598.5,-151 598.5,-110 446.5,-110"/>
 <text text-anchor="start" x="454.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicCallback</text>
 <text text-anchor="start" x="454.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; WorkCallback&lt; Functor,</text>
 <text text-anchor="middle" x="522.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00"> Args... &gt;, Functor, Args... &gt;</text>
@@ -73,7 +72,7 @@
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="classntp_1_1details_1_1BasicCallback.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="446.5,-50 446.5,-91 598.5,-91 598.5,-50 446.5,-50"/>
+<polygon fill="none" stroke="black" points="446.5,-50 446.5,-91 598.5,-91 598.5,-50 446.5,-50"/>
 <text text-anchor="start" x="454.5" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicCallback</text>
 <text text-anchor="start" x="454.5" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; WaitCallback&lt; Functor,</text>
 <text text-anchor="middle" x="522.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00"> Args... &gt;, Functor, Args... &gt;</text>
@@ -90,7 +89,7 @@
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:href="classntp_1_1details_1_1BasicCallback.html" target="_top" xlink:title="Base class for all callbacks.">
-<polygon fill="white" stroke="black" points="449,-0.5 449,-30.5 596,-30.5 596,-0.5 449,-0.5"/>
+<polygon fill="none" stroke="black" points="449,-0.5 449,-30.5 596,-30.5 596,-0.5 449,-0.5"/>
 <text text-anchor="start" x="457" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::BasicCallback</text>
 <text text-anchor="middle" x="522.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Derived, Functor, Args &gt;</text>
 </a>
@@ -106,7 +105,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="classntp_1_1details_1_1NativeSlistEntry.html" target="_top" xlink:title="Wrapper for SLIST_ENTRY (actually inherits from it).">
-<polygon fill="white" stroke="black" points="116,-115.5 116,-145.5 247,-145.5 247,-115.5 116,-115.5"/>
+<polygon fill="none" stroke="black" points="116,-115.5 116,-145.5 247,-145.5 247,-115.5 116,-115.5"/>
 <text text-anchor="start" x="124" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::details::NativeSlist</text>
 <text text-anchor="middle" x="181.5" y="-122.5" font-family="Helvetica,sans-Serif" font-size="10.00">Entry</text>
 </a>
@@ -122,7 +121,7 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:title=" ">
-<polygon fill="white" stroke="#bfbfbf" points="0,-121 0,-140 80,-140 80,-121 0,-121"/>
+<polygon fill="none" stroke="#bfbfbf" points="0,-121 0,-140 80,-140 80,-121 0,-121"/>
 <text text-anchor="middle" x="40" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">SLIST_ENTRY</text>
 </a>
 </g>
@@ -137,7 +136,7 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="classntp_1_1timer_1_1details_1_1TimerCallback.html" target="_top" xlink:title="Timer callback wrapper (PTP_TIMER).">
-<polygon fill="white" stroke="black" points="640,-230 640,-271 783,-271 783,-230 640,-230"/>
+<polygon fill="none" stroke="black" points="640,-230 640,-271 783,-271 783,-230 640,-230"/>
 <text text-anchor="start" x="648" y="-259" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::timer::details</text>
 <text text-anchor="start" x="648" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00">::TimerCallback&lt; Functor,</text>
 <text text-anchor="middle" x="711.5" y="-237" font-family="Helvetica,sans-Serif" font-size="10.00"> Args &gt;</text>
@@ -154,7 +153,7 @@
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="classntp_1_1io_1_1details_1_1IoCallback.html" target="_top" xlink:title="IO callback wrapper (PTP_IO).">
-<polygon fill="white" stroke="black" points="640,-175.5 640,-205.5 783,-205.5 783,-175.5 640,-175.5"/>
+<polygon fill="none" stroke="black" points="640,-175.5 640,-205.5 783,-205.5 783,-175.5 640,-175.5"/>
 <text text-anchor="start" x="648" y="-193.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::io::details::IoCallback</text>
 <text text-anchor="middle" x="711.5" y="-182.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Functor, Args &gt;</text>
 </a>
@@ -170,7 +169,7 @@
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="classntp_1_1work_1_1details_1_1WorkCallback.html" target="_top" xlink:title="Work callback wrapper (PTP_WORK)">
-<polygon fill="white" stroke="black" points="641.5,-110 641.5,-151 781.5,-151 781.5,-110 641.5,-110"/>
+<polygon fill="none" stroke="black" points="641.5,-110 641.5,-151 781.5,-151 781.5,-110 641.5,-110"/>
 <text text-anchor="start" x="649.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::work::details</text>
 <text text-anchor="start" x="649.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">::WorkCallback&lt; Functor,</text>
 <text text-anchor="middle" x="711.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00"> Args &gt;</text>
@@ -187,7 +186,7 @@
 <g id="node11" class="node">
 <title>Node11</title>
 <g id="a_node11"><a xlink:href="classntp_1_1wait_1_1details_1_1WaitCallback.html" target="_top" xlink:title="Wait callback wrapper (PTP_WAIT).">
-<polygon fill="white" stroke="black" points="643,-50 643,-91 780,-91 780,-50 643,-50"/>
+<polygon fill="none" stroke="black" points="643,-50 643,-91 780,-91 780,-50 643,-50"/>
 <text text-anchor="start" x="651" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::wait::details</text>
 <text text-anchor="start" x="651" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">::WaitCallback&lt; Functor,</text>
 <text text-anchor="middle" x="711.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00"> Args &gt;</text>
