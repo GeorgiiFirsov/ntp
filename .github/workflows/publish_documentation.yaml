@@ -15,6 +15,9 @@ jobs:
               with:
                 fetch-depth: 0
                 submodules: 'recursive'
+
+            - name: Checking content of docs
+              run: ls docs/
             
             - name: Configure Doxygen with CMake
               run: cmake . -DNTP_ENABLE_GH_DOCS_ONLY=ON
