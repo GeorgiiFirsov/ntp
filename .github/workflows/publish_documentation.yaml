@@ -16,11 +16,13 @@ jobs:
                 fetch-depth: 0
                 submodules: 'true'
             
-            - name: CMake configure doxygen
+            - name: Configure Doxygen with CMake
               run: cmake . -DNTP_ENABLE_GH_DOCS_ONLY=ON
 
-#            - name: Generate Documentation
-#              uses: mattnotmitt/doxygen-action@v1.9.4
+            - name: Generate Documentation
+              uses: mattnotmitt/doxygen-action@v1.9.4
+              with:
+                doxyfile-path: docs/Doxyfile
 #
 #            - name: Publish generated content to GitHub Pages
 #              uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
