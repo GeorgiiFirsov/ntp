@@ -1,0 +1,11 @@
+<map id="ntp::details::BasicManager" name="ntp::details::BasicManager">
+<area shape="rect" id="node1" title="Base class for all callbacks&#39; managers." alt="" coords="5,180,200,207"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManagerEx.html" title=" " alt="" coords="274,5,469,61"/>
+<area shape="rect" id="node4" href="$classntp_1_1details_1_1BasicManagerEx.html" title=" " alt="" coords="267,85,476,141"/>
+<area shape="rect" id="node6" href="$classntp_1_1details_1_1BasicManagerEx.html" title=" " alt="" coords="258,165,485,221"/>
+<area shape="rect" id="node8" href="$classntp_1_1details_1_1BasicManagerEx.html" title="Extended version of ntp::details::BasicManager with container of callbacks." alt="" coords="248,245,495,301"/>
+<area shape="rect" id="node9" href="$classntp_1_1work_1_1details_1_1WorkManager.html" title="WorkManager for work callbacks. Binds callbacks and threadpool implementation." alt="" coords="304,326,439,367"/>
+<area shape="rect" id="node3" href="$classntp_1_1io_1_1details_1_1IoManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="543,20,735,47"/>
+<area shape="rect" id="node5" href="$classntp_1_1wait_1_1details_1_1WaitManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="573,93,704,134"/>
+<area shape="rect" id="node7" href="$classntp_1_1timer_1_1details_1_1TimerManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="569,173,708,214"/>
+</map>

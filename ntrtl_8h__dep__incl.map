@@ -1,0 +1,14 @@
+<map id="ntp/include/native/ntrtl.h" name="ntp/include/native/ntrtl.h">
+<area shape="rect" id="node1" title="Contains necessary declarations/definitions of internal windows objects and functions." alt="" coords="568,5,707,47"/>
+<area shape="rect" id="node2" href="$utils_8hpp.html" title="Some useful implementation stuff." alt="" coords="511,95,654,136"/>
+<area shape="rect" id="node12" href="$utils_8cpp.html" title="Implementation of helper functions and classes." alt="" coords="728,191,901,218"/>
+<area shape="rect" id="node3" href="$logger__internal_8hpp.html" title="Internal logger subsystem implementation." alt="" coords="451,184,603,225"/>
+<area shape="rect" id="node4" href="$basic__callback_8hpp.html" title="Interfaces and base classes for callback wrappers." alt="" coords="262,184,426,225"/>
+<area shape="rect" id="node5" href="$io_8hpp.html" title="Implementation of threadpool IO callback." alt="" coords="432,273,603,300"/>
+<area shape="rect" id="node9" href="$timer_8hpp.html" title="Implementation of threadpool timer callback." alt="" coords="627,273,819,300"/>
+<area shape="rect" id="node10" href="$wait_8hpp.html" title="Implementation of threadpool wait callback." alt="" coords="5,273,192,300"/>
+<area shape="rect" id="node11" href="$work_8hpp.html" title="Work callback wrapper and manager implementation." alt="" coords="217,273,407,300"/>
+<area shape="rect" id="node6" href="$threadpool_8hpp.html" title="Threadpool implementations." alt="" coords="301,348,529,375"/>
+<area shape="rect" id="node7" href="$ntp_8hpp.html" title="Main ntp library header." alt="" coords="243,423,389,449"/>
+<area shape="rect" id="node8" href="$threadpool_8cpp.html" title="Threadpool implementation (traits and some helper functions)" alt="" coords="414,423,613,449"/>
+</map>

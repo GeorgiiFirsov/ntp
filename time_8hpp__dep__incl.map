@@ -1,0 +1,9 @@
+<map id="ntp/include/details/time.hpp" name="ntp/include/details/time.hpp">
+<area shape="rect" id="node1" title="Utils to work with std::chrono." alt="" coords="225,5,367,47"/>
+<area shape="rect" id="node2" href="$io_8hpp.html" title="Implementation of threadpool IO callback." alt="" coords="5,95,176,121"/>
+<area shape="rect" id="node6" href="$timer_8hpp.html" title="Implementation of threadpool timer callback." alt="" coords="200,95,392,121"/>
+<area shape="rect" id="node7" href="$wait_8hpp.html" title="Implementation of threadpool wait callback." alt="" coords="416,95,603,121"/>
+<area shape="rect" id="node3" href="$threadpool_8hpp.html" title="Threadpool implementations." alt="" coords="182,169,410,196"/>
+<area shape="rect" id="node4" href="$ntp_8hpp.html" title="Main ntp library header." alt="" coords="124,244,271,271"/>
+<area shape="rect" id="node5" href="$threadpool_8cpp.html" title="Threadpool implementation (traits and some helper functions)" alt="" coords="295,244,494,271"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;" name="ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;">
+<area shape="rect" id="node1" title="Base class for all callbacks." alt="" coords="5,244,201,285"/>
+<area shape="rect" id="node2" href="$structntp_1_1details_1_1ICallback.html" title="Interface for callback wrapper." alt="" coords="22,169,185,196"/>
+<area shape="rect" id="node3" href="$classntp_1_1details_1_1NativeSlistEntry.html" title="Wrapper for SLIST_ENTRY (actually inherits from it)." alt="" coords="16,80,191,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="50,5,157,32"/>
+</map>

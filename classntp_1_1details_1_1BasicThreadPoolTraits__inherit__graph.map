@@ -1,0 +1,4 @@
+<map id="ntp::details::BasicThreadPoolTraits" name="ntp::details::BasicThreadPoolTraits">
+<area shape="rect" id="node1" title="Basic threadpool traits. Used as system&#45;default threadpool traits." alt="" coords="13,5,196,47"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1CustomThreadPoolTraits.html" title="Traits for a custom threadpool." alt="" coords="5,95,204,136"/>
+</map>

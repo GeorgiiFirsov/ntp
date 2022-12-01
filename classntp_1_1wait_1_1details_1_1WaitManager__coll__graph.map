@@ -1,0 +1,5 @@
+<map id="ntp::wait::details::WaitManager" name="ntp::wait::details::WaitManager">
+<area shape="rect" id="node1" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="45,184,175,225"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManagerEx.html" title=" " alt="" coords="5,80,215,136"/>
+<area shape="rect" id="node3" href="$classntp_1_1details_1_1BasicManager.html" title="Base class for all callbacks&#39; managers." alt="" coords="13,5,207,32"/>
+</map>

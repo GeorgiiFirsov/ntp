@@ -1,0 +1,4 @@
+<map id="ntp::work::details::WorkManager" name="ntp::work::details::WorkManager">
+<area shape="rect" id="node1" title="WorkManager for work callbacks. Binds callbacks and threadpool implementation." alt="" coords="35,80,170,121"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManager.html" title="Base class for all callbacks&#39; managers." alt="" coords="5,5,200,32"/>
+</map>

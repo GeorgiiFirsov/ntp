@@ -1,0 +1,7 @@
+<map id="ntp::timer::details::TimerCallback&lt; Functor, Args &gt;" name="ntp::timer::details::TimerCallback&lt; Functor, Args &gt;">
+<area shape="rect" id="node1" title="Timer callback wrapper (PTP_TIMER)." alt="" coords="844,5,1035,61"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicCallback.html" title=" " alt="" coords="593,5,796,61"/>
+<area shape="rect" id="node3" href="$structntp_1_1details_1_1ICallback.html" title="Interface for callback wrapper." alt="" coords="383,20,545,47"/>
+<area shape="rect" id="node4" href="$classntp_1_1details_1_1NativeSlistEntry.html" title="Wrapper for SLIST_ENTRY (actually inherits from it)." alt="" coords="160,13,335,54"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,20,112,47"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="ntp::exception::Win32Exception" name="ntp::exception::Win32Exception">
+<area shape="rect" id="node1" title="Wrapper for Win32 error code, that has C++ interface." alt="" coords="5,80,233,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="62,5,177,32"/>
+</map>

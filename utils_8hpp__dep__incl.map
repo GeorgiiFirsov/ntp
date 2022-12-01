@@ -1,0 +1,13 @@
+<map id="ntp/include/details/utils.hpp" name="ntp/include/details/utils.hpp">
+<area shape="rect" id="node1" title="Some useful implementation stuff." alt="" coords="331,5,474,47"/>
+<area shape="rect" id="node2" href="$logger__internal_8hpp.html" title="Internal logger subsystem implementation." alt="" coords="43,95,195,136"/>
+<area shape="rect" id="node3" href="$basic__callback_8hpp.html" title="Interfaces and base classes for callback wrappers." alt="" coords="321,95,485,136"/>
+<area shape="rect" id="node4" href="$io_8hpp.html" title="Implementation of threadpool IO callback." alt="" coords="5,184,176,211"/>
+<area shape="rect" id="node8" href="$timer_8hpp.html" title="Implementation of threadpool timer callback." alt="" coords="200,184,392,211"/>
+<area shape="rect" id="node9" href="$wait_8hpp.html" title="Implementation of threadpool wait callback." alt="" coords="416,184,603,211"/>
+<area shape="rect" id="node10" href="$work_8hpp.html" title="Work callback wrapper and manager implementation." alt="" coords="627,184,818,211"/>
+<area shape="rect" id="node11" href="$utils_8cpp.html" title="Implementation of helper functions and classes." alt="" coords="611,102,784,129"/>
+<area shape="rect" id="node5" href="$threadpool_8hpp.html" title="Threadpool implementations." alt="" coords="289,259,517,285"/>
+<area shape="rect" id="node6" href="$ntp_8hpp.html" title="Main ntp library header." alt="" coords="231,333,377,360"/>
+<area shape="rect" id="node7" href="$threadpool_8cpp.html" title="Threadpool implementation (traits and some helper functions)" alt="" coords="402,333,601,360"/>
+</map>

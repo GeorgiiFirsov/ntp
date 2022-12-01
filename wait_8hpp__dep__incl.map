@@ -1,0 +1,6 @@
+<map id="ntp/include/pool/wait.hpp" name="ntp/include/pool/wait.hpp">
+<area shape="rect" id="node1" title="Implementation of threadpool wait callback." alt="" coords="84,5,271,32"/>
+<area shape="rect" id="node2" href="$threadpool_8hpp.html" title="Threadpool implementations." alt="" coords="63,80,291,107"/>
+<area shape="rect" id="node3" href="$ntp_8hpp.html" title="Main ntp library header." alt="" coords="5,155,152,181"/>
+<area shape="rect" id="node4" href="$threadpool_8cpp.html" title="Threadpool implementation (traits and some helper functions)" alt="" coords="177,155,375,181"/>
+</map>

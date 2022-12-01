@@ -1,0 +1,13 @@
+<map id="ntp/include/details/utils.hpp" name="ntp/include/details/utils.hpp">
+<area shape="rect" id="node1" title="Some useful implementation stuff." alt="" coords="155,5,297,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="27,95,94,121"/>
+<area shape="rect" id="node3" href="$ntp__config_8hpp_source.html" title=" " alt="" coords="231,169,349,196"/>
+<area shape="rect" id="node4" href="$ntrtl_8h.html" title="Contains necessary declarations/definitions of internal windows objects and functions." alt="" coords="118,95,225,121"/>
+<area shape="rect" id="node7" href="$allocator_8hpp.html" title="Allocator implementations." alt="" coords="351,95,506,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="117,169,207,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,169,92,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="522,244,615,271"/>
+<area shape="rect" id="node9" href="$exception_8hpp.html" title="Win32 error wrapper implementations." alt="" coords="373,169,535,196"/>
+<area shape="rect" id="node10" title=" " alt="" coords="319,244,405,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="430,244,489,271"/>
+</map>

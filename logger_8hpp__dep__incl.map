@@ -1,0 +1,5 @@
+<map id="ntp/include/logger/logger.hpp" name="ntp/include/logger/logger.hpp">
+<area shape="rect" id="node1" title="Interface for custom logger function." alt="" coords="99,5,237,47"/>
+<area shape="rect" id="node2" href="$logger__internal_8hpp.html" title="Internal logger subsystem implementation." alt="" coords="5,95,157,136"/>
+<area shape="rect" id="node3" href="$ntp_8hpp.html" title="Main ntp library header." alt="" coords="181,102,328,129"/>
+</map>

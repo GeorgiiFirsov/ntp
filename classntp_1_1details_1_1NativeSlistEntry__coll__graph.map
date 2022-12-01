@@ -1,0 +1,4 @@
+<map id="ntp::details::NativeSlistEntry" name="ntp::details::NativeSlistEntry">
+<area shape="rect" id="node1" title="Wrapper for SLIST_ENTRY (actually inherits from it)." alt="" coords="5,80,180,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="39,5,146,32"/>
+</map>

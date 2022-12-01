@@ -1,0 +1,7 @@
+<map id="ntp::io::details::IoCallback&lt; Functor, Args &gt;" name="ntp::io::details::IoCallback&lt; Functor, Args &gt;">
+<area shape="rect" id="node1" title="IO callback wrapper (PTP_IO)." alt="" coords="19,348,209,389"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicCallback.html" title=" " alt="" coords="5,244,223,300"/>
+<area shape="rect" id="node3" href="$structntp_1_1details_1_1ICallback.html" title="Interface for callback wrapper." alt="" coords="33,169,195,196"/>
+<area shape="rect" id="node4" href="$classntp_1_1details_1_1NativeSlistEntry.html" title="Wrapper for SLIST_ENTRY (actually inherits from it)." alt="" coords="27,80,201,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="61,5,167,32"/>
+</map>
