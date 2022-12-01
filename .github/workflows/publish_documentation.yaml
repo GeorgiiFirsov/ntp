@@ -25,8 +25,7 @@ jobs:
                 doxyfile-path: docs/Doxyfile
 
             - name: Publish generated content to GitHub Pages
-              uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                dir: doxygen/html
-                branch: main
+                folder: doxygen/html
                 token: ${{ secrets.ACCESS_TOKEN }}
