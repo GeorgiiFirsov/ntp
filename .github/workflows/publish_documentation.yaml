@@ -23,7 +23,7 @@ jobs:
               run: cmake . -DNTP_ENABLE_GH_DOCS_ONLY=ON
 
             - name: Generate documentation
-              run: doxygen docs/Doxygen
+              run: doxygen docs/Doxyfile
 
             - name: Publish generated content to GitHub Pages
               uses: JamesIves/github-pages-deploy-action@v4
