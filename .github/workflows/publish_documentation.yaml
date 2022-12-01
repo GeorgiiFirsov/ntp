@@ -10,6 +10,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Installing necessary tools
+              run: sudo apt-get install doxygen
+            
             - name: Checkout repository
               uses: actions/checkout@v3
               with:
@@ -19,19 +22,11 @@ jobs:
             - name: Configure Doxygen with CMake
               run: cmake . -DNTP_ENABLE_GH_DOCS_ONLY=ON
 
-            - name: Checking content of docs
-              run: ls docs/
+            - name: Generate documentation
+              run: doxygen docs/Doxygen
 
-            - name: Checking content of docs/doxygen-awesome-css
-              run: ls docs/doxygen-awesome-css/
-
-            - name: Generate Documentation
-              uses: mattnotmitt/doxygen-action@v1.9.4
+            - name: Publish generated content to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                working-directory: docs/
-
-#            - name: Publish generated content to GitHub Pages
-#              uses: JamesIves/github-pages-deploy-action@v4
-#              with:
-#                folder: docs/doxygen/html
-#                token: ${{ secrets.ACCESS_TOKEN }}
+                folder: docs/doxygen/html
+                token: ${{ secrets.ACCESS_TOKEN }}
