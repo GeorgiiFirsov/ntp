@@ -3,7 +3,6 @@
  * @brief Main ntp library header
  * 
  * @license GPL-v3
- * 
  * @author GeorgyFirsov (gfirsov007@gmail.com)
  */
 
