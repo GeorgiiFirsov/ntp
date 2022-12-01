@@ -57,23 +57,23 @@ private:
     /**
      * @brief Converts void* parameter into TP_WAIT_RESULT.
      */
-    TP_WAIT_RESULT ConvertParameter(void* parameter) { return reinterpret_cast<TP_WAIT_RESULT>(parameter); }
+    TP_WAIT_RESULT* ConvertParameter(void* parameter) { return static_cast<TP_WAIT_RESULT*>(parameter); }
 
     /**
      * @brief WaitCallback invocation function implementation. Supports invocation of
      *        callbacks with or without PTP_CALLBACK_INSTANCE parameter.
      */
     template<typename = void> /* if constexpr works only for templates */
-    void CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result)
+    void CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT* wait_result)
     {
         if constexpr (std::is_invocable_v<std::decay_t<Functor>, PTP_CALLBACK_INSTANCE, TP_WAIT_RESULT, std::decay_t<Args>...>)
         {
-            const auto args = std::tuple_cat(std::make_tuple(instance, wait_result), Arguments());
+            const auto args = std::tuple_cat(std::make_tuple(instance, *wait_result), Arguments());
             std::apply(Callable(), args);
         }
         else
         {
-            const auto args = std::tuple_cat(std::make_tuple(wait_result), Arguments());
+            const auto args = std::tuple_cat(std::make_tuple(*wait_result), Arguments());
             std::apply(Callable(), args);
         }
     }
