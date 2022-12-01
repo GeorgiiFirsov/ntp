@@ -10,8 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #
 # Options
 #
-option(NTP_ENABLE_TESTING "Enable testing of ntp library." ON)
-option(NTP_ENABLE_DOCS "Enable building docs for ntp library." ON)
+option(NTP_ENABLE_TESTING   "Enable testing of ntp library." ON)
+option(NTP_ENABLE_DOCS      "Enable building docs for ntp library." ON)
+option(NTP_ENABLE_DOCS_ONLY "Building documentation only (used by GitHub Actions)" OFF)
 
 #
 # Basic common directories
@@ -28,27 +29,31 @@ add_compile_definitions(UNICODE)  # Build with unicode characters (wchar_t)
 #
 # Library itself
 #
-add_subdirectory(ntp)
+if (NOT NTP_ENABLE_DOCS_ONLY)
+    add_subdirectory(ntp)
+else (NOT NTP_ENABLE_DOCS_ONLY)
+    message(NOTICE "[${CMAKE_PROJECT_NAME}] Building only documentation")
+endif(NOT NTP_ENABLE_DOCS_ONLY)
 
 # 
 # Docs
 #
-if (NTP_ENABLE_DOCS)
+if (NTP_ENABLE_DOCS_ONLY OR NTP_ENABLE_DOCS)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Docs building is enabled. Adding docs project.")
 
     add_subdirectory(docs)
-else(NTP_ENABLE_DOCS)
+else(NTP_ENABLE_DOCS_ONLY OR NTP_ENABLE_DOCS)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Docs building is disabled.")
-endif(NTP_ENABLE_DOCS)
+endif(NTP_ENABLE_DOCS_ONLY OR NTP_ENABLE_DOCS)
 
 #
 # Tests of ntp library
 #
-if (NTP_ENABLE_TESTING)
+if (NTP_ENABLE_TESTING AND NOT NTP_ENABLE_DOCS_ONLY)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Testing is enabled. Adding test project.")
 
     enable_testing()
     add_subdirectory(tests)
-else(NTP_ENABLE_TESTING)
+else(NTP_ENABLE_TESTING AND NOT NTP_ENABLE_DOCS_ONLY)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Testing is disabled.")
-endif(NTP_ENABLE_TESTING)
+endif(NTP_ENABLE_TESTING AND NOT NTP_ENABLE_DOCS_ONLY)
