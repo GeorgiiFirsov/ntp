@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['call_23',['Call',['../structntp_1_1details_1_1ICallback.html#a724789dfe21e2c6d2f459d52a0d8a29c',1,'ntp::details::ICallback']]],
+  ['callable_24',['Callable',['../classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3',1,'ntp::details::BasicCallback']]],
+  ['callback_5ft_25',['callback_t',['../basic__callback_8hpp.html#afb0bca01bc5ada5955fe59ae5ec461f5',1,'ntp::details']]],
+  ['callbacks_5ft_26',['callbacks_t',['../classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85',1,'ntp::details::BasicManagerEx']]],
+  ['callimpl_27',['CallImpl',['../classntp_1_1io_1_1details_1_1IoCallback.html#a4e9b5a5447b7d6ba663cdd0173c68a38',1,'ntp::io::details::IoCallback::CallImpl()'],['../classntp_1_1timer_1_1details_1_1TimerCallback.html#a5b93988a489f5e330c6068dc526bc2c3',1,'ntp::timer::details::TimerCallback::CallImpl()']]],
+  ['cancel_28',['Cancel',['../classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96',1,'ntp::details::BasicManagerEx']]],
+  ['cancelall_29',['CancelAll',['../classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65',1,'ntp::details::BasicManagerEx::CancelAll()'],['../classntp_1_1work_1_1details_1_1WorkManager.html#a588d5f63cfefac8d5d1bb3b7b3fc182c',1,'ntp::work::details::WorkManager::CancelAll()']]],
+  ['cancelallcallbacks_30',['CancelAllCallbacks',['../classntp_1_1BasicThreadPool.html#aefae25ab34cf134904e46b7f67c0ddc1',1,'ntp::BasicThreadPool']]],
+  ['cancelio_31',['CancelIo',['../classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a',1,'ntp::BasicThreadPool']]],
+  ['cancelios_32',['CancelIos',['../classntp_1_1BasicThreadPool.html#a4ef2a8ee6326ab9de68fc887762c421e',1,'ntp::BasicThreadPool']]],
+  ['canceltimer_33',['CancelTimer',['../classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b',1,'ntp::BasicThreadPool']]],
+  ['canceltimers_34',['CancelTimers',['../classntp_1_1BasicThreadPool.html#ad89f0961e4217d05f26e7fd669402a3a',1,'ntp::BasicThreadPool']]],
+  ['cancelwait_35',['CancelWait',['../classntp_1_1BasicThreadPool.html#a9022977043d46ed1d2085210f42000f0',1,'ntp::BasicThreadPool']]],
+  ['cancelwaits_36',['CancelWaits',['../classntp_1_1BasicThreadPool.html#afd4d90a7a2b14c41f5ad75af9c50247a',1,'ntp::BasicThreadPool']]],
+  ['cancelworks_37',['CancelWorks',['../classntp_1_1BasicThreadPool.html#a798e87b63580ca2640474f100539ea34',1,'ntp::BasicThreadPool']]],
+  ['cleanupcontext_38',['CleanupContext',['../classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c',1,'ntp::details::BasicManagerEx']]],
+  ['cleanupgroup_39',['CleanupGroup',['../classntp_1_1details_1_1CleanupGroup.html#aa6edc05a51bc5de9a3099e4567089915',1,'ntp::details::CleanupGroup::CleanupGroup()'],['../classntp_1_1details_1_1CleanupGroup.html',1,'ntp::details::CleanupGroup']]],
+  ['context_5fpointer_5ft_40',['context_pointer_t',['../classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57',1,'ntp::details::BasicManagerEx']]],
+  ['context_5ft_41',['context_t',['../classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2',1,'ntp::details::BasicManagerEx']]],
+  ['convert_42',['Convert',['../utils_8hpp.html#a727c59530e54045ee93862714ca6822b',1,'ntp::details']]],
+  ['convertparameter_43',['ConvertParameter',['../classntp_1_1timer_1_1details_1_1TimerCallback.html#ad6661cc365cae53a0f25679534e89d24',1,'ntp::timer::details::TimerCallback::ConvertParameter()'],['../classntp_1_1io_1_1details_1_1IoCallback.html#aeb8f18b8f84818d18bc07bebf63e3547',1,'ntp::io::details::IoCallback::ConvertParameter()']]],
+  ['createcontext_44',['CreateContext',['../classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a',1,'ntp::details::BasicManagerEx']]],
+  ['customthreadpooltraits_45',['CustomThreadPoolTraits',['../classntp_1_1details_1_1CustomThreadPoolTraits.html#a967fe38007456f865bcab0b03912e1a3',1,'ntp::details::CustomThreadPoolTraits::CustomThreadPoolTraits()'],['../classntp_1_1details_1_1CustomThreadPoolTraits.html',1,'ntp::details::CustomThreadPoolTraits']]]
+];

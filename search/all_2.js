@@ -1,0 +1,18 @@
+var searchData=
+[
+  ['basic_5fcallback_2ehpp_8',['basic_callback.hpp',['../basic__callback_8hpp.html',1,'']]],
+  ['basiccallback_9',['BasicCallback',['../classntp_1_1details_1_1BasicCallback.html#ae1ce89a9c87ffe9aa8d80c37a1a27a0c',1,'ntp::details::BasicCallback::BasicCallback()'],['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;']]],
+  ['basiccallback_3c_20iocallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_10',['BasicCallback&lt; IoCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
+  ['basiccallback_3c_20timercallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_11',['BasicCallback&lt; TimerCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
+  ['basiccallback_3c_20waitcallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_12',['BasicCallback&lt; WaitCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
+  ['basiccallback_3c_20workcallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_13',['BasicCallback&lt; WorkCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
+  ['basicformatmessage_14',['BasicFormatMessage',['../utils_8cpp.html#a2825fd90f09ec70b038910f601683ca1',1,'ntp::details']]],
+  ['basicmanager_15',['BasicManager',['../classntp_1_1details_1_1BasicManager.html#a4b258e1048a420512d88a23c5b01cc66',1,'ntp::details::BasicManager::BasicManager()'],['../classntp_1_1details_1_1BasicManager.html',1,'ntp::details::BasicManager']]],
+  ['basicmanagerex_16',['BasicManagerEx',['../classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc',1,'ntp::details::BasicManagerEx::BasicManagerEx()'],['../classntp_1_1details_1_1BasicManagerEx.html',1,'ntp::details::BasicManagerEx&lt; NativeHandle, ObjectContext, Derived &gt;']]],
+  ['basicmanagerex_3c_20ptp_5fio_2c_20iocontext_2c_20iomanager_20_3e_17',['BasicManagerEx&lt; PTP_IO, IoContext, IoManager &gt;',['../classntp_1_1details_1_1BasicManagerEx.html',1,'ntp::details']]],
+  ['basicmanagerex_3c_20ptp_5ftimer_2c_20timercontext_2c_20timermanager_20_3e_18',['BasicManagerEx&lt; PTP_TIMER, TimerContext, TimerManager &gt;',['../classntp_1_1details_1_1BasicManagerEx.html',1,'ntp::details']]],
+  ['basicmanagerex_3c_20ptp_5fwait_2c_20waitcontext_2c_20waitmanager_20_3e_19',['BasicManagerEx&lt; PTP_WAIT, WaitContext, WaitManager &gt;',['../classntp_1_1details_1_1BasicManagerEx.html',1,'ntp::details']]],
+  ['basicthreadpool_20',['BasicThreadPool',['../classntp_1_1BasicThreadPool.html#a55102d27dc4a510fb4f8303c03582283',1,'ntp::BasicThreadPool::BasicThreadPool(details::test_cancel_t test_cancel=details::DefaultTestCancel)'],['../classntp_1_1BasicThreadPool.html#a59b51f47c53cd6c419186690bf47e44f',1,'ntp::BasicThreadPool::BasicThreadPool(DWORD min_threads, DWORD max_threads, details::test_cancel_t test_cancel=details::DefaultTestCancel)'],['../classntp_1_1BasicThreadPool.html',1,'ntp::BasicThreadPool&lt; ThreadPoolTraits &gt;']]],
+  ['basicthreadpooltraits_21',['BasicThreadPoolTraits',['../classntp_1_1details_1_1BasicThreadPoolTraits.html',1,'ntp::details']]],
+  ['bytes_5ftransferred_22',['bytes_transferred',['../structntp_1_1io_1_1details_1_1IoData.html#aad635a0064705d40cceceacc6c4c2136',1,'ntp::io::details::IoData']]]
+];

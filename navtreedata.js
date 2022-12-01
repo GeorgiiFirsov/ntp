@@ -24,12 +24,43 @@
 */
 var NAVTREE =
 [
-  [ "ntp", "index.html", ]
+  [ "ntp", "index.html", [
+    [ "Installation", "index.html#autotoc_md1", null ],
+    [ "Usage", "index.html#autotoc_md2", null ],
+    [ "Examples", "index.html#autotoc_md3", [
+      [ "Basic workers", "index.html#autotoc_md4", null ],
+      [ "External cancellation", "index.html#autotoc_md5", null ],
+      [ "Cleanup on callback exit", "index.html#autotoc_md6", null ],
+      [ "Basic wait callbacks", "index.html#autotoc_md7", null ],
+      [ "External logger support", "index.html#autotoc_md8", null ],
+      [ "Variety of thread pools", "index.html#autotoc_md9", null ]
+    ] ],
+    [ "TODO", "index.html#autotoc_md10", null ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ]
+      ] ]
+    ] ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Typedefs", "globals_type.html", null ]
+      ] ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"allocator_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
