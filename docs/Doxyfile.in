@@ -2455,6 +2455,10 @@ HIDE_UNDOC_RELATIONS   = YES
 
 HAVE_DOT               = @NTP_DOXYGEN_HAVE_DOT@
 
+# Transparent pictures. Somewhy missing in default Doxyfile...
+
+DOT_TRANSPARENT        = YES
+
 # The DOT_NUM_THREADS specifies the number of dot invocations doxygen is allowed
 # to run in parallel. When set to 0 doxygen will base this on the number of
 # processors available in the system. You can set it explicitly to a value
