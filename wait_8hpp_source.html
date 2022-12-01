@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.0</span>
+   &#160;<span id="projectnumber">0.1.1</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -124,19 +124,19 @@ $(document).ready(function(){initNavTree('wait_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    { }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    TP_WAIT_RESULT ConvertParameter(<span class="keywordtype">void</span>* parameter) { <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>TP_WAIT_RESULT<span class="keyword">&gt;</span>(parameter); }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    TP_WAIT_RESULT* ConvertParameter(<span class="keywordtype">void</span>* parameter) { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>TP_WAIT_RESULT*<span class="keyword">&gt;</span>(parameter); }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt; <span class="comment">/* if constexpr works only for templates */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> CallImpl(PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT* wait_result)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_invocable_v&lt;std::decay_t&lt;Functor&gt;, PTP_CALLBACK_INSTANCE, TP_WAIT_RESULT, std::decay_t&lt;Args&gt;...&gt;)</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> args = std::tuple_cat(std::make_tuple(instance, wait_result), <a class="code" href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">Arguments</a>());</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> args = std::tuple_cat(std::make_tuple(instance, *wait_result), <a class="code" href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">Arguments</a>());</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            std::apply(<a class="code" href="classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3">Callable</a>(), args);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> args = std::tuple_cat(std::make_tuple(wait_result), <a class="code" href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">Arguments</a>());</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> args = std::tuple_cat(std::make_tuple(*wait_result), <a class="code" href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">Arguments</a>());</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            std::apply(<a class="code" href="classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3">Callable</a>(), args);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
