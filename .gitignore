@@ -1,5 +1,6 @@
 # Hidden items
 .*
+!/.github
 !/.gitignore
 !/.clang-format
 !/.clang-tidy
