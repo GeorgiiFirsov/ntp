@@ -20,7 +20,7 @@ endif (NTP_BUILD_GH_DOCS)
 #
 set(NTP_DOCS_VERSION              ${CMAKE_PROJECT_VERSION})
 set(NTP_DOCS_ROOT                 ${NTP_ROOT}/docs)
-set(NTP_DOCS_AWESOME_DOXYGEN_ROOT ${NTP_DOCS_ROOT}/doxygen-awesome-css)
+set(NTP_DOCS_DOXYGEN_AWESOME_ROOT ${NTP_DOCS_ROOT}/doxygen-awesome-css)
 set(NTP_DOCS_DOXYGEN_IN           ${NTP_DOCS_ROOT}/Doxyfile.in)
 set(NTP_DOCS_DOXYGEN_OUT          ${NTP_DOCS_ROOT}/Doxyfile)
 
