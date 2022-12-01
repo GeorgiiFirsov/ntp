@@ -58,6 +58,9 @@ else (NTP_ENABLE_GH_DOCS_ONLY)
 
 endif (NTP_ENABLE_GH_DOCS_ONLY)
 
+#
+# Print current configuration
+#
 message(NOTICE "[${CMAKE_PROJECT_NAME}] Building library: ${NTP_BUILD_LIBRARY}")
 message(NOTICE "[${CMAKE_PROJECT_NAME}] Building tests: ${NTP_BUILD_TESTS}")
 message(NOTICE "[${CMAKE_PROJECT_NAME}] Building docs: ${NTP_BUILD_DOCS} (for GitHub: ${NTP_BUILD_GH_DOCS})")

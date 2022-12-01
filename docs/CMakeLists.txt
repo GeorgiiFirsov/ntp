@@ -18,6 +18,7 @@ configure_file(${NTP_DOCS_DOXYGEN_IN} ${NTP_DOCS_DOXYGEN_OUT} @ONLY)
 #
 if (NTP_BUILD_GH_DOCS)
     message(NOTICE "[${CMAKE_PROJECT_NAME}] Doxyfile is generated, but NTP_BUILD_GH_DOCS is set, nothing else will be performed")
+    message(NOTICE "[${CMAKE_PROJECT_NAME}] Doxyfile is located here: '${NTP_DOCS_DOXYGEN_OUT}'")
     return()
 endif (NTP_BUILD_GH_DOCS)
 
