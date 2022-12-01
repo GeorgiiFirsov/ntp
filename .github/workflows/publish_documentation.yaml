@@ -23,10 +23,10 @@ jobs:
               uses: mattnotmitt/doxygen-action@v1.9.4
               with:
                 doxyfile-path: docs/Doxyfile
-#
-#            - name: Publish generated content to GitHub Pages
-#              uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
-#              with:
-#                dir: docs/html
-#                branch: gh-pages
-#                token: ${{ secrets.ACCESS_TOKEN }}
+
+            - name: Publish generated content to GitHub Pages
+              uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+              with:
+                dir: docs/html
+                branch: main
+                token: ${{ secrets.ACCESS_TOKEN }}
