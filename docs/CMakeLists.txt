@@ -1,5 +1,14 @@
 #
-# Setup variables
+# Configuration flags
+#
+if (NTP_BUILD_GH_DOCS)
+    set(NTP_DOXYGEN_HAVE_DOT YES)
+else (NTP_BUILD_GH_DOCS)
+    set(NTP_DOXYGEN_HAVE_DOT NO)
+endif (NTP_BUILD_GH_DOCS)
+
+#
+# Setup paths
 #
 set(NTP_DOCS_ROOT        ${NTP_ROOT}/docs)
 set(NTP_DOCS_STYLES_ROOT ${NTP_DOCS_ROOT}/doxygen-awesome-css)
