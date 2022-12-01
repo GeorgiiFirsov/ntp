@@ -15,12 +15,15 @@ jobs:
               with:
                 fetch-depth: 0
                 submodules: 'recursive'
-
-            - name: Checking content of docs
-              run: ls docs/
             
             - name: Configure Doxygen with CMake
               run: cmake . -DNTP_ENABLE_GH_DOCS_ONLY=ON
+
+            - name: Checking content of docs
+              run: ls docs/
+
+            - name: Checking content of docs/doxygen-awesome-css
+              run: ls docs/doxygen-awesome-css/
 
             - name: Generate Documentation
               uses: mattnotmitt/doxygen-action@v1.9.4
