@@ -22,7 +22,7 @@ jobs:
             - name: Generate Documentation
               uses: mattnotmitt/doxygen-action@v1.9.4
               with:
-                doxyfile-path: docs/Doxyfile
+                working-directory: docs/
 
             - name: Publish generated content to GitHub Pages
               uses: JamesIves/github-pages-deploy-action@v4
