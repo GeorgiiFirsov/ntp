@@ -73,6 +73,11 @@ set(NTP_LIBRARY_ROOT ${NTP_ROOT}/ntp)
 set(NTP_INCLUDE_DIR  ${NTP_LIBRARY_ROOT}/include)
 
 #
+# Generic include directories
+#
+set(NTP_GENERIC_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR})
+
+#
 # Preprocessor definitions
 #
 add_compile_definitions(UNICODE)  # Build with unicode characters (wchar_t)

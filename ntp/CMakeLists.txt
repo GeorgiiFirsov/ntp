@@ -12,10 +12,7 @@ set(NTP_LIB_DETAILS_SOURCE      ${NTP_LIB_SOURCE_ROOT}/details)
 set(NTP_LIB_POOL_SOURCE         ${NTP_LIB_SOURCE_ROOT}/pool)
 set(NTP_LIB_LOGGER_SOURCE       ${NTP_LIB_SOURCE_ROOT}/logger)
 
-set(NTP_LIB_INCLUDE_DIRECTORIES ${NTP_LIB_INCLUDE_ROOT}
-                                ${NTP_LIB_DETAILS_INCLUDE}
-                                ${NTP_LIB_POOL_INCLUDE}
-                                ${NTP_LIB_LOGGER_INCLUDE})
+set(NTP_LIB_INCLUDE_DIRECTORIES ${NTP_GENERIC_INCLUDE_DIRECTORIES})
 
 #
 # Sources and headers
