@@ -53,8 +53,17 @@ void NTAPI TimerManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_
 }
 
 /* static */
-void TimerManager::Close(native_handle_t native_handle) noexcept
+void TimerManager::CloseInternal(native_handle_t native_handle) noexcept
 {
+    if (!native_handle)
+    {
+        //
+        // Just to be confident if we are working with a valid object
+        //
+
+        return;
+    }
+
     ntp::details::SafeThreadpoolCall<SetThreadpoolTimerEx>(native_handle, nullptr, 0, 0);
     ntp::details::SafeThreadpoolCall<WaitForThreadpoolTimerCallbacks>(native_handle, TRUE);
     ntp::details::SafeThreadpoolCall<CloseThreadpoolTimer>(native_handle);

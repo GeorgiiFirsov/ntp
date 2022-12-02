@@ -161,9 +161,16 @@ private:
  * This extended version is used for waits, because each such object must have separate native handle.
  * 
  * Derived class must implement the following methods:
- * - static Close(native_handle_t native_handle)
- * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context)
- * - native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
+ * - static void CloseInternal(native_handle_t native_handle) noexcept - closes threadpool object in a common way.
+ * 
+ * - static void AbortInternal(native_handle_t native_handle) noexcept - closes threadpool object in an emergency situation. 
+ *   Due to template instantiation rules if you never call ntp::details::BasicManagerEx::Abort for specific
+ *   threadpool object, you may skip this function implementation.
+ * 
+ * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context) - submits object to threadpool.
+ * 
+ * - native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args) -
+ *   replaces object's callback.
  * 
  * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
  * @tparam ObjectContext Type of context specific for threadpool object kind
@@ -258,8 +265,11 @@ public:
     template<typename Functor, typename... Args>
     native_handle_t Replace(native_handle_t object, Functor&& functor, Args&&... args)
     {
-        if (const auto context = Lookup(object); context)
+        std::unique_lock lock { lock_ };
+
+        if (const auto callback = callbacks_.find(object); callback != callbacks_.end())
         {
+            const auto context = callback->second.get();
             return AsDerived()->ReplaceInternal(object, context,
                 std::forward<Functor>(functor), std::forward<Args>(args)...);
         }
@@ -280,15 +290,28 @@ public:
     }
 
     /**
+     * @brief Cancels and removes an object in case of emergency.
+     *
+     * @param object Handle for an object
+     */
+    void Abort(native_handle_t object) noexcept
+    {
+        AbortAndRemove(object);
+    }
+
+    /**
      * @brief Cancel all pending callbacks.
      */
     void CancelAll() noexcept
     {
+        static_assert(noexcept(Derived::CloseInternal(std::declval<native_handle_t>())),
+            "[ntp::details::BasicManagerEx::CancelAll]: Derived::CloseInternal MUST be noexcept");
+
         std::unique_lock lock { lock_ };
 
         for (auto& [native_handle, _] : callbacks_)
         {
-            Derived::Close(native_handle);
+            Derived::CloseInternal(native_handle);
         }
 
         callbacks_.clear();
@@ -356,27 +379,32 @@ private:
         return static_cast<Derived*>(this);
     }
 
-    void CloseAndRemove(native_handle_t native_handle)
+    template<auto Cleanup>
+    void CleanupAndRemove(native_handle_t native_handle) noexcept
     {
         std::unique_lock lock { lock_ };
 
         if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
         {
-            Derived::Close(native_handle);
+            Cleanup(native_handle);
             callbacks_.erase(callback);
         }
     }
 
-    context_pointer_t Lookup(native_handle_t native_handle) noexcept
+    void CloseAndRemove(native_handle_t native_handle) noexcept
     {
-        std::shared_lock lock { lock_ };
+        static_assert(noexcept(Derived::CloseInternal(std::declval<native_handle_t>())),
+            "[ntp::details::BasicManagerEx::CloseAndRemove]: Derived::CloseInternal MUST be noexcept");
 
-        if (const auto callback = callbacks_.find(native_handle); callback != callbacks_.end())
-        {
-            return callback->second.get();
-        }
+        return CleanupAndRemove<Derived::CloseInternal>(native_handle);
+    }
 
-        return nullptr;
+    void AbortAndRemove(native_handle_t native_handle) noexcept
+    {
+        static_assert(noexcept(Derived::AbortInternal(std::declval<native_handle_t>())),
+            "[ntp::details::BasicManagerEx::AbortAndRemove]: Derived::AbortInternal MUST be noexcept");
+
+        return CleanupAndRemove<Derived::AbortInternal>(native_handle);
     }
 
 private:

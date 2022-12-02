@@ -406,6 +406,9 @@ public:
     /**
      * @brief Submits a threadpool IO object with a user-defined callback.
      *
+     * If after call to this function async IO failed to start you MUST call
+     * ntp::BasicThreadPool::AbortIo to prevent memory leaks).
+     * 
      * @param io_handle Handle of and object, wchich asynchronous IO is performed on
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
@@ -421,6 +424,9 @@ public:
     /**
      * @brief Replaces an existing threadpool IO callback with a new one.
      *        This method cannot be called concurrently for the same IO object.
+     *
+     * If after call to this function async IO failed to start you MUST call
+     * ntp::BasicThreadPool::AbortIo to prevent memory leaks).
      *
      * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
      * @param functor New callable to invoke
@@ -441,6 +447,13 @@ public:
      * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
      */
     void CancelIo(io_t io_object) noexcept { return io_manager_.Cancel(io_object); }
+
+    /**
+     * @brief Cancel threadpool IO if async IO failed to start.
+     *
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     */
+    void AbortIo(io_t io_object) noexcept { return io_manager_.Abort(io_object); }
 
     /**
      * @brief Cancel all pending IO callbacks

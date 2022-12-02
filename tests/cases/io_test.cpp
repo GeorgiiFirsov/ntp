@@ -24,7 +24,7 @@ TEST(Io, Submit)
     size_t bytes_written = 0;
 
     ntp::SystemThreadPool pool;
-    pool.SubmitIo(file, [&bytes_written, &event](PTP_CALLBACK_INSTANCE instance, LPVOID /*overlapped*/, ULONG /*result*/, ULONG_PTR bytes_transferred) {
+    const auto io = pool.SubmitIo(file, [&bytes_written, &event](PTP_CALLBACK_INSTANCE instance, LPVOID /*overlapped*/, ULONG /*result*/, ULONG_PTR bytes_transferred) {
         SetEventWhenCallbackReturns(instance, event);
         bytes_written = static_cast<size_t>(bytes_transferred);
     });
@@ -38,13 +38,20 @@ TEST(Io, Submit)
     OVERLAPPED ovl = {};
     hr             = file.Write(buffer.data(), static_cast<DWORD>(buffer.size()), &ovl);
 
-    EXPECT_EQ(hr, HRESULT_FROM_WIN32(ERROR_IO_PENDING));
+    if (hr == HRESULT_FROM_WIN32(ERROR_IO_PENDING))
+    {
+        WaitForSingleObject(event, INFINITE);
 
-    WaitForSingleObject(event, INFINITE);
+        //
+        // Check if all bytes are written into a file
+        //
 
-    //
-    // Check if all bytes are written into a file
-    //
+        EXPECT_EQ(bytes_written, buffer.size());
+    }
+    else
+    {
+        pool.AbortIo(io);
 
-    EXPECT_EQ(bytes_written, buffer.size());
+        FAIL();
+    }
 }
