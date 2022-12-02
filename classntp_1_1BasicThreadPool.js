@@ -3,6 +3,7 @@ var classntp_1_1BasicThreadPool =
     [ "BasicThreadPool", "classntp_1_1BasicThreadPool.html#a55102d27dc4a510fb4f8303c03582283", null ],
     [ "BasicThreadPool", "classntp_1_1BasicThreadPool.html#a59b51f47c53cd6c419186690bf47e44f", null ],
     [ "~BasicThreadPool", "classntp_1_1BasicThreadPool.html#a0c3d91351e32138b0857118e10817eae", null ],
+    [ "AbortIo", "classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2", null ],
     [ "CancelAllCallbacks", "classntp_1_1BasicThreadPool.html#aefae25ab34cf134904e46b7f67c0ddc1", null ],
     [ "CancelIo", "classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a", null ],
     [ "CancelIos", "classntp_1_1BasicThreadPool.html#a4ef2a8ee6326ab9de68fc887762c421e", null ],

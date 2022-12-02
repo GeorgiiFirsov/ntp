@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.1.2</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -171,6 +171,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a568ff5fba7cebe6ad9dd7955e942c01a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a">CancelIo</a> (<a class="el" href="threadpool_8hpp.html#aba881202ec99a5f486f3fd0f3d7446b9">io_t</a> io_object) noexcept</td></tr>
 <tr class="memdesc:a568ff5fba7cebe6ad9dd7955e942c01a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel threadpool IO.  <a href="classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a">More...</a><br /></td></tr>
 <tr class="separator:a568ff5fba7cebe6ad9dd7955e942c01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87fee13ef91c8688336a5de8358931b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2">AbortIo</a> (<a class="el" href="threadpool_8hpp.html#aba881202ec99a5f486f3fd0f3d7446b9">io_t</a> io_object) noexcept</td></tr>
+<tr class="memdesc:a87fee13ef91c8688336a5de8358931b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel threadpool IO if async IO failed to start.  <a href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2">More...</a><br /></td></tr>
+<tr class="separator:a87fee13ef91c8688336a5de8358931b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef2a8ee6326ab9de68fc887762c421e"><td class="memItemLeft" align="right" valign="top"><a id="a4ef2a8ee6326ab9de68fc887762c421e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a4ef2a8ee6326ab9de68fc887762c421e">CancelIos</a> () noexcept</td></tr>
 <tr class="memdesc:a4ef2a8ee6326ab9de68fc887762c421e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel all pending IO callbacks. <br /></td></tr>
@@ -288,6 +291,42 @@ template&lt;typename  = std::enable_if_t&lt;std::is_same_v&lt;traits_t, details:
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a87fee13ef91c8688336a5de8358931b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87fee13ef91c8688336a5de8358931b2">&#9670;&nbsp;</a></span>AbortIo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ThreadPoolTraits &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classntp_1_1BasicThreadPool.html">ntp::BasicThreadPool</a>&lt; ThreadPoolTraits &gt;::AbortIo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="threadpool_8hpp.html#aba881202ec99a5f486f3fd0f3d7446b9">io_t</a>&#160;</td>
+          <td class="paramname"><em>io_object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cancel threadpool IO if async IO failed to start. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">io_object</td><td>Handle for an existing IO object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a" title="Submits a threadpool IO object with a user-defined callback.">ntp::BasicThreadPool::SubmitIo</a>) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a568ff5fba7cebe6ad9dd7955e942c01a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a568ff5fba7cebe6ad9dd7955e942c01a">&#9670;&nbsp;</a></span>CancelIo()</h2>
 
@@ -441,6 +480,7 @@ template&lt;typename Functor , typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Replaces an existing threadpool IO callback with a new one. This method cannot be called concurrently for the same IO object. </p>
+<p>If after call to this function async IO failed to start you MUST call <a class="el" href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2" title="Cancel threadpool IO if async IO failed to start.">ntp::BasicThreadPool::AbortIo</a> to prevent memory leaks).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">io_object</td><td>Handle for an existing IO object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a" title="Submits a threadpool IO object with a user-defined callback.">ntp::BasicThreadPool::SubmitIo</a>) </td></tr>
@@ -644,6 +684,7 @@ template&lt;typename Functor , typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Submits a threadpool IO object with a user-defined callback. </p>
+<p>If after call to this function async IO failed to start you MUST call <a class="el" href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2" title="Cancel threadpool IO if async IO failed to start.">ntp::BasicThreadPool::AbortIo</a> to prevent memory leaks).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">io_handle</td><td>Handle of and object, wchich asynchronous IO is performed on </td></tr>

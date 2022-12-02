@@ -7,6 +7,7 @@ var classntp_1_1details_1_1BasicManagerEx =
     [ "native_handle_t", "classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d", null ],
     [ "object_context_t", "classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f", null ],
     [ "BasicManagerEx", "classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc", null ],
+    [ "Abort", "classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6", null ],
     [ "Cancel", "classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96", null ],
     [ "CancelAll", "classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65", null ],
     [ "Replace", "classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f", null ],
