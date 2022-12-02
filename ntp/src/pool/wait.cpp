@@ -54,8 +54,17 @@ void NTAPI WaitManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_p
 }
 
 /* static */
-void WaitManager::Close(native_handle_t native_handle) noexcept
+void WaitManager::CloseInternal(native_handle_t native_handle) noexcept
 {
+    if (!native_handle)
+    {
+        //
+        // Just to be confident if we are working with a valid object
+        //
+
+        return;
+    }
+
     ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(native_handle, nullptr, nullptr);
     ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(native_handle, TRUE);
     ntp::details::SafeThreadpoolCall<CloseThreadpoolWait>(native_handle);

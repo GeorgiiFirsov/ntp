@@ -184,7 +184,7 @@ private:
 private:
     static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_pointer_t context, PTP_TIMER timer) noexcept;
 
-    static void Close(native_handle_t native_handle) noexcept;
+    static void CloseInternal(native_handle_t native_handle) noexcept;
 };
 
 }  // namespace ntp::timer::details

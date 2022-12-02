@@ -143,11 +143,9 @@ private:
     native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
     {
         //
-        // Firstly we need to cancel current pending callback and only
-        // after that we are allowed to replace it with the new one
+        // Callback exchange can be performed only after all callbacks are finished.
         //
 
-        ntp::details::SafeThreadpoolCall<CancelThreadpoolIo>(native_handle);
         ntp::details::SafeThreadpoolCall<WaitForThreadpoolIoCallbacks>(native_handle, TRUE);
 
         //
@@ -169,7 +167,9 @@ private:
     static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_pointer_t context, PVOID overlapped,
         ULONG result, ULONG_PTR bytes_transferred, PTP_IO io) noexcept;
 
-    static void Close(native_handle_t native_handle) noexcept;
+    static void CloseInternal(native_handle_t native_handle) noexcept;
+
+    static void AbortInternal(native_handle_t native_handle) noexcept;
 };
 
 }  // namespace ntp::io::details

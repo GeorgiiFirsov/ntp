@@ -51,11 +51,45 @@ void NTAPI IoManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_poi
 }
 
 /* static */
-void IoManager::Close(native_handle_t native_handle) noexcept
+void IoManager::CloseInternal(native_handle_t native_handle) noexcept
 {
-    ntp::details::SafeThreadpoolCall<CancelThreadpoolIo>(native_handle);
+    if (!native_handle)
+    {
+        //
+        // Just to be confident if we are working with a valid object
+        //
+
+        return;
+    }
+
     ntp::details::SafeThreadpoolCall<WaitForThreadpoolIoCallbacks>(native_handle, TRUE);
     ntp::details::SafeThreadpoolCall<CloseThreadpoolIo>(native_handle);
+}
+
+/* static */
+void IoManager::AbortInternal(native_handle_t native_handle) noexcept
+{
+    if (!native_handle)
+    {
+        //
+        // Just to be confident if we are working with a valid object
+        //
+
+        return;
+    }
+
+    //
+    // Here we need to cancel IO object first. This function prevents 
+    // memory leaks if async IO failed to start.
+    //
+
+    ntp::details::SafeThreadpoolCall<CancelThreadpoolIo>(native_handle);
+
+    //
+    // And now we are ready to close native handle
+    //
+
+    CloseInternal(native_handle);
 }
 
 }  // namespace ntp::io::details
