@@ -158,7 +158,8 @@ private:
 /**
  * @brief Extended version of ntp::details::BasicManager with container of callbacks.
  * 
- * This extended version is used for waits, because each such object must have separate native handle.
+ * This extended version is used for waits, timers and IOs, because each such object must have 
+ * separate native handle.
  * 
  * Derived class must implement the following methods:
  * - static void CloseInternal(native_handle_t native_handle) noexcept - closes threadpool object in a common way.
