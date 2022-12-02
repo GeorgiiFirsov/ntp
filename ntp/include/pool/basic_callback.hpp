@@ -170,7 +170,8 @@ private:
  * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context) - submits object to threadpool.
  * 
  * - native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args) -
- *   replaces object's callback.
+ *   replaces object's callback. Due to template instantiation rules if you never call ntp::details::BasicManagerEx::Replace
+ *   for specific threadpool object, you may skip this function implementation.
  * 
  * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
  * @tparam ObjectContext Type of context specific for threadpool object kind

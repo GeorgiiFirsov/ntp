@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <atomic>
-
 #include "ntp_config.hpp"
 #include "native/ntrtl.h"
 #include "details/allocator.hpp"

@@ -70,27 +70,6 @@ TEST(Wait, Timeout)
     EXPECT_TRUE(is_timed_out);
 }
 
-TEST(Wait, Replace)
-{
-    ATL::CEvent event(TRUE, FALSE);
-    ATL::CEvent callback_completed(TRUE, FALSE);
-    ntp::SystemThreadPool pool;
-
-    bool is_completed  = false;
-    const auto wait_object = pool.SubmitWait(event, [](TP_WAIT_RESULT) {});
-
-    pool.ReplaceWait(wait_object, [&is_completed, &callback_completed](PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
-        is_completed = (wait_result == WAIT_OBJECT_0);
-        SetEventWhenCallbackReturns(instance, callback_completed);
-    });
-
-    event.Set();
-
-    WaitForSingleObject(callback_completed, INFINITE);
-
-    EXPECT_TRUE(is_completed);
-}
-
 TEST(Wait, Cancel)
 {
     ATL::CEvent event(TRUE, FALSE);

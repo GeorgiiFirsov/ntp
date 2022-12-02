@@ -168,6 +168,19 @@ using io_t = io::details::IoManager::native_handle_t;
  * define which threadpool to use: system-default or cutom.
  * One can write its own threadpool traits if necessary.
  * 
+ * You can submit 4 different object types into threadpool:
+ * - Work objects, that execute your arbitrary callback immediately.
+ * 
+ * - Wait objects, that execute your arbitrary callback, when specified handle 
+ *   becomes signaled or timeout expires.
+ * 
+ * - Timer objects, that execute your arbitrary callback, when timer expires. 
+ *   They may be scheduled for periodical calls. You may exchange callback 
+ *   submitted earlier with a new one, and next time timer will call an updated one.
+ * 
+ * - IO objects, that execute your arbitrary callback, when asynchronous IO
+ *   is completed.
+ * 
  * @tparam ThreadPoolTraits Threadpool traits, that define
  *                          actual implementation internals
  */
@@ -308,25 +321,6 @@ public:
     }
 
     /**
-     * @brief Replaces an existing wait callback in threadpool.
-     *        This method cannot be called concurrently for the same wait object.
-     *
-     * @tparam Functor Type of callable to invoke in threadpool
-     * @tparam Args... Types of arguments
-     * @param wait_object Handle for an existing wait object (obtained from SubmitWait)
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
-     * @returns handle for the same wait object
-     */
-    template<typename Functor, typename... Args>
-    wait_t ReplaceWait(wait_t wait_object, Functor&& functor, Args&&... args)
-    {
-        return wait_manager_.Replace(wait_object, std::forward<Functor>(functor),
-            std::forward<Args>(args)...);
-    }
-
-    /**
      * @brief Cancel threadpool wait
      * 
      * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait)
@@ -418,26 +412,6 @@ public:
     io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
     {
         return io_manager_.Submit(io_handle, std::forward<Functor>(functor),
-            std::forward<Args>(args)...);
-    }
-
-    /**
-     * @brief Replaces an existing threadpool IO callback with a new one.
-     *        This method cannot be called concurrently for the same IO object.
-     *
-     * If after call to this function async IO failed to start you MUST call
-     * ntp::BasicThreadPool::AbortIo to prevent memory leaks).
-     *
-     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
-     * @param functor New callable to invoke
-     * @param args New arguments to pass into callable (they will be copied into wrapper)
-     * @throws ntp::exception::Win32Exception if specified handle is not present or corrupt
-     * @returns handle for the same IO object
-     */
-    template<typename Functor, typename... Args>
-    io_t ReplaceIo(io_t io_object, Functor&& functor, Args&&... args)
-    {
-        return io_manager_.Replace(io_object, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 
