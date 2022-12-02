@@ -161,30 +161,6 @@ public:
     }
 
 private:
-    template<typename Functor, typename... Args>
-    native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
-    {
-        //
-        // Firstly we need to cancel current pending callback and only
-        // after that we are allowed to replace it with the new one
-        //
-
-        ntp::details::SafeThreadpoolCall<SetThreadpoolWait>(native_handle, nullptr, nullptr);
-        ntp::details::SafeThreadpoolCall<WaitForThreadpoolWaitCallbacks>(native_handle, TRUE);
-
-        //
-        // Now I can change callback and here I don't care about callback itself,
-        // because it is cancelled.
-        //
-
-        context->callback = std::make_unique<WaitCallback<Functor, Args...>>(
-            std::forward<Functor>(functor), std::forward<Args>(args)...);
-
-        SubmitInternal(native_handle, context->object_context);
-
-        return native_handle;
-    }
-
     void SubmitInternal(native_handle_t native_handle, object_context_t& user_context);
 
 private:

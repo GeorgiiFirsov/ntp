@@ -139,28 +139,6 @@ public:
     }
 
 private:
-    template<typename Functor, typename... Args>
-    native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args)
-    {
-        //
-        // Callback exchange can be performed only after all callbacks are finished.
-        //
-
-        ntp::details::SafeThreadpoolCall<WaitForThreadpoolIoCallbacks>(native_handle, TRUE);
-
-        //
-        // Now I can change callback and here I don't care about callback itself,
-        // because it is cancelled.
-        //
-
-        context->callback = std::make_unique<IoCallback<Functor, Args...>>(
-            std::forward<Functor>(functor), std::forward<Args>(args)...);
-
-        SubmitInternal(native_handle, context->object_context);
-
-        return native_handle;
-    }
-
     void SubmitInternal(native_handle_t native_handle, object_context_t& user_context);
 
 private:
