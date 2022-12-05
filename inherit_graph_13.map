@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structntp_1_1io_1_1details_1_1IoContext.html" title="Specific context for threadpool IO objects. Empty, because no additional information is needed." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,120,32"/>
+<area shape="rect" id="node2" href="$classntp_1_1exception_1_1Win32Exception.html" title="Wrapper for Win32 error code, that has C++ interface." alt="" coords="168,5,396,32"/>
 </map>

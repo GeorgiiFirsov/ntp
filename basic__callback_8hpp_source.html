@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.3</span>
+   &#160;<span id="projectnumber">0.1.4</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -181,160 +181,160 @@ $(document).ready(function(){initNavTree('basic__callback_8hpp_source.html','');
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;};</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> NativeHandle, <span class="keyword">typename</span> ObjectContext, <span class="keyword">typename</span> Derived&gt;</div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html">  181</a></span>&#160;<span class="keyword">class </span><a class="code" href="classntp_1_1details_1_1BasicManagerEx.html">BasicManagerEx</a></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classntp_1_1details_1_1BasicManager.html">BasicManager</a></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="comment">// Forward declaration of context structure</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">struct </span>Context;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">  191</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> = NativeHandle;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">  197</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> = std::unique_ptr&lt;Context&gt;;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">  204</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">context_pointer_t</a> = <span class="keyword">typename</span> context_t::pointer;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">  209</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">object_context_t</a> = ObjectContext;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">  214</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">callbacks_t</a> = std::map&lt;native_handle_t, context_t&gt;;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ab8b76348e4c28fedd254a302ab12e058">  219</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1RtlResource.html">lock_t</a> = <a class="code" href="classntp_1_1details_1_1RtlResource.html">ntp::details::RtlResource</a>;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">struct </span>MetaContext</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html">BasicManagerEx</a>* manager; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    };</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">struct </span>Context final</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        object_context_t object_context; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        MetaContext meta_context; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <a class="code" href="basic__callback_8hpp.html#afb0bca01bc5ada5955fe59ae5ec461f5">ntp::details::callback_t</a> callback; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    };</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">  250</a></span>&#160;    <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">BasicManagerEx</a>(PTP_CALLBACK_ENVIRON environment)</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        : <a class="code" href="classntp_1_1details_1_1BasicManager.html">BasicManager</a>(environment)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        , callbacks_()</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        , lock_()</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    { }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Functor, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">  267</a></span>&#160;    <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">Replace</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>, Functor&amp;&amp; functor, Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    {</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        std::unique_lock lock { lock_ };</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> callback = callbacks_.find(<span class="keywordtype">object</span>); callback != callbacks_.end())</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        {</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> context = callback-&gt;second.get();</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">return</span> AsDerived()-&gt;ReplaceInternal(<span class="keywordtype">object</span>, context,</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                std::forward&lt;Functor&gt;(functor), std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classntp_1_1exception_1_1Win32Exception.html">exception::Win32Exception</a>(ERROR_NOT_FOUND);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">  288</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">Cancel</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>) noexcept</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        CloseAndRemove(<span class="keywordtype">object</span>);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    }</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">  298</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">Abort</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>) noexcept</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        AbortAndRemove(<span class="keywordtype">object</span>);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">  306</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">CancelAll</a>() noexcept</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        static_assert(noexcept(Derived::CloseInternal(std::declval&lt;native_handle_t&gt;())),</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::CancelAll]: Derived::CloseInternal MUST be noexcept&quot;</span>);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        std::unique_lock lock { lock_ };</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [native_handle, _] : callbacks_)</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            Derived::CloseInternal(native_handle);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        callbacks_.clear();</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">  328</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">SubmitContext</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle, <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a>&amp;&amp; context)</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        std::unique_lock lock { lock_ };</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> [iter, _]                     = callbacks_.emplace(native_handle, std::move(context));</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        iter-&gt;second-&gt;meta_context.manager       = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        iter-&gt;second-&gt;meta_context.native_handle = native_handle;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        AsDerived()-&gt;SubmitInternal(native_handle, iter-&gt;second-&gt;object_context);</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">  345</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">CreateContext</a>()</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    {</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;Context&gt;();</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    }</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">  367</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">CleanupContext</a>(PTP_CALLBACK_INSTANCE instance, <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">context_pointer_t</a> context)</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        DisassociateCurrentThreadFromCallback(instance);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keyword">auto</span> native_handle = context-&gt;meta_context.native_handle;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">auto</span> manager       = context-&gt;meta_context.manager;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordflow">return</span> manager-&gt;CloseAndRemove(native_handle);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    Derived* AsDerived() noexcept</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    {</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    }</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">template</span>&lt;auto Cleanup&gt;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordtype">void</span> CleanupAndRemove(native_handle_t native_handle) noexcept</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    {</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        std::unique_lock lock { lock_ };</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> callback = callbacks_.find(native_handle); callback != callbacks_.end())</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        {</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            Cleanup(native_handle);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            callbacks_.erase(callback);</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        }</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    }</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="keywordtype">void</span> CloseAndRemove(native_handle_t native_handle) noexcept</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    {</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        static_assert(noexcept(Derived::CloseInternal(std::declval&lt;native_handle_t&gt;())),</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::CloseAndRemove]: Derived::CloseInternal MUST be noexcept&quot;</span>);</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keywordflow">return</span> CleanupAndRemove&lt;Derived::CloseInternal&gt;(native_handle);</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordtype">void</span> AbortAndRemove(native_handle_t native_handle) noexcept</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    {</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        static_assert(noexcept(Derived::AbortInternal(std::declval&lt;native_handle_t&gt;())),</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::AbortAndRemove]: Derived::AbortInternal MUST be noexcept&quot;</span>);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        <span class="keywordflow">return</span> CleanupAndRemove&lt;Derived::AbortInternal&gt;(native_handle);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    }</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="comment">// Container with callbacks</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    callbacks_t callbacks_;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="comment">// Syncronization primitive for callbacks container</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keyword">mutable</span> lock_t lock_;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;};</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;}  <span class="comment">// namespace ntp::details</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> NativeHandle, <span class="keyword">typename</span> ObjectContext, <span class="keyword">typename</span> Derived&gt;</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html">  182</a></span>&#160;<span class="keyword">class </span><a class="code" href="classntp_1_1details_1_1BasicManagerEx.html">BasicManagerEx</a></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classntp_1_1details_1_1BasicManager.html">BasicManager</a></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;{</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="comment">// Forward declaration of context structure</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">struct </span>Context;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">  192</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> = NativeHandle;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00198"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">  198</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> = std::unique_ptr&lt;Context&gt;;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">  205</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">context_pointer_t</a> = <span class="keyword">typename</span> context_t::pointer;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">  210</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">object_context_t</a> = ObjectContext;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">  215</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">callbacks_t</a> = std::map&lt;native_handle_t, context_t&gt;;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#ab8b76348e4c28fedd254a302ab12e058">  220</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classntp_1_1details_1_1RtlResource.html">lock_t</a> = <a class="code" href="classntp_1_1details_1_1RtlResource.html">ntp::details::RtlResource</a>;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keyword">struct </span>MetaContext</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html">BasicManagerEx</a>* manager; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    };</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">struct </span>Context final</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        object_context_t object_context; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        MetaContext meta_context; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <a class="code" href="basic__callback_8hpp.html#afb0bca01bc5ada5955fe59ae5ec461f5">ntp::details::callback_t</a> callback; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    };</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">  251</a></span>&#160;    <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">BasicManagerEx</a>(PTP_CALLBACK_ENVIRON environment)</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        : <a class="code" href="classntp_1_1details_1_1BasicManager.html">BasicManager</a>(environment)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        , callbacks_()</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        , lock_()</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    { }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Functor, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">  268</a></span>&#160;    <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">Replace</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>, Functor&amp;&amp; functor, Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        std::unique_lock lock { lock_ };</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> callback = callbacks_.find(<span class="keywordtype">object</span>); callback != callbacks_.end())</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> context = callback-&gt;second.get();</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">return</span> AsDerived()-&gt;ReplaceInternal(<span class="keywordtype">object</span>, context,</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                std::forward&lt;Functor&gt;(functor), std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classntp_1_1exception_1_1Win32Exception.html">exception::Win32Exception</a>(ERROR_NOT_FOUND);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">  289</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">Cancel</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>) noexcept</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        CloseAndRemove(<span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    }</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">  299</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">Abort</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> <span class="keywordtype">object</span>) noexcept</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    {</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        AbortAndRemove(<span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    }</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">  307</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">CancelAll</a>() noexcept</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        static_assert(noexcept(Derived::CloseInternal(std::declval&lt;native_handle_t&gt;())),</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::CancelAll]: Derived::CloseInternal MUST be noexcept&quot;</span>);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        std::unique_lock lock { lock_ };</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [native_handle, _] : callbacks_)</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        {</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            Derived::CloseInternal(native_handle);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        callbacks_.clear();</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">  329</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">SubmitContext</a>(<a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle, <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a>&amp;&amp; context)</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        std::unique_lock lock { lock_ };</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> [iter, _]                     = callbacks_.emplace(native_handle, std::move(context));</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        iter-&gt;second-&gt;meta_context.manager       = <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        iter-&gt;second-&gt;meta_context.native_handle = native_handle;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        AsDerived()-&gt;SubmitInternal(native_handle, iter-&gt;second-&gt;object_context);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    }</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">  346</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">CreateContext</a>()</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;Context&gt;();</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno"><a class="line" href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">  368</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">CleanupContext</a>(PTP_CALLBACK_INSTANCE instance, <a class="code" href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">context_pointer_t</a> context)</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        DisassociateCurrentThreadFromCallback(instance);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">auto</span> native_handle = context-&gt;meta_context.native_handle;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="keyword">auto</span> manager       = context-&gt;meta_context.manager;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordflow">return</span> manager-&gt;CloseAndRemove(native_handle);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    }</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    Derived* AsDerived() noexcept</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keyword">template</span>&lt;auto Cleanup&gt;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordtype">void</span> CleanupAndRemove(native_handle_t native_handle) noexcept</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        std::unique_lock lock { lock_ };</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> callback = callbacks_.find(native_handle); callback != callbacks_.end())</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            Cleanup(native_handle);</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            callbacks_.erase(callback);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordtype">void</span> CloseAndRemove(native_handle_t native_handle) noexcept</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        static_assert(noexcept(Derived::CloseInternal(std::declval&lt;native_handle_t&gt;())),</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::CloseAndRemove]: Derived::CloseInternal MUST be noexcept&quot;</span>);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">return</span> CleanupAndRemove&lt;Derived::CloseInternal&gt;(native_handle);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keywordtype">void</span> AbortAndRemove(native_handle_t native_handle) noexcept</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        static_assert(noexcept(Derived::AbortInternal(std::declval&lt;native_handle_t&gt;())),</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            <span class="stringliteral">&quot;[ntp::details::BasicManagerEx::AbortAndRemove]: Derived::AbortInternal MUST be noexcept&quot;</span>);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="keywordflow">return</span> CleanupAndRemove&lt;Derived::AbortInternal&gt;(native_handle);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="comment">// Container with callbacks</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    callbacks_t callbacks_;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="comment">// Syncronization primitive for callbacks container</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keyword">mutable</span> lock_t lock_;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;};</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;}  <span class="comment">// namespace ntp::details</span></div>
 <div class="ttc" id="abasic__callback_8hpp_html_a52d3f68ac97176db5960bbcd126cfb9e"><div class="ttname"><a href="basic__callback_8hpp.html#a52d3f68ac97176db5960bbcd126cfb9e">ntp::details::test_cancel_t</a></div><div class="ttdeci">std::function&lt; bool()&gt; test_cancel_t</div><div class="ttdoc">Cancellation checker for threadpool.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:35</div></div>
 <div class="ttc" id="abasic__callback_8hpp_html_adf45388dd4aad21efcea75b4620d86ba"><div class="ttname"><a href="basic__callback_8hpp.html#adf45388dd4aad21efcea75b4620d86ba">ntp::details::kTestCancelTimeout</a></div><div class="ttdeci">constexpr NTP_INLINE auto kTestCancelTimeout</div><div class="ttdoc">Cancellation test timeout, while waiting for callbacks. Set to 500 msec.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:27</div></div>
 <div class="ttc" id="abasic__callback_8hpp_html_afb0bca01bc5ada5955fe59ae5ec461f5"><div class="ttname"><a href="basic__callback_8hpp.html#afb0bca01bc5ada5955fe59ae5ec461f5">ntp::details::callback_t</a></div><div class="ttdeci">std::unique_ptr&lt; ICallback &gt; callback_t</div><div class="ttdoc">Smart pointer to ICallback implementation object.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:62</div></div>
@@ -342,20 +342,20 @@ $(document).ready(function(){initNavTree('basic__callback_8hpp_source.html','');
 <div class="ttc" id="aclassntp_1_1details_1_1BasicCallback_html_a4924e5aca2218bea5183c94ac53388b3"><div class="ttname"><a href="classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3">ntp::details::BasicCallback::Callable</a></div><div class="ttdeci">Functor &amp; Callable() noexcept</div><div class="ttdoc">Get stored callable.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:104</div></div>
 <div class="ttc" id="aclassntp_1_1details_1_1BasicCallback_html_ae1ce89a9c87ffe9aa8d80c37a1a27a0c"><div class="ttname"><a href="classntp_1_1details_1_1BasicCallback.html#ae1ce89a9c87ffe9aa8d80c37a1a27a0c">ntp::details::BasicCallback::BasicCallback</a></div><div class="ttdeci">BasicCallback(Functor functor, CArgs &amp;&amp;... args)</div><div class="ttdoc">Constructor from callable and its arguments.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:94</div></div>
 <div class="ttc" id="aclassntp_1_1details_1_1BasicCallback_html_af9d69c7530bca2103f7a76f9bfb28543"><div class="ttname"><a href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">ntp::details::BasicCallback::Arguments</a></div><div class="ttdeci">tuple_t &amp; Arguments() noexcept</div><div class="ttdoc">Get stored pack of arguments.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:111</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html">ntp::details::BasicManagerEx</a></div><div class="ttdoc">Extended version of ntp::details::BasicManager with container of callbacks.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:183</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a06383c0f3596e08ec53c10ff901062f2"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">ntp::details::BasicManagerEx::context_t</a></div><div class="ttdeci">std::unique_ptr&lt; Context &gt; context_t</div><div class="ttdoc">Smart pointer to specific context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:197</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a067b67b238cf1f6294f660e3da6f34ff"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">ntp::details::BasicManagerEx::SubmitContext</a></div><div class="ttdeci">void SubmitContext(native_handle_t native_handle, context_t &amp;&amp;context)</div><div class="ttdoc">Put context into container and then submit associated callback.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:328</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a3b0d0f75c248e7f3c154f201707e423a"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">ntp::details::BasicManagerEx::CreateContext</a></div><div class="ttdeci">static context_t CreateContext()</div><div class="ttdoc">Create new empty context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:345</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a50c91546c13cea19beb80f03f0ff8e65"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">ntp::details::BasicManagerEx::CancelAll</a></div><div class="ttdeci">void CancelAll() noexcept</div><div class="ttdoc">Cancel all pending callbacks.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:306</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a8380d9134dd2c0cfa5b4ed8c59616cdc"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">ntp::details::BasicManagerEx::BasicManagerEx</a></div><div class="ttdeci">BasicManagerEx(PTP_CALLBACK_ENVIRON environment)</div><div class="ttdoc">Constructor that initializes all necessary objects.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:250</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_aaa7413bc68c833cf91741b0fb8a1773d"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">ntp::details::BasicManagerEx::native_handle_t</a></div><div class="ttdeci">NativeHandle native_handle_t</div><div class="ttdoc">Type of native threadpool object handle.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:191</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_abab258af74a1159d7e01d9f16c516c96"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">ntp::details::BasicManagerEx::Cancel</a></div><div class="ttdeci">void Cancel(native_handle_t object) noexcept</div><div class="ttdoc">Cancels and removes an object.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:288</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_acc49e0ef617c0e40e2ca4015849b58e6"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">ntp::details::BasicManagerEx::Abort</a></div><div class="ttdeci">void Abort(native_handle_t object) noexcept</div><div class="ttdoc">Cancels and removes an object in case of emergency.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:298</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_ad214e966d16f2c9abe4d9d6608e25c85"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">ntp::details::BasicManagerEx::callbacks_t</a></div><div class="ttdeci">std::map&lt; native_handle_t, context_t &gt; callbacks_t</div><div class="ttdoc">Container with callbacks represented by their handles.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:214</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_add6b00f91025eb379c729f3c4231ab8f"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">ntp::details::BasicManagerEx::Replace</a></div><div class="ttdeci">native_handle_t Replace(native_handle_t object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Replaces an existing threadpool callback with a new one.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:267</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_ae9e45e8fc09ba0371e635fc0ac3fc69f"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">ntp::details::BasicManagerEx::object_context_t</a></div><div class="ttdeci">ObjectContext object_context_t</div><div class="ttdoc">Implementation's context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:209</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_af3355b5f8cdbb07551b7120b8a22ee57"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">ntp::details::BasicManagerEx::context_pointer_t</a></div><div class="ttdeci">typename context_t::pointer context_pointer_t</div><div class="ttdoc">Raw pointer to specific context. Is never invalidated, while pointee lives. E.g. after any modificati...</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:204</div></div>
-<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_af6abecc9cf24cd8b7043c10707deeb2c"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">ntp::details::BasicManagerEx::CleanupContext</a></div><div class="ttdeci">static void CleanupContext(PTP_CALLBACK_INSTANCE instance, context_pointer_t context)</div><div class="ttdoc">A right way to delete object from its callback.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:367</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html">ntp::details::BasicManagerEx</a></div><div class="ttdoc">Extended version of ntp::details::BasicManager with container of callbacks.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:184</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a06383c0f3596e08ec53c10ff901062f2"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">ntp::details::BasicManagerEx::context_t</a></div><div class="ttdeci">std::unique_ptr&lt; Context &gt; context_t</div><div class="ttdoc">Smart pointer to specific context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:198</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a067b67b238cf1f6294f660e3da6f34ff"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">ntp::details::BasicManagerEx::SubmitContext</a></div><div class="ttdeci">void SubmitContext(native_handle_t native_handle, context_t &amp;&amp;context)</div><div class="ttdoc">Put context into container and then submit associated callback.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:329</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a3b0d0f75c248e7f3c154f201707e423a"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a3b0d0f75c248e7f3c154f201707e423a">ntp::details::BasicManagerEx::CreateContext</a></div><div class="ttdeci">static context_t CreateContext()</div><div class="ttdoc">Create new empty context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:346</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a50c91546c13cea19beb80f03f0ff8e65"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65">ntp::details::BasicManagerEx::CancelAll</a></div><div class="ttdeci">void CancelAll() noexcept</div><div class="ttdoc">Cancel all pending callbacks.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:307</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_a8380d9134dd2c0cfa5b4ed8c59616cdc"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">ntp::details::BasicManagerEx::BasicManagerEx</a></div><div class="ttdeci">BasicManagerEx(PTP_CALLBACK_ENVIRON environment)</div><div class="ttdoc">Constructor that initializes all necessary objects.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:251</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_aaa7413bc68c833cf91741b0fb8a1773d"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">ntp::details::BasicManagerEx::native_handle_t</a></div><div class="ttdeci">NativeHandle native_handle_t</div><div class="ttdoc">Type of native threadpool object handle.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:192</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_abab258af74a1159d7e01d9f16c516c96"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96">ntp::details::BasicManagerEx::Cancel</a></div><div class="ttdeci">void Cancel(native_handle_t object) noexcept</div><div class="ttdoc">Cancels and removes an object.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:289</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_acc49e0ef617c0e40e2ca4015849b58e6"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6">ntp::details::BasicManagerEx::Abort</a></div><div class="ttdeci">void Abort(native_handle_t object) noexcept</div><div class="ttdoc">Cancels and removes an object in case of emergency.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:299</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_ad214e966d16f2c9abe4d9d6608e25c85"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85">ntp::details::BasicManagerEx::callbacks_t</a></div><div class="ttdeci">std::map&lt; native_handle_t, context_t &gt; callbacks_t</div><div class="ttdoc">Container with callbacks represented by their handles.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:215</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_add6b00f91025eb379c729f3c4231ab8f"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">ntp::details::BasicManagerEx::Replace</a></div><div class="ttdeci">native_handle_t Replace(native_handle_t object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Replaces an existing threadpool callback with a new one.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:268</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_ae9e45e8fc09ba0371e635fc0ac3fc69f"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">ntp::details::BasicManagerEx::object_context_t</a></div><div class="ttdeci">ObjectContext object_context_t</div><div class="ttdoc">Implementation's context.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:210</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_af3355b5f8cdbb07551b7120b8a22ee57"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#af3355b5f8cdbb07551b7120b8a22ee57">ntp::details::BasicManagerEx::context_pointer_t</a></div><div class="ttdeci">typename context_t::pointer context_pointer_t</div><div class="ttdoc">Raw pointer to specific context. Is never invalidated, while pointee lives. E.g. after any modificati...</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:205</div></div>
+<div class="ttc" id="aclassntp_1_1details_1_1BasicManagerEx_html_af6abecc9cf24cd8b7043c10707deeb2c"><div class="ttname"><a href="classntp_1_1details_1_1BasicManagerEx.html#af6abecc9cf24cd8b7043c10707deeb2c">ntp::details::BasicManagerEx::CleanupContext</a></div><div class="ttdeci">static void CleanupContext(PTP_CALLBACK_INSTANCE instance, context_pointer_t context)</div><div class="ttdoc">A right way to delete object from its callback.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:368</div></div>
 <div class="ttc" id="aclassntp_1_1details_1_1BasicManager_html"><div class="ttname"><a href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a></div><div class="ttdoc">Base class for all callbacks' managers.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:135</div></div>
 <div class="ttc" id="aclassntp_1_1details_1_1BasicManager_html_a4b258e1048a420512d88a23c5b01cc66"><div class="ttname"><a href="classntp_1_1details_1_1BasicManager.html#a4b258e1048a420512d88a23c5b01cc66">ntp::details::BasicManager::BasicManager</a></div><div class="ttdeci">BasicManager(PTP_CALLBACK_ENVIRON environment) noexcept</div><div class="ttdoc">Constructor, that saves an environment associated with a threadpool.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:140</div></div>
 <div class="ttc" id="aclassntp_1_1details_1_1BasicManager_html_aba4ebf646951ba34b8341f3aa869c770"><div class="ttname"><a href="classntp_1_1details_1_1BasicManager.html#aba4ebf646951ba34b8341f3aa869c770">ntp::details::BasicManager::Environment</a></div><div class="ttdeci">PTP_CALLBACK_ENVIRON Environment() const noexcept</div><div class="ttdoc">Get an environment associated with owning threadpool.</div><div class="ttdef"><b>Definition:</b> basic_callback.hpp:150</div></div>

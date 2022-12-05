@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.3</span>
+   &#160;<span id="projectnumber">0.1.4</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -150,11 +150,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:acdbf682754b0d3070eb2b5ec13ff2631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an existing timer callback in threadpool. This method cannot be called concurrently for the same timer object.  <a href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">More...</a><br /></td></tr>
 <tr class="separator:acdbf682754b0d3070eb2b5ec13ff2631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93452e89aa71e991a3c5b812c9712a7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">CancelTimer</a> (<a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a> timer_object) noexcept</td></tr>
-<tr class="memdesc:a93452e89aa71e991a3c5b812c9712a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel threadpool wait.  <a href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">More...</a><br /></td></tr>
+<tr class="memdesc:a93452e89aa71e991a3c5b812c9712a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel threadpool timer.  <a href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">More...</a><br /></td></tr>
 <tr class="separator:a93452e89aa71e991a3c5b812c9712a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad89f0961e4217d05f26e7fd669402a3a"><td class="memItemLeft" align="right" valign="top"><a id="ad89f0961e4217d05f26e7fd669402a3a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#ad89f0961e4217d05f26e7fd669402a3a">CancelTimers</a> () noexcept</td></tr>
-<tr class="memdesc:ad89f0961e4217d05f26e7fd669402a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel all pending wait callbacks. <br /></td></tr>
+<tr class="memdesc:ad89f0961e4217d05f26e7fd669402a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel all pending timer callbacks. <br /></td></tr>
 <tr class="separator:ad89f0961e4217d05f26e7fd669402a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a896b5331d3aaa49a2d9a128c2ac91e9a"><td class="memTemplParams" colspan="2">template&lt;typename Functor , typename... Args&gt; </td></tr>
 <tr class="memitem:a896b5331d3aaa49a2d9a128c2ac91e9a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="threadpool_8hpp.html#aba881202ec99a5f486f3fd0f3d7446b9">io_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a">SubmitIo</a> (HANDLE io_handle, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
@@ -387,7 +387,7 @@ template&lt;typename ThreadPoolTraits &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Cancel threadpool wait. </p>
+<p>Cancel threadpool timer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timer_object</td><td>Handle for an existing timer object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc" title="Submits a threadpool timer object with a user-defined callback.">ntp::BasicThreadPool::SubmitTimer</a>) </td></tr>

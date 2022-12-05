@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fnative_5fduration_290',['max_native_duration',['../time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2',1,'ntp::time']]]
+  ['max_5fnative_5fduration_301',['max_native_duration',['../time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2',1,'ntp::time']]]
 ];

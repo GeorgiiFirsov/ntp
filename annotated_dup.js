@@ -11,6 +11,7 @@ var annotated_dup =
         [ "NativeSlist", "classntp_1_1details_1_1NativeSlist.html", "classntp_1_1details_1_1NativeSlist" ],
         [ "NativeSlistEntry", "classntp_1_1details_1_1NativeSlistEntry.html", "classntp_1_1details_1_1NativeSlistEntry" ],
         [ "RtlResource", "classntp_1_1details_1_1RtlResource.html", "classntp_1_1details_1_1RtlResource" ],
+        [ "Event", "classntp_1_1details_1_1Event.html", "classntp_1_1details_1_1Event" ],
         [ "ICallback", "structntp_1_1details_1_1ICallback.html", "structntp_1_1details_1_1ICallback" ],
         [ "BasicCallback", "classntp_1_1details_1_1BasicCallback.html", "classntp_1_1details_1_1BasicCallback" ],
         [ "BasicManager", "classntp_1_1details_1_1BasicManager.html", "classntp_1_1details_1_1BasicManager" ],

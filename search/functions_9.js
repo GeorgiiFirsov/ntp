@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['negate_249',['Negate',['../time_8hpp.html#afd464a7d713da18f08505a97e5575fe5',1,'ntp::time']]]
+  ['negate_256',['Negate',['../time_8hpp.html#afd464a7d713da18f08505a97e5575fe5',1,'ntp::time']]]
 ];

@@ -1,3 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structntp_1_1wait_1_1details_1_1WaitContext.html" title="Specific context for threadpool wait objects. Contatins wait handle and wait timeout." alt="" coords="5,5,136,47"/>
+<area shape="rect" id="node1" href="$structntp_1_1timer_1_1details_1_1TimerContext.html" title="Specific context for threadpool timer objects. Contatins timeout and period." alt="" coords="5,5,144,47"/>
 </map>

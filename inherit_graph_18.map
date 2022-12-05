@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structntp_1_1timer_1_1details_1_1TimerContext.html" title="Specific context for threadpool timer objects. Contatins timeout and period." alt="" coords="5,5,144,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,124,39"/>
+<area shape="rect" id="node2" href="$structntp_1_1time_1_1details_1_1is__duration.html" title="Trait that detects std::chono::duration specializations." alt="" coords="172,5,371,47"/>
 </map>

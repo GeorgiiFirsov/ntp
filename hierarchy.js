@@ -21,6 +21,7 @@ var hierarchy =
       [ "ntp::details::CustomThreadPoolTraits", "classntp_1_1details_1_1CustomThreadPoolTraits.html", null ]
     ] ],
     [ "ntp::details::CleanupGroup", "classntp_1_1details_1_1CleanupGroup.html", null ],
+    [ "ntp::details::Event", "classntp_1_1details_1_1Event.html", null ],
     [ "std::exception", null, [
       [ "ntp::exception::Win32Exception", "classntp_1_1exception_1_1Win32Exception.html", null ]
     ] ],
