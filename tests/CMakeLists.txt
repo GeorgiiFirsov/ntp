@@ -10,7 +10,7 @@ set(NTP_TEST_ROOT                ${NTP_ROOT}/tests)
 set(NTP_TEST_SOURCE_ROOT         ${NTP_TEST_ROOT})
 set(NTP_TEST_CASES_ROOT          ${NTP_TEST_SOURCE_ROOT}/cases)
 
-set(NTP_TEST_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR} 
+set(NTP_TEST_INCLUDE_DIRECTORIES ${NTP_GENERIC_INCLUDE_DIRECTORIES}
                                  ${NTP_TEST_ROOT}
                                  ${gtest_SOURCE_DIR}/include 
                                  ${gtest_SOURCE_DIR})

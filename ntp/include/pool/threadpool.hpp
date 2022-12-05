@@ -385,14 +385,14 @@ public:
     }
 
     /**
-     * @brief Cancel threadpool wait
+     * @brief Cancel threadpool timer
      *
      * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
      */
     void CancelTimer(timer_t timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
 
     /**
-     * @brief Cancel all pending wait callbacks
+     * @brief Cancel all pending timer callbacks
      */
     void CancelTimers() noexcept { return timer_manager_.CancelAll(); }
 

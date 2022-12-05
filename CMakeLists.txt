@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(ntp VERSION 0.1.3)
+project(ntp VERSION 0.1.4)
 
 #
 # Global config
@@ -62,7 +62,7 @@ endif (NTP_ENABLE_GH_DOCS_ONLY)
 # Print current configuration
 #
 message(NOTICE "[${CMAKE_PROJECT_NAME}] Building library: ${NTP_BUILD_LIBRARY}")
-message(NOTICE "[${CMAKE_PROJECT_NAME}] Building tests: ${NTP_BUILD_TESTS}")
+message(NOTICE "[${CMAKE_PROJECT_NAME}] Building tests: ${NTP_BUILD_TESTS} (ignored if NTP_BUILD_LIBRARY is OFF)")
 message(NOTICE "[${CMAKE_PROJECT_NAME}] Building docs: ${NTP_BUILD_DOCS} (for GitHub: ${NTP_BUILD_GH_DOCS})")
 
 #
@@ -71,6 +71,11 @@ message(NOTICE "[${CMAKE_PROJECT_NAME}] Building docs: ${NTP_BUILD_DOCS} (for Gi
 set(NTP_ROOT         ${CMAKE_SOURCE_DIR})
 set(NTP_LIBRARY_ROOT ${NTP_ROOT}/ntp)
 set(NTP_INCLUDE_DIR  ${NTP_LIBRARY_ROOT}/include)
+
+#
+# Generic include directories
+#
+set(NTP_GENERIC_INCLUDE_DIRECTORIES ${NTP_INCLUDE_DIR})
 
 #
 # Preprocessor definitions
@@ -92,9 +97,9 @@ if (NTP_BUILD_DOCS)
 endif (NTP_BUILD_DOCS)
 
 #
-# Tests of ntp library
+# Tests of ntp library (can be built only if library is built too)
 #
-if (NTP_BUILD_TESTS)
+if (NTP_BUILD_LIBRARY AND NTP_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
-endif (NTP_BUILD_TESTS)
+endif (NTP_BUILD_LIBRARY AND NTP_BUILD_TESTS)

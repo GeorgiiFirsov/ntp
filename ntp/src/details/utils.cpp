@@ -194,4 +194,42 @@ void RtlResource::unlock_shared() noexcept
     RtlReleaseResource(&resource_);
 }
 
+
+Event::Event(LPSECURITY_ATTRIBUTES security_attributes, BOOL manual_reset, BOOL initially_signaled, LPCWSTR name /* = nullptr */)
+    : event_(CreateEvent(security_attributes, manual_reset, initially_signaled, name))
+{
+    if (!event_)
+    {
+        throw exception::Win32Exception();
+    }
+}
+
+Event::Event(BOOL manual_reset, BOOL initially_signaled, LPCWSTR name /* = nullptr */)
+    : Event(nullptr, manual_reset, initially_signaled, name)
+{ }
+
+Event::~Event()
+{
+    if (event_)
+    {
+        CloseHandle(event_);
+    }
+}
+
+void Event::Set()
+{
+    if (!SetEvent(event_))
+    {
+        throw exception::Win32Exception();
+    }
+}
+
+void Event::Reset()
+{
+    if (!ResetEvent(event_))
+    {
+        throw exception::Win32Exception();
+    }
+}
+
 }  // namespace ntp::details

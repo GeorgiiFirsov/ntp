@@ -6,7 +6,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <atlsync.h>
 
 #include <tuple>
 #include <utility>
@@ -140,7 +139,7 @@ private:
     PTP_WORK work_;
 
     // Event: all tasks completed
-    ATL::CEvent done_event_;
+    ntp::details::Event done_event_;
 };
 
 }  // namespace ntp::work::details
