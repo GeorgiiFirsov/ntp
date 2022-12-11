@@ -7,6 +7,7 @@
 
 #include <tuple>
 #include <utility>
+#include <chrono>
 
 #include "ntp_config.hpp"
 #include "details/time.hpp"
@@ -22,9 +23,9 @@ namespace ntp::timer::details {
  */
 struct TimerContext
 {
-    FILETIME timer_timeout; /**< Timeout of first trigger */
+    ntp::time::native_duration_t timer_timeout; /**< Timeout of first trigger */
 
-    DWORD timer_period; /**< Timer period (if 0, then timer is non-periodic) */
+    std::chrono::milliseconds timer_period; /**< Timer period (if 0, then timer is non-periodic) */
 };
 
 
@@ -110,14 +111,8 @@ public:
         auto context      = CreateContext();
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
 
-        //
-        // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
-        // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpooltimerex
-        //
-
-        context->object_context.timer_period  = static_cast<DWORD>(std::chrono::duration_cast<std::chrono::milliseconds>(period).count());
-        context->object_context.timer_timeout = ntp::time::AsFileTime(timeout);
-        context->object_context.timer_timeout = ntp::time::Negate(context->object_context.timer_timeout);
+        context->object_context.timer_period  = std::chrono::duration_cast<std::chrono::milliseconds>(period);
+        context->object_context.timer_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
 
         const auto native_handle = CreateThreadpoolTimer(reinterpret_cast<PTP_TIMER_CALLBACK>(InvokeCallback),
             context.get(), Environment());
@@ -145,9 +140,58 @@ public:
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto Submit(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, native_handle_t>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, native_handle_t>
     {
         return Submit(timeout, std::chrono::milliseconds(0), std::forward<Functor>(functor), std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Submits a threadpool deadline timer object with a user-defined callback.
+     * 
+     * Computes timeout until the specified deadline and calls 
+     * generic version of ntp::wait::details::TimerManager::Submit.
+     * 
+     * @param deadline A specific point in time, which the timer will expire at
+     * @param period If non-zero, timer object willbe triggered each period after first call
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
+     */
+    template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
+    auto Submit(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
+    {
+        //
+        // Just compute a timeout until deadline and call generic function.
+        // If timeout becomes negative, it is assumed to be zero (timer expires immediately).
+        //
+
+        const auto internal_deadline = std::chrono::time_point_cast<ntp::time::deadline_clock_t::duration>(deadline);
+
+        auto timeout = internal_deadline - ntp::time::deadline_clock_t::now();
+        if (timeout < ntp::time::deadline_clock_t::duration::zero())
+        {
+            timeout = ntp::time::deadline_clock_t::duration::zero();
+        }
+
+        return Submit(timeout, period, std::forward<Functor>(functor), std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Submits a non-periodic threadpool deadline timer object with a user-defined callback.
+     * 
+     * Just calls generic version of ntp::wait::details::TimerManager::Submit with
+     * 0 as period parameter.
+     * 
+     * @param deadline A specific point in time, which the timer will expire at
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
+     */
+    template<typename Duration, typename Functor, typename... Args>
+    auto Submit(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, native_handle_t>
+    {
+        return Submit(deadline, std::chrono::milliseconds(0), std::forward<Functor>(functor), std::forward<Args>(args)...);
     }
 
 private:
@@ -169,10 +213,6 @@ private:
 
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);
-
-        //
-        // BUGBUG: here we actually need to handle timeout difference
-        //
 
         SubmitInternal(native_handle, context->object_context);
 
