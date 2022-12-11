@@ -7,6 +7,7 @@
 
 #include <tuple>
 #include <utility>
+#include <chrono>
 
 #include "ntp_config.hpp"
 #include "details/time.hpp"
@@ -22,9 +23,9 @@ namespace ntp::timer::details {
  */
 struct TimerContext
 {
-    FILETIME timer_timeout; /**< Timeout of first trigger */
+    ntp::time::native_duration_t timer_timeout; /**< Timeout of first trigger */
 
-    DWORD timer_period; /**< Timer period (if 0, then timer is non-periodic) */
+    std::chrono::milliseconds timer_period; /**< Timer period (if 0, then timer is non-periodic) */
 };
 
 
@@ -110,14 +111,8 @@ public:
         auto context      = CreateContext();
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(std::forward<Functor>(functor), std::forward<Args>(args)...);
 
-        //
-        // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
-        // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpooltimerex
-        //
-
-        context->object_context.timer_period  = static_cast<DWORD>(std::chrono::duration_cast<std::chrono::milliseconds>(period).count());
-        context->object_context.timer_timeout = ntp::time::AsFileTime(timeout);
-        context->object_context.timer_timeout = ntp::time::Negate(context->object_context.timer_timeout);
+        context->object_context.timer_period  = std::chrono::duration_cast<std::chrono::milliseconds>(period);
+        context->object_context.timer_timeout = std::chrono::duration_cast<ntp::time::native_duration_t>(timeout);
 
         const auto native_handle = CreateThreadpoolTimer(reinterpret_cast<PTP_TIMER_CALLBACK>(InvokeCallback),
             context.get(), Environment());
@@ -169,10 +164,6 @@ private:
 
         context->callback = std::make_unique<TimerCallback<Functor, Args...>>(
             std::forward<Functor>(functor), std::forward<Args>(args)...);
-
-        //
-        // BUGBUG: here we actually need to handle timeout difference
-        //
 
         SubmitInternal(native_handle, context->object_context);
 

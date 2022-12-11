@@ -1,4 +1,5 @@
 #include "pool/timer.hpp"
+#include "details/time.hpp"
 #include "details/utils.hpp"
 #include "logger/logger_internal.hpp"
 
@@ -11,8 +12,25 @@ TimerManager::TimerManager(PTP_CALLBACK_ENVIRON environment)
 
 void TimerManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context)
 {
-    ntp::details::SafeThreadpoolCall<SetThreadpoolTimer>(
-        native_handle, &object_context.timer_timeout, object_context.timer_period, 0);
+    //
+    // Here we need to decrease timeout, because this function may be called in replacement
+    // function and some time was elapsed since this handle was submitted. If current timer
+    // is being submitted for the first time, this step handles some delays elapsed after
+    // callback creation.
+    // BUGBUG: not implemented for now
+    //
+
+    //
+    // Here we need relative timeout, so I will invert it (negative timeout represets a relative time interval):
+    // https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpooltimerex
+    //
+
+    FILETIME timeout = ntp::time::AsFileTime(object_context.timer_timeout);
+    timeout          = ntp::time::Negate(timeout);
+
+    const auto period = static_cast<DWORD>(object_context.timer_period.count());
+
+    ntp::details::SafeThreadpoolCall<SetThreadpoolTimer>(native_handle, &timeout, period, 0);
 }
 
 /* static */
@@ -36,7 +54,7 @@ void NTAPI TimerManager::InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_
         // Clean object here
         //
 
-        if (0 == context->object_context.timer_period)
+        if (0 == context->object_context.timer_period.count())
         {
             CleanupContext(instance, context);
         }
