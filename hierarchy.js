@@ -26,7 +26,8 @@ var hierarchy =
       [ "ntp::exception::Win32Exception", "classntp_1_1exception_1_1Win32Exception.html", null ]
     ] ],
     [ "std::false_type", null, [
-      [ "ntp::time::details::is_duration< typename >", "structntp_1_1time_1_1details_1_1is__duration.html", null ]
+      [ "ntp::time::details::is_duration< typename >", "structntp_1_1time_1_1details_1_1is__duration.html", null ],
+      [ "ntp::time::details::is_time_point< typename >", "structntp_1_1time_1_1details_1_1is__time__point.html", null ]
     ] ],
     [ "ntp::allocator::HeapAllocator< Ty >", "classntp_1_1allocator_1_1HeapAllocator.html", null ],
     [ "ntp::allocator::HeapAllocator< void >", "structntp_1_1allocator_1_1HeapAllocator_3_01void_01_4.html", null ],
@@ -56,7 +57,8 @@ var hierarchy =
     ] ],
     [ "ntp::timer::details::TimerContext", "structntp_1_1timer_1_1details_1_1TimerContext.html", null ],
     [ "std::true_type", null, [
-      [ "ntp::time::details::is_duration< std::chrono::duration< Rep, Period > >", "structntp_1_1time_1_1details_1_1is__duration_3_01std_1_1chrono_1_1duration_3_01Rep_00_01Period_01_4_01_4.html", null ]
+      [ "ntp::time::details::is_duration< std::chrono::duration< Rep, Period > >", "structntp_1_1time_1_1details_1_1is__duration_3_01std_1_1chrono_1_1duration_3_01Rep_00_01Period_01_4_01_4.html", null ],
+      [ "ntp::time::details::is_time_point< std::chrono::time_point< Clock, Duration > >", "structntp_1_1time_1_1details_1_1is__time__point_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html", null ]
     ] ],
     [ "ntp::wait::details::WaitContext", "structntp_1_1wait_1_1details_1_1WaitContext.html", null ]
 ];

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.4</span>
+   &#160;<span id="projectnumber">0.1.5</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -114,45 +114,68 @@ $(document).ready(function(){initNavTree('time_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Ty&gt;</div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">   43</a></span>&#160;NTP_INLINE constexpr <span class="keywordtype">bool</span> <a class="code" href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">is_duration_v</a> = <a class="code" href="structntp_1_1time_1_1details_1_1is__duration.html">is_duration&lt;Ty&gt;::value</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}  <span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">   51</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">native_duration_t</a> = std::chrono::duration&lt;long long, std::ratio&lt;1, 10&#39;000&#39;000&gt;&gt;;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">   57</a></span>&#160;NTP_INLINE constexpr <span class="keyword">auto</span> <a class="code" href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">max_native_duration</a> = (native_duration_t::max)();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Rep, <span class="keyword">typename</span> Period&gt;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">   67</a></span>&#160;FILETIME <a class="code" href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">AsFileTime</a>(<span class="keyword">const</span> std::chrono::duration&lt;Rep, Period&gt;&amp; duration) noexcept</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> native       = std::chrono::duration_cast&lt;native_duration_t&gt;(duration);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> native_count = native.count();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structntp_1_1time_1_1details_1_1is__time__point.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structntp_1_1time_1_1details_1_1is__time__point.html">is_time_point</a> : std::false_type</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{ };</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Clock, <span class="keyword">typename</span> Duration&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structntp_1_1time_1_1details_1_1is__time__point_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html">   61</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structntp_1_1time_1_1details_1_1is__time__point.html">is_time_point</a>&lt;std::chrono::time_point&lt;Clock, Duration&gt;&gt; : std::true_type</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{ };</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Ty&gt;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">   70</a></span>&#160;NTP_INLINE constexpr <span class="keywordtype">bool</span> <a class="code" href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">is_time_point_v</a> = <a class="code" href="structntp_1_1time_1_1details_1_1is__time__point.html">is_time_point&lt;Ty&gt;::value</a>;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// Now we need to construct low and high parts of native_count</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> low_part  = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(native_count);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> high_part = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(native_count &gt;&gt; 32);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> FILETIME { low_part, high_part };</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">   86</a></span>&#160;<span class="keyword">inline</span> FILETIME <a class="code" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">Negate</a>(FILETIME time)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    time.dwLowDateTime = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(-<span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(time.dwLowDateTime));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> time;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}  <span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">   78</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">native_duration_t</a> = std::chrono::duration&lt;long long, std::ratio&lt;1, 10&#39;000&#39;000&gt;&gt;;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">   84</a></span>&#160;NTP_INLINE constexpr <span class="keyword">auto</span> <a class="code" href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">max_native_duration</a> = (native_duration_t::max)();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">   90</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">deadline_clock_t</a> = std::chrono::steady_clock;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}  <span class="comment">// namespace ntp::time</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Duration&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">   97</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">deadline_t</a> = std::chrono::time_point&lt;deadline_clock_t, Duration&gt;;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Rep, <span class="keyword">typename</span> Period&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">  107</a></span>&#160;FILETIME <a class="code" href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">AsFileTime</a>(<span class="keyword">const</span> std::chrono::duration&lt;Rep, Period&gt;&amp; duration) noexcept</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> native       = std::chrono::duration_cast&lt;native_duration_t&gt;(duration);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> native_count = native.count();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="comment">// Now we need to construct low and high parts of native_count</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> low_part  = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(native_count);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> high_part = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(native_count &gt;&gt; 32);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> FILETIME { low_part, high_part };</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">  126</a></span>&#160;<span class="keyword">inline</span> FILETIME <a class="code" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">Negate</a>(FILETIME time)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    time.dwLowDateTime = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(-<span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(time.dwLowDateTime));</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> time;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}  <span class="comment">// namespace ntp::time</span></div>
 <div class="ttc" id="astructntp_1_1time_1_1details_1_1is__duration_html"><div class="ttname"><a href="structntp_1_1time_1_1details_1_1is__duration.html">ntp::time::details::is_duration</a></div><div class="ttdoc">Trait that detects std::chono::duration specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:26</div></div>
+<div class="ttc" id="astructntp_1_1time_1_1details_1_1is__time__point_html"><div class="ttname"><a href="structntp_1_1time_1_1details_1_1is__time__point.html">ntp::time::details::is_time_point</a></div><div class="ttdoc">Trait that detects std::chono::time_point specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:53</div></div>
 <div class="ttc" id="atime_8hpp_html_a1eb3cd21b9ea7005b97ed563d00b97b9"><div class="ttname"><a href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">ntp::time::details::is_duration_v</a></div><div class="ttdeci">constexpr NTP_INLINE bool is_duration_v</div><div class="ttdoc">Trait that detects std::chono::duration specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:43</div></div>
-<div class="ttc" id="atime_8hpp_html_a2294e7508f710a6bc21a61e591c0fe07"><div class="ttname"><a href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">ntp::time::AsFileTime</a></div><div class="ttdeci">FILETIME AsFileTime(const std::chrono::duration&lt; Rep, Period &gt; &amp;duration) noexcept</div><div class="ttdoc">Converts std::chrono::duration to FILETIME.</div><div class="ttdef"><b>Definition:</b> time.hpp:67</div></div>
-<div class="ttc" id="atime_8hpp_html_a6581c695fa57e038b6a453cff630f395"><div class="ttname"><a href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a></div><div class="ttdeci">std::chrono::duration&lt; long long, std::ratio&lt; 1, 10 '000 '000 &gt; &gt; native_duration_t</div><div class="ttdoc">Native 100-ns duration interval.</div><div class="ttdef"><b>Definition:</b> time.hpp:51</div></div>
-<div class="ttc" id="atime_8hpp_html_aa4fc36352852fb5210bc8cdc492a26f2"><div class="ttname"><a href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">ntp::time::max_native_duration</a></div><div class="ttdeci">constexpr NTP_INLINE auto max_native_duration</div><div class="ttdoc">Maximum supported native duration count.</div><div class="ttdef"><b>Definition:</b> time.hpp:57</div></div>
-<div class="ttc" id="atime_8hpp_html_afd464a7d713da18f08505a97e5575fe5"><div class="ttname"><a href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">ntp::time::Negate</a></div><div class="ttdeci">FILETIME Negate(FILETIME time)</div><div class="ttdoc">Negates a duration value stored in FILETIME structure.</div><div class="ttdef"><b>Definition:</b> time.hpp:86</div></div>
+<div class="ttc" id="atime_8hpp_html_a2294e7508f710a6bc21a61e591c0fe07"><div class="ttname"><a href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">ntp::time::AsFileTime</a></div><div class="ttdeci">FILETIME AsFileTime(const std::chrono::duration&lt; Rep, Period &gt; &amp;duration) noexcept</div><div class="ttdoc">Converts std::chrono::duration to FILETIME.</div><div class="ttdef"><b>Definition:</b> time.hpp:107</div></div>
+<div class="ttc" id="atime_8hpp_html_a6581c695fa57e038b6a453cff630f395"><div class="ttname"><a href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a></div><div class="ttdeci">std::chrono::duration&lt; long long, std::ratio&lt; 1, 10 '000 '000 &gt; &gt; native_duration_t</div><div class="ttdoc">Native 100-ns duration interval.</div><div class="ttdef"><b>Definition:</b> time.hpp:78</div></div>
+<div class="ttc" id="atime_8hpp_html_a7670f15bb48e47269e9ed275ee12f479"><div class="ttname"><a href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">ntp::time::details::is_time_point_v</a></div><div class="ttdeci">constexpr NTP_INLINE bool is_time_point_v</div><div class="ttdoc">Trait that detects std::chono::time_point specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:70</div></div>
+<div class="ttc" id="atime_8hpp_html_aa4fc36352852fb5210bc8cdc492a26f2"><div class="ttname"><a href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">ntp::time::max_native_duration</a></div><div class="ttdeci">constexpr NTP_INLINE auto max_native_duration</div><div class="ttdoc">Maximum supported native duration count.</div><div class="ttdef"><b>Definition:</b> time.hpp:84</div></div>
+<div class="ttc" id="atime_8hpp_html_ab1ea4e25b1332d473030000e6de57b8e"><div class="ttname"><a href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a></div><div class="ttdeci">std::chrono::time_point&lt; deadline_clock_t, Duration &gt; deadline_t</div><div class="ttdoc">Time point, that specifies a deadline.</div><div class="ttdef"><b>Definition:</b> time.hpp:97</div></div>
+<div class="ttc" id="atime_8hpp_html_aebbf03271e1d71a380dd4e179640958c"><div class="ttname"><a href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">ntp::time::deadline_clock_t</a></div><div class="ttdeci">std::chrono::steady_clock deadline_clock_t</div><div class="ttdoc">Clock to measure deadlines.</div><div class="ttdef"><b>Definition:</b> time.hpp:90</div></div>
+<div class="ttc" id="atime_8hpp_html_afd464a7d713da18f08505a97e5575fe5"><div class="ttname"><a href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">ntp::time::Negate</a></div><div class="ttdeci">FILETIME Negate(FILETIME time)</div><div class="ttdoc">Negates a duration value stored in FILETIME structure.</div><div class="ttdef"><b>Definition:</b> time.hpp:126</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

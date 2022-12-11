@@ -39,7 +39,9 @@ var annotated_dup =
       [ "time", null, [
         [ "details", null, [
           [ "is_duration", "structntp_1_1time_1_1details_1_1is__duration.html", null ],
-          [ "is_duration< std::chrono::duration< Rep, Period > >", "structntp_1_1time_1_1details_1_1is__duration_3_01std_1_1chrono_1_1duration_3_01Rep_00_01Period_01_4_01_4.html", null ]
+          [ "is_duration< std::chrono::duration< Rep, Period > >", "structntp_1_1time_1_1details_1_1is__duration_3_01std_1_1chrono_1_1duration_3_01Rep_00_01Period_01_4_01_4.html", null ],
+          [ "is_time_point", "structntp_1_1time_1_1details_1_1is__time__point.html", null ],
+          [ "is_time_point< std::chrono::time_point< Clock, Duration > >", "structntp_1_1time_1_1details_1_1is__time__point_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html", null ]
         ] ]
       ] ],
       [ "timer", null, [

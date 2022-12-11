@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['io_5ft_312',['io_t',['../threadpool_8hpp.html#aba881202ec99a5f486f3fd0f3d7446b9',1,'ntp']]]
+  ['deadline_5fclock_5ft_320',['deadline_clock_t',['../time_8hpp.html#aebbf03271e1d71a380dd4e179640958c',1,'ntp::time']]],
+  ['deadline_5ft_321',['deadline_t',['../time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e',1,'ntp::time']]]
 ];

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.4</span>
+   &#160;<span id="projectnumber">0.1.5</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -141,10 +141,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:aadf3211f92fe46ed6bd3d6b6eaab1adc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc">SubmitTimer</a> (const std::chrono::duration&lt; Rep1, Period1 &gt; &amp;timeout, const std::chrono::duration&lt; Rep2, Period2 &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:aadf3211f92fe46ed6bd3d6b6eaab1adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a threadpool timer object with a user-defined callback.  <a href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc">More...</a><br /></td></tr>
 <tr class="separator:aadf3211f92fe46ed6bd3d6b6eaab1adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3db2da50bdc54cf58dba64035a05e343"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period , typename Functor , typename... Args&gt; </td></tr>
-<tr class="memitem:a3db2da50bdc54cf58dba64035a05e343"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a3db2da50bdc54cf58dba64035a05e343">SubmitTimer</a> (const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a> &gt;</td></tr>
-<tr class="memdesc:a3db2da50bdc54cf58dba64035a05e343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool timer object with a user-defined callback.  <a href="classntp_1_1BasicThreadPool.html#a3db2da50bdc54cf58dba64035a05e343">More...</a><br /></td></tr>
-<tr class="separator:a3db2da50bdc54cf58dba64035a05e343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fcc5d8940a99da70b55d94aa9dc357"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period , typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:aa3fcc5d8940a99da70b55d94aa9dc357"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#aa3fcc5d8940a99da70b55d94aa9dc357">SubmitTimer</a> (const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt; &amp;&amp;!ntp::time::details::is_time_point_v&lt; Functor &gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a> &gt;</td></tr>
+<tr class="memdesc:aa3fcc5d8940a99da70b55d94aa9dc357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool timer object with a user-defined callback.  <a href="classntp_1_1BasicThreadPool.html#aa3fcc5d8940a99da70b55d94aa9dc357">More...</a><br /></td></tr>
+<tr class="separator:aa3fcc5d8940a99da70b55d94aa9dc357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac51fa4b873d600ba3f37728b477ef152"><td class="memTemplParams" colspan="2">template&lt;typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:ac51fa4b873d600ba3f37728b477ef152"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#ac51fa4b873d600ba3f37728b477ef152">SubmitTimer</a> (const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;deadline, const std::chrono::duration&lt; Rep, Period &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ac51fa4b873d600ba3f37728b477ef152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1BasicThreadPool.html#ac51fa4b873d600ba3f37728b477ef152">More...</a><br /></td></tr>
+<tr class="separator:ac51fa4b873d600ba3f37728b477ef152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3ee566487f5d7d430d94ccf73254b9"><td class="memTemplParams" colspan="2">template&lt;typename Duration , typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:a7e3ee566487f5d7d430d94ccf73254b9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#a7e3ee566487f5d7d430d94ccf73254b9">SubmitTimer</a> (const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;deadline, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt; &amp;&amp;!ntp::time::details::is_time_point_v&lt; Functor &gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a> &gt;</td></tr>
+<tr class="memdesc:a7e3ee566487f5d7d430d94ccf73254b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1BasicThreadPool.html#a7e3ee566487f5d7d430d94ccf73254b9">More...</a><br /></td></tr>
+<tr class="separator:a7e3ee566487f5d7d430d94ccf73254b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdbf682754b0d3070eb2b5ec13ff2631"><td class="memTemplParams" colspan="2">template&lt;typename Functor , typename... Args&gt; </td></tr>
 <tr class="memitem:acdbf682754b0d3070eb2b5ec13ff2631"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">ReplaceTimer</a> (<a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a> timer_object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:acdbf682754b0d3070eb2b5ec13ff2631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an existing timer callback in threadpool. This method cannot be called concurrently for the same timer object.  <a href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">More...</a><br /></td></tr>
@@ -561,8 +569,132 @@ template&lt;typename Functor , typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a3db2da50bdc54cf58dba64035a05e343"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3db2da50bdc54cf58dba64035a05e343">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[1/2]</span></h2>
+<a id="ac51fa4b873d600ba3f37728b477ef152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac51fa4b873d600ba3f37728b477ef152">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ThreadPoolTraits &gt; </div>
+<div class="memtemplate">
+template&lt;typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classntp_1_1BasicThreadPool.html">ntp::BasicThreadPool</a>&lt; ThreadPoolTraits &gt;::SubmitTimer </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;&#160;</td>
+          <td class="paramname"><em>deadline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::duration&lt; Rep, Period &gt; &amp;&#160;</td>
+          <td class="paramname"><em>period</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Functor &amp;&amp;&#160;</td>
+          <td class="paramname"><em>functor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Submits a threadpool deadline timer object with a user-defined callback. </p>
+<p>If deadline is already gone, timer expires immediately.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deadline</td><td>A specific point in time, which the timer will expire at </td></tr>
+    <tr><td class="paramname">period</td><td>If non-zero, timer object willbe triggered each period after first call </td></tr>
+    <tr><td class="paramname">functor</td><td>Callable to invoke </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments to pass into callable (they will be copied into wrapper) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>handle for created timer object </dd></dl>
+
+</div>
+</div>
+<a id="a7e3ee566487f5d7d430d94ccf73254b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3ee566487f5d7d430d94ccf73254b9">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ThreadPoolTraits &gt; </div>
+<div class="memtemplate">
+template&lt;typename Duration , typename Functor , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classntp_1_1BasicThreadPool.html">ntp::BasicThreadPool</a>&lt; ThreadPoolTraits &gt;::SubmitTimer </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;&#160;</td>
+          <td class="paramname"><em>deadline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Functor &amp;&amp;&#160;</td>
+          <td class="paramname"><em>functor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt;Functor&gt; &amp;&amp; !ntp::time::details::is_time_point_v&lt;Functor&gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a>&gt;
+    </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Submits a non-periodic threadpool deadline timer object with a user-defined callback. </p>
+<p>If deadline is already gone, timer expires immediately.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deadline</td><td>A specific point in time, which the timer will expire at </td></tr>
+    <tr><td class="paramname">functor</td><td>Callable to invoke </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments to pass into callable (they will be copied into wrapper) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>handle for created timer object </dd></dl>
+
+</div>
+</div>
+<a id="aa3fcc5d8940a99da70b55d94aa9dc357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3fcc5d8940a99da70b55d94aa9dc357">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,7 +727,7 @@ template&lt;typename Rep , typename Period , typename Functor , typename... Args
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt;Functor&gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a>&gt;
+          <td></td><td> -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt;Functor&gt; &amp;&amp; !ntp::time::details::is_time_point_v&lt;Functor&gt;, <a class="el" href="threadpool_8hpp.html#a01e95d988314d46fbf6ed54dbc8cf9e6">timer_t</a>&gt;
     </td>
         </tr>
       </table>
@@ -620,7 +752,7 @@ template&lt;typename Rep , typename Period , typename Functor , typename... Args
 </div>
 </div>
 <a id="aadf3211f92fe46ed6bd3d6b6eaab1adc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadf3211f92fe46ed6bd3d6b6eaab1adc">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aadf3211f92fe46ed6bd3d6b6eaab1adc">&#9670;&nbsp;</a></span>SubmitTimer() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

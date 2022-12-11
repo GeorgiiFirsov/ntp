@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['object_5fcontext_5ft_317',['object_context_t',['../classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f',1,'ntp::details::BasicManagerEx']]]
+  ['native_5fduration_5ft_325',['native_duration_t',['../time_8hpp.html#a6581c695fa57e038b6a453cff630f395',1,'ntp::time']]],
+  ['native_5fhandle_5ft_326',['native_handle_t',['../classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d',1,'ntp::details::BasicManagerEx']]]
 ];

@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.4</span>
+   &#160;<span id="projectnumber">0.1.5</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -100,22 +100,22 @@ $(document).ready(function(){initNavTree('structntp_1_1timer_1_1details_1_1Timer
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a644931c3529989866746e6e289e499f8"><td class="memItemLeft" align="right" valign="top">FILETIME&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structntp_1_1timer_1_1details_1_1TimerContext.html#a644931c3529989866746e6e289e499f8">timer_timeout</a></td></tr>
-<tr class="separator:a644931c3529989866746e6e289e499f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ebdda95098495d75fdda6aa6c53e32"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structntp_1_1timer_1_1details_1_1TimerContext.html#a55ebdda95098495d75fdda6aa6c53e32">timer_period</a></td></tr>
-<tr class="separator:a55ebdda95098495d75fdda6aa6c53e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57a4ec32b19315ed1f266cee53386d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structntp_1_1timer_1_1details_1_1TimerContext.html#ae57a4ec32b19315ed1f266cee53386d7">timer_timeout</a></td></tr>
+<tr class="separator:ae57a4ec32b19315ed1f266cee53386d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6e75943d7d46d9a6530305262bb94d"><td class="memItemLeft" align="right" valign="top">std::chrono::milliseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structntp_1_1timer_1_1details_1_1TimerContext.html#a2a6e75943d7d46d9a6530305262bb94d">timer_period</a></td></tr>
+<tr class="separator:a2a6e75943d7d46d9a6530305262bb94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Specific context for threadpool timer objects. Contatins timeout and period. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a55ebdda95098495d75fdda6aa6c53e32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55ebdda95098495d75fdda6aa6c53e32">&#9670;&nbsp;</a></span>timer_period</h2>
+<a id="a2a6e75943d7d46d9a6530305262bb94d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6e75943d7d46d9a6530305262bb94d">&#9670;&nbsp;</a></span>timer_period</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">DWORD ntp::timer::details::TimerContext::timer_period</td>
+          <td class="memname">std::chrono::milliseconds ntp::timer::details::TimerContext::timer_period</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -123,14 +123,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a644931c3529989866746e6e289e499f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a644931c3529989866746e6e289e499f8">&#9670;&nbsp;</a></span>timer_timeout</h2>
+<a id="ae57a4ec32b19315ed1f266cee53386d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae57a4ec32b19315ed1f266cee53386d7">&#9670;&nbsp;</a></span>timer_timeout</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">FILETIME ntp::timer::details::TimerContext::timer_timeout</td>
+          <td class="memname"><a class="el" href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a> ntp::timer::details::TimerContext::timer_timeout</td>
         </tr>
       </table>
 </div><div class="memdoc">
