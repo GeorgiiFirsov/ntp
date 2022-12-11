@@ -10,7 +10,7 @@ TimerManager::TimerManager(PTP_CALLBACK_ENVIRON environment)
     : BasicManagerEx(environment)
 { }
 
-void TimerManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context)
+void TimerManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context) noexcept
 {
     //
     // Here we need to decrease timeout, because this function may be called in replacement

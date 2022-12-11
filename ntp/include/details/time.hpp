@@ -123,7 +123,7 @@ FILETIME AsFileTime(const std::chrono::duration<Rep, Period>& duration) noexcept
 /**
  * @brief Negates a duration value stored in FILETIME structure.
  */
-inline FILETIME Negate(FILETIME time)
+inline FILETIME Negate(FILETIME time) noexcept
 {
     time.dwLowDateTime = static_cast<DWORD>(-static_cast<LONG>(time.dwLowDateTime));
     return time;

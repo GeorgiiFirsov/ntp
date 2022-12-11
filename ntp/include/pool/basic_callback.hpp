@@ -327,6 +327,7 @@ protected:
      * @param context Filled context of callback
      */
     void SubmitContext(native_handle_t native_handle, context_t&& context)
+        noexcept(noexcept(std::declval<Derived>().SubmitInternal(std::declval<native_handle_t>(), std::declval<object_context_t>())))
     {
         std::unique_lock lock { lock_ };
 

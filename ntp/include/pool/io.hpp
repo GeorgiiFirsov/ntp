@@ -133,13 +133,19 @@ public:
             throw exception::Win32Exception();
         }
 
+        static_assert(noexcept(SubmitContext(native_handle, std::move(context))),
+            "[ntp::io::details::WaitManager::Submit]: inspect ntp::details::BasicCallback::SubmitContext and "
+            "ntp::io::details::WaitManager::SubmitInternal for noexcept property, because an exception thrown "
+            "here can lead to handle and memory leaks. SubmitContext is noexcept if and only if SubmitInternal "
+            "is noexcept.");
+
         SubmitContext(native_handle, std::move(context));
 
         return native_handle;
     }
 
 private:
-    void SubmitInternal(native_handle_t native_handle, object_context_t& user_context);
+    void SubmitInternal(native_handle_t native_handle, object_context_t& user_context) noexcept;
 
 private:
     static void NTAPI InvokeCallback(PTP_CALLBACK_INSTANCE instance, context_pointer_t context, PVOID overlapped,
