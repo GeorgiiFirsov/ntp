@@ -9,7 +9,7 @@ IoManager::IoManager(PTP_CALLBACK_ENVIRON environment)
     : BasicManagerEx(environment)
 { }
 
-void IoManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context)
+void IoManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context) noexcept
 {
     ntp::details::SafeThreadpoolCall<StartThreadpoolIo>(native_handle);
 }
