@@ -42,6 +42,33 @@ struct is_duration<std::chrono::duration<Rep, Period>> : std::true_type
 template<typename Ty>
 NTP_INLINE constexpr bool is_duration_v = is_duration<Ty>::value;
 
+
+/**
+ * @brief Trait that detects std::chono::time_point specializations.
+ *
+ * Generic version (for all types, except std::chono::time_point).
+ */
+template<typename>
+struct is_time_point : std::false_type
+{ };
+
+/**
+ * @brief Trait that detects std::chono::time_point specializations.
+ *
+ * std::chono::time_point specialization.
+ */
+template<typename Clock, typename Duration>
+struct is_time_point<std::chrono::time_point<Clock, Duration>> : std::true_type
+{ };
+
+/**
+ * @brief Trait that detects std::chono::time_point specializations.
+ *
+ * Helper inline (since C++17) variable.
+ */
+template<typename Ty>
+NTP_INLINE constexpr bool is_time_point_v = is_time_point<Ty>::value;
+
 }  // namespace details
 
 
@@ -55,6 +82,19 @@ using native_duration_t = std::chrono::duration<long long, std::ratio<1, 10'000'
  * @brief Maximum supported native duration count.
  */
 NTP_INLINE constexpr auto max_native_duration = (native_duration_t::max)();
+
+
+/**
+ * @brief Clock to measure deadlines
+ */
+using deadline_clock_t = std::chrono::steady_clock;
+
+
+/**
+ * @brief Time point, that specifies a deadline
+ */
+template<typename Duration>
+using deadline_t = std::chrono::time_point<deadline_clock_t, Duration>;
 
 
 /**

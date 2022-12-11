@@ -17,6 +17,22 @@ TEST(Timer, Submit)
     EXPECT_EQ(counter, 1);
 }
 
+TEST(Timer, SubmitDeadline)
+{
+    using namespace std::chrono_literals;
+
+    std::atomic_int counter = 0;
+    ntp::SystemThreadPool pool;
+
+    pool.SubmitTimer(ntp::time::deadline_clock_t::now() + 10ms, [&counter]() {
+        ++counter;
+    });
+
+    std::this_thread::sleep_for(40ms);
+
+    EXPECT_EQ(counter, 1);
+}
+
 TEST(Timer, Periodic)
 {
     using namespace std::chrono_literals;

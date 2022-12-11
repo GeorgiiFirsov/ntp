@@ -359,9 +359,45 @@ public:
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, timer_t>
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, timer_t>
     {
         return timer_manager_.Submit(timeout, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Submits a threadpool deadline timer object with a user-defined callback.
+     *
+     * If deadline is already gone, timer expires immediately.
+     * 
+     * @param deadline A specific point in time, which the timer will expire at
+     * @param period If non-zero, timer object willbe triggered each period after first call
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created timer object
+     */
+    template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
+    auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
+    {
+        return timer_manager_.Submit(deadline, period, std::forward<Functor>(functor),
+            std::forward<Args>(args)...);
+    }
+
+    /**
+     * @brief Submits a non-periodic threadpool deadline timer object with a user-defined callback.
+     *
+     * If deadline is already gone, timer expires immediately.
+     *
+     * @param deadline A specific point in time, which the timer will expire at
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created timer object
+     */
+    template<typename Duration, typename Functor, typename... Args>
+    auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
+        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, timer_t>
+    {
+        return timer_manager_.Submit(deadline, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 

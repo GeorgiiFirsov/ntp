@@ -26,5 +26,6 @@
 // Just a list of necessary library headers
 //
 #include "ntp_config.hpp"
+#include "details/time.hpp"
 #include "logger/logger.hpp"
 #include "pool/threadpool.hpp"
