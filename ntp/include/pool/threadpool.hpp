@@ -597,11 +597,14 @@ public:
      *     you_can_even_pass, another_arguments);
      * @endcode
      *
-     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
-     * @returns handle for the same timer object
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer).
+     * @param functor      Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                     If you don't need it, you just don't pass it.
+     * @param args         Arguments to pass into callable. They will be copied into wrapper by default.
+     *                     You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                     but you must guarantee the parameter's validity until the callback is finished.
+     * @throws exception::Win32Exception If the specified handle is not present in threadpool or is corrupt.
+     * @returns            Handle for the same timer object.
      */
     template<typename Functor, typename... Args>
     timer_t ReplaceTimer(timer_t timer_object, Functor&& functor, Args&&... args)
@@ -641,40 +644,86 @@ public:
      * If after call to this function async IO failed to start you MUST call
      * ntp::BasicThreadPool::AbortIo to prevent memory leaks).
      * 
-     * @param io_handle Handle of and object, wchich asynchronous IO is performed on
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created IO object
+     * Usage example:
+     * @code{.cpp}
+     * ATL::CAtlFile file;
+     * file.Create(..., FILE_FLAG_OVERLAPPED, ...);
+     * 
+     * ntp::SystemThreadPool pool;
+     * const auto io = pool.SubmitIo(file, [] (LPVOID overlapped, ULONG result, ULONG_PTR bytes_transferred) {
+     *     //
+     *     // Pointer passed as overlapped structure to WriteFile is in overlapped parameter
+     *     // Result of async IO operation is in result parameter
+     *     // Number of bytes transferred during the last IO is in bytes_transferred parameter
+     *     //
+     * });
+     *
+     * OVERLAPPED ovl = {};
+     * HRESULT hr = file.Write(buffer, buffer_size, &ovl);
+     * 
+     * if (hr != HRESULT_FROM_WIN32(ERROR_IO_PENDING))
+     * {
+     *     //
+     *     // Error occurred. We need to abort thread pool IO here
+     *     //
+     *     
+     *     pool.AbortIo(io);
+     *     throw std::runtime_error("Cannot write to file");
+     * }
+     * @endcode
+     * 
+     * @param io_handle Handle of and object, wchich asynchronous IO is performed on.
+     * @param functor   Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                  If you don't need it, you just don't pass it.
+     * @param args      Arguments to pass into callable. They will be copied into wrapper by default.
+     *                  You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                  but you must guarantee the parameter's validity until the callback is finished.
+     * @returns         Handle for created IO object.
      */
     template<typename Functor, typename... Args>
-    io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
+    [[nodiscard]] io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
     {
         return io_manager_.Submit(io_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 
     /**
-     * @brief Cancel threadpool IO
+     * @brief Cancel threadpool IO.
      *
-     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto io = pool.SubmitIo(file, [] (LPVOID overlapped, ULONG result, ULONG_PTR bytes_transferred) { ... });
+     * 
+     * //
+     * // You may want not to call callback on IO completion anymore, but IO didn't fail.
+     * // In this case you just need to cancel it
+     * //
+     * 
+     * pool.CancelIo(io);
+     * @endcode
+     *
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo).
      */
     void CancelIo(io_t io_object) noexcept { return io_manager_.Cancel(io_object); }
 
     /**
      * @brief Cancel threadpool IO if async IO failed to start.
+     * 
+     * For usage example refer to ntp::BasicThreadPool::SubmitIo.
      *
-     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo).
      */
     void AbortIo(io_t io_object) noexcept { return io_manager_.Abort(io_object); }
 
     /**
-     * @brief Cancel all pending IO callbacks
+     * @brief Cancel all pending IO callbacks.
      */
     void CancelIos() noexcept { return io_manager_.CancelAll(); }
 
 
     /**
-     * @brief Cancel all pending callbacks (of any kind)
+     * @brief Cancel all pending callbacks (of any kind).
      */
     void CancelAllCallbacks() noexcept
     {
