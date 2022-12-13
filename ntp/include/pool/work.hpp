@@ -35,7 +35,7 @@ public:
      * 
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 */
+     */
     template<typename CFunctor, typename... CArgs>
     explicit WorkCallback(CFunctor&& functor, CArgs&&... args)
         : BasicCallback(std::forward<CFunctor>(functor), std::forward<CArgs>(args)...)
@@ -80,7 +80,7 @@ public:
     /**
      * @brief Constructor that initializes all necessary objects.
      * 
-	 * @param environment Owning threadpool environment
+     * @param environment Owning threadpool environment
      */
     explicit WorkManager(PTP_CALLBACK_ENVIRON environment);
 
@@ -89,11 +89,11 @@ public:
      * 
      * Creates a callback wrapper and pushes it into a queue,
      * then submits PTP_WORK into corresponding threadpool.
-	 *
+     *
      * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @tparam Args... Types of arguments
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
     template<typename Functor, typename... Args>
     void Submit(Functor&& functor, Args&&... args)
@@ -110,9 +110,9 @@ public:
      * 
      * Wait is performed in separate thread if possible with periodical cancellation checks.
      * If waiting in separate thread is not possible, wait is performed in caller thread,
-	 * cancellation checks are impossible in this case (error message is reported to logger).
+     * cancellation checks are impossible in this case (error message is reported to logger).
      * 
-	 * @param test_cancel Reference to cancellation test function
+     * @param test_cancel Reference to cancellation test function
      * 
      * @returns true if all callbacks are completed, false if cancellation occurred while waiting for callbacks
      */

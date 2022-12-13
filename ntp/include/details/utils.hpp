@@ -87,17 +87,17 @@ public:
     ~NativeSlist();
 
     /**
-	 * @brief Inserts a new item to the list.
+     * @brief Inserts a new item to the list.
      * 
      * @param entry New item to insert into the list
-	 */
+     */
     void Push(PSLIST_ENTRY entry) noexcept;
 
     /**
-	 * @brief Implicit cast operator to internal list header.
+     * @brief Implicit cast operator to internal list header.
      * 
      * @returns Pointer to the internal list headers
-	 */
+     */
     operator PSLIST_HEADER() const noexcept { return header_; }
 
 private:
@@ -117,9 +117,9 @@ class alignas(NTP_ALLOCATION_ALIGNMENT) NativeSlistEntry
 
 public:
     /**
-	 * @brief Custom new operator, that allocates aligned memory.
-	 *
-	 * @param bytes Number of bytes to allocate
+     * @brief Custom new operator, that allocates aligned memory.
+     *
+     * @param bytes Number of bytes to allocate
      */
     void* operator new(size_t bytes)
     {

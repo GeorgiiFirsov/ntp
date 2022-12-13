@@ -52,14 +52,14 @@ public:
     { }
 
     /**
-	 * @brief Parameter conversion function. Does nothing.
-	 */
+     * @brief Parameter conversion function. Does nothing.
+     */
     void* ConvertParameter(void*) { return nullptr; }
 
     /**
      * @brief Callback invocation function implementation. Supports invocation of
      *        callbacks with or without PTP_CALLBACK_INSTANCE parameter.
-	 */
+     */
     template<typename = void> /* if constexpr works only for templates */
     void CallImpl(PTP_CALLBACK_INSTANCE instance, void* /* parameter */)
     {
@@ -86,9 +86,9 @@ class TimerManager final
 
 public:
     /**
-	 * @brief Constructor that initializes all necessary objects.
-	 *
-	 * @param environment Owning threadpool environment
+     * @brief Constructor that initializes all necessary objects.
+     *
+     * @param environment Owning threadpool environment
      */
     explicit TimerManager(PTP_CALLBACK_ENVIRON environment);
 
@@ -97,12 +97,12 @@ public:
      * 
      * Creates a new callback wrapper, new timer object, put 
      * it into a callbacks container and then sets threadpool timer.
-	 *
-	 * @param timeout Timeout after which timer object calls the callback
-	 * @param period If non-zero, timer object willbe triggered each period after first call
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     *
+     * @param timeout Timeout after which timer object calls the callback
+     * @param period If non-zero, timer object willbe triggered each period after first call
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
     native_handle_t Submit(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period,
@@ -134,15 +134,15 @@ public:
     }
 
     /**
-	 * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
-	 *
-	 * Just calls generic version of ntp::wait::details::TimerManager::Submit with
-	 * 0 as period parameter.
-	 *
-	 * @param timeout Timeout after which timer object calls the callback
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
+     *
+     * Just calls generic version of ntp::wait::details::TimerManager::Submit with
+     * 0 as period parameter.
+     *
+     * @param timeout Timeout after which timer object calls the callback
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto Submit(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)

@@ -65,14 +65,14 @@ public:
     { }
 
     /**
-	 * @brief Parameter conversion function. Just performs pointer type conversion.
-	 */
+     * @brief Parameter conversion function. Just performs pointer type conversion.
+     */
     IoData* ConvertParameter(void* parameter) { return static_cast<IoData*>(parameter); }
 
     /**
      * @brief Callback invocation function implementation. Supports invocation of
      *        callbacks with or without PTP_CALLBACK_INSTANCE parameter. 
-	 */
+     */
     template<typename = void> /* if constexpr works only for templates */
     void CallImpl(PTP_CALLBACK_INSTANCE instance, IoData* io_data)
     {
@@ -102,9 +102,9 @@ class IoManager final
 
 public:
     /**
-	 * @brief Constructor that initializes all necessary objects.
-	 *
-	 * @param environment Owning threadpool environment
+     * @brief Constructor that initializes all necessary objects.
+     *
+     * @param environment Owning threadpool environment
      */
     explicit IoManager(PTP_CALLBACK_ENVIRON environment);
 
