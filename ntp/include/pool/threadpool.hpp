@@ -182,7 +182,7 @@ using io_t = io::details::IoManager::native_handle_t;
  *   is completed.
  * 
  * @tparam ThreadPoolTraits Threadpool traits, that define
- *                          actual implementation internals
+ *                          actual implementation internals.
  */
 template<typename ThreadPoolTraits>
 class BasicThreadPool final
@@ -200,11 +200,11 @@ private:
 
 public:
     /**
-     * @brief Default constructor
+     * @brief Default constructor.
      * 
-	 * Initializes stateful threadpool traits and cleanup group
+     * Initializes stateful threadpool traits and cleanup group.
      * 
-	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
+     * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel).
      */
     explicit BasicThreadPool(details::test_cancel_t test_cancel = details::DefaultTestCancel)
         : traits_()
@@ -217,15 +217,20 @@ public:
     { }
 
     /**
-     * @brief Constructor with the ability to set threadpool threads number
+     * @brief Constructor with the ability to set threadpool threads number.
      * 
-     * This constructor is available only for BasicThreadPool<details::CustomThreadPoolTraits>
-     * specialization. For the description of parameters refer to details::CustomThreadPoolTraits
+     * This constructor is available only for ntp::BasicThreadPool<details::CustomThreadPoolTraits>
+     * specialization. For the description of parameters refer to ntp::details::CustomThreadPoolTraits
      * description.
-	 *
-	 * @param min_threads Minimum number of threads
-	 * @param max_threads Maximum number of threads
-	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::ThreadPool(1, 16); // Use up to 16 threads in thread pool
+     * @endcode
+     *
+     * @param min_threads Minimum number of threads.
+     * @param max_threads Maximum number of threads.
+     * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel).
      */
     template<typename = std::enable_if_t<std::is_same_v<traits_t, details::CustomThreadPoolTraits>>>
     explicit BasicThreadPool(DWORD min_threads, DWORD max_threads, details::test_cancel_t test_cancel = details::DefaultTestCancel)
@@ -239,7 +244,7 @@ public:
     { }
 
     /**
-     * @brief Destructor releases all forgotten (or not) resources via cleanup group
+     * @brief Destructor releases all forgotten (or not) resources via cleanup group.
      */
     ~BasicThreadPool()
     {
@@ -253,12 +258,34 @@ public:
 
 
     /**
-	 * @brief Submits a work callback into threadpool.
-	 *
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @brief Submits a work callback into threadpool.
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitWork([] (const std::string& parameter1, size_t parameter2) {
+     *     //
+     *     // Parameter passed_by_ref will not be copied because of std::cref,
+     *     // whereas passed_by_value parameter will be copied into an internal
+     *     // callable wrapper.
+     *     //
+     * }, std::cref(passed_by_ref), passed_by_value);
+     * 
+     * pool.SubmitWork([event_handle] (PTP_CALLBACK_INSTANCE instance) {
+     *     //
+     *     // Callback can accept PTP_CALLBACK_INSTANCE as its first parameter,
+     *     // but it is optional, so you are free not to pass it
+     *     //
+     * });
+     * @endcode
+     *
+     * @tparam Functor Type of callable to invoke in threadpool.
+     * @tparam Args... Types of arguments.
+     * @param functor  Callable to invoke. May accept `PTP_CALLBACK_INSTANCE` as its first parameter. 
+     *                 If you don't need it, you just don't pass it.
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
      */
     template<typename Functor, typename... Args>
     void SubmitWork(Functor&& functor, Args&&... args)
@@ -268,15 +295,31 @@ public:
     }
 
     /**
-     * @brief Waits until all work callbacks are completed or cancellation is requested
+     * @brief Waits until all work callbacks are completed or cancellation is requested.
      *
+     * Usage example:
+     * @code{.cpp}
+     * //
+     * // Submit some callbacks to thread pool
+     * //
+     * 
+     * if (!pool.WaitWorks())
+     * {
+     *     //
+     *     // Cancellation was requested, some tasks may be incomplete.
+     *     //
+     * 
+     *     HandleIncompleteProcessing();
+     * }
+     * @endcode
+     * 
      * @returns true if all callbacks are completed, false if cancellation
-     *          occurred while waiting for callbacks
+     *          occurred while waiting for callbacks.
      */
     bool WaitWorks() noexcept { return work_manager_.WaitAll(test_cancel_); }
 
     /**
-     * @brief Cancel all pending work callbacks
+     * @brief Cancel all pending work callbacks.
      */
     void CancelWorks() noexcept { return work_manager_.CancelAll(); }
 
