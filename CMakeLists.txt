@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(ntp VERSION 0.2.0)
+project(ntp VERSION 0.2.1)
 
 #
 # Global config

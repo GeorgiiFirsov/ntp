@@ -363,9 +363,13 @@ public:
      * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
      * @param timeout     Timeout while wait object waits for the specified handle
      *                    (pass ntp::time::max_native_duration for infinite wait timeout).
-     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
-     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
-     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param functor     Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                    If you don't need it, you just don't pass it. However, it MUST accept
+     *                    the following parameter as the first one (second if `PTP_CALLBACK_INSTANCE` 
+     *                    is passed):
+     *                    - `TP_WAIT_RESULT` wait_result - The result of the wait operation. This parameter can 
+     *                                                     be one of the following values from `WaitForMultipleObjects`:
+     *                                                     `WAIT_OBJECT_0`, `WAIT_TIMEOUT`.
      * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
      *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
      *                    but you must guarantee the parameter's validity until the callback is finished.
@@ -396,9 +400,13 @@ public:
      * @endcode
      * 
      * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
-     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
-     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
-     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param functor     Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                    If you don't need it, you just don't pass it. However, it MUST accept
+     *                    the following parameter as the first one (second if `PTP_CALLBACK_INSTANCE`
+     *                    is passed):
+     *                    - `TP_WAIT_RESULT` wait_result - The result of the wait operation. This parameter can
+     *                                                     be one of the following values from `WaitForMultipleObjects`:
+     *                                                     `WAIT_OBJECT_0`, `WAIT_TIMEOUT`.
      * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
      *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
      *                    but you must guarantee the parameter's validity until the callback is finished.
@@ -674,7 +682,14 @@ public:
      * 
      * @param io_handle Handle of and object, wchich asynchronous IO is performed on.
      * @param functor   Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
-     *                  If you don't need it, you just don't pass it.
+     *                  If you don't need it, you just don't pass it. However, it MUST accept
+     *                  the following parameters as the first, second and third ones (second, third and 
+     *                  fourth if `PTP_CALLBACK_INSTANCE` is passed):
+     *                  - `LPVOID` overlapped - A pointer to a variable that receives the address of the OVERLAPPED structure 
+     *                                          that was specified when the completed IO operation was started.
+     *                  - `ULONG` result -      The result of the I/O operation. If the I/O is successful, this parameter is NO_ERROR. 
+     *                                          Otherwise, this parameter is one of the system error codes.
+     *                  - `ULONG_PTR` bytes_transferred - The number of bytes transferred during the IO operation that has completed.
      * @param args      Arguments to pass into callable. They will be copied into wrapper by default.
      *                  You schould use `std::ref` or `std::cref` to pass a parameter by reference,
      *                  but you must guarantee the parameter's validity until the callback is finished.
