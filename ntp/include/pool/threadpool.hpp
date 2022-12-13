@@ -278,11 +278,14 @@ public:
      *     //
      * });
      * @endcode
+     * 
+     * There may be some conflictine situations with a `PTP_CALLBACK_INSTANCE` custom
+     * parameter, but usually you don't have to pass it as your own parameter.
      *
      * @tparam Functor Type of callable to invoke in threadpool.
      * @tparam Args... Types of arguments.
-     * @param functor  Callable to invoke. May accept `PTP_CALLBACK_INSTANCE` as its first parameter. 
-     *                 If you don't need it, you just don't pass it.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter. 
+     *                 If you don't need it, you just don't pass it. 
      * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
      *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
      *                 but you must guarantee the parameter's validity until the callback is finished.
@@ -325,18 +328,46 @@ public:
 
 
     /**
-	 * @brief Submits a wait callback into threadpool.
-	 *
-	 * @tparam Rep Type of ticks representation for timeout
-	 * @tparam Period Type of period for timeout ticks
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param wait_handle Handle to wait for
-	 * @param timeout Timeout while wait object waits for the specified handle
-	 *                (pass ntp::time::max_native_duration for infinite wait timeout)
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created wait object
+     * @brief Submits a wait callback into threadpool.
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * HANDLE event = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+     * 
+     * pool.SubmitWait(event, 20min, [] (TP_WAIT_RESULT wait_result) {
+     *     if (WAIT_OBJECT_0 == wait_result)
+     *     {
+     *         // Wait completed
+     *     }
+     *     else
+     *     {
+     *         // Timeout 
+     *     }
+     * });
+     * 
+     * pool.SubmitWait(event, 30min, [custom_dll] (PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+     *     if (WAIT_OBJECT_0 != wait_result)
+     *     {
+     *         //
+     *         // Suppose we don't need a dll anymore, if event is not signaled in 30 minutes
+     *         //
+     *         
+     *         FreeLibraryWhenCallbackReturns(instance, custom_dll);
+     *     }
+     * });
+     * @endcode
+     * 
+     * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
+     * @param timeout     Timeout while wait object waits for the specified handle
+     *                    (pass ntp::time::max_native_duration for infinite wait timeout).
+     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
+     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
+     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
+     *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                    but you must guarantee the parameter's validity until the callback is finished.
+     * @returns           Handle for created wait object.
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     wait_t SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -346,14 +377,30 @@ public:
     }
 
     /**
-	 * @brief Submits a wait callback into threadpool (timeout never expires).
-	 *
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param wait_handle Handle to wait for
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     * @brief Submits a wait callback into threadpool (timeout never expires).
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * HANDLE event = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+     * 
+     * pool.SubmitWait(event, [] (TP_WAIT_RESULT wait_result) {
+     *     //
+     *     // Wait result SHOULD be WAIT_OBJECT_0 here (as for 13 of December, 2022), but passed to the 
+     *     // callable to handle potential future changes.
+     *     // This callback is called only if event is signaled, because it waits for it infinitely.
+     *     //
+     * });
+     * @endcode
+     * 
+     * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
+     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
+     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
+     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
+     *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                    but you must guarantee the parameter's validity until the callback is finished.
+     * @returns           Handle for created wait object.
      */
     template<typename Functor, typename... Args>
     auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
@@ -364,14 +411,26 @@ public:
     }
 
     /**
-     * @brief Cancel threadpool wait
+     * @brief Cancel threadpool wait.
      * 
-     * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait)
+     * Usage example:
+     * @code{.cpp}
+     * const auto wait = pool.SubmitWait(event, [] () { ... });
+     * 
+     * //
+     * // Suppose you don't need to wait for callback and execute 
+     * // a function anymore. You can just cancel it!
+     * //
+     * 
+     * pool.CancelWait(wait);
+     * @endcode
+     * 
+     * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait).
      */
     void CancelWait(wait_t wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
 
     /**
-     * @brief Cancel all pending wait callbacks
+     * @brief Cancel all pending wait callbacks.
      */
     void CancelWaits() noexcept { return wait_manager_.CancelAll(); }
 
@@ -394,8 +453,8 @@ public:
 
     /**
      * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
-	 *
-	 * @param timeout Timeout after which timer object calls the callback
+     *
+     * @param timeout Timeout after which timer object calls the callback
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      * @returns handle for created timer object
