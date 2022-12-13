@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.5</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -172,9 +172,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8380d9134dd2c0cfa5b4ed8c59616cdc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">BasicManagerEx</a> (PTP_CALLBACK_ENVIRON environment)</td></tr>
 <tr class="memdesc:a8380d9134dd2c0cfa5b4ed8c59616cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that initializes all necessary objects.  <a href="classntp_1_1details_1_1BasicManagerEx.html#a8380d9134dd2c0cfa5b4ed8c59616cdc">More...</a><br /></td></tr>
 <tr class="separator:a8380d9134dd2c0cfa5b4ed8c59616cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a067b67b238cf1f6294f660e3da6f34ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">SubmitContext</a> (<a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle, <a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> &amp;&amp;context)</td></tr>
-<tr class="memdesc:a067b67b238cf1f6294f660e3da6f34ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put context into container and then submit associated callback.  <a href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">More...</a><br /></td></tr>
-<tr class="separator:a067b67b238cf1f6294f660e3da6f34ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39768f9c81ee0b3896a5841a6b05d71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#aa39768f9c81ee0b3896a5841a6b05d71">SubmitContext</a> (<a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> native_handle, <a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#a06383c0f3596e08ec53c10ff901062f2">context_t</a> &amp;&amp;context) noexcept(noexcept(std::declval&lt; Derived &gt;().SubmitInternal(std::declval&lt; <a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#aaa7413bc68c833cf91741b0fb8a1773d">native_handle_t</a> &gt;(), std::declval&lt; <a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f">object_context_t</a> &gt;())))</td></tr>
+<tr class="memdesc:aa39768f9c81ee0b3896a5841a6b05d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put context into container and then submit associated callback.  <a href="classntp_1_1details_1_1BasicManagerEx.html#aa39768f9c81ee0b3896a5841a6b05d71">More...</a><br /></td></tr>
+<tr class="separator:aa39768f9c81ee0b3896a5841a6b05d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classntp_1_1details_1_1BasicManager"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classntp_1_1details_1_1BasicManager')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a></td></tr>
 <tr class="memitem:aba4ebf646951ba34b8341f3aa869c770 inherit pro_methods_classntp_1_1details_1_1BasicManager"><td class="memItemLeft" align="right" valign="top">PTP_CALLBACK_ENVIRON&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#aba4ebf646951ba34b8341f3aa869c770">Environment</a> () const noexcept</td></tr>
 <tr class="memdesc:aba4ebf646951ba34b8341f3aa869c770 inherit pro_methods_classntp_1_1details_1_1BasicManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an environment associated with owning threadpool.  <a href="classntp_1_1details_1_1BasicManager.html#aba4ebf646951ba34b8341f3aa869c770">More...</a><br /></td></tr>
@@ -462,8 +462,8 @@ template&lt;typename Functor , typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a067b67b238cf1f6294f660e3da6f34ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a067b67b238cf1f6294f660e3da6f34ff">&#9670;&nbsp;</a></span>SubmitContext()</h2>
+<a id="aa39768f9c81ee0b3896a5841a6b05d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa39768f9c81ee0b3896a5841a6b05d71">&#9670;&nbsp;</a></span>SubmitContext()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,7 +493,7 @@ template&lt;typename NativeHandle , typename ObjectContext , typename Derived &g
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

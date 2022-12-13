@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.5</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('time_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">  126</a></span>&#160;<span class="keyword">inline</span> FILETIME <a class="code" href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">Negate</a>(FILETIME time)</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="time_8hpp.html#a2d55af3cba8b1142ff7562e9dd9847b9">  126</a></span>&#160;<span class="keyword">inline</span> FILETIME <a class="code" href="time_8hpp.html#a2d55af3cba8b1142ff7562e9dd9847b9">Negate</a>(FILETIME time) noexcept</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    time.dwLowDateTime = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(-<span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(time.dwLowDateTime));</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> time;</div>
@@ -170,12 +170,12 @@ $(document).ready(function(){initNavTree('time_8hpp_source.html',''); initResiza
 <div class="ttc" id="astructntp_1_1time_1_1details_1_1is__time__point_html"><div class="ttname"><a href="structntp_1_1time_1_1details_1_1is__time__point.html">ntp::time::details::is_time_point</a></div><div class="ttdoc">Trait that detects std::chono::time_point specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:53</div></div>
 <div class="ttc" id="atime_8hpp_html_a1eb3cd21b9ea7005b97ed563d00b97b9"><div class="ttname"><a href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">ntp::time::details::is_duration_v</a></div><div class="ttdeci">constexpr NTP_INLINE bool is_duration_v</div><div class="ttdoc">Trait that detects std::chono::duration specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:43</div></div>
 <div class="ttc" id="atime_8hpp_html_a2294e7508f710a6bc21a61e591c0fe07"><div class="ttname"><a href="time_8hpp.html#a2294e7508f710a6bc21a61e591c0fe07">ntp::time::AsFileTime</a></div><div class="ttdeci">FILETIME AsFileTime(const std::chrono::duration&lt; Rep, Period &gt; &amp;duration) noexcept</div><div class="ttdoc">Converts std::chrono::duration to FILETIME.</div><div class="ttdef"><b>Definition:</b> time.hpp:107</div></div>
+<div class="ttc" id="atime_8hpp_html_a2d55af3cba8b1142ff7562e9dd9847b9"><div class="ttname"><a href="time_8hpp.html#a2d55af3cba8b1142ff7562e9dd9847b9">ntp::time::Negate</a></div><div class="ttdeci">FILETIME Negate(FILETIME time) noexcept</div><div class="ttdoc">Negates a duration value stored in FILETIME structure.</div><div class="ttdef"><b>Definition:</b> time.hpp:126</div></div>
 <div class="ttc" id="atime_8hpp_html_a6581c695fa57e038b6a453cff630f395"><div class="ttname"><a href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a></div><div class="ttdeci">std::chrono::duration&lt; long long, std::ratio&lt; 1, 10 '000 '000 &gt; &gt; native_duration_t</div><div class="ttdoc">Native 100-ns duration interval.</div><div class="ttdef"><b>Definition:</b> time.hpp:78</div></div>
 <div class="ttc" id="atime_8hpp_html_a7670f15bb48e47269e9ed275ee12f479"><div class="ttname"><a href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">ntp::time::details::is_time_point_v</a></div><div class="ttdeci">constexpr NTP_INLINE bool is_time_point_v</div><div class="ttdoc">Trait that detects std::chono::time_point specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:70</div></div>
 <div class="ttc" id="atime_8hpp_html_aa4fc36352852fb5210bc8cdc492a26f2"><div class="ttname"><a href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">ntp::time::max_native_duration</a></div><div class="ttdeci">constexpr NTP_INLINE auto max_native_duration</div><div class="ttdoc">Maximum supported native duration count.</div><div class="ttdef"><b>Definition:</b> time.hpp:84</div></div>
 <div class="ttc" id="atime_8hpp_html_ab1ea4e25b1332d473030000e6de57b8e"><div class="ttname"><a href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a></div><div class="ttdeci">std::chrono::time_point&lt; deadline_clock_t, Duration &gt; deadline_t</div><div class="ttdoc">Time point, that specifies a deadline.</div><div class="ttdef"><b>Definition:</b> time.hpp:97</div></div>
 <div class="ttc" id="atime_8hpp_html_aebbf03271e1d71a380dd4e179640958c"><div class="ttname"><a href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">ntp::time::deadline_clock_t</a></div><div class="ttdeci">std::chrono::steady_clock deadline_clock_t</div><div class="ttdoc">Clock to measure deadlines.</div><div class="ttdef"><b>Definition:</b> time.hpp:90</div></div>
-<div class="ttc" id="atime_8hpp_html_afd464a7d713da18f08505a97e5575fe5"><div class="ttname"><a href="time_8hpp.html#afd464a7d713da18f08505a97e5575fe5">ntp::time::Negate</a></div><div class="ttdeci">FILETIME Negate(FILETIME time)</div><div class="ttdoc">Negates a duration value stored in FILETIME structure.</div><div class="ttdef"><b>Definition:</b> time.hpp:126</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

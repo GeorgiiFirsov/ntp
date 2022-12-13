@@ -11,5 +11,5 @@ var classntp_1_1details_1_1BasicManagerEx =
     [ "Cancel", "classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96", null ],
     [ "CancelAll", "classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65", null ],
     [ "Replace", "classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f", null ],
-    [ "SubmitContext", "classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff", null ]
+    [ "SubmitContext", "classntp_1_1details_1_1BasicManagerEx.html#aa39768f9c81ee0b3896a5841a6b05d71", null ]
 ];

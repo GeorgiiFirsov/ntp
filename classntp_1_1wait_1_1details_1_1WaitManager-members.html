@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.1.5</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('classntp_1_1wait_1_1details_1_1WaitMan
   <tr><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f">Replace</a>(native_handle_t object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html">ntp::details::BasicManagerEx&lt; PTP_WAIT, WaitContext, WaitManager &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html#a4a31f343728f4762e9a658747955610b">Submit</a>(HANDLE wait_handle, const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html">ntp::wait::details::WaitManager</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html#afb0f9d621bff083f6eb19efb802bd4d1">Submit</a>(HANDLE wait_handle, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt;, native_handle_t &gt;</td><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html">ntp::wait::details::WaitManager</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#a067b67b238cf1f6294f660e3da6f34ff">SubmitContext</a>(native_handle_t native_handle, context_t &amp;&amp;context)</td><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html">ntp::details::BasicManagerEx&lt; PTP_WAIT, WaitContext, WaitManager &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html#aa39768f9c81ee0b3896a5841a6b05d71">SubmitContext</a>(native_handle_t native_handle, context_t &amp;&amp;context) noexcept(noexcept(std::declval&lt; WaitManager &gt;().SubmitInternal(std::declval&lt; native_handle_t &gt;(), std::declval&lt; object_context_t &gt;())))</td><td class="entry"><a class="el" href="classntp_1_1details_1_1BasicManagerEx.html">ntp::details::BasicManagerEx&lt; PTP_WAIT, WaitContext, WaitManager &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html#a355587a41703e57ad2915edb098619b3">WaitManager</a>(PTP_CALLBACK_ENVIRON environment)</td><td class="entry"><a class="el" href="classntp_1_1wait_1_1details_1_1WaitManager.html">ntp::wait::details::WaitManager</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
