@@ -302,6 +302,8 @@ public:
      *
      * Usage example:
      * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * 
      * //
      * // Submit some callbacks to thread pool
      * //
@@ -415,6 +417,7 @@ public:
      * 
      * Usage example:
      * @code{.cpp}
+     * ntp::SystemThreadPool pool;
      * const auto wait = pool.SubmitWait(event, [] () { ... });
      * 
      * //
@@ -437,12 +440,27 @@ public:
 
     /**
      * @brief Submits a threadpool timer object with a user-defined callback.
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitTimer(20s, 10s, [] () {
+     *     //
+     *     // This timer will be triggered after 20 seconds and 
+     *     // then every 10 seconds
+     *     //
+     * });
+     * @endcode
      *
-     * @param timeout Timeout after which timer object calls the callback
-     * @param period If non-zero, timer object willbe triggered each period after first call
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * @param timeout Timeout after which timer object calls the callback for the first time.
+     * @param period  Period of the timer. Callback will be triggered after each such interval is elapsed.
+     *                Pass zero, if you want to create a timer, that will be triggered only once.
+     * @param functor Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                If you don't need it, you just don't pass it.
+     * @param args    Arguments to pass into callable. They will be copied into wrapper by default.
+     *                You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                but you must guarantee the parameter's validity until the callback is finished.
+     * @returns       Handle for created timer object.
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
     timer_t SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
@@ -454,10 +472,23 @@ public:
     /**
      * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
      *
-     * @param timeout Timeout after which timer object calls the callback
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitTimer(20s, [] () {
+     *     //
+     *     // This timer will be triggered only once after 20 seconds
+     *     //
+     * });
+     * @endcode
+     *
+     * @param timeout Timeout after which timer object calls the callback for the first time.
+     * @param functor Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                If you don't need it, you just don't pass it.
+     * @param args    Arguments to pass into callable. They will be copied into wrapper by default.
+     *                You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                but you must guarantee the parameter's validity until the callback is finished.
+     * @returns       Handle for created timer object.
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -471,12 +502,36 @@ public:
      * @brief Submits a threadpool deadline timer object with a user-defined callback.
      *
      * If deadline is already gone, timer expires immediately.
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto now = ntp::time::deadline_clock_t::now();
      * 
-     * @param deadline A specific point in time, which the timer will expire at
-     * @param period If non-zero, timer object willbe triggered each period after first call
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * pool.SubmitTimer(now + 40min, 10s, [] () {
+     *     //
+     *     // This timer will be triggered after 40 minutes from now and then
+     *     // will be triggered repeatedly every 10 seconds
+     *     //
+     * });
+     * 
+     * pool.SubmitTimer(now - 20s, 10s, [] () {
+     *     //
+     *     // This timer will be triggered immediately (since deadline is already gone) 
+     *     // and after that will be triggered repeatedly every 10 seconds
+     *     //
+     * });
+     * @endcode
+     * 
+     * @param deadline A specific point in time, which the timer will expire at for the first time.
+     * @param period   Period of the timer. Callback will be triggered after each such interval is elapsed.
+     *                 Pass zero, if you want to create a timer, that will be triggered only once.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                 If you don't need it, you just don't pass it.
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
+     * @returns        Handle for created timer object.
      */
     template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
@@ -490,10 +545,31 @@ public:
      *
      * If deadline is already gone, timer expires immediately.
      *
-     * @param deadline A specific point in time, which the timer will expire at
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto now = ntp::time::deadline_clock_t::now();
+     * 
+     * pool.SubmitTimer(now + 40min, [] () {
+     *     //
+     *     // This timer will be triggered only once after 40 minutes from now
+     *     //
+     * });
+     * 
+     * pool.SubmitTimer(now - 20s, [] () {
+     *     //
+     *     // This timer will be triggered only once immediately (since deadline is already gone)
+     *     //
+     * });
+     * @endcode
+     *
+     * @param deadline A specific point in time, which the timer will expire at for the first time.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                 If you don't need it, you just don't pass it.
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
+     * @returns        Handle for created timer object.
      */
     template<typename Duration, typename Functor, typename... Args>
     auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
@@ -507,8 +583,20 @@ public:
      * @brief Replaces an existing timer callback in threadpool.
      *        This method cannot be called concurrently for the same timer object.
      *
-     * @tparam Functor Type of callable to invoke in threadpool
-     * @tparam Args... Types of arguments
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto timer = pool.SubmitTimer(30s, 10s, [] () { ... });
+     * 
+     * //
+     * // You may need to replace a callback, that will be called when timer expires,
+     * // so you just replace it by its handle
+     * //
+     * 
+     * pool.ReplaceTimer(timer, [] (size_t param1, int param2) { ... }, 
+     *     you_can_even_pass, another_arguments);
+     * @endcode
+     *
      * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
@@ -523,14 +611,26 @@ public:
     }
 
     /**
-     * @brief Cancel threadpool timer
+     * @brief Cancel threadpool timer.
      *
-     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto timer = pool.SubmitTimer(30s, 10s, [] () { ... });
+     * 
+     * //
+     * // You may need to stop timer to trigger each 10 seconds, sou you may just cancel it!
+     * //
+     * 
+     * pool.CancelTimer(timer);
+     * @endcode
+     *
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer).
      */
     void CancelTimer(timer_t timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
 
     /**
-     * @brief Cancel all pending timer callbacks
+     * @brief Cancel all pending timer callbacks.
      */
     void CancelTimers() noexcept { return timer_manager_.CancelAll(); }
 
