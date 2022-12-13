@@ -36,10 +36,10 @@ public:
     /**
      * @brief Allocates specific number of elements
      * 
-	 * @param count Number of elements to allocate (default = 1)
-	 * @returns Pointer to allocated memory
-	 * @throws exception::Win32Exception if count is zero or in case
-	 *                                   of allocation failure
+     * @param count Number of elements to allocate (default = 1)
+     * @returns Pointer to allocated memory
+     * @throws exception::Win32Exception if count is zero or in case
+     *                                   of allocation failure
      */
     static Ty* Allocate(size_t count = 1)
     {
@@ -134,7 +134,7 @@ public:
     /**
      * @brief Allocates specific number of elements
      * 
-	 * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
+     * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
      * @param count Number of elements to allocate (default = 1)
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception if count is zero or in case
@@ -147,15 +147,15 @@ public:
     }
 
     /**
-	 * @brief Allocates specific number of bytes
-	 *
-	 * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
+     * @brief Allocates specific number of bytes
+     *
+     * @tparam alignment Alignment value (default = NTP_ALLOCATION_ALIGNMENT)
      * @param bytes Number of bytes to allocate (default = sizeof(Ty))
      * @returns Pointer to allocated memory
      * @throws exception::Win32Exception if bytes is less than sizeof(Ty) or
      *                                   in case of allocation failure
      *
-	 */
+     */
     template<size_t alignment = NTP_ALLOCATION_ALIGNMENT>
     static Ty* AllocateBytes(size_t bytes = sizeof(Ty))
     {

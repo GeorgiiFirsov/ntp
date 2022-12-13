@@ -182,7 +182,7 @@ using io_t = io::details::IoManager::native_handle_t;
  *   is completed.
  * 
  * @tparam ThreadPoolTraits Threadpool traits, that define
- *                          actual implementation internals
+ *                          actual implementation internals.
  */
 template<typename ThreadPoolTraits>
 class BasicThreadPool final
@@ -200,11 +200,11 @@ private:
 
 public:
     /**
-     * @brief Default constructor
+     * @brief Default constructor.
      * 
-	 * Initializes stateful threadpool traits and cleanup group
+     * Initializes stateful threadpool traits and cleanup group.
      * 
-	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
+     * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel).
      */
     explicit BasicThreadPool(details::test_cancel_t test_cancel = details::DefaultTestCancel)
         : traits_()
@@ -217,15 +217,20 @@ public:
     { }
 
     /**
-     * @brief Constructor with the ability to set threadpool threads number
+     * @brief Constructor with the ability to set threadpool threads number.
      * 
-     * This constructor is available only for BasicThreadPool<details::CustomThreadPoolTraits>
-     * specialization. For the description of parameters refer to details::CustomThreadPoolTraits
+     * This constructor is available only for ntp::BasicThreadPool<details::CustomThreadPoolTraits>
+     * specialization. For the description of parameters refer to ntp::details::CustomThreadPoolTraits
      * description.
-	 *
-	 * @param min_threads Minimum number of threads
-	 * @param max_threads Maximum number of threads
-	 * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel)
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::ThreadPool(1, 16); // Use up to 16 threads in thread pool
+     * @endcode
+     *
+     * @param min_threads Minimum number of threads.
+     * @param max_threads Maximum number of threads.
+     * @param test_cancel Cancellation test function (defaulted to ntp::details::DefaultTestCancel).
      */
     template<typename = std::enable_if_t<std::is_same_v<traits_t, details::CustomThreadPoolTraits>>>
     explicit BasicThreadPool(DWORD min_threads, DWORD max_threads, details::test_cancel_t test_cancel = details::DefaultTestCancel)
@@ -239,7 +244,7 @@ public:
     { }
 
     /**
-     * @brief Destructor releases all forgotten (or not) resources via cleanup group
+     * @brief Destructor releases all forgotten (or not) resources via cleanup group.
      */
     ~BasicThreadPool()
     {
@@ -253,12 +258,37 @@ public:
 
 
     /**
-	 * @brief Submits a work callback into threadpool.
-	 *
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @brief Submits a work callback into threadpool.
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitWork([] (const std::string& parameter1, size_t parameter2) {
+     *     //
+     *     // Parameter passed_by_ref will not be copied because of std::cref,
+     *     // whereas passed_by_value parameter will be copied into an internal
+     *     // callable wrapper.
+     *     //
+     * }, std::cref(passed_by_ref), passed_by_value);
+     * 
+     * pool.SubmitWork([event_handle] (PTP_CALLBACK_INSTANCE instance) {
+     *     //
+     *     // Callback can accept PTP_CALLBACK_INSTANCE as its first parameter,
+     *     // but it is optional, so you are free not to pass it
+     *     //
+     * });
+     * @endcode
+     * 
+     * There may be some conflictine situations with a `PTP_CALLBACK_INSTANCE` custom
+     * parameter, but usually you don't have to pass it as your own parameter.
+     *
+     * @tparam Functor Type of callable to invoke in threadpool.
+     * @tparam Args... Types of arguments.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter. 
+     *                 If you don't need it, you just don't pass it. 
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
      */
     template<typename Functor, typename... Args>
     void SubmitWork(Functor&& functor, Args&&... args)
@@ -268,32 +298,78 @@ public:
     }
 
     /**
-     * @brief Waits until all work callbacks are completed or cancellation is requested
+     * @brief Waits until all work callbacks are completed or cancellation is requested.
      *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * 
+     * //
+     * // Submit some callbacks to thread pool
+     * //
+     * 
+     * if (!pool.WaitWorks())
+     * {
+     *     //
+     *     // Cancellation was requested, some tasks may be incomplete.
+     *     //
+     * 
+     *     HandleIncompleteProcessing();
+     * }
+     * @endcode
+     * 
      * @returns true if all callbacks are completed, false if cancellation
-     *          occurred while waiting for callbacks
+     *          occurred while waiting for callbacks.
      */
     bool WaitWorks() noexcept { return work_manager_.WaitAll(test_cancel_); }
 
     /**
-     * @brief Cancel all pending work callbacks
+     * @brief Cancel all pending work callbacks.
      */
     void CancelWorks() noexcept { return work_manager_.CancelAll(); }
 
 
     /**
-	 * @brief Submits a wait callback into threadpool.
-	 *
-	 * @tparam Rep Type of ticks representation for timeout
-	 * @tparam Period Type of period for timeout ticks
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param wait_handle Handle to wait for
-	 * @param timeout Timeout while wait object waits for the specified handle
-	 *                (pass ntp::time::max_native_duration for infinite wait timeout)
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created wait object
+     * @brief Submits a wait callback into threadpool.
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * HANDLE event = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+     * 
+     * pool.SubmitWait(event, 20min, [] (TP_WAIT_RESULT wait_result) {
+     *     if (WAIT_OBJECT_0 == wait_result)
+     *     {
+     *         // Wait completed
+     *     }
+     *     else
+     *     {
+     *         // Timeout 
+     *     }
+     * });
+     * 
+     * pool.SubmitWait(event, 30min, [custom_dll] (PTP_CALLBACK_INSTANCE instance, TP_WAIT_RESULT wait_result) {
+     *     if (WAIT_OBJECT_0 != wait_result)
+     *     {
+     *         //
+     *         // Suppose we don't need a dll anymore, if event is not signaled in 30 minutes
+     *         //
+     *         
+     *         FreeLibraryWhenCallbackReturns(instance, custom_dll);
+     *     }
+     * });
+     * @endcode
+     * 
+     * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
+     * @param timeout     Timeout while wait object waits for the specified handle
+     *                    (pass ntp::time::max_native_duration for infinite wait timeout).
+     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
+     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
+     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
+     *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                    but you must guarantee the parameter's validity until the callback is finished.
+     * @returns           Handle for created wait object.
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     wait_t SubmitWait(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -303,14 +379,30 @@ public:
     }
 
     /**
-	 * @brief Submits a wait callback into threadpool (timeout never expires).
-	 *
-	 * @tparam Functor Type of callable to invoke in threadpool
-	 * @tparam Args... Types of arguments
-	 * @param wait_handle Handle to wait for
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     * @brief Submits a wait callback into threadpool (timeout never expires).
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * HANDLE event = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
+     * 
+     * pool.SubmitWait(event, [] (TP_WAIT_RESULT wait_result) {
+     *     //
+     *     // Wait result SHOULD be WAIT_OBJECT_0 here (as for 13 of December, 2022), but passed to the 
+     *     // callable to handle potential future changes.
+     *     // This callback is called only if event is signaled, because it waits for it infinitely.
+     *     //
+     * });
+     * @endcode
+     * 
+     * @param wait_handle Handle to wait for. May be any handle, that you can pass to `WaitForSingleObject`.
+     * @param functor     Callable to invoke. It MUST accept `TP_WAIT_RESULT` as its first parameter, and MAY
+     *                    accept `PTP_CALLBACK_INSTANCE` as second one. All the rest parameters (if any) MUST
+     *                    be accepted strictly after `TP_WAIT_RESULT` and `PTP_CALLBACK_INSTANCE` (if present).
+     * @param args        Arguments to pass into callable. They will be copied into wrapper by default.
+     *                    You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                    but you must guarantee the parameter's validity until the callback is finished.
+     * @returns           Handle for created wait object.
      */
     template<typename Functor, typename... Args>
     auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
@@ -321,26 +413,54 @@ public:
     }
 
     /**
-     * @brief Cancel threadpool wait
+     * @brief Cancel threadpool wait.
      * 
-     * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait)
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto wait = pool.SubmitWait(event, [] () { ... });
+     * 
+     * //
+     * // Suppose you don't need to wait for callback and execute 
+     * // a function anymore. You can just cancel it!
+     * //
+     * 
+     * pool.CancelWait(wait);
+     * @endcode
+     * 
+     * @param wait_object Handle for an existing wait object (obtained from ntp::BasicThreadPool::SubmitWait).
      */
     void CancelWait(wait_t wait_object) noexcept { return wait_manager_.Cancel(wait_object); }
 
     /**
-     * @brief Cancel all pending wait callbacks
+     * @brief Cancel all pending wait callbacks.
      */
     void CancelWaits() noexcept { return wait_manager_.CancelAll(); }
 
 
     /**
      * @brief Submits a threadpool timer object with a user-defined callback.
+     * 
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitTimer(20s, 10s, [] () {
+     *     //
+     *     // This timer will be triggered after 20 seconds and 
+     *     // then every 10 seconds
+     *     //
+     * });
+     * @endcode
      *
-     * @param timeout Timeout after which timer object calls the callback
-     * @param period If non-zero, timer object willbe triggered each period after first call
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * @param timeout Timeout after which timer object calls the callback for the first time.
+     * @param period  Period of the timer. Callback will be triggered after each such interval is elapsed.
+     *                Pass zero, if you want to create a timer, that will be triggered only once.
+     * @param functor Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                If you don't need it, you just don't pass it.
+     * @param args    Arguments to pass into callable. They will be copied into wrapper by default.
+     *                You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                but you must guarantee the parameter's validity until the callback is finished.
+     * @returns       Handle for created timer object.
      */
     template<typename Rep1, typename Period1, typename Rep2, typename Period2, typename Functor, typename... Args>
     timer_t SubmitTimer(const std::chrono::duration<Rep1, Period1>& timeout, const std::chrono::duration<Rep2, Period2>& period, Functor&& functor, Args&&... args)
@@ -351,11 +471,24 @@ public:
 
     /**
      * @brief Submits a non-periodic threadpool timer object with a user-defined callback.
-	 *
-	 * @param timeout Timeout after which timer object calls the callback
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * pool.SubmitTimer(20s, [] () {
+     *     //
+     *     // This timer will be triggered only once after 20 seconds
+     *     //
+     * });
+     * @endcode
+     *
+     * @param timeout Timeout after which timer object calls the callback for the first time.
+     * @param functor Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                If you don't need it, you just don't pass it.
+     * @param args    Arguments to pass into callable. They will be copied into wrapper by default.
+     *                You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                but you must guarantee the parameter's validity until the callback is finished.
+     * @returns       Handle for created timer object.
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -369,12 +502,36 @@ public:
      * @brief Submits a threadpool deadline timer object with a user-defined callback.
      *
      * If deadline is already gone, timer expires immediately.
+     *
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto now = ntp::time::deadline_clock_t::now();
      * 
-     * @param deadline A specific point in time, which the timer will expire at
-     * @param period If non-zero, timer object willbe triggered each period after first call
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * pool.SubmitTimer(now + 40min, 10s, [] () {
+     *     //
+     *     // This timer will be triggered after 40 minutes from now and then
+     *     // will be triggered repeatedly every 10 seconds
+     *     //
+     * });
+     * 
+     * pool.SubmitTimer(now - 20s, 10s, [] () {
+     *     //
+     *     // This timer will be triggered immediately (since deadline is already gone) 
+     *     // and after that will be triggered repeatedly every 10 seconds
+     *     //
+     * });
+     * @endcode
+     * 
+     * @param deadline A specific point in time, which the timer will expire at for the first time.
+     * @param period   Period of the timer. Callback will be triggered after each such interval is elapsed.
+     *                 Pass zero, if you want to create a timer, that will be triggered only once.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                 If you don't need it, you just don't pass it.
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
+     * @returns        Handle for created timer object.
      */
     template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
@@ -388,10 +545,31 @@ public:
      *
      * If deadline is already gone, timer expires immediately.
      *
-     * @param deadline A specific point in time, which the timer will expire at
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created timer object
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto now = ntp::time::deadline_clock_t::now();
+     * 
+     * pool.SubmitTimer(now + 40min, [] () {
+     *     //
+     *     // This timer will be triggered only once after 40 minutes from now
+     *     //
+     * });
+     * 
+     * pool.SubmitTimer(now - 20s, [] () {
+     *     //
+     *     // This timer will be triggered only once immediately (since deadline is already gone)
+     *     //
+     * });
+     * @endcode
+     *
+     * @param deadline A specific point in time, which the timer will expire at for the first time.
+     * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                 If you don't need it, you just don't pass it.
+     * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
+     *                 You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                 but you must guarantee the parameter's validity until the callback is finished.
+     * @returns        Handle for created timer object.
      */
     template<typename Duration, typename Functor, typename... Args>
     auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
@@ -405,13 +583,28 @@ public:
      * @brief Replaces an existing timer callback in threadpool.
      *        This method cannot be called concurrently for the same timer object.
      *
-     * @tparam Functor Type of callable to invoke in threadpool
-     * @tparam Args... Types of arguments
-     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @throws exception::Win32Exception if specified handle is not present in waits or is corrupt
-     * @returns handle for the same timer object
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto timer = pool.SubmitTimer(30s, 10s, [] () { ... });
+     * 
+     * //
+     * // You may need to replace a callback, that will be called when timer expires,
+     * // so you just replace it by its handle
+     * //
+     * 
+     * pool.ReplaceTimer(timer, [] (size_t param1, int param2) { ... }, 
+     *     you_can_even_pass, another_arguments);
+     * @endcode
+     *
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer).
+     * @param functor      Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                     If you don't need it, you just don't pass it.
+     * @param args         Arguments to pass into callable. They will be copied into wrapper by default.
+     *                     You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                     but you must guarantee the parameter's validity until the callback is finished.
+     * @throws exception::Win32Exception If the specified handle is not present in threadpool or is corrupt.
+     * @returns            Handle for the same timer object.
      */
     template<typename Functor, typename... Args>
     timer_t ReplaceTimer(timer_t timer_object, Functor&& functor, Args&&... args)
@@ -421,14 +614,26 @@ public:
     }
 
     /**
-     * @brief Cancel threadpool timer
+     * @brief Cancel threadpool timer.
      *
-     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer)
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto timer = pool.SubmitTimer(30s, 10s, [] () { ... });
+     * 
+     * //
+     * // You may need to stop timer to trigger each 10 seconds, sou you may just cancel it!
+     * //
+     * 
+     * pool.CancelTimer(timer);
+     * @endcode
+     *
+     * @param timer_object Handle for an existing timer object (obtained from ntp::BasicThreadPool::SubmitTimer).
      */
     void CancelTimer(timer_t timer_object) noexcept { return timer_manager_.Cancel(timer_object); }
 
     /**
-     * @brief Cancel all pending timer callbacks
+     * @brief Cancel all pending timer callbacks.
      */
     void CancelTimers() noexcept { return timer_manager_.CancelAll(); }
 
@@ -439,40 +644,86 @@ public:
      * If after call to this function async IO failed to start you MUST call
      * ntp::BasicThreadPool::AbortIo to prevent memory leaks).
      * 
-     * @param io_handle Handle of and object, wchich asynchronous IO is performed on
-     * @param functor Callable to invoke
-     * @param args Arguments to pass into callable (they will be copied into wrapper)
-     * @returns handle for created IO object
+     * Usage example:
+     * @code{.cpp}
+     * ATL::CAtlFile file;
+     * file.Create(..., FILE_FLAG_OVERLAPPED, ...);
+     * 
+     * ntp::SystemThreadPool pool;
+     * const auto io = pool.SubmitIo(file, [] (LPVOID overlapped, ULONG result, ULONG_PTR bytes_transferred) {
+     *     //
+     *     // Pointer passed as overlapped structure to WriteFile is in overlapped parameter
+     *     // Result of async IO operation is in result parameter
+     *     // Number of bytes transferred during the last IO is in bytes_transferred parameter
+     *     //
+     * });
+     *
+     * OVERLAPPED ovl = {};
+     * HRESULT hr = file.Write(buffer, buffer_size, &ovl);
+     * 
+     * if (hr != HRESULT_FROM_WIN32(ERROR_IO_PENDING))
+     * {
+     *     //
+     *     // Error occurred. We need to abort thread pool IO here
+     *     //
+     *     
+     *     pool.AbortIo(io);
+     *     throw std::runtime_error("Cannot write to file");
+     * }
+     * @endcode
+     * 
+     * @param io_handle Handle of and object, wchich asynchronous IO is performed on.
+     * @param functor   Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter.
+     *                  If you don't need it, you just don't pass it.
+     * @param args      Arguments to pass into callable. They will be copied into wrapper by default.
+     *                  You schould use `std::ref` or `std::cref` to pass a parameter by reference,
+     *                  but you must guarantee the parameter's validity until the callback is finished.
+     * @returns         Handle for created IO object.
      */
     template<typename Functor, typename... Args>
-    io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
+    [[nodiscard]] io_t SubmitIo(HANDLE io_handle, Functor&& functor, Args&&... args)
     {
         return io_manager_.Submit(io_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
     }
 
     /**
-     * @brief Cancel threadpool IO
+     * @brief Cancel threadpool IO.
      *
-     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     * Usage example:
+     * @code{.cpp}
+     * ntp::SystemThreadPool pool;
+     * const auto io = pool.SubmitIo(file, [] (LPVOID overlapped, ULONG result, ULONG_PTR bytes_transferred) { ... });
+     * 
+     * //
+     * // You may want not to call callback on IO completion anymore, but IO didn't fail.
+     * // In this case you just need to cancel it
+     * //
+     * 
+     * pool.CancelIo(io);
+     * @endcode
+     *
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo).
      */
     void CancelIo(io_t io_object) noexcept { return io_manager_.Cancel(io_object); }
 
     /**
      * @brief Cancel threadpool IO if async IO failed to start.
+     * 
+     * For usage example refer to ntp::BasicThreadPool::SubmitIo.
      *
-     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo)
+     * @param io_object Handle for an existing IO object (obtained from ntp::BasicThreadPool::SubmitIo).
      */
     void AbortIo(io_t io_object) noexcept { return io_manager_.Abort(io_object); }
 
     /**
-     * @brief Cancel all pending IO callbacks
+     * @brief Cancel all pending IO callbacks.
      */
     void CancelIos() noexcept { return io_manager_.CancelAll(); }
 
 
     /**
-     * @brief Cancel all pending callbacks (of any kind)
+     * @brief Cancel all pending callbacks (of any kind).
      */
     void CancelAllCallbacks() noexcept
     {

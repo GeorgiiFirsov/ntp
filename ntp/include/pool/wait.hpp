@@ -90,9 +90,9 @@ class WaitManager final
 
 public:
     /**
-	 * @brief Constructor that initializes all necessary objects.
-	 *
-	 * @param environment Owning threadpool environment
+     * @brief Constructor that initializes all necessary objects.
+     *
+     * @param environment Owning threadpool environment
      */
     explicit WaitManager(PTP_CALLBACK_ENVIRON environment);
 
@@ -105,9 +105,9 @@ public:
      * @param wait_handle Handle to wait for
      * @param timeout Timeout while wait object waits for the specified handle 
      *                (pass ntp::time::max_native_duration for infinite wait timeout)
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     native_handle_t Submit(HANDLE wait_handle, const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
@@ -148,16 +148,16 @@ public:
     }
 
     /**
-	 * @brief Submits a threadpool wait object with a 
+     * @brief Submits a threadpool wait object with a 
      * user-defined callback. It never expires.
-	 *
-	 * Just calls generic version of ntp::wait::details::WaitManager::Submit with
-	 * ntp::time::max_native_duration as timeout parameter.
-	 *
-	 * @param wait_handle Handle to wait for
-	 * @param functor Callable to invoke
-	 * @param args Arguments to pass into callable (they will be copied into wrapper)
-	 * @returns handle for created wait object
+     *
+     * Just calls generic version of ntp::wait::details::WaitManager::Submit with
+     * ntp::time::max_native_duration as timeout parameter.
+     *
+     * @param wait_handle Handle to wait for
+     * @param functor Callable to invoke
+     * @param args Arguments to pass into callable (they will be copied into wrapper)
+     * @returns handle for created wait object
      */
     template<typename Functor, typename... Args>
     auto Submit(HANDLE wait_handle, Functor&& functor, Args&&... args)

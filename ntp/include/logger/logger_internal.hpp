@@ -77,15 +77,15 @@ public:
     }
 
     /**
-	 * @brief Formats message and forwards formatted message to internal logger function
+     * @brief Formats message and forwards formatted message to internal logger function
      * 
      * After formatting it converts formatted message into std::wstring using ntp::details::Convert.
-	 *
-	 * @tparam Args... Types of arguments, which will be inserted
-	 * @param severity Message severity
-	 * @param message Format of the message
-	 * @param args Optional pack of arguments to embed into formatted message
-	 */
+     *
+     * @tparam Args... Types of arguments, which will be inserted
+     * @param severity Message severity
+     * @param message Format of the message
+     * @param args Optional pack of arguments to embed into formatted message
+     */
     template<typename... Args>
     void TraceMessage(Severity severity, const char* message, Args&&... args) const noexcept
     {
