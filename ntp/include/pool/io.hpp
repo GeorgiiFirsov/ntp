@@ -86,7 +86,7 @@ public:
         {
             const auto required_args = std::make_tuple(io_data->overlapped, io_data->result, io_data->bytes_transferred);
             const auto args          = std::tuple_cat(required_args, Arguments());
-            std::apply(Callable(), Arguments());
+            std::apply(Callable(), args);
         }
     }
 };
