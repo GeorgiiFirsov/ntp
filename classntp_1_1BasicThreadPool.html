@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.0</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -372,8 +372,8 @@ template&lt;typename ThreadPoolTraits &gt; </div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"> </div>
 <div class="line">pool.<a class="code" href="classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a">CancelIo</a>(io);</div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a568ff5fba7cebe6ad9dd7955e942c01a"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a">ntp::BasicThreadPool::CancelIo</a></div><div class="ttdeci">void CancelIo(io_t io_object) noexcept</div><div class="ttdoc">Cancel threadpool IO.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:708</div></div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a896b5331d3aaa49a2d9a128c2ac91e9a"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a">ntp::BasicThreadPool::SubmitIo</a></div><div class="ttdeci">io_t SubmitIo(HANDLE io_handle, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a threadpool IO object with a user-defined callback.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:684</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a568ff5fba7cebe6ad9dd7955e942c01a"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a568ff5fba7cebe6ad9dd7955e942c01a">ntp::BasicThreadPool::CancelIo</a></div><div class="ttdeci">void CancelIo(io_t io_object) noexcept</div><div class="ttdoc">Cancel threadpool IO.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:723</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a896b5331d3aaa49a2d9a128c2ac91e9a"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a">ntp::BasicThreadPool::SubmitIo</a></div><div class="ttdeci">io_t SubmitIo(HANDLE io_handle, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a threadpool IO object with a user-defined callback.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:699</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">io_object</td><td>Handle for an existing IO object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#a896b5331d3aaa49a2d9a128c2ac91e9a" title="Submits a threadpool IO object with a user-defined callback.">ntp::BasicThreadPool::SubmitIo</a>). </td></tr>
@@ -418,8 +418,8 @@ template&lt;typename ThreadPoolTraits &gt; </div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"> </div>
 <div class="line">pool.<a class="code" href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">CancelTimer</a>(timer);</div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a93452e89aa71e991a3c5b812c9712a7b"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">ntp::BasicThreadPool::CancelTimer</a></div><div class="ttdeci">void CancelTimer(timer_t timer_object) noexcept</div><div class="ttdoc">Cancel threadpool timer.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:633</div></div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_aadf3211f92fe46ed6bd3d6b6eaab1adc"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc">ntp::BasicThreadPool::SubmitTimer</a></div><div class="ttdeci">timer_t SubmitTimer(const std::chrono::duration&lt; Rep1, Period1 &gt; &amp;timeout, const std::chrono::duration&lt; Rep2, Period2 &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a threadpool timer object with a user-defined callback.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:466</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a93452e89aa71e991a3c5b812c9712a7b"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a93452e89aa71e991a3c5b812c9712a7b">ntp::BasicThreadPool::CancelTimer</a></div><div class="ttdeci">void CancelTimer(timer_t timer_object) noexcept</div><div class="ttdoc">Cancel threadpool timer.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:641</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_aadf3211f92fe46ed6bd3d6b6eaab1adc"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc">ntp::BasicThreadPool::SubmitTimer</a></div><div class="ttdeci">timer_t SubmitTimer(const std::chrono::duration&lt; Rep1, Period1 &gt; &amp;timeout, const std::chrono::duration&lt; Rep2, Period2 &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a threadpool timer object with a user-defined callback.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:474</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timer_object</td><td>Handle for an existing timer object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc" title="Submits a threadpool timer object with a user-defined callback.">ntp::BasicThreadPool::SubmitTimer</a>). </td></tr>
@@ -465,8 +465,8 @@ template&lt;typename ThreadPoolTraits &gt; </div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"> </div>
 <div class="line">pool.<a class="code" href="classntp_1_1BasicThreadPool.html#a9022977043d46ed1d2085210f42000f0">CancelWait</a>(wait);</div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a1b0a40d50b76c4a1f79f95ee8daaba0f"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a1b0a40d50b76c4a1f79f95ee8daaba0f">ntp::BasicThreadPool::SubmitWait</a></div><div class="ttdeci">wait_t SubmitWait(HANDLE wait_handle, const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a wait callback into threadpool.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:375</div></div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a9022977043d46ed1d2085210f42000f0"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a9022977043d46ed1d2085210f42000f0">ntp::BasicThreadPool::CancelWait</a></div><div class="ttdeci">void CancelWait(wait_t wait_object) noexcept</div><div class="ttdoc">Cancel threadpool wait.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:433</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a1b0a40d50b76c4a1f79f95ee8daaba0f"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a1b0a40d50b76c4a1f79f95ee8daaba0f">ntp::BasicThreadPool::SubmitWait</a></div><div class="ttdeci">wait_t SubmitWait(HANDLE wait_handle, const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Submits a wait callback into threadpool.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:379</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a9022977043d46ed1d2085210f42000f0"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a9022977043d46ed1d2085210f42000f0">ntp::BasicThreadPool::CancelWait</a></div><div class="ttdeci">void CancelWait(wait_t wait_object) noexcept</div><div class="ttdoc">Cancel threadpool wait.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:441</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">wait_object</td><td>Handle for an existing wait object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#a1b0a40d50b76c4a1f79f95ee8daaba0f" title="Submits a wait callback into threadpool.">ntp::BasicThreadPool::SubmitWait</a>). </td></tr>
@@ -531,7 +531,7 @@ template&lt;typename Functor , typename... Args&gt; </div>
 <div class="line"> </div>
 <div class="line">pool.<a class="code" href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">ReplaceTimer</a>(timer, [] (<span class="keywordtype">size_t</span> param1, <span class="keywordtype">int</span> param2) { ... }, </div>
 <div class="line">    you_can_even_pass, another_arguments);</div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_acdbf682754b0d3070eb2b5ec13ff2631"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">ntp::BasicThreadPool::ReplaceTimer</a></div><div class="ttdeci">timer_t ReplaceTimer(timer_t timer_object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Replaces an existing timer callback in threadpool. This method cannot be called concurrently for the ...</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:610</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_acdbf682754b0d3070eb2b5ec13ff2631"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631">ntp::BasicThreadPool::ReplaceTimer</a></div><div class="ttdeci">timer_t ReplaceTimer(timer_t timer_object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</div><div class="ttdoc">Replaces an existing timer callback in threadpool. This method cannot be called concurrently for the ...</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:618</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timer_object</td><td>Handle for an existing timer object (obtained from <a class="el" href="classntp_1_1BasicThreadPool.html#aadf3211f92fe46ed6bd3d6b6eaab1adc" title="Submits a threadpool timer object with a user-defined callback.">ntp::BasicThreadPool::SubmitTimer</a>). </td></tr>
@@ -620,11 +620,16 @@ template&lt;typename Functor , typename... Args&gt; </div>
 <div class="line">    pool.<a class="code" href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2">AbortIo</a>(io);</div>
 <div class="line">    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Cannot write to file&quot;</span>);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a87fee13ef91c8688336a5de8358931b2"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2">ntp::BasicThreadPool::AbortIo</a></div><div class="ttdeci">void AbortIo(io_t io_object) noexcept</div><div class="ttdoc">Cancel threadpool IO if async IO failed to start.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:717</div></div>
+<div class="ttc" id="aclassntp_1_1BasicThreadPool_html_a87fee13ef91c8688336a5de8358931b2"><div class="ttname"><a href="classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2">ntp::BasicThreadPool::AbortIo</a></div><div class="ttdeci">void AbortIo(io_t io_object) noexcept</div><div class="ttdoc">Cancel threadpool IO if async IO failed to start.</div><div class="ttdef"><b>Definition:</b> threadpool.hpp:732</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">io_handle</td><td>Handle of and object, wchich asynchronous IO is performed on. </td></tr>
-    <tr><td class="paramname">functor</td><td>Callable to invoke. It MAY accept <code>PTP_CALLBACK_INSTANCE</code> as its first parameter. If you don't need it, you just don't pass it. </td></tr>
+    <tr><td class="paramname">functor</td><td>Callable to invoke. It MAY accept <code>PTP_CALLBACK_INSTANCE</code> as its first parameter. If you don't need it, you just don't pass it. However, it MUST accept the following parameters as the first, second and third ones (second, third and fourth if <code>PTP_CALLBACK_INSTANCE</code> is passed):<ul>
+<li><code>LPVOID</code> overlapped - A pointer to a variable that receives the address of the OVERLAPPED structure that was specified when the completed IO operation was started.</li>
+<li><code>ULONG</code> result - The result of the I/O operation. If the I/O is successful, this parameter is NO_ERROR. Otherwise, this parameter is one of the system error codes.</li>
+<li><code>ULONG_PTR</code> bytes_transferred - The number of bytes transferred during the IO operation that has completed. </li>
+</ul>
+</td></tr>
     <tr><td class="paramname">args</td><td>Arguments to pass into callable. They will be copied into wrapper by default. You schould use <code>std::ref</code> or <code>std::cref</code> to pass a parameter by reference, but you must guarantee the parameter's validity until the callback is finished. </td></tr>
   </table>
   </dd>
@@ -1001,7 +1006,10 @@ template&lt;typename Rep , typename Period , typename Functor , typename... Args
   <table class="params">
     <tr><td class="paramname">wait_handle</td><td>Handle to wait for. May be any handle, that you can pass to <code>WaitForSingleObject</code>. </td></tr>
     <tr><td class="paramname">timeout</td><td>Timeout while wait object waits for the specified handle (pass ntp::time::max_native_duration for infinite wait timeout). </td></tr>
-    <tr><td class="paramname">functor</td><td>Callable to invoke. It MUST accept <code>TP_WAIT_RESULT</code> as its first parameter, and MAY accept <code>PTP_CALLBACK_INSTANCE</code> as second one. All the rest parameters (if any) MUST be accepted strictly after <code>TP_WAIT_RESULT</code> and <code>PTP_CALLBACK_INSTANCE</code> (if present). </td></tr>
+    <tr><td class="paramname">functor</td><td>Callable to invoke. It MAY accept <code>PTP_CALLBACK_INSTANCE</code> as its first parameter. If you don't need it, you just don't pass it. However, it MUST accept the following parameter as the first one (second if <code>PTP_CALLBACK_INSTANCE</code> is passed):<ul>
+<li><code>TP_WAIT_RESULT</code> wait_result - The result of the wait operation. This parameter can be one of the following values from <code>WaitForMultipleObjects</code>: <code>WAIT_OBJECT_0</code>, <code>WAIT_TIMEOUT</code>. </li>
+</ul>
+</td></tr>
     <tr><td class="paramname">args</td><td>Arguments to pass into callable. They will be copied into wrapper by default. You schould use <code>std::ref</code> or <code>std::cref</code> to pass a parameter by reference, but you must guarantee the parameter's validity until the callback is finished. </td></tr>
   </table>
   </dd>
@@ -1069,7 +1077,10 @@ template&lt;typename Functor , typename... Args&gt; </div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">wait_handle</td><td>Handle to wait for. May be any handle, that you can pass to <code>WaitForSingleObject</code>. </td></tr>
-    <tr><td class="paramname">functor</td><td>Callable to invoke. It MUST accept <code>TP_WAIT_RESULT</code> as its first parameter, and MAY accept <code>PTP_CALLBACK_INSTANCE</code> as second one. All the rest parameters (if any) MUST be accepted strictly after <code>TP_WAIT_RESULT</code> and <code>PTP_CALLBACK_INSTANCE</code> (if present). </td></tr>
+    <tr><td class="paramname">functor</td><td>Callable to invoke. It MAY accept <code>PTP_CALLBACK_INSTANCE</code> as its first parameter. If you don't need it, you just don't pass it. However, it MUST accept the following parameter as the first one (second if <code>PTP_CALLBACK_INSTANCE</code> is passed):<ul>
+<li><code>TP_WAIT_RESULT</code> wait_result - The result of the wait operation. This parameter can be one of the following values from <code>WaitForMultipleObjects</code>: <code>WAIT_OBJECT_0</code>, <code>WAIT_TIMEOUT</code>. </li>
+</ul>
+</td></tr>
     <tr><td class="paramname">args</td><td>Arguments to pass into callable. They will be copied into wrapper by default. You schould use <code>std::ref</code> or <code>std::cref</code> to pass a parameter by reference, but you must guarantee the parameter's validity until the callback is finished. </td></tr>
   </table>
   </dd>
