@@ -39,7 +39,8 @@ set(NTP_LIB_HEADER_FILES ${NTP_LIB_INCLUDE_ROOT}/ntp.hpp
                          ${NTP_LIB_DETAILS_INCLUDE}/allocator.hpp
                          ${NTP_LIB_DETAILS_INCLUDE}/exception.hpp
                          ${NTP_LIB_DETAILS_INCLUDE}/time.hpp
-                         ${NTP_LIB_DETAILS_INCLUDE}/utils.hpp)
+                         ${NTP_LIB_DETAILS_INCLUDE}/utils.hpp
+                         ${NTP_LIB_DETAILS_INCLUDE}/windows.hpp)
 
 set(NTP_LIB_SOURCES      ${NTP_LIB_SOURCE_FILES} 
                          ${NTP_LIB_HEADER_FILES})

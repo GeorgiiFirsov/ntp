@@ -8,13 +8,11 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <chrono>
 #include <type_traits>
 
-#include "ntp_config.hpp"
 #include "details/allocator.hpp"
+#include "details/windows.hpp"
 #include "pool/work.hpp"
 #include "pool/wait.hpp"
 #include "pool/timer.hpp"

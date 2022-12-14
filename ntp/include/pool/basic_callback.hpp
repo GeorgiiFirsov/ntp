@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <map>
 #include <mutex>
 #include <memory>
@@ -14,7 +12,7 @@
 #include <type_traits>
 #include <shared_mutex>
 
-#include "ntp_config.hpp"
+#include "details/windows.hpp"
 #include "details/utils.hpp"
 
 
@@ -24,7 +22,7 @@ namespace ntp::details {
  * @brief Cancellation test timeout, while waiting for callbacks.
  *        Set to 500 msec.
  */
-NTP_INLINE constexpr auto kTestCancelTimeout = 500ul;
+inline constexpr auto kTestCancelTimeout = 500ul;
 
 
 /**

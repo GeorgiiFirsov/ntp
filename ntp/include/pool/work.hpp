@@ -5,12 +5,10 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <tuple>
 #include <utility>
 
-#include "ntp_config.hpp"
+#include "details/windows.hpp"
 #include "details/utils.hpp"
 #include "pool/basic_callback.hpp"
 

@@ -3,13 +3,12 @@
  * @brief Threadpool implementation (traits and some helper functions)
  */
 
-#include <Windows.h>
-
 #include <thread>
 
 #include "pool/threadpool.hpp"
 #include "details/allocator.hpp"
 #include "details/exception.hpp"
+#include "details/windows.hpp"
 
 
 namespace ntp::details {

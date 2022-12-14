@@ -9,13 +9,29 @@
 
 
 //
+// Minimum supported Windows version
+//
+
+#ifndef WINVER
+#	define WINVER 0x0601 // Windows 7
+#endif
+
+#ifndef _WIN32_WINNT
+#	define _WIN32_WINNT 0x0601 // Windows 7
+#endif
+
+
+//
 // Library configuration
 //
 
 #define NTP_ALLOCATION_ALIGNMENT MEMORY_ALLOCATION_ALIGNMENT
 
-#if defined(__cpp_inline_variables) && __cpp_inline_variables >= 201606
-#   define NTP_INLINE inline
-#else  // ^^^ has inline variables ^^^ vvv has no inline variables vvv
-#   define NTP_INLINE
-#endif  // inline variables
+
+//
+// Check minimum supported Windows version (just to be sure, if no one set it before)
+//
+
+#if _WIN32_WINNT < 0x0601
+#	error ntp library requires _WIN32_WINNT to be equal to at least 0x0601 (Windows 7)
+#endif // Prior to Windows 7

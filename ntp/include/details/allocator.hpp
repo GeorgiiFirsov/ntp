@@ -13,10 +13,8 @@
 
 #pragma once
 
-#include <Windows.h>
-
-#include "ntp_config.hpp"
 #include "details/exception.hpp"
+#include "details/windows.hpp"
 
 
 namespace ntp::allocator {

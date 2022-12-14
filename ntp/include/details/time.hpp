@@ -5,12 +5,10 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <ratio>
 #include <chrono>
 
-#include "ntp_config.hpp"
+#include "details/windows.hpp"
 
 
 namespace ntp::time {
@@ -40,7 +38,7 @@ struct is_duration<std::chrono::duration<Rep, Period>> : std::true_type
  * Helper inline (since C++17) variable.
  */
 template<typename Ty>
-NTP_INLINE constexpr bool is_duration_v = is_duration<Ty>::value;
+inline constexpr bool is_duration_v = is_duration<Ty>::value;
 
 
 /**
@@ -67,7 +65,7 @@ struct is_time_point<std::chrono::time_point<Clock, Duration>> : std::true_type
  * Helper inline (since C++17) variable.
  */
 template<typename Ty>
-NTP_INLINE constexpr bool is_time_point_v = is_time_point<Ty>::value;
+inline constexpr bool is_time_point_v = is_time_point<Ty>::value;
 
 }  // namespace details
 
@@ -81,7 +79,7 @@ using native_duration_t = std::chrono::duration<long long, std::ratio<1, 10'000'
 /**
  * @brief Maximum supported native duration count.
  */
-NTP_INLINE constexpr auto max_native_duration = (native_duration_t::max)();
+inline constexpr auto max_native_duration = (native_duration_t::max)();
 
 
 /**
