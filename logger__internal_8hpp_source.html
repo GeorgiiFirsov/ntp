@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.1</span>
+   &#160;<span id="projectnumber">0.2.2</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -92,76 +92,75 @@ $(document).ready(function(){initNavTree('logger__internal_8hpp_source.html','')
 <a href="logger__internal_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;Windows.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8hpp.html">details/utils.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="logger_8hpp.html">logger/logger.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8hpp.html">details/utils.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;details/windows.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="logger_8hpp.html">logger/logger.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>ntp::logger::details {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a> final</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>() noexcept</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        : logger_(<span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    { }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">   34</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>&amp; <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">Instance</a>() noexcept { <span class="keywordflow">return</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">InstanceMut</a>(); }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">   39</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>&amp; <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">InstanceMut</a>() noexcept</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">static</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a> logger;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> logger;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">   52</a></span>&#160;    <a class="code" href="logger_8hpp.html#a03aeccc387a1e0bfd9d654d2ed10636d">logger_t</a> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">Exchange</a>(<a class="code" href="logger_8hpp.html#a03aeccc387a1e0bfd9d654d2ed10636d">logger_t</a> new_logger) noexcept</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> old_logger = logger_.load(std::memory_order_acquire);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        logger_.store(new_logger, std::memory_order_release);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> old_logger;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">   68</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">TraceMessage</a>(<a class="code" href="logger_8hpp.html#ac8589e98e2f5a5fec46cfa14fc8d90e5">Severity</a> severity, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* message, Args&amp;&amp;... args) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = logger_.load(std::memory_order_acquire); logger)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keyword">const</span> DWORD format_flags = FORMAT_MESSAGE_FROM_STRING;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> formatted     = ntp::details::FormatMessage(format_flags, message, 0, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            logger(severity, formatted.c_str());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">   90</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">TraceMessage</a>(<a class="code" href="logger_8hpp.html#ac8589e98e2f5a5fec46cfa14fc8d90e5">Severity</a> severity, <span class="keyword">const</span> <span class="keywordtype">char</span>* message, Args&amp;&amp;... args) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = logger_.load(std::memory_order_acquire); logger)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keyword">const</span> DWORD format_flags = FORMAT_MESSAGE_FROM_STRING;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> formatted     = ntp::details::FormatMessage(format_flags, message, 0, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> converted     = ntp::details::Convert(formatted);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            logger(severity, converted.c_str());</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// Pointer to logger is atomic to prevent races</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    std::atomic&lt;logger_t&gt; logger_;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}  <span class="comment">// namespace ntp::logger::details</span></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html">ntp::logger::details::Logger</a></div><div class="ttdoc">Internal logger class. Implemented as singleton.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:25</div></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a1cae2987ae679429307f44bfe5e1f7d3"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">ntp::logger::details::Logger::TraceMessage</a></div><div class="ttdeci">void TraceMessage(Severity severity, const char *message, Args &amp;&amp;... args) const noexcept</div><div class="ttdoc">Formats message and forwards formatted message to internal logger function.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:90</div></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a36a202b2f8ea958aae2e793ac1e1cab6"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">ntp::logger::details::Logger::Exchange</a></div><div class="ttdeci">logger_t Exchange(logger_t new_logger) noexcept</div><div class="ttdoc">Replaces internal logger with a new one.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:52</div></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a6439a5829238a867dc7d2f3fb7cc0279"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">ntp::logger::details::Logger::TraceMessage</a></div><div class="ttdeci">void TraceMessage(Severity severity, const wchar_t *message, Args &amp;&amp;... args) const noexcept</div><div class="ttdoc">Formats message and forwards formatted message to internal logger function.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:68</div></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a9189f14465b710b3fc71b1b4e561cb2c"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">ntp::logger::details::Logger::InstanceMut</a></div><div class="ttdeci">static Logger &amp; InstanceMut() noexcept</div><div class="ttdoc">Mutable instance accessor.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:39</div></div>
-<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_ac5519ffc1c85cff81c077347d0d69b8f"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">ntp::logger::details::Logger::Instance</a></div><div class="ttdeci">static const Logger &amp; Instance() noexcept</div><div class="ttdoc">Const instance accessor.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:34</div></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>ntp::logger::details {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a> final</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>() noexcept</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        : logger_(<span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    { }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">   33</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>&amp; <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">Instance</a>() noexcept { <span class="keywordflow">return</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">InstanceMut</a>(); }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">   38</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a>&amp; <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">InstanceMut</a>() noexcept</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">static</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html">Logger</a> logger;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> logger;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">   51</a></span>&#160;    <a class="code" href="logger_8hpp.html#a03aeccc387a1e0bfd9d654d2ed10636d">logger_t</a> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">Exchange</a>(<a class="code" href="logger_8hpp.html#a03aeccc387a1e0bfd9d654d2ed10636d">logger_t</a> new_logger) noexcept</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> old_logger = logger_.load(std::memory_order_acquire);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        logger_.store(new_logger, std::memory_order_release);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> old_logger;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">   67</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">TraceMessage</a>(<a class="code" href="logger_8hpp.html#ac8589e98e2f5a5fec46cfa14fc8d90e5">Severity</a> severity, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* message, Args&amp;&amp;... args) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = logger_.load(std::memory_order_acquire); logger)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">const</span> DWORD format_flags = FORMAT_MESSAGE_FROM_STRING;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> formatted     = ntp::details::FormatMessage(format_flags, message, 0, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            logger(severity, formatted.c_str());</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">   89</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">TraceMessage</a>(<a class="code" href="logger_8hpp.html#ac8589e98e2f5a5fec46cfa14fc8d90e5">Severity</a> severity, <span class="keyword">const</span> <span class="keywordtype">char</span>* message, Args&amp;&amp;... args) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = logger_.load(std::memory_order_acquire); logger)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keyword">const</span> DWORD format_flags = FORMAT_MESSAGE_FROM_STRING;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> formatted     = ntp::details::FormatMessage(format_flags, message, 0, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> converted     = ntp::details::Convert(formatted);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            logger(severity, converted.c_str());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// Pointer to logger is atomic to prevent races</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    std::atomic&lt;logger_t&gt; logger_;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}  <span class="comment">// namespace ntp::logger::details</span></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html">ntp::logger::details::Logger</a></div><div class="ttdoc">Internal logger class. Implemented as singleton.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:24</div></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a1cae2987ae679429307f44bfe5e1f7d3"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a1cae2987ae679429307f44bfe5e1f7d3">ntp::logger::details::Logger::TraceMessage</a></div><div class="ttdeci">void TraceMessage(Severity severity, const char *message, Args &amp;&amp;... args) const noexcept</div><div class="ttdoc">Formats message and forwards formatted message to internal logger function.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:89</div></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a36a202b2f8ea958aae2e793ac1e1cab6"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a36a202b2f8ea958aae2e793ac1e1cab6">ntp::logger::details::Logger::Exchange</a></div><div class="ttdeci">logger_t Exchange(logger_t new_logger) noexcept</div><div class="ttdoc">Replaces internal logger with a new one.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:51</div></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a6439a5829238a867dc7d2f3fb7cc0279"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a6439a5829238a867dc7d2f3fb7cc0279">ntp::logger::details::Logger::TraceMessage</a></div><div class="ttdeci">void TraceMessage(Severity severity, const wchar_t *message, Args &amp;&amp;... args) const noexcept</div><div class="ttdoc">Formats message and forwards formatted message to internal logger function.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:67</div></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_a9189f14465b710b3fc71b1b4e561cb2c"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#a9189f14465b710b3fc71b1b4e561cb2c">ntp::logger::details::Logger::InstanceMut</a></div><div class="ttdeci">static Logger &amp; InstanceMut() noexcept</div><div class="ttdoc">Mutable instance accessor.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:38</div></div>
+<div class="ttc" id="aclassntp_1_1logger_1_1details_1_1Logger_html_ac5519ffc1c85cff81c077347d0d69b8f"><div class="ttname"><a href="classntp_1_1logger_1_1details_1_1Logger.html#ac5519ffc1c85cff81c077347d0d69b8f">ntp::logger::details::Logger::Instance</a></div><div class="ttdeci">static const Logger &amp; Instance() noexcept</div><div class="ttdoc">Const instance accessor.</div><div class="ttdef"><b>Definition:</b> logger_internal.hpp:33</div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div><div class="ttdoc">Interface for custom logger function.</div></div>
 <div class="ttc" id="alogger_8hpp_html_a03aeccc387a1e0bfd9d654d2ed10636d"><div class="ttname"><a href="logger_8hpp.html#a03aeccc387a1e0bfd9d654d2ed10636d">ntp::logger::logger_t</a></div><div class="ttdeci">void(*)(Severity severity, const wchar_t *message) logger_t</div><div class="ttdoc">Logger function type.</div><div class="ttdef"><b>Definition:</b> logger.hpp:29</div></div>
 <div class="ttc" id="alogger_8hpp_html_ac8589e98e2f5a5fec46cfa14fc8d90e5"><div class="ttname"><a href="logger_8hpp.html#ac8589e98e2f5a5fec46cfa14fc8d90e5">ntp::logger::Severity</a></div><div class="ttdeci">Severity</div><div class="ttdoc">Severity of a message.</div><div class="ttdef"><b>Definition:</b> logger.hpp:15</div></div>

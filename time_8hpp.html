@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.1</span>
+   &#160;<span id="projectnumber">0.2.2</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -97,14 +97,13 @@ $(document).ready(function(){initNavTree('time_8hpp.html',''); initResizable(); 
 
 <p>Utils to work with std::chrono.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;Windows.h&gt;</code><br />
-<code>#include &lt;ratio&gt;</code><br />
+<div class="textblock"><code>#include &lt;ratio&gt;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
-<code>#include &quot;ntp_config.hpp&quot;</code><br />
+<code>#include &quot;details/windows.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for time.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="time_8hpp__incl.svg" width="414" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="time_8hpp__incl.svg" width="367" height="202"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -160,18 +159,18 @@ FILETIME&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a1eb3cd21b9ea7005b97ed563d00b97b9"><td class="memTemplParams" colspan="2">template&lt;typename Ty &gt; </td></tr>
-<tr class="memitem:a1eb3cd21b9ea7005b97ed563d00b97b9"><td class="memTemplItemLeft" align="right" valign="top">constexpr NTP_INLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">ntp::time::details::is_duration_v</a> = is_duration&lt;Ty&gt;::value</td></tr>
-<tr class="memdesc:a1eb3cd21b9ea7005b97ed563d00b97b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trait that detects std::chono::duration specializations.  <a href="time_8hpp.html#a1eb3cd21b9ea7005b97ed563d00b97b9">More...</a><br /></td></tr>
-<tr class="separator:a1eb3cd21b9ea7005b97ed563d00b97b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7670f15bb48e47269e9ed275ee12f479"><td class="memTemplParams" colspan="2">template&lt;typename Ty &gt; </td></tr>
-<tr class="memitem:a7670f15bb48e47269e9ed275ee12f479"><td class="memTemplItemLeft" align="right" valign="top">constexpr NTP_INLINE bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">ntp::time::details::is_time_point_v</a> = is_time_point&lt;Ty&gt;::value</td></tr>
-<tr class="memdesc:a7670f15bb48e47269e9ed275ee12f479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trait that detects std::chono::time_point specializations.  <a href="time_8hpp.html#a7670f15bb48e47269e9ed275ee12f479">More...</a><br /></td></tr>
-<tr class="separator:a7670f15bb48e47269e9ed275ee12f479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4fc36352852fb5210bc8cdc492a26f2"><td class="memItemLeft" align="right" valign="top"><a id="aa4fc36352852fb5210bc8cdc492a26f2"></a>
-constexpr NTP_INLINE auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8hpp.html#aa4fc36352852fb5210bc8cdc492a26f2">ntp::time::max_native_duration</a> = (native_duration_t::max)()</td></tr>
-<tr class="memdesc:aa4fc36352852fb5210bc8cdc492a26f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum supported native duration count. <br /></td></tr>
-<tr class="separator:aa4fc36352852fb5210bc8cdc492a26f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ef1ee32dc33fe5259b0b23aa8340a1c"><td class="memTemplParams" colspan="2">template&lt;typename Ty &gt; </td></tr>
+<tr class="memitem:a1ef1ee32dc33fe5259b0b23aa8340a1c"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="time_8hpp.html#a1ef1ee32dc33fe5259b0b23aa8340a1c">ntp::time::details::is_duration_v</a> = is_duration&lt;Ty&gt;::value</td></tr>
+<tr class="memdesc:a1ef1ee32dc33fe5259b0b23aa8340a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trait that detects std::chono::duration specializations.  <a href="time_8hpp.html#a1ef1ee32dc33fe5259b0b23aa8340a1c">More...</a><br /></td></tr>
+<tr class="separator:a1ef1ee32dc33fe5259b0b23aa8340a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5618630c0d7574e859a9d1cbdd76687c"><td class="memTemplParams" colspan="2">template&lt;typename Ty &gt; </td></tr>
+<tr class="memitem:a5618630c0d7574e859a9d1cbdd76687c"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="time_8hpp.html#a5618630c0d7574e859a9d1cbdd76687c">ntp::time::details::is_time_point_v</a> = is_time_point&lt;Ty&gt;::value</td></tr>
+<tr class="memdesc:a5618630c0d7574e859a9d1cbdd76687c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trait that detects std::chono::time_point specializations.  <a href="time_8hpp.html#a5618630c0d7574e859a9d1cbdd76687c">More...</a><br /></td></tr>
+<tr class="separator:a5618630c0d7574e859a9d1cbdd76687c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e8a12cabb806c574f58019ee4baa098"><td class="memItemLeft" align="right" valign="top"><a id="a8e8a12cabb806c574f58019ee4baa098"></a>
+constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8hpp.html#a8e8a12cabb806c574f58019ee4baa098">ntp::time::max_native_duration</a> = (native_duration_t::max)()</td></tr>
+<tr class="memdesc:a8e8a12cabb806c574f58019ee4baa098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum supported native duration count. <br /></td></tr>
+<tr class="separator:a8e8a12cabb806c574f58019ee4baa098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utils to work with std::chrono. </p>
@@ -214,8 +213,8 @@ template&lt;typename Rep , typename Period &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a1eb3cd21b9ea7005b97ed563d00b97b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eb3cd21b9ea7005b97ed563d00b97b9">&#9670;&nbsp;</a></span>is_duration_v</h2>
+<a id="a1ef1ee32dc33fe5259b0b23aa8340a1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ef1ee32dc33fe5259b0b23aa8340a1c">&#9670;&nbsp;</a></span>is_duration_v</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,12 +225,12 @@ template&lt;typename Ty &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr NTP_INLINE bool ntp::time::details::is_duration_v = is_duration&lt;Ty&gt;::value</td>
+          <td class="memname">constexpr bool ntp::time::details::is_duration_v = is_duration&lt;Ty&gt;::value</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -241,8 +240,8 @@ template&lt;typename Ty &gt; </div>
 
 </div>
 </div>
-<a id="a7670f15bb48e47269e9ed275ee12f479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7670f15bb48e47269e9ed275ee12f479">&#9670;&nbsp;</a></span>is_time_point_v</h2>
+<a id="a5618630c0d7574e859a9d1cbdd76687c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5618630c0d7574e859a9d1cbdd76687c">&#9670;&nbsp;</a></span>is_time_point_v</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,12 +252,12 @@ template&lt;typename Ty &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr NTP_INLINE bool ntp::time::details::is_time_point_v = is_time_point&lt;Ty&gt;::value</td>
+          <td class="memname">constexpr bool ntp::time::details::is_time_point_v = is_time_point&lt;Ty&gt;::value</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -10,5 +10,6 @@ var dir_f6ac0c14f74c22565ad02ca34f6f32e7 =
       [ "Win32Exception", "classntp_1_1exception_1_1Win32Exception.html", "classntp_1_1exception_1_1Win32Exception" ]
     ] ],
     [ "time.hpp", "time_8hpp.html", "time_8hpp" ],
-    [ "utils.hpp", "utils_8hpp.html", "utils_8hpp" ]
+    [ "utils.hpp", "utils_8hpp.html", "utils_8hpp" ],
+    [ "windows.hpp", "windows_8hpp_source.html", null ]
 ];

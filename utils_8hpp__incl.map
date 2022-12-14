@@ -1,12 +1,13 @@
 <map id="ntp/include/details/utils.hpp" name="ntp/include/details/utils.hpp">
-<area shape="rect" id="node1" title="Some useful implementation stuff." alt="" coords="219,5,361,47"/>
-<area shape="rect" id="node2" href="$ntp__config_8hpp_source.html" title=" " alt="" coords="231,169,349,196"/>
-<area shape="rect" id="node3" href="$ntrtl_8h.html" title="Contains necessary declarations/definitions of internal windows objects and functions." alt="" coords="109,95,215,121"/>
-<area shape="rect" id="node6" href="$allocator_8hpp.html" title="Allocator implementations." alt="" coords="351,95,506,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="117,169,207,196"/>
-<area shape="rect" id="node5" title=" " alt="" coords="5,169,92,196"/>
-<area shape="rect" id="node7" title=" " alt="" coords="522,244,615,271"/>
-<area shape="rect" id="node8" href="$exception_8hpp.html" title="Win32 error wrapper implementations." alt="" coords="373,169,535,196"/>
-<area shape="rect" id="node9" title=" " alt="" coords="319,244,405,271"/>
-<area shape="rect" id="node10" title=" " alt="" coords="430,244,489,271"/>
+<area shape="rect" id="node1" title="Some useful implementation stuff." alt="" coords="56,5,199,47"/>
+<area shape="rect" id="node2" href="$ntp__config_8hpp_source.html" title=" " alt="" coords="95,319,213,345"/>
+<area shape="rect" id="node3" href="$ntrtl_8h.html" title="Contains necessary declarations/definitions of internal windows objects and functions." alt="" coords="74,95,181,121"/>
+<area shape="rect" id="node6" href="$allocator_8hpp.html" title="Allocator implementations." alt="" coords="254,95,409,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="23,169,114,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="139,169,225,196"/>
+<area shape="rect" id="node7" href="$exception_8hpp.html" title="Win32 error wrapper implementations." alt="" coords="250,169,413,196"/>
+<area shape="rect" id="node10" href="$windows_8hpp_source.html" title=" " alt="" coords="373,244,527,271"/>
+<area shape="rect" id="node8" title=" " alt="" coords="179,244,265,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="290,244,349,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="403,319,497,345"/>
 </map>

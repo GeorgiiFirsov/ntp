@@ -1,6 +1,8 @@
 <map id="ntp/include/details/exception.hpp" name="ntp/include/details/exception.hpp">
-<area shape="rect" id="node1" title="Win32 error wrapper implementations." alt="" coords="95,5,238,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,95,99,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="123,95,210,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="235,95,293,121"/>
+<area shape="rect" id="node1" title="Win32 error wrapper implementations." alt="" coords="75,5,217,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,92,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="117,95,175,121"/>
+<area shape="rect" id="node4" href="$windows_8hpp_source.html" title=" " alt="" coords="199,95,354,121"/>
+<area shape="rect" id="node5" href="$ntp__config_8hpp_source.html" title=" " alt="" coords="153,169,270,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="294,169,387,196"/>
 </map>

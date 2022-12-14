@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.1</span>
+   &#160;<span id="projectnumber">0.2.2</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -96,19 +96,18 @@ $(document).ready(function(){initNavTree('basic__callback_8hpp.html',''); initRe
 
 <p>Interfaces and base classes for callback wrappers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;Windows.h&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
+<div class="textblock"><code>#include &lt;map&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;shared_mutex&gt;</code><br />
-<code>#include &quot;ntp_config.hpp&quot;</code><br />
+<code>#include &quot;details/windows.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="utils_8hpp_source.html">details/utils.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for basic_callback.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="basic__callback_8hpp__incl.svg" width="1196" height="351"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="basic__callback_8hpp__incl.svg" width="1175" height="426"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -147,10 +146,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:adf45388dd4aad21efcea75b4620d86ba"><td class="memItemLeft" align="right" valign="top"><a id="adf45388dd4aad21efcea75b4620d86ba"></a>
-constexpr NTP_INLINE auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="basic__callback_8hpp.html#adf45388dd4aad21efcea75b4620d86ba">ntp::details::kTestCancelTimeout</a> = 500ul</td></tr>
-<tr class="memdesc:adf45388dd4aad21efcea75b4620d86ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancellation test timeout, while waiting for callbacks. Set to 500 msec. <br /></td></tr>
-<tr class="separator:adf45388dd4aad21efcea75b4620d86ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2a0413a95f175f3280e8c9d0752b6d"><td class="memItemLeft" align="right" valign="top"><a id="a8f2a0413a95f175f3280e8c9d0752b6d"></a>
+constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="basic__callback_8hpp.html#a8f2a0413a95f175f3280e8c9d0752b6d">ntp::details::kTestCancelTimeout</a> = 500ul</td></tr>
+<tr class="memdesc:a8f2a0413a95f175f3280e8c9d0752b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancellation test timeout, while waiting for callbacks. Set to 500 msec. <br /></td></tr>
+<tr class="separator:a8f2a0413a95f175f3280e8c9d0752b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interfaces and base classes for callback wrappers. </p>
