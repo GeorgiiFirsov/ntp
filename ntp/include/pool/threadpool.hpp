@@ -282,8 +282,6 @@ public:
      * There may be some conflictine situations with a `PTP_CALLBACK_INSTANCE` custom
      * parameter, but usually you don't have to pass it as your own parameter.
      *
-     * @tparam Functor Type of callable to invoke in threadpool.
-     * @tparam Args... Types of arguments.
      * @param functor  Callable to invoke. It MAY accept `PTP_CALLBACK_INSTANCE` as its first parameter. 
      *                 If you don't need it, you just don't pass it. 
      * @param args     Arguments to pass into callable. They will be copied into wrapper by default.
