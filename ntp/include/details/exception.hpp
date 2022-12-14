@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <stdexcept>
 #include <string>
+
+#include "details/windows.hpp"
 
 
 namespace ntp::exception {

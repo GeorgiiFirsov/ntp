@@ -5,11 +5,10 @@
 
 #pragma once
 
-#include <Windows.h>
-
 #include <atomic>
 
 #include "details/utils.hpp"
+#include "details/windows.hpp"
 #include "logger/logger.hpp"
 
 
