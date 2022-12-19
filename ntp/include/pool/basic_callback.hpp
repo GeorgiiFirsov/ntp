@@ -81,6 +81,9 @@ private:
     // Type of packed arguments
     using tuple_t = std::tuple<std::decay_t<Args>...>;
 
+    // Type of stored functor
+    using functor_t = std::decay_t<Functor>;
+
 protected:
     /**
      * @brief Constructor from callable and its arguments
@@ -88,10 +91,10 @@ protected:
      * @param functor Callable to invoke
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      */
-    template<typename... CArgs>
-    explicit BasicCallback(Functor functor, CArgs&&... args)
+    template<typename CFunctor, typename... CArgs>
+    explicit BasicCallback(CFunctor&& functor, CArgs&&... args)
         : args_(std::forward<CArgs>(args)...)
-        , functor_(std::move(functor))
+        , functor_(std::forward<CFunctor>(functor))
     { }
 
     /**
@@ -99,7 +102,7 @@ protected:
      *
      * @returns Reference to callable
      */
-    Functor& Callable() noexcept { return functor_; }
+    functor_t& Callable() noexcept { return functor_; }
 
     /**
      * @brief Get stored pack of arguments
@@ -122,7 +125,7 @@ private:
     tuple_t args_;
 
     // Callable
-    Functor functor_;
+    functor_t functor_;
 };
 
 
