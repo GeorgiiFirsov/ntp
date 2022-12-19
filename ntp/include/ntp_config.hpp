@@ -13,11 +13,11 @@
 //
 
 #ifndef WINVER
-#	define WINVER 0x0601 // Windows 7
+#   define WINVER 0x0601  // Windows 7
 #endif
 
 #ifndef _WIN32_WINNT
-#	define _WIN32_WINNT 0x0601 // Windows 7
+#   define _WIN32_WINNT 0x0601  // Windows 7
 #endif
 
 
@@ -33,5 +33,5 @@
 //
 
 #if _WIN32_WINNT < 0x0601
-#	error ntp library requires _WIN32_WINNT to be equal to at least 0x0601 (Windows 7)
-#endif // Prior to Windows 7
+#   error ntp library requires _WIN32_WINNT to be equal to at least 0x0601 (Windows 7)
+#endif  // Prior to Windows 7
