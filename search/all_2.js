@@ -1,7 +1,7 @@
 var searchData=
 [
   ['basic_5fcallback_2ehpp_10',['basic_callback.hpp',['../basic__callback_8hpp.html',1,'']]],
-  ['basiccallback_11',['BasicCallback',['../classntp_1_1details_1_1BasicCallback.html#ae1ce89a9c87ffe9aa8d80c37a1a27a0c',1,'ntp::details::BasicCallback::BasicCallback()'],['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;']]],
+  ['basiccallback_11',['BasicCallback',['../classntp_1_1details_1_1BasicCallback.html#a207c2114fce29e73bbdf8867b0d346e4',1,'ntp::details::BasicCallback::BasicCallback()'],['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;']]],
   ['basiccallback_3c_20iocallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_12',['BasicCallback&lt; IoCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
   ['basiccallback_3c_20timercallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_13',['BasicCallback&lt; TimerCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],
   ['basiccallback_3c_20waitcallback_3c_20functor_2c_20args_2e_2e_2e_20_3e_2c_20functor_2c_20args_2e_2e_2e_20_3e_14',['BasicCallback&lt; WaitCallback&lt; Functor, Args... &gt;, Functor, Args... &gt;',['../classntp_1_1details_1_1BasicCallback.html',1,'ntp::details']]],

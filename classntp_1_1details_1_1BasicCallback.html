@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.2</span>
+   &#160;<span id="projectnumber">0.2.3</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -112,13 +112,13 @@ Collaboration diagram for ntp::details::BasicCallback&lt; Derived, Functor, Args
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae1ce89a9c87ffe9aa8d80c37a1a27a0c"><td class="memTemplParams" colspan="2">template&lt;typename... CArgs&gt; </td></tr>
-<tr class="memitem:ae1ce89a9c87ffe9aa8d80c37a1a27a0c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicCallback.html#ae1ce89a9c87ffe9aa8d80c37a1a27a0c">BasicCallback</a> (Functor functor, CArgs &amp;&amp;... args)</td></tr>
-<tr class="memdesc:ae1ce89a9c87ffe9aa8d80c37a1a27a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from callable and its arguments.  <a href="classntp_1_1details_1_1BasicCallback.html#ae1ce89a9c87ffe9aa8d80c37a1a27a0c">More...</a><br /></td></tr>
-<tr class="separator:ae1ce89a9c87ffe9aa8d80c37a1a27a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4924e5aca2218bea5183c94ac53388b3"><td class="memItemLeft" align="right" valign="top">Functor &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3">Callable</a> () noexcept</td></tr>
-<tr class="memdesc:a4924e5aca2218bea5183c94ac53388b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get stored callable.  <a href="classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3">More...</a><br /></td></tr>
-<tr class="separator:a4924e5aca2218bea5183c94ac53388b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a207c2114fce29e73bbdf8867b0d346e4"><td class="memTemplParams" colspan="2">template&lt;typename CFunctor , typename... CArgs&gt; </td></tr>
+<tr class="memitem:a207c2114fce29e73bbdf8867b0d346e4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicCallback.html#a207c2114fce29e73bbdf8867b0d346e4">BasicCallback</a> (CFunctor &amp;&amp;functor, CArgs &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a207c2114fce29e73bbdf8867b0d346e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from callable and its arguments.  <a href="classntp_1_1details_1_1BasicCallback.html#a207c2114fce29e73bbdf8867b0d346e4">More...</a><br /></td></tr>
+<tr class="separator:a207c2114fce29e73bbdf8867b0d346e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68a0074e66fa15729df01a14e13c5d5f"><td class="memItemLeft" align="right" valign="top">functor_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicCallback.html#a68a0074e66fa15729df01a14e13c5d5f">Callable</a> () noexcept</td></tr>
+<tr class="memdesc:a68a0074e66fa15729df01a14e13c5d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get stored callable.  <a href="classntp_1_1details_1_1BasicCallback.html#a68a0074e66fa15729df01a14e13c5d5f">More...</a><br /></td></tr>
+<tr class="separator:a68a0074e66fa15729df01a14e13c5d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9d69c7530bca2103f7a76f9bfb28543"><td class="memItemLeft" align="right" valign="top">tuple_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">Arguments</a> () noexcept</td></tr>
 <tr class="memdesc:af9d69c7530bca2103f7a76f9bfb28543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get stored pack of arguments.  <a href="classntp_1_1details_1_1BasicCallback.html#af9d69c7530bca2103f7a76f9bfb28543">More...</a><br /></td></tr>
 <tr class="separator:af9d69c7530bca2103f7a76f9bfb28543"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,15 +153,15 @@ class ntp::details::BasicCallback&lt; Derived, Functor, Args &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae1ce89a9c87ffe9aa8d80c37a1a27a0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1ce89a9c87ffe9aa8d80c37a1a27a0c">&#9670;&nbsp;</a></span>BasicCallback()</h2>
+<a id="a207c2114fce29e73bbdf8867b0d346e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207c2114fce29e73bbdf8867b0d346e4">&#9670;&nbsp;</a></span>BasicCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Derived , typename Functor , typename... Args&gt; </div>
 <div class="memtemplate">
-template&lt;typename... CArgs&gt; </div>
+template&lt;typename CFunctor , typename... CArgs&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -169,7 +169,7 @@ template&lt;typename... CArgs&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classntp_1_1details_1_1BasicCallback.html">ntp::details::BasicCallback</a>&lt; Derived, Functor, Args &gt;::<a class="el" href="classntp_1_1details_1_1BasicCallback.html">BasicCallback</a> </td>
           <td>(</td>
-          <td class="paramtype">Functor&#160;</td>
+          <td class="paramtype">CFunctor &amp;&amp;&#160;</td>
           <td class="paramname"><em>functor</em>, </td>
         </tr>
         <tr>
@@ -233,8 +233,8 @@ template&lt;typename Derived , typename Functor , typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a4924e5aca2218bea5183c94ac53388b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4924e5aca2218bea5183c94ac53388b3">&#9670;&nbsp;</a></span>Callable()</h2>
+<a id="a68a0074e66fa15729df01a14e13c5d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68a0074e66fa15729df01a14e13c5d5f">&#9670;&nbsp;</a></span>Callable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -245,7 +245,7 @@ template&lt;typename Derived , typename Functor , typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Functor&amp; <a class="el" href="classntp_1_1details_1_1BasicCallback.html">ntp::details::BasicCallback</a>&lt; Derived, Functor, Args &gt;::Callable </td>
+          <td class="memname">functor_t&amp; <a class="el" href="classntp_1_1details_1_1BasicCallback.html">ntp::details::BasicCallback</a>&lt; Derived, Functor, Args &gt;::Callable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

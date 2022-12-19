@@ -1,7 +1,7 @@
 var searchData=
 [
   ['call_231',['Call',['../structntp_1_1details_1_1ICallback.html#a724789dfe21e2c6d2f459d52a0d8a29c',1,'ntp::details::ICallback']]],
-  ['callable_232',['Callable',['../classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3',1,'ntp::details::BasicCallback']]],
+  ['callable_232',['Callable',['../classntp_1_1details_1_1BasicCallback.html#a68a0074e66fa15729df01a14e13c5d5f',1,'ntp::details::BasicCallback']]],
   ['callimpl_233',['CallImpl',['../classntp_1_1io_1_1details_1_1IoCallback.html#a4e9b5a5447b7d6ba663cdd0173c68a38',1,'ntp::io::details::IoCallback::CallImpl()'],['../classntp_1_1timer_1_1details_1_1TimerCallback.html#a5b93988a489f5e330c6068dc526bc2c3',1,'ntp::timer::details::TimerCallback::CallImpl()']]],
   ['cancel_234',['Cancel',['../classntp_1_1details_1_1BasicManagerEx.html#abab258af74a1159d7e01d9f16c516c96',1,'ntp::details::BasicManagerEx']]],
   ['cancelall_235',['CancelAll',['../classntp_1_1details_1_1BasicManagerEx.html#a50c91546c13cea19beb80f03f0ff8e65',1,'ntp::details::BasicManagerEx::CancelAll()'],['../classntp_1_1work_1_1details_1_1WorkManager.html#a588d5f63cfefac8d5d1bb3b7b3fc182c',1,'ntp::work::details::WorkManager::CancelAll()']]],

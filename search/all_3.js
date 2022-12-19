@@ -1,7 +1,7 @@
 var searchData=
 [
   ['call_25',['Call',['../structntp_1_1details_1_1ICallback.html#a724789dfe21e2c6d2f459d52a0d8a29c',1,'ntp::details::ICallback']]],
-  ['callable_26',['Callable',['../classntp_1_1details_1_1BasicCallback.html#a4924e5aca2218bea5183c94ac53388b3',1,'ntp::details::BasicCallback']]],
+  ['callable_26',['Callable',['../classntp_1_1details_1_1BasicCallback.html#a68a0074e66fa15729df01a14e13c5d5f',1,'ntp::details::BasicCallback']]],
   ['callback_5ft_27',['callback_t',['../basic__callback_8hpp.html#afb0bca01bc5ada5955fe59ae5ec461f5',1,'ntp::details']]],
   ['callbacks_5ft_28',['callbacks_t',['../classntp_1_1details_1_1BasicManagerEx.html#ad214e966d16f2c9abe4d9d6608e25c85',1,'ntp::details::BasicManagerEx']]],
   ['callimpl_29',['CallImpl',['../classntp_1_1io_1_1details_1_1IoCallback.html#a4e9b5a5447b7d6ba663cdd0173c68a38',1,'ntp::io::details::IoCallback::CallImpl()'],['../classntp_1_1timer_1_1details_1_1TimerCallback.html#a5b93988a489f5e330c6068dc526bc2c3',1,'ntp::timer::details::TimerCallback::CallImpl()']]],
