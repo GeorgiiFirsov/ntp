@@ -80,9 +80,9 @@ public:
  * @brief Manager for wait callbacks. Binds callbacks and threadpool implementation.
  */
 class TimerManager final
-    : public ntp::details::BasicManagerEx<PTP_TIMER, TimerContext, TimerManager>
+    : public ntp::details::BasicManager<PTP_TIMER, TimerContext, TimerManager>
 {
-    friend class ntp::details::BasicManagerEx<PTP_TIMER, TimerContext, TimerManager>;
+    friend class ntp::details::BasicManager<PTP_TIMER, TimerContext, TimerManager>;
 
 public:
     /**

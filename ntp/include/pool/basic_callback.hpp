@@ -130,19 +130,21 @@ private:
 
 
 /**
- * @brief Base class for all callbacks' managers
+ * @brief Class, that binds a manager with a pool. Manager should inherit this class to 
+ * bind itself with the threadpool.
+ * 
+ * This class is inherited directly only be ntp::details::BasicManager. 
  */
-class BasicManager
+class TpEnvironmentView
 {
-public:
+protected:
     /**
      * @brief Constructor, that saves an environment associated with a threadpool
      */
-    explicit BasicManager(PTP_CALLBACK_ENVIRON environment) noexcept
+    explicit TpEnvironmentView(PTP_CALLBACK_ENVIRON environment) noexcept
         : environment_(environment)
     { }
 
-protected:
     /**
      * @brief Get an environment associated with owning threadpool
      * 
@@ -157,31 +159,31 @@ private:
 
 
 /**
- * @brief Extended version of ntp::details::BasicManager with container of callbacks.
+ * @brief Direct base class for all context managers of threadpool callbacks. 
  * 
- * This extended version is used for waits, timers and IOs, because each such object must have 
- * separate native handle.
- * 
+ * It provides a specialization instantiated with all void's, that means that no context
+ * management is actually required (i.e. callback has an "empty" context).
+ *
  * Derived class must implement the following methods:
  * - static void CloseInternal(native_handle_t native_handle) noexcept - closes threadpool object in a common way.
  * 
  * - static void AbortInternal(native_handle_t native_handle) noexcept - closes threadpool object in an emergency situation. 
- *   Due to template instantiation rules if you never call ntp::details::BasicManagerEx::Abort for specific
+ *   Due to template instantiation rules if you never call ntp::details::BasicManager::Abort for specific
  *   threadpool object, you may skip this function implementation.
  * 
  * - void SubmitInternal(native_handle_t native_handle, object_context_t& user_context) - submits object to threadpool.
  * 
  * - native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&& functor, Args&&... args) -
- *   replaces object's callback. Due to template instantiation rules if you never call ntp::details::BasicManagerEx::Replace
+ *   replaces object's callback. Due to template instantiation rules if you never call ntp::details::BasicManager::Replace
  *   for specific threadpool object, you may skip this function implementation.
  * 
  * @tparam NativeHandle Type of native object handle (e.g. PTP_WAIT)
  * @tparam ObjectContext Type of context specific for threadpool object kind
  * @tparam Derived Derived from this class implementation for specific callback type (CRTP)
  */
-template<typename NativeHandle, typename ObjectContext, typename Derived>
-class BasicManagerEx
-    : public BasicManager
+template<typename NativeHandle = void, typename ObjectContext = void, typename Derived = void>
+class BasicManager
+    : public TpEnvironmentView
 {
     // Forward declaration of context structure
     struct Context;
@@ -226,7 +228,7 @@ private:
      */
     struct MetaContext
     {
-        BasicManagerEx* manager; /**< Pointer to parent wait manager */
+        BasicManager* manager; /**< Pointer to parent wait manager */
 
         native_handle_t native_handle; /**< Native handle of corresponding threadpool object */
     };
@@ -249,8 +251,8 @@ protected:
      *
      * @param environment Owning threadpool environment
      */
-    BasicManagerEx(PTP_CALLBACK_ENVIRON environment)
-        : BasicManager(environment)
+    BasicManager(PTP_CALLBACK_ENVIRON environment)
+        : TpEnvironmentView(environment)
         , callbacks_()
         , lock_()
     { }
@@ -308,7 +310,7 @@ public:
     void CancelAll() noexcept
     {
         static_assert(noexcept(Derived::CloseInternal(std::declval<native_handle_t>())),
-            "[ntp::details::BasicManagerEx::CancelAll]: Derived::CloseInternal MUST be noexcept");
+            "[ntp::details::BasicManager::CancelAll]: Derived::CloseInternal MUST be noexcept");
 
         std::unique_lock lock { lock_ };
 
@@ -398,7 +400,7 @@ private:
     void CloseAndRemove(native_handle_t native_handle) noexcept
     {
         static_assert(noexcept(Derived::CloseInternal(std::declval<native_handle_t>())),
-            "[ntp::details::BasicManagerEx::CloseAndRemove]: Derived::CloseInternal MUST be noexcept");
+            "[ntp::details::BasicManager::CloseAndRemove]: Derived::CloseInternal MUST be noexcept");
 
         return CleanupAndRemove<Derived::CloseInternal>(native_handle);
     }
@@ -406,7 +408,7 @@ private:
     void AbortAndRemove(native_handle_t native_handle) noexcept
     {
         static_assert(noexcept(Derived::AbortInternal(std::declval<native_handle_t>())),
-            "[ntp::details::BasicManagerEx::AbortAndRemove]: Derived::AbortInternal MUST be noexcept");
+            "[ntp::details::BasicManager::AbortAndRemove]: Derived::AbortInternal MUST be noexcept");
 
         return CleanupAndRemove<Derived::AbortInternal>(native_handle);
     }
@@ -417,6 +419,29 @@ private:
 
     // Syncronization primitive for callbacks container
     mutable lock_t lock_;
+};
+
+
+/**
+ * @brief Direct base class for all context managers of threadpool callbacks. "Empty" context specialization.
+ * 
+ * Actually it is just a proxy-class to ntp::details::BasicContext. The existence
+ * of this class is required to provide a uniformely named base class for all
+ * threadpool object's managers: all of them inherit ntp::details::BasicManager.
+ */
+template<>
+class BasicManager<void, void, void>
+    : public TpEnvironmentView
+{ 
+protected:
+    /**
+     * @brief Constructor that initializes all necessary objects.
+     *
+     * @param environment Owning threadpool environment
+     */
+	explicit BasicManager(PTP_CALLBACK_ENVIRON environment) noexcept
+		: TpEnvironmentView(environment)
+	{ }
 };
 
 }  // namespace ntp::details

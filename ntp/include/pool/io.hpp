@@ -96,9 +96,9 @@ public:
  * @brief Manager for wait callbacks. Binds callbacks and threadpool implementation.
  */
 class IoManager final
-    : public ntp::details::BasicManagerEx<PTP_IO, IoContext, IoManager>
+    : public ntp::details::BasicManager<PTP_IO, IoContext, IoManager>
 {
-    friend class ntp::details::BasicManagerEx<PTP_IO, IoContext, IoManager>;
+    friend class ntp::details::BasicManager<PTP_IO, IoContext, IoManager>;
 
 public:
     /**

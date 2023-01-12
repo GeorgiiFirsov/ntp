@@ -66,10 +66,10 @@ private:
 
 
 /**
- * @brief WorkManager for work callbacks. Binds callbacks and threadpool implementation.
+ * @brief Manager for work callbacks. Binds callbacks and threadpool implementation.
  */
 class WorkManager final
-    : public ntp::details::BasicManager
+    : public ntp::details::BasicManager<>
 {
     WorkManager(const WorkManager&)            = delete;
     WorkManager& operator=(const WorkManager&) = delete;

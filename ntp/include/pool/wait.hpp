@@ -84,9 +84,9 @@ private:
  * @brief Manager for wait callbacks. Binds callbacks and threadpool implementation.
  */
 class WaitManager final
-    : public ntp::details::BasicManagerEx<PTP_WAIT, WaitContext, WaitManager>
+    : public ntp::details::BasicManager<PTP_WAIT, WaitContext, WaitManager>
 {
-    friend class ntp::details::BasicManagerEx<PTP_WAIT, WaitContext, WaitManager>;
+    friend class ntp::details::BasicManager<PTP_WAIT, WaitContext, WaitManager>;
 
 public:
     /**

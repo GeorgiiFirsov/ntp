@@ -6,7 +6,7 @@
 namespace ntp::wait::details {
 
 WaitManager::WaitManager(PTP_CALLBACK_ENVIRON environment)
-    : BasicManagerEx(environment)
+    : BasicManager(environment)
 { }
 
 void WaitManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context) noexcept
