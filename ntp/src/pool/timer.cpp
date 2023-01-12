@@ -7,7 +7,7 @@
 namespace ntp::timer::details {
 
 TimerManager::TimerManager(PTP_CALLBACK_ENVIRON environment)
-    : BasicManagerEx(environment)
+    : BasicManager(environment)
 { }
 
 void TimerManager::SubmitInternal(native_handle_t native_handle, object_context_t& object_context) noexcept
