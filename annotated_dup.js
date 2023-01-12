@@ -14,8 +14,9 @@ var annotated_dup =
         [ "Event", "classntp_1_1details_1_1Event.html", "classntp_1_1details_1_1Event" ],
         [ "ICallback", "structntp_1_1details_1_1ICallback.html", "structntp_1_1details_1_1ICallback" ],
         [ "BasicCallback", "classntp_1_1details_1_1BasicCallback.html", "classntp_1_1details_1_1BasicCallback" ],
+        [ "TpEnvironmentView", "classntp_1_1details_1_1TpEnvironmentView.html", "classntp_1_1details_1_1TpEnvironmentView" ],
         [ "BasicManager", "classntp_1_1details_1_1BasicManager.html", "classntp_1_1details_1_1BasicManager" ],
-        [ "BasicManagerEx", "classntp_1_1details_1_1BasicManagerEx.html", "classntp_1_1details_1_1BasicManagerEx" ],
+        [ "BasicManager< void, void, void >", "classntp_1_1details_1_1BasicManager_3_01void_00_01void_00_01void_01_4.html", "classntp_1_1details_1_1BasicManager_3_01void_00_01void_00_01void_01_4" ],
         [ "BasicThreadPoolTraits", "classntp_1_1details_1_1BasicThreadPoolTraits.html", "classntp_1_1details_1_1BasicThreadPoolTraits" ],
         [ "CustomThreadPoolTraits", "classntp_1_1details_1_1CustomThreadPoolTraits.html", "classntp_1_1details_1_1CustomThreadPoolTraits" ],
         [ "CleanupGroup", "classntp_1_1details_1_1CleanupGroup.html", "classntp_1_1details_1_1CleanupGroup" ]

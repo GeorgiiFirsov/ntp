@@ -1,4 +1,5 @@
 <map id="ntp::work::details::WorkManager" name="ntp::work::details::WorkManager">
-<area shape="rect" id="node1" title="WorkManager for work callbacks. Binds callbacks and threadpool implementation." alt="" coords="35,80,170,121"/>
-<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManager.html" title="Base class for all callbacks&#39; managers." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node1" title="Manager for work callbacks. Binds callbacks and threadpool implementation." alt="" coords="55,184,190,225"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManager.html" title="Direct base class for all context managers of threadpool callbacks." alt="" coords="7,80,238,136"/>
+<area shape="rect" id="node3" href="$classntp_1_1details_1_1TpEnvironmentView.html" title="Class, that binds a manager with a pool. Manager should inherit this class to bind itself with the th..." alt="" coords="5,5,240,32"/>
 </map>

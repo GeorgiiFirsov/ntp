@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ntp: ntp::details::BasicManager Class Reference</title>
+<title>ntp: ntp::details::BasicManager&lt; NativeHandle, ObjectContext, Derived &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.3</span>
+   &#160;<span id="projectnumber">0.2.4</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -86,55 +86,408 @@ $(document).ready(function(){initNavTree('classntp_1_1details_1_1BasicManager.ht
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classntp_1_1details_1_1BasicManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ntp::details::BasicManager Class Reference</div>  </div>
+<div class="title">ntp::details::BasicManager&lt; NativeHandle, ObjectContext, Derived &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for all callbacks' managers.  
+<p>Direct base class for all context managers of threadpool callbacks.  
  <a href="classntp_1_1details_1_1BasicManager.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="basic__callback_8hpp_source.html">basic_callback.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ntp::details::BasicManager:</div>
+Inheritance diagram for ntp::details::BasicManager&lt; NativeHandle, ObjectContext, Derived &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classntp_1_1details_1_1BasicManager__inherit__graph.svg" width="740" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classntp_1_1details_1_1BasicManager__inherit__graph.svg" width="246" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for ntp::details::BasicManager&lt; NativeHandle, ObjectContext, Derived &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classntp_1_1details_1_1BasicManager__coll__graph.svg" width="246" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9b3f08f5ba3d2b9ac65e5d3ad402cb04"><td class="memItemLeft" align="right" valign="top"><a id="a9b3f08f5ba3d2b9ac65e5d3ad402cb04"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> = NativeHandle</td></tr>
+<tr class="memdesc:a9b3f08f5ba3d2b9ac65e5d3ad402cb04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of native threadpool object handle. <br /></td></tr>
+<tr class="separator:a9b3f08f5ba3d2b9ac65e5d3ad402cb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4b258e1048a420512d88a23c5b01cc66"><td class="memItemLeft" align="right" valign="top"><a id="a4b258e1048a420512d88a23c5b01cc66"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a4b258e1048a420512d88a23c5b01cc66">BasicManager</a> (PTP_CALLBACK_ENVIRON environment) noexcept</td></tr>
-<tr class="memdesc:a4b258e1048a420512d88a23c5b01cc66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, that saves an environment associated with a threadpool. <br /></td></tr>
-<tr class="separator:a4b258e1048a420512d88a23c5b01cc66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580c270149650259d6a249c8189a6031"><td class="memTemplParams" colspan="2">template&lt;typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:a580c270149650259d6a249c8189a6031"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031">Replace</a> (<a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a580c270149650259d6a249c8189a6031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an existing threadpool callback with a new one.  <a href="classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031">More...</a><br /></td></tr>
+<tr class="separator:a580c270149650259d6a249c8189a6031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e588d2a08e852214279d9987dc5e3d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9e588d2a08e852214279d9987dc5e3d4">Cancel</a> (<a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> object) noexcept</td></tr>
+<tr class="memdesc:a9e588d2a08e852214279d9987dc5e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels and removes an object.  <a href="classntp_1_1details_1_1BasicManager.html#a9e588d2a08e852214279d9987dc5e3d4">More...</a><br /></td></tr>
+<tr class="separator:a9e588d2a08e852214279d9987dc5e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af631ef16baa64d7f103af9231402bc91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#af631ef16baa64d7f103af9231402bc91">Abort</a> (<a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> object) noexcept</td></tr>
+<tr class="memdesc:af631ef16baa64d7f103af9231402bc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels and removes an object in case of emergency.  <a href="classntp_1_1details_1_1BasicManager.html#af631ef16baa64d7f103af9231402bc91">More...</a><br /></td></tr>
+<tr class="separator:af631ef16baa64d7f103af9231402bc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4805b0ed06b83873269d206e1a5dbcf"><td class="memItemLeft" align="right" valign="top"><a id="ab4805b0ed06b83873269d206e1a5dbcf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ab4805b0ed06b83873269d206e1a5dbcf">CancelAll</a> () noexcept</td></tr>
+<tr class="memdesc:ab4805b0ed06b83873269d206e1a5dbcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel all pending callbacks. <br /></td></tr>
+<tr class="separator:ab4805b0ed06b83873269d206e1a5dbcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:ae96325c79ba750f4d62a0e94d3d1a6d2"><td class="memItemLeft" align="right" valign="top"><a id="ae96325c79ba750f4d62a0e94d3d1a6d2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a> = std::unique_ptr&lt; Context &gt;</td></tr>
+<tr class="memdesc:ae96325c79ba750f4d62a0e94d3d1a6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Smart pointer to specific context. <br /></td></tr>
+<tr class="separator:ae96325c79ba750f4d62a0e94d3d1a6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434eed9ffdaba4f449c3dedbf91c0bfc"><td class="memItemLeft" align="right" valign="top"><a id="a434eed9ffdaba4f449c3dedbf91c0bfc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a434eed9ffdaba4f449c3dedbf91c0bfc">context_pointer_t</a> = typename context_t::pointer</td></tr>
+<tr class="memdesc:a434eed9ffdaba4f449c3dedbf91c0bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw pointer to specific context. Is never invalidated, while pointee lives. E.g. after any modification of the container, this pointer still remains valid, if corresponding object is not erased from container. <br /></td></tr>
+<tr class="separator:a434eed9ffdaba4f449c3dedbf91c0bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62706a3d6a5c6339df77ce39be01220"><td class="memItemLeft" align="right" valign="top"><a id="aa62706a3d6a5c6339df77ce39be01220"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#aa62706a3d6a5c6339df77ce39be01220">object_context_t</a> = ObjectContext</td></tr>
+<tr class="memdesc:aa62706a3d6a5c6339df77ce39be01220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation's context. <br /></td></tr>
+<tr class="separator:aa62706a3d6a5c6339df77ce39be01220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23e49e5c5c0fe30892d6dcff00837f8"><td class="memItemLeft" align="right" valign="top"><a id="ac23e49e5c5c0fe30892d6dcff00837f8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ac23e49e5c5c0fe30892d6dcff00837f8">callbacks_t</a> = std::map&lt; <a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>, <a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a> &gt;</td></tr>
+<tr class="memdesc:ac23e49e5c5c0fe30892d6dcff00837f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container with callbacks represented by their handles. <br /></td></tr>
+<tr class="separator:ac23e49e5c5c0fe30892d6dcff00837f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759e7e1dd17082c30b4beb67abb045f4"><td class="memItemLeft" align="right" valign="top"><a id="a759e7e1dd17082c30b4beb67abb045f4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a759e7e1dd17082c30b4beb67abb045f4">lock_t</a> = <a class="el" href="classntp_1_1details_1_1RtlResource.html">ntp::details::RtlResource</a></td></tr>
+<tr class="memdesc:a759e7e1dd17082c30b4beb67abb045f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock primitive. <br /></td></tr>
+<tr class="separator:a759e7e1dd17082c30b4beb67abb045f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aba4ebf646951ba34b8341f3aa869c770"><td class="memItemLeft" align="right" valign="top">PTP_CALLBACK_ENVIRON&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#aba4ebf646951ba34b8341f3aa869c770">Environment</a> () const noexcept</td></tr>
-<tr class="memdesc:aba4ebf646951ba34b8341f3aa869c770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an environment associated with owning threadpool.  <a href="classntp_1_1details_1_1BasicManager.html#aba4ebf646951ba34b8341f3aa869c770">More...</a><br /></td></tr>
-<tr class="separator:aba4ebf646951ba34b8341f3aa869c770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af571d94b15e70c95b2466531ecdabfc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#af571d94b15e70c95b2466531ecdabfc5">BasicManager</a> (PTP_CALLBACK_ENVIRON environment)</td></tr>
+<tr class="memdesc:af571d94b15e70c95b2466531ecdabfc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that initializes all necessary objects.  <a href="classntp_1_1details_1_1BasicManager.html#af571d94b15e70c95b2466531ecdabfc5">More...</a><br /></td></tr>
+<tr class="separator:af571d94b15e70c95b2466531ecdabfc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac93e6398c02fd7d25b18f36b68dd4519"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ac93e6398c02fd7d25b18f36b68dd4519">SubmitContext</a> (<a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> native_handle, <a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a> &amp;&amp;context) noexcept(noexcept(std::declval&lt; Derived &gt;().SubmitInternal(std::declval&lt; <a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> &gt;(), std::declval&lt; <a class="el" href="classntp_1_1details_1_1BasicManager.html#aa62706a3d6a5c6339df77ce39be01220">object_context_t</a> &gt;())))</td></tr>
+<tr class="memdesc:ac93e6398c02fd7d25b18f36b68dd4519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put context into container and then submit associated callback.  <a href="classntp_1_1details_1_1BasicManager.html#ac93e6398c02fd7d25b18f36b68dd4519">More...</a><br /></td></tr>
+<tr class="separator:ac93e6398c02fd7d25b18f36b68dd4519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classntp_1_1details_1_1TpEnvironmentView')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classntp_1_1details_1_1TpEnvironmentView.html">ntp::details::TpEnvironmentView</a></td></tr>
+<tr class="memitem:a9d5c14ee04aef5d1cd3188d27ce8bc86 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="memItemLeft" align="right" valign="top"><a id="a9d5c14ee04aef5d1cd3188d27ce8bc86"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1TpEnvironmentView.html#a9d5c14ee04aef5d1cd3188d27ce8bc86">TpEnvironmentView</a> (PTP_CALLBACK_ENVIRON environment) noexcept</td></tr>
+<tr class="memdesc:a9d5c14ee04aef5d1cd3188d27ce8bc86 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, that saves an environment associated with a threadpool. <br /></td></tr>
+<tr class="separator:a9d5c14ee04aef5d1cd3188d27ce8bc86 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a451f468f99836c9f861723bf6ef4b9 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="memItemLeft" align="right" valign="top">PTP_CALLBACK_ENVIRON&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1TpEnvironmentView.html#a6a451f468f99836c9f861723bf6ef4b9">Environment</a> () const noexcept</td></tr>
+<tr class="memdesc:a6a451f468f99836c9f861723bf6ef4b9 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an environment associated with owning threadpool.  <a href="classntp_1_1details_1_1TpEnvironmentView.html#a6a451f468f99836c9f861723bf6ef4b9">More...</a><br /></td></tr>
+<tr class="separator:a6a451f468f99836c9f861723bf6ef4b9 inherit pro_methods_classntp_1_1details_1_1TpEnvironmentView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a38d9d754144bbef1257fe3c53acc69e0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a38d9d754144bbef1257fe3c53acc69e0">CreateContext</a> ()</td></tr>
+<tr class="memdesc:a38d9d754144bbef1257fe3c53acc69e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new empty context.  <a href="classntp_1_1details_1_1BasicManager.html#a38d9d754144bbef1257fe3c53acc69e0">More...</a><br /></td></tr>
+<tr class="separator:a38d9d754144bbef1257fe3c53acc69e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78159f5838a8e70a7e0b645c4ec4a93"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ad78159f5838a8e70a7e0b645c4ec4a93">CleanupContext</a> (PTP_CALLBACK_INSTANCE instance, <a class="el" href="classntp_1_1details_1_1BasicManager.html#a434eed9ffdaba4f449c3dedbf91c0bfc">context_pointer_t</a> context)</td></tr>
+<tr class="memdesc:ad78159f5838a8e70a7e0b645c4ec4a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">A right way to delete object from its callback.  <a href="classntp_1_1details_1_1BasicManager.html#ad78159f5838a8e70a7e0b645c4ec4a93">More...</a><br /></td></tr>
+<tr class="separator:ad78159f5838a8e70a7e0b645c4ec4a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for all callbacks' managers. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aba4ebf646951ba34b8341f3aa869c770"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba4ebf646951ba34b8341f3aa869c770">&#9670;&nbsp;</a></span>Environment()</h2>
+<div class="textblock"><h3>template&lt;typename NativeHandle = void, typename ObjectContext = void, typename Derived = void&gt;<br />
+class ntp::details::BasicManager&lt; NativeHandle, ObjectContext, Derived &gt;</h3>
+
+<p>Direct base class for all context managers of threadpool callbacks. </p>
+<p>It provides a specialization instantiated with all void's, that means that no context management is actually required (i.e. callback has an "empty" context).</p>
+<p>Derived class must implement the following methods:</p><ul>
+<li>static void CloseInternal(native_handle_t native_handle) noexcept - closes threadpool object in a common way.</li>
+<li>static void AbortInternal(native_handle_t native_handle) noexcept - closes threadpool object in an emergency situation. Due to template instantiation rules if you never call <a class="el" href="classntp_1_1details_1_1BasicManager.html#af631ef16baa64d7f103af9231402bc91" title="Cancels and removes an object in case of emergency.">ntp::details::BasicManager::Abort</a> for specific threadpool object, you may skip this function implementation.</li>
+<li>void SubmitInternal(native_handle_t native_handle, object_context_t&amp; user_context) - submits object to threadpool.</li>
+<li>native_handle_t ReplaceInternal(native_handle_t native_handle, context_pointer_t context, Functor&amp;&amp; functor, Args&amp;&amp;... args) - replaces object's callback. Due to template instantiation rules if you never call <a class="el" href="classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031" title="Replaces an existing threadpool callback with a new one.">ntp::details::BasicManager::Replace</a> for specific threadpool object, you may skip this function implementation.</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">NativeHandle</td><td>Type of native object handle (e.g. PTP_WAIT) </td></tr>
+    <tr><td class="paramname">ObjectContext</td><td>Type of context specific for threadpool object kind </td></tr>
+    <tr><td class="paramname">Derived</td><td>Derived from this class implementation for specific callback type (CRTP) </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af571d94b15e70c95b2466531ecdabfc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af571d94b15e70c95b2466531ecdabfc5">&#9670;&nbsp;</a></span>BasicManager()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">PTP_CALLBACK_ENVIRON ntp::details::BasicManager::Environment </td>
+          <td class="memname"><a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::<a class="el" href="classntp_1_1details_1_1BasicManager.html">BasicManager</a> </td>
+          <td>(</td>
+          <td class="paramtype">PTP_CALLBACK_ENVIRON&#160;</td>
+          <td class="paramname"><em>environment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor that initializes all necessary objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">environment</td><td>Owning threadpool environment </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af631ef16baa64d7f103af9231402bc91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af631ef16baa64d7f103af9231402bc91">&#9670;&nbsp;</a></span>Abort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::Abort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cancels and removes an object in case of emergency. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>Handle for an object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e588d2a08e852214279d9987dc5e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e588d2a08e852214279d9987dc5e3d4">&#9670;&nbsp;</a></span>Cancel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::Cancel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cancels and removes an object. </p>
+<p>If no such object is present, does nothing.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>Handle for an object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad78159f5838a8e70a7e0b645c4ec4a93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad78159f5838a8e70a7e0b645c4ec4a93">&#9670;&nbsp;</a></span>CleanupContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::CleanupContext </td>
+          <td>(</td>
+          <td class="paramtype">PTP_CALLBACK_INSTANCE&#160;</td>
+          <td class="paramname"><em>instance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a434eed9ffdaba4f449c3dedbf91c0bfc">context_pointer_t</a>&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A right way to delete object from its callback. </p>
+<p>Removes callback and object association and then removes context by its value. Removing by value is required, because we can collide with Cancel/CancelAll functions. After container's lock is released, no already closed objects will remain in container.</p>
+<p>It may be confusing, why object is removed by value. This is the key to atomicity of removal. If Cancel/CancelAll closes and removes object first, then there will be no object anymore, and this function will do nothing.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instance</td><td>Running callback instance (it is extremely important to remove association between object and callback) </td></tr>
+    <tr><td class="paramname">context</td><td>Context to remove from container </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a38d9d754144bbef1257fe3c53acc69e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d9d754144bbef1257fe3c53acc69e0">&#9670;&nbsp;</a></span>CreateContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a> <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::CreateContext </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create new empty context. </p>
+<dl class="section return"><dt>Returns</dt><dd>Smart pointer to empty context </dd></dl>
+
+</div>
+</div>
+<a id="a580c270149650259d6a249c8189a6031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580c270149650259d6a249c8189a6031">&#9670;&nbsp;</a></span>Replace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<div class="memtemplate">
+template&lt;typename Functor , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::Replace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Functor &amp;&amp;&#160;</td>
+          <td class="paramname"><em>functor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replaces an existing threadpool callback with a new one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>Handle for an existing threadpool object </td></tr>
+    <tr><td class="paramname">functor</td><td>New callable to invoke </td></tr>
+    <tr><td class="paramname">args</td><td>New arguments to pass into callable (they will be copied into wrapper) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classntp_1_1exception_1_1Win32Exception.html" title="Wrapper for Win32 error code, that has C++ interface.">ntp::exception::Win32Exception</a></td><td>if specified handle is not present or corrupt </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>handle for the threadpool object with updated callback </dd></dl>
+
+</div>
+</div>
+<a id="ac93e6398c02fd7d25b18f36b68dd4519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac93e6398c02fd7d25b18f36b68dd4519">&#9670;&nbsp;</a></span>SubmitContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename NativeHandle  = void, typename ObjectContext  = void, typename Derived  = void&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager</a>&lt; NativeHandle, ObjectContext, Derived &gt;::SubmitContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td>
+          <td class="paramname"><em>native_handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2">context_t</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -144,8 +497,14 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get an environment associated with owning threadpool. </p>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the environment </dd></dl>
+<p>Put context into container and then submit associated callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">native_handle</td><td>Native handle of threadpool object to submit </td></tr>
+    <tr><td class="paramname">context</td><td>Filled context of callback </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

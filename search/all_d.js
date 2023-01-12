@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['object_5fcontext_5ft_96',['object_context_t',['../classntp_1_1details_1_1BasicManagerEx.html#ae9e45e8fc09ba0371e635fc0ac3fc69f',1,'ntp::details::BasicManagerEx']]],
+  ['object_5fcontext_5ft_96',['object_context_t',['../classntp_1_1details_1_1BasicManager.html#aa62706a3d6a5c6339df77ce39be01220',1,'ntp::details::BasicManager']]],
   ['operator_20delete_97',['operator delete',['../classntp_1_1details_1_1NativeSlistEntry.html#a1129572a30fb8802e8d44226e967aaa4',1,'ntp::details::NativeSlistEntry']]],
   ['operator_20handle_98',['operator HANDLE',['../classntp_1_1details_1_1Event.html#a315c16b2da5c9692618784c72686fff6',1,'ntp::details::Event']]],
   ['operator_20new_99',['operator new',['../classntp_1_1details_1_1NativeSlistEntry.html#a4e3dd352eb70ae3071726972fdb0dd37',1,'ntp::details::NativeSlistEntry']]],

@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 257.00 132.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 128)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node43 -->
+<!-- Node44 -->
 <g id="node1" class="node">
-<title>Node43</title>
+<title>Node44</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="none" stroke="#bfbfbf" points="0,-52 0,-71 84,-71 84,-52 0,-52"/>
 <text text-anchor="middle" x="42" y="-59" font-family="Helvetica,sans-Serif" font-size="10.00">std::true_type</text>
@@ -29,15 +29,15 @@
 </a>
 </g>
 </g>
-<!-- Node43&#45;&gt;Node0 -->
+<!-- Node44&#45;&gt;Node0 -->
 <g id="edge1" class="edge">
-<title>Node43&#45;&gt;Node0</title>
+<title>Node44&#45;&gt;Node0</title>
 <path fill="none" stroke="midnightblue" d="M90.02,-73.55C99.63,-76.01 109.88,-78.64 119.96,-81.22"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="90.84,-70.14 80.28,-71.05 89.1,-76.93 90.84,-70.14"/>
 </g>
-<!-- Node45 -->
+<!-- Node46 -->
 <g id="node3" class="node">
-<title>Node45</title>
+<title>Node46</title>
 <g id="a_node3"><a xlink:href="structntp_1_1time_1_1details_1_1is__time__point_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html" target="_top" xlink:title="Trait that detects std::chono::time_point specializations.">
 <polygon fill="none" stroke="black" points="122,-0.5 122,-52.5 247,-52.5 247,-0.5 122,-0.5"/>
 <text text-anchor="start" x="130" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">ntp::time::details</text>
@@ -47,9 +47,9 @@
 </a>
 </g>
 </g>
-<!-- Node43&#45;&gt;Node45 -->
+<!-- Node44&#45;&gt;Node46 -->
 <g id="edge2" class="edge">
-<title>Node43&#45;&gt;Node45</title>
+<title>Node44&#45;&gt;Node46</title>
 <path fill="none" stroke="midnightblue" d="M91.37,-49.45C101.21,-47 111.68,-44.39 121.9,-41.85"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="90.25,-46.12 81.39,-51.94 91.94,-52.92 90.25,-46.12"/>
 </g>

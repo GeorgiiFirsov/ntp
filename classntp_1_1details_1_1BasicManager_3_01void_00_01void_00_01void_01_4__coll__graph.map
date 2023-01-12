@@ -1,0 +1,4 @@
+<map id="ntp::details::BasicManager&lt; void, void, void &gt;" name="ntp::details::BasicManager&lt; void, void, void &gt;">
+<area shape="rect" id="node1" title="Direct base class for all context managers of threadpool callbacks. &quot;Empty&quot; context specialization." alt="" coords="25,80,220,121"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1TpEnvironmentView.html" title="Class, that binds a manager with a pool. Manager should inherit this class to bind itself with the th..." alt="" coords="5,5,240,32"/>
+</map>

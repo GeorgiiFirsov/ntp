@@ -3,19 +3,6 @@ var hierarchy =
     [ "_RTL_RESOURCE", "struct__RTL__RESOURCE.html", null ],
     [ "ntp::allocator::AlignedAllocator< Ty >", "classntp_1_1allocator_1_1AlignedAllocator.html", null ],
     [ "ntp::allocator::AlignedAllocator< void >", "structntp_1_1allocator_1_1AlignedAllocator_3_01void_01_4.html", null ],
-    [ "ntp::details::BasicManager", "classntp_1_1details_1_1BasicManager.html", [
-      [ "ntp::details::BasicManagerEx< PTP_IO, IoContext, IoManager >", "classntp_1_1details_1_1BasicManagerEx.html", [
-        [ "ntp::io::details::IoManager", "classntp_1_1io_1_1details_1_1IoManager.html", null ]
-      ] ],
-      [ "ntp::details::BasicManagerEx< PTP_WAIT, WaitContext, WaitManager >", "classntp_1_1details_1_1BasicManagerEx.html", [
-        [ "ntp::wait::details::WaitManager", "classntp_1_1wait_1_1details_1_1WaitManager.html", null ]
-      ] ],
-      [ "ntp::details::BasicManagerEx< PTP_TIMER, TimerContext, TimerManager >", "classntp_1_1details_1_1BasicManagerEx.html", [
-        [ "ntp::timer::details::TimerManager", "classntp_1_1timer_1_1details_1_1TimerManager.html", null ]
-      ] ],
-      [ "ntp::details::BasicManagerEx< NativeHandle, ObjectContext, Derived >", "classntp_1_1details_1_1BasicManagerEx.html", null ],
-      [ "ntp::work::details::WorkManager", "classntp_1_1work_1_1details_1_1WorkManager.html", null ]
-    ] ],
     [ "ntp::BasicThreadPool< ThreadPoolTraits >", "classntp_1_1BasicThreadPool.html", null ],
     [ "ntp::details::BasicThreadPoolTraits", "classntp_1_1details_1_1BasicThreadPoolTraits.html", [
       [ "ntp::details::CustomThreadPoolTraits", "classntp_1_1details_1_1CustomThreadPoolTraits.html", null ]
@@ -56,6 +43,21 @@ var hierarchy =
       ] ]
     ] ],
     [ "ntp::timer::details::TimerContext", "structntp_1_1timer_1_1details_1_1TimerContext.html", null ],
+    [ "ntp::details::TpEnvironmentView", "classntp_1_1details_1_1TpEnvironmentView.html", [
+      [ "ntp::details::BasicManager< PTP_IO, IoContext, IoManager >", "classntp_1_1details_1_1BasicManager.html", [
+        [ "ntp::io::details::IoManager", "classntp_1_1io_1_1details_1_1IoManager.html", null ]
+      ] ],
+      [ "ntp::details::BasicManager< PTP_WAIT, WaitContext, WaitManager >", "classntp_1_1details_1_1BasicManager.html", [
+        [ "ntp::wait::details::WaitManager", "classntp_1_1wait_1_1details_1_1WaitManager.html", null ]
+      ] ],
+      [ "ntp::details::BasicManager< PTP_TIMER, TimerContext, TimerManager >", "classntp_1_1details_1_1BasicManager.html", [
+        [ "ntp::timer::details::TimerManager", "classntp_1_1timer_1_1details_1_1TimerManager.html", null ]
+      ] ],
+      [ "ntp::details::BasicManager< NativeHandle, ObjectContext, Derived >", "classntp_1_1details_1_1BasicManager.html", [
+        [ "ntp::work::details::WorkManager", "classntp_1_1work_1_1details_1_1WorkManager.html", null ]
+      ] ],
+      [ "ntp::details::BasicManager< void, void, void >", "classntp_1_1details_1_1BasicManager_3_01void_00_01void_00_01void_01_4.html", null ]
+    ] ],
     [ "std::true_type", null, [
       [ "ntp::time::details::is_duration< std::chrono::duration< Rep, Period > >", "structntp_1_1time_1_1details_1_1is__duration_3_01std_1_1chrono_1_1duration_3_01Rep_00_01Period_01_4_01_4.html", null ],
       [ "ntp::time::details::is_time_point< std::chrono::time_point< Clock, Duration > >", "structntp_1_1time_1_1details_1_1is__time__point_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html", null ]

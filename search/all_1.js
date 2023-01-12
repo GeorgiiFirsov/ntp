@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['abort_1',['Abort',['../classntp_1_1details_1_1BasicManagerEx.html#acc49e0ef617c0e40e2ca4015849b58e6',1,'ntp::details::BasicManagerEx']]],
+  ['abort_1',['Abort',['../classntp_1_1details_1_1BasicManager.html#af631ef16baa64d7f103af9231402bc91',1,'ntp::details::BasicManager']]],
   ['abortio_2',['AbortIo',['../classntp_1_1BasicThreadPool.html#a87fee13ef91c8688336a5de8358931b2',1,'ntp::BasicThreadPool']]],
   ['alignedallocator_3',['AlignedAllocator',['../classntp_1_1allocator_1_1AlignedAllocator.html',1,'ntp::allocator']]],
   ['alignedallocator_3c_20void_20_3e_4',['AlignedAllocator&lt; void &gt;',['../structntp_1_1allocator_1_1AlignedAllocator_3_01void_01_4.html',1,'ntp::allocator']]],

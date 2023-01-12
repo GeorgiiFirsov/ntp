@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['replace_104',['Replace',['../classntp_1_1details_1_1BasicManagerEx.html#add6b00f91025eb379c729f3c4231ab8f',1,'ntp::details::BasicManagerEx']]],
+  ['replace_104',['Replace',['../classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031',1,'ntp::details::BasicManager']]],
   ['replacetimer_105',['ReplaceTimer',['../classntp_1_1BasicThreadPool.html#acdbf682754b0d3070eb2b5ec13ff2631',1,'ntp::BasicThreadPool']]],
   ['reset_106',['Reset',['../classntp_1_1details_1_1Event.html#a2eb6571b42a0069ff21e57ac96f37f6a',1,'ntp::details::Event']]],
   ['result_107',['result',['../structntp_1_1io_1_1details_1_1IoData.html#aa7fbb86d8345beac96d87facaa752216',1,'ntp::io::details::IoData']]],

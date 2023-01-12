@@ -1,3 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classntp_1_1details_1_1RtlResource.html" title="STL&#45;compatible (in terms of SharedLockable and Lockable named requirements) wrapper for RTL_RESOURCE." alt="" coords="5,5,187,32"/>
+<area shape="rect" id="node1" href="$classntp_1_1details_1_1TpEnvironmentView.html" title="Class, that binds a manager with a pool. Manager should inherit this class to bind itself with the th..." alt="" coords="5,166,240,193"/>
+<area shape="rect" id="node2" href="$classntp_1_1details_1_1BasicManager.html" title=" " alt="" coords="288,5,533,47"/>
+<area shape="rect" id="node4" href="$classntp_1_1details_1_1BasicManager.html" title=" " alt="" coords="313,71,508,127"/>
+<area shape="rect" id="node6" href="$classntp_1_1details_1_1BasicManager.html" title=" " alt="" coords="305,151,516,207"/>
+<area shape="rect" id="node8" href="$classntp_1_1details_1_1BasicManager.html" title="Direct base class for all context managers of threadpool callbacks." alt="" coords="295,231,526,287"/>
+<area shape="rect" id="node10" href="$classntp_1_1details_1_1BasicManager_3_01void_00_01void_00_01void_01_4.html" title="Direct base class for all context managers of threadpool callbacks. &quot;Empty&quot; context specialization." alt="" coords="313,312,508,353"/>
+<area shape="rect" id="node3" href="$classntp_1_1io_1_1details_1_1IoManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="581,13,773,39"/>
+<area shape="rect" id="node5" href="$classntp_1_1wait_1_1details_1_1WaitManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="612,79,743,120"/>
+<area shape="rect" id="node7" href="$classntp_1_1timer_1_1details_1_1TimerManager.html" title="Manager for wait callbacks. Binds callbacks and threadpool implementation." alt="" coords="608,159,747,200"/>
+<area shape="rect" id="node9" href="$classntp_1_1work_1_1details_1_1WorkManager.html" title="Manager for work callbacks. Binds callbacks and threadpool implementation." alt="" coords="610,239,745,280"/>
 </map>
