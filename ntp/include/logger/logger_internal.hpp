@@ -50,9 +50,7 @@ public:
      */
     logger_t Exchange(logger_t new_logger) noexcept
     {
-        const auto old_logger = logger_.load(std::memory_order_acquire);
-        logger_.store(new_logger, std::memory_order_release);
-        return old_logger;
+        return logger_.exchange(new_logger, std::memory_order_acq_rel);
     }
 
     /**
