@@ -7,7 +7,7 @@ namespace ntp::logger {
 logger_t SetLogger(logger_t new_logger)
 {
     //
-    // Just trust, if Logger makes everithing fine :)
+    // Just trust, if Logger makes everything fine :)
     //
 
     return details::Logger::InstanceMut().Exchange(new_logger);
