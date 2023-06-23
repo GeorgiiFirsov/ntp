@@ -83,16 +83,16 @@ inline constexpr auto max_native_duration = (native_duration_t::max)();
 
 
 /**
- * @brief Clock to measure deadlines
+ * @brief Default clock.
  */
-using deadline_clock_t = std::chrono::steady_clock;
+using clock_t = std::chrono::steady_clock;
 
 
 /**
- * @brief Time point, that specifies a deadline
+ * @brief Time point, that specifies a deadline.
  */
-template<typename Duration>
-using deadline_t = std::chrono::time_point<deadline_clock_t, Duration>;
+template<typename Clock, typename Duration>
+using deadline_t = std::chrono::time_point<Clock, Duration>;
 
 
 /**

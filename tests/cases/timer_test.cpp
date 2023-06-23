@@ -24,7 +24,7 @@ TEST(Timer, SubmitDeadline)
     std::atomic_int counter = 0;
     ntp::SystemThreadPool pool;
 
-    pool.SubmitTimer(ntp::time::deadline_clock_t::now() + 10ms, [&counter]() {
+    pool.SubmitTimer(ntp::time::clock_t::now() + 10ms, [&counter]() {
         ++counter;
     });
 
