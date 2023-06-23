@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.5</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -124,14 +124,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa470e1bcfa5aae0b5edc361a43daf76d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1timer_1_1details_1_1TimerManager.html#aa470e1bcfa5aae0b5edc361a43daf76d">Submit</a> (const std::chrono::duration&lt; Rep, Period &gt; &amp;timeout, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt; &amp;&amp;!ntp::time::details::is_time_point_v&lt; Functor &gt;, <a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> &gt;</td></tr>
 <tr class="memdesc:aa470e1bcfa5aae0b5edc361a43daf76d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool timer object with a user-defined callback.  <a href="classntp_1_1timer_1_1details_1_1TimerManager.html#aa470e1bcfa5aae0b5edc361a43daf76d">More...</a><br /></td></tr>
 <tr class="separator:aa470e1bcfa5aae0b5edc361a43daf76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d95bf19f6f8d7fc0cc7a0d86fb55a74"><td class="memTemplParams" colspan="2">template&lt;typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </td></tr>
-<tr class="memitem:a9d95bf19f6f8d7fc0cc7a0d86fb55a74"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1timer_1_1details_1_1TimerManager.html#a9d95bf19f6f8d7fc0cc7a0d86fb55a74">Submit</a> (const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;deadline, const std::chrono::duration&lt; Rep, Period &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a9d95bf19f6f8d7fc0cc7a0d86fb55a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1timer_1_1details_1_1TimerManager.html#a9d95bf19f6f8d7fc0cc7a0d86fb55a74">More...</a><br /></td></tr>
-<tr class="separator:a9d95bf19f6f8d7fc0cc7a0d86fb55a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1648347f0cff68d2b855266d394f16e9"><td class="memTemplParams" colspan="2">template&lt;typename Duration , typename Functor , typename... Args&gt; </td></tr>
-<tr class="memitem:a1648347f0cff68d2b855266d394f16e9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1timer_1_1details_1_1TimerManager.html#a1648347f0cff68d2b855266d394f16e9">Submit</a> (const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;deadline, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt; &amp;&amp;!ntp::time::details::is_time_point_v&lt; Functor &gt;, <a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> &gt;</td></tr>
-<tr class="memdesc:a1648347f0cff68d2b855266d394f16e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1timer_1_1details_1_1TimerManager.html#a1648347f0cff68d2b855266d394f16e9">More...</a><br /></td></tr>
-<tr class="separator:a1648347f0cff68d2b855266d394f16e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99dd129b351e566f3e4eb8323a674ac5"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:a99dd129b351e566f3e4eb8323a674ac5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1timer_1_1details_1_1TimerManager.html#a99dd129b351e566f3e4eb8323a674ac5">Submit</a> (const <a class="el" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">ntp::time::deadline_t</a>&lt; Clock, Duration &gt; &amp;deadline, const std::chrono::duration&lt; Rep, Period &gt; &amp;period, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a99dd129b351e566f3e4eb8323a674ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1timer_1_1details_1_1TimerManager.html#a99dd129b351e566f3e4eb8323a674ac5">More...</a><br /></td></tr>
+<tr class="separator:a99dd129b351e566f3e4eb8323a674ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3b846f15770f3f08827fe52fed833f0"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration , typename Functor , typename... Args&gt; </td></tr>
+<tr class="memitem:ae3b846f15770f3f08827fe52fed833f0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classntp_1_1timer_1_1details_1_1TimerManager.html#ae3b846f15770f3f08827fe52fed833f0">Submit</a> (const <a class="el" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">ntp::time::deadline_t</a>&lt; Clock, Duration &gt; &amp;deadline, Functor &amp;&amp;functor, Args &amp;&amp;... args) -&gt; std::enable_if_t&lt;!ntp::time::details::is_duration_v&lt; Functor &gt; &amp;&amp;!ntp::time::details::is_time_point_v&lt; Functor &gt;, <a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> &gt;</td></tr>
+<tr class="memdesc:ae3b846f15770f3f08827fe52fed833f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a non-periodic threadpool deadline timer object with a user-defined callback.  <a href="classntp_1_1timer_1_1details_1_1TimerManager.html#ae3b846f15770f3f08827fe52fed833f0">More...</a><br /></td></tr>
+<tr class="separator:ae3b846f15770f3f08827fe52fed833f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classntp_1_1details_1_1BasicManager"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classntp_1_1details_1_1BasicManager')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classntp_1_1details_1_1BasicManager.html">ntp::details::BasicManager&lt; PTP_TIMER, TimerContext, TimerManager &gt;</a></td></tr>
 <tr class="memitem:a580c270149650259d6a249c8189a6031 inherit pub_methods_classntp_1_1details_1_1BasicManager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031">Replace</a> (<a class="el" href="classntp_1_1details_1_1BasicManager.html#a9b3f08f5ba3d2b9ac65e5d3ad402cb04">native_handle_t</a> object, Functor &amp;&amp;functor, Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:a580c270149650259d6a249c8189a6031 inherit pub_methods_classntp_1_1details_1_1BasicManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an existing threadpool callback with a new one.  <a href="classntp_1_1details_1_1BasicManager.html#a580c270149650259d6a249c8189a6031">More...</a><br /></td></tr>
@@ -242,13 +242,13 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9d95bf19f6f8d7fc0cc7a0d86fb55a74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d95bf19f6f8d7fc0cc7a0d86fb55a74">&#9670;&nbsp;</a></span>Submit() <span class="overload">[1/4]</span></h2>
+<a id="a99dd129b351e566f3e4eb8323a674ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99dd129b351e566f3e4eb8323a674ac5">&#9670;&nbsp;</a></span>Submit() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </div>
+template&lt;typename Clock , typename Duration , typename Rep , typename Period , typename Functor , typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -256,7 +256,7 @@ template&lt;typename Duration , typename Rep , typename Period , typename Functo
         <tr>
           <td class="memname">auto ntp::timer::details::TimerManager::Submit </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">ntp::time::deadline_t</a>&lt; Clock, Duration &gt; &amp;&#160;</td>
           <td class="paramname"><em>deadline</em>, </td>
         </tr>
         <tr>
@@ -305,13 +305,13 @@ template&lt;typename Duration , typename Rep , typename Period , typename Functo
 
 </div>
 </div>
-<a id="a1648347f0cff68d2b855266d394f16e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1648347f0cff68d2b855266d394f16e9">&#9670;&nbsp;</a></span>Submit() <span class="overload">[2/4]</span></h2>
+<a id="ae3b846f15770f3f08827fe52fed833f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3b846f15770f3f08827fe52fed833f0">&#9670;&nbsp;</a></span>Submit() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Duration , typename Functor , typename... Args&gt; </div>
+template&lt;typename Clock , typename Duration , typename Functor , typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -319,7 +319,7 @@ template&lt;typename Duration , typename Functor , typename... Args&gt; </div>
         <tr>
           <td class="memname">auto ntp::timer::details::TimerManager::Submit </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a>&lt; Duration &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">ntp::time::deadline_t</a>&lt; Clock, Duration &gt; &amp;&#160;</td>
           <td class="paramname"><em>deadline</em>, </td>
         </tr>
         <tr>

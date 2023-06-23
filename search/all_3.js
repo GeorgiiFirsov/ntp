@@ -17,10 +17,11 @@ var searchData=
   ['cancelworks_39',['CancelWorks',['../classntp_1_1BasicThreadPool.html#a798e87b63580ca2640474f100539ea34',1,'ntp::BasicThreadPool']]],
   ['cleanupcontext_40',['CleanupContext',['../classntp_1_1details_1_1BasicManager.html#ad78159f5838a8e70a7e0b645c4ec4a93',1,'ntp::details::BasicManager']]],
   ['cleanupgroup_41',['CleanupGroup',['../classntp_1_1details_1_1CleanupGroup.html#aa6edc05a51bc5de9a3099e4567089915',1,'ntp::details::CleanupGroup::CleanupGroup()'],['../classntp_1_1details_1_1CleanupGroup.html',1,'ntp::details::CleanupGroup']]],
-  ['context_5fpointer_5ft_42',['context_pointer_t',['../classntp_1_1details_1_1BasicManager.html#a434eed9ffdaba4f449c3dedbf91c0bfc',1,'ntp::details::BasicManager']]],
-  ['context_5ft_43',['context_t',['../classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2',1,'ntp::details::BasicManager']]],
-  ['convert_44',['Convert',['../utils_8hpp.html#a727c59530e54045ee93862714ca6822b',1,'ntp::details']]],
-  ['convertparameter_45',['ConvertParameter',['../classntp_1_1timer_1_1details_1_1TimerCallback.html#ad6661cc365cae53a0f25679534e89d24',1,'ntp::timer::details::TimerCallback::ConvertParameter()'],['../classntp_1_1io_1_1details_1_1IoCallback.html#aeb8f18b8f84818d18bc07bebf63e3547',1,'ntp::io::details::IoCallback::ConvertParameter()']]],
-  ['createcontext_46',['CreateContext',['../classntp_1_1details_1_1BasicManager.html#a38d9d754144bbef1257fe3c53acc69e0',1,'ntp::details::BasicManager']]],
-  ['customthreadpooltraits_47',['CustomThreadPoolTraits',['../classntp_1_1details_1_1CustomThreadPoolTraits.html#a967fe38007456f865bcab0b03912e1a3',1,'ntp::details::CustomThreadPoolTraits::CustomThreadPoolTraits()'],['../classntp_1_1details_1_1CustomThreadPoolTraits.html',1,'ntp::details::CustomThreadPoolTraits']]]
+  ['clock_5ft_42',['clock_t',['../time_8hpp.html#a8ffa4efc32ffd21d64482dabed0329d7',1,'ntp::time']]],
+  ['context_5fpointer_5ft_43',['context_pointer_t',['../classntp_1_1details_1_1BasicManager.html#a434eed9ffdaba4f449c3dedbf91c0bfc',1,'ntp::details::BasicManager']]],
+  ['context_5ft_44',['context_t',['../classntp_1_1details_1_1BasicManager.html#ae96325c79ba750f4d62a0e94d3d1a6d2',1,'ntp::details::BasicManager']]],
+  ['convert_45',['Convert',['../utils_8hpp.html#a727c59530e54045ee93862714ca6822b',1,'ntp::details']]],
+  ['convertparameter_46',['ConvertParameter',['../classntp_1_1timer_1_1details_1_1TimerCallback.html#ad6661cc365cae53a0f25679534e89d24',1,'ntp::timer::details::TimerCallback::ConvertParameter()'],['../classntp_1_1io_1_1details_1_1IoCallback.html#aeb8f18b8f84818d18bc07bebf63e3547',1,'ntp::io::details::IoCallback::ConvertParameter()']]],
+  ['createcontext_47',['CreateContext',['../classntp_1_1details_1_1BasicManager.html#a38d9d754144bbef1257fe3c53acc69e0',1,'ntp::details::BasicManager']]],
+  ['customthreadpooltraits_48',['CustomThreadPoolTraits',['../classntp_1_1details_1_1CustomThreadPoolTraits.html#a967fe38007456f865bcab0b03912e1a3',1,'ntp::details::CustomThreadPoolTraits::CustomThreadPoolTraits()'],['../classntp_1_1details_1_1CustomThreadPoolTraits.html',1,'ntp::details::CustomThreadPoolTraits']]]
 ];

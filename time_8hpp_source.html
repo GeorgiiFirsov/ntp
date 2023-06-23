@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ntp
-   &#160;<span id="projectnumber">0.2.5</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
    <div id="projectbrief">Threadpool library based on Win32 Threadool API</div>
   </td>
@@ -133,11 +133,11 @@ $(document).ready(function(){initNavTree('time_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="time_8hpp.html#a8e8a12cabb806c574f58019ee4baa098">   82</a></span>&#160;<span class="keyword">inline</span> constexpr <span class="keyword">auto</span> <a class="code" href="time_8hpp.html#a8e8a12cabb806c574f58019ee4baa098">max_native_duration</a> = (native_duration_t::max)();</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">   88</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">deadline_clock_t</a> = std::chrono::steady_clock;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="time_8hpp.html#a8ffa4efc32ffd21d64482dabed0329d7">   88</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#a8ffa4efc32ffd21d64482dabed0329d7">clock_t</a> = std::chrono::steady_clock;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Duration&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">   95</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">deadline_t</a> = std::chrono::time_point&lt;deadline_clock_t, Duration&gt;;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Clock, <span class="keyword">typename</span> Duration&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">   95</a></span>&#160;<span class="keyword">using</span> <a class="code" href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">deadline_t</a> = std::chrono::time_point&lt;Clock, Duration&gt;;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Rep, <span class="keyword">typename</span> Period&gt;</div>
@@ -172,8 +172,8 @@ $(document).ready(function(){initNavTree('time_8hpp_source.html',''); initResiza
 <div class="ttc" id="atime_8hpp_html_a5618630c0d7574e859a9d1cbdd76687c"><div class="ttname"><a href="time_8hpp.html#a5618630c0d7574e859a9d1cbdd76687c">ntp::time::details::is_time_point_v</a></div><div class="ttdeci">constexpr bool is_time_point_v</div><div class="ttdoc">Trait that detects std::chono::time_point specializations.</div><div class="ttdef"><b>Definition:</b> time.hpp:68</div></div>
 <div class="ttc" id="atime_8hpp_html_a6581c695fa57e038b6a453cff630f395"><div class="ttname"><a href="time_8hpp.html#a6581c695fa57e038b6a453cff630f395">ntp::time::native_duration_t</a></div><div class="ttdeci">std::chrono::duration&lt; long long, std::ratio&lt; 1, 10 '000 '000 &gt; &gt; native_duration_t</div><div class="ttdoc">Native 100-ns duration interval.</div><div class="ttdef"><b>Definition:</b> time.hpp:76</div></div>
 <div class="ttc" id="atime_8hpp_html_a8e8a12cabb806c574f58019ee4baa098"><div class="ttname"><a href="time_8hpp.html#a8e8a12cabb806c574f58019ee4baa098">ntp::time::max_native_duration</a></div><div class="ttdeci">constexpr auto max_native_duration</div><div class="ttdoc">Maximum supported native duration count.</div><div class="ttdef"><b>Definition:</b> time.hpp:82</div></div>
-<div class="ttc" id="atime_8hpp_html_ab1ea4e25b1332d473030000e6de57b8e"><div class="ttname"><a href="time_8hpp.html#ab1ea4e25b1332d473030000e6de57b8e">ntp::time::deadline_t</a></div><div class="ttdeci">std::chrono::time_point&lt; deadline_clock_t, Duration &gt; deadline_t</div><div class="ttdoc">Time point, that specifies a deadline.</div><div class="ttdef"><b>Definition:</b> time.hpp:95</div></div>
-<div class="ttc" id="atime_8hpp_html_aebbf03271e1d71a380dd4e179640958c"><div class="ttname"><a href="time_8hpp.html#aebbf03271e1d71a380dd4e179640958c">ntp::time::deadline_clock_t</a></div><div class="ttdeci">std::chrono::steady_clock deadline_clock_t</div><div class="ttdoc">Clock to measure deadlines.</div><div class="ttdef"><b>Definition:</b> time.hpp:88</div></div>
+<div class="ttc" id="atime_8hpp_html_a8ffa4efc32ffd21d64482dabed0329d7"><div class="ttname"><a href="time_8hpp.html#a8ffa4efc32ffd21d64482dabed0329d7">ntp::time::clock_t</a></div><div class="ttdeci">std::chrono::steady_clock clock_t</div><div class="ttdoc">Default clock.</div><div class="ttdef"><b>Definition:</b> time.hpp:88</div></div>
+<div class="ttc" id="atime_8hpp_html_ab402eaa0ae59d00e8efac214f124db76"><div class="ttname"><a href="time_8hpp.html#ab402eaa0ae59d00e8efac214f124db76">ntp::time::deadline_t</a></div><div class="ttdeci">std::chrono::time_point&lt; Clock, Duration &gt; deadline_t</div><div class="ttdoc">Time point, that specifies a deadline.</div><div class="ttdef"><b>Definition:</b> time.hpp:95</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
