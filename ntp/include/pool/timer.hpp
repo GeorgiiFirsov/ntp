@@ -163,20 +163,23 @@ public:
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      * @returns handle for created wait object
      */
-    template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
-    auto Submit(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
+    template<typename Clock, typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
+    auto Submit(const ntp::time::deadline_t<Clock, Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
     {
+        using clock_t    = Clock;
+        using duration_t = typename clock_t::duration;
+
         //
         // Just compute a timeout until deadline and call generic function.
         // If timeout becomes negative, it is assumed to be zero (timer expires immediately).
         //
 
-        const auto internal_deadline = std::chrono::time_point_cast<ntp::time::deadline_clock_t::duration>(deadline);
+        const auto internal_deadline = std::chrono::time_point_cast<duration_t>(deadline);
 
-        auto timeout = internal_deadline - ntp::time::deadline_clock_t::now();
-        if (timeout < ntp::time::deadline_clock_t::duration::zero())
+        auto timeout = internal_deadline - clock_t::now();
+        if (timeout < clock_t::duration::zero())
         {
-            timeout = ntp::time::deadline_clock_t::duration::zero();
+            timeout = clock_t::duration::zero();
         }
 
         return Submit(timeout, period, std::forward<Functor>(functor), std::forward<Args>(args)...);
@@ -193,8 +196,8 @@ public:
      * @param args Arguments to pass into callable (they will be copied into wrapper)
      * @returns handle for created wait object
      */
-    template<typename Duration, typename Functor, typename... Args>
-    auto Submit(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
+    template<typename Clock, typename Duration, typename Functor, typename... Args>
+    auto Submit(const ntp::time::deadline_t<Clock, Duration>& deadline, Functor&& functor, Args&&... args)
         -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, native_handle_t>
     {
         return Submit(deadline, std::chrono::milliseconds(0), std::forward<Functor>(functor), std::forward<Args>(args)...);

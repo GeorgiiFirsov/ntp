@@ -537,8 +537,8 @@ public:
      *                 but you must guarantee the parameter's validity until the callback is finished.
      * @returns        Handle for created timer object.
      */
-    template<typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
-    auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
+    template<typename Clock, typename Duration, typename Rep, typename Period, typename Functor, typename... Args>
+    auto SubmitTimer(const ntp::time::deadline_t<Clock, Duration>& deadline, const std::chrono::duration<Rep, Period>& period, Functor&& functor, Args&&... args)
     {
         return timer_manager_.Submit(deadline, period, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -575,8 +575,8 @@ public:
      *                 but you must guarantee the parameter's validity until the callback is finished.
      * @returns        Handle for created timer object.
      */
-    template<typename Duration, typename Functor, typename... Args>
-    auto SubmitTimer(const ntp::time::deadline_t<Duration>& deadline, Functor&& functor, Args&&... args)
+    template<typename Clock, typename Duration, typename Functor, typename... Args>
+    auto SubmitTimer(const ntp::time::deadline_t<Clock, Duration>& deadline, Functor&& functor, Args&&... args)
         -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, timer_t>
     {
         return timer_manager_.Submit(deadline, std::forward<Functor>(functor),
