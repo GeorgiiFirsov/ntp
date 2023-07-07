@@ -410,7 +410,9 @@ public:
      */
     template<typename Functor, typename... Args>
     auto SubmitWait(HANDLE wait_handle, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor>, wait_t>
+        -> std::enable_if_t<
+            !ntp::time::details::is_duration_v<std::decay_t<Functor>>,
+            wait_t>
     {
         return wait_manager_.Submit(wait_handle, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -496,7 +498,10 @@ public:
      */
     template<typename Rep, typename Period, typename Functor, typename... Args>
     auto SubmitTimer(const std::chrono::duration<Rep, Period>& timeout, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, timer_t>
+        -> std::enable_if_t<
+            !ntp::time::details::is_duration_v<std::decay_t<Functor>> &&
+                !ntp::time::details::is_time_point_v<std::decay_t<Functor>>,
+            timer_t>
     {
         return timer_manager_.Submit(timeout, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
@@ -577,7 +582,10 @@ public:
      */
     template<typename Clock, typename Duration, typename Functor, typename... Args>
     auto SubmitTimer(const ntp::time::deadline_t<Clock, Duration>& deadline, Functor&& functor, Args&&... args)
-        -> std::enable_if_t<!ntp::time::details::is_duration_v<Functor> && !ntp::time::details::is_time_point_v<Functor>, timer_t>
+        -> std::enable_if_t<
+            !ntp::time::details::is_duration_v<std::decay_t<Functor>> &&
+                !ntp::time::details::is_time_point_v<std::decay_t<Functor>>,
+            timer_t>
     {
         return timer_manager_.Submit(deadline, std::forward<Functor>(functor),
             std::forward<Args>(args)...);
