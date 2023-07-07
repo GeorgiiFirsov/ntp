@@ -1,0 +1,47 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main", "tests-ci" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Debug
+  INSTALL_LOCATION: ".local"
+
+jobs:
+  build:
+    # This library is Windows-only
+    runs-on: windows-latest
+    
+    # Let's allow bypassing tests
+    if: "!contains(github.event.head_commit.message, '[skip tests]')"
+
+    steps:
+    - name: Install GoogleTest
+      run: |
+        git clone https://github.com/google/googletest.git --branch release-1.10.0
+        pushd googletest
+        cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION" -Dgtest_force_shared_crt=1
+        cmake --build build --config "$env:BUILD_TYPE"
+        cmake --build build --target install --config "$env:BUILD_TYPE"
+        popd
+        
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        token: ${{ secrets.ACCESS_TOKEN }}
+      
+    - name: Configure
+      run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION"
+      
+    - name: Build
+      run: cmake --build build --config "$env:BUILD_TYPE" -j4
+
+    - name: Run tests
+      run: |
+        pushd build
+        ctest -C "$env:BUILD_TYPE" -VV
+        popd
